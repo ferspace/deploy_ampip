@@ -73,7 +73,7 @@ const pieChartData = [
   { name: "Group D", value: 200 },
 ];
 
-export default function Charts(props) {
+const Desarrolladores = (props) =>{
   var theme = useTheme();
 
   // local
@@ -87,7 +87,7 @@ export default function Charts(props) {
           size="medium"
           color="secondary"
         >
-          Latest Reports
+          Desarrolladores
         </Button>
       } />
       <Grid container spacing={4}>
@@ -232,3 +232,5 @@ function renderActiveShape(props) {
     </g>
   );
 }
+
+export default Desarrolladores;
