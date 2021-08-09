@@ -68,6 +68,8 @@ function Login(props) {
               props.history,
               setIsLoading,
               setError,) 
+
+          //console.log(response.data.data.user.authentication_token);
           }else{
             alert("Usuario no autorizado")
           }
