@@ -57,7 +57,15 @@ function Login(props) {
       },
       data: data
     };
-  
+    
+    loginUser(
+      userDispatch,
+      loginValue,
+      passwordValue,
+      props.history,
+      setIsLoading,
+      setError) 
+
     axios(config)
       .then(function (response) {
         if(response.data.messages === "Signed In Successfully"){
