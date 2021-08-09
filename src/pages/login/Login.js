@@ -76,7 +76,7 @@ function Login(props) {
               props.history,
               setIsLoading,
               setError,) 
-          localStorage.setItem('data', response.data.data.user)
+          localStorage.setItem('data', JSON.stringify(response.data.data.user))
           }else{
             alert("Usuario no autorizado")
           }
