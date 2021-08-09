@@ -8,10 +8,10 @@ import { docco } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 import tinycolor from 'tinycolor2';
 import 'react-toastify/dist/ReactToastify.css';
 
-import Widget from '../../components/Widget';
-import PageTitle from '../../components/PageTitle';
-import NotificationCustomComponent from '../../components/Notification';
-import { Typography, Button } from '../../components/Wrappers';
+import Widget from '../../components/Widget/Widget';
+import PageTitle from '../../components/PageTitle/PageTitle';
+import NotificationCustomComponent from '../../components/Notification/Notification';
+import { Typography, Button } from '../../components/Wrappers/Wrappers';
 
 const CloseButton = ({ closeToast, className }) => (
   <CloseIcon

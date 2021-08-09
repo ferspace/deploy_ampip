@@ -83,7 +83,7 @@ export default function NotificationsPage(props) {
           onChange={(e, id) => setActiveTabId(id)}
           className={classes.iconsBar}
         >
-          <Tab label="Desarrolladores" classes={{ root: classes.tab }} />
+          <Tab label="Usuarios" classes={{ root: classes.tab }} />
           <Tab label="Agregar" classes={{ root: classes.tab }} />
         </Tabs>
         {activeTabId === 0 && (

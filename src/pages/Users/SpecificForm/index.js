@@ -24,8 +24,25 @@ const SpecificForm = (props)=>{
   };
 
   return(
-    <Form>
-      <h1>HOla</h1>
+    <Form  {...layout} name="nest-messages" onFinish={onFinish} validateMessages={validateMessages} >
+     <Form.Item name={['user', 'name']} label="Nombre" rules={[{ required: true }]}>
+        <Input />
+      </Form.Item>
+      <Form.Item name={['user', 'lastName']} label="Apellido" rules={[{ required: true }]}>
+        <Input />
+      </Form.Item>
+      <Form.Item name={['user', 'email']} label="Correo" rules={[{ required: true }]}>
+        <Input />
+      </Form.Item>
+      <Form.Item name={['user', 'role']} label="Rol" rules={[{ required: true }]}>
+        <Input />
+      </Form.Item>
+      <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
+        <br/>
+        <Button type="primary" htmlType="submit">
+          Submit
+        </Button>
+      </Form.Item>
     </Form>
   )
 }
