@@ -13,7 +13,7 @@ import { ToastContainer, toast } from "react-toastify";
 import SyntaxHighlighter from "react-syntax-highlighter";
 import { docco } from "react-syntax-highlighter/dist/esm/styles/hljs";
 import classnames from "classnames";
-import Tables from '../tables'
+import Tables from '../Tables'
 import SpecificForm from './SpecificForm'
 import axios from "axios";
 // styles
