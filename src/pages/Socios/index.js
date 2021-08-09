@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect} from "react";
 import {
   Typography,
   Grid,
@@ -10,21 +10,24 @@ import {
   Button
 } from "@material-ui/core";
 import * as Icons from "@material-ui/icons";
-import SpecificForm from './SpecificForm'
+
 // styles
 import useStyles from "./styles";
-import Tables from '../Tables'
+
 // components
 import PageTitle from "../../components/PageTitle/PageTitle";
+import SpecificForm from './SpecificForm'
 import axios from 'axios';
+import Tables from '../tables'
+
 
 // icons sets
 import "font-awesome/css/font-awesome.min.css";
 
-
-const Socios = () =>{
+const Desarrolladores = () =>{
   const [anchorEl, setAnchorEl] = React.useState(null)
-  //const [datatableData, setDatatableData] = ([]) descomentar al integrar apis
+  const [datatableData, setDatatableData] = ([]) //descomentar al integrar apis
+
   const handleClick = (e) => {
     setAnchorEl(e.currentTarget)
   }
@@ -33,47 +36,43 @@ const Socios = () =>{
     setAnchorEl(null)
   }
 
-  const onFinish = (values) => {
-    console.log(values);
-  };
-
   var classes = useStyles();
 
   // local
   var [activeTabId, setActiveTabId] = useState(0);
 
- /*  useEffect(() => {    aqui va la peticion al endpoint , se va aprocesar la informacion del tipo [[dato1,dato2]]
-    axios.get(``).then((response) => {
+   useEffect(() => {    //aqui va la peticion al endpoint , se va aprocesar la informacion del tipo [[dato1,dato2]]
+    axios.get(`http://localhost:3001/api/v1/corporates`).then((response) => {
       setDatatableData(response.data);
     }).catch(error => {
       console.log(error); // poner alerta cuando tengamos tiempo
     });
-  }, []); */
+  }, []); 
 
 
-  const datatableData = [ // esto viene de axios
-    ["fer vargas", "Example Inc.", "Yonkers", "NY"],
-    ["John Walsh", "Example Inc.", "Hartford", "CT"],
-    ["Bob Herm", "Example Inc.", "Tampa", "FL"],
-    ["James Houston", "Example Inc.", "Dallas", "TX"],
-    ["Prabhakar Linwood", "Example Inc.", "Hartford", "CT"],
-    ["Kaui Ignace", "Example Inc.", "Yonkers", "NY"],
-    ["Esperanza Susanne", "Example Inc.", "Hartford", "CT"],
-    ["Christian Birgitte", "Example Inc.", "Tampa", "FL"],
-    ["Meral Elias", "Example Inc.", "Hartford", "CT"],
-    ["Deep Pau", "Example Inc.", "Yonkers", "NY"],
-    ["Sebastiana Hani", "Example Inc.", "Dallas", "TX"],
-    ["Marciano Oihana", "Example Inc.", "Yonkers", "NY"],
-    ["Brigid Ankur", "Example Inc.", "Dallas", "TX"],
-    ["Anna Siranush", "Example Inc.", "Yonkers", "NY"],
-    ["Avram Sylva", "Example Inc.", "Hartford", "CT"],
-    ["Serafima Babatunde", "Example Inc.", "Tampa", "FL"],
-    ["Gaston Festus", "Example Inc.", "Tampa", "FL"],
-  ];
+  // const datatableData = [ // esto viene de axios
+  //   ["fer vargas", "Example Inc.", "Yonkers", "NY"],
+  //   ["John Walsh", "Example Inc.", "Hartford", "CT"],
+  //   ["Bob Herm", "Example Inc.", "Tampa", "FL"],
+  //   ["James Houston", "Example Inc.", "Dallas", "TX"],
+  //   ["Prabhakar Linwood", "Example Inc.", "Hartford", "CT"],
+  //   ["Kaui Ignace", "Example Inc.", "Yonkers", "NY"],
+  //   ["Esperanza Susanne", "Example Inc.", "Hartford", "CT"],
+  //   ["Christian Birgitte", "Example Inc.", "Tampa", "FL"],
+  //   ["Meral Elias", "Example Inc.", "Hartford", "CT"],
+  //   ["Deep Pau", "Example Inc.", "Yonkers", "NY"],
+  //   ["Sebastiana Hani", "Example Inc.", "Dallas", "TX"],
+  //   ["Marciano Oihana", "Example Inc.", "Yonkers", "NY"],
+  //   ["Brigid Ankur", "Example Inc.", "Dallas", "TX"],
+  //   ["Anna Siranush", "Example Inc.", "Yonkers", "NY"],
+  //   ["Avram Sylva", "Example Inc.", "Hartford", "CT"],
+  //   ["Serafima Babatunde", "Example Inc.", "Tampa", "FL"],
+  //   ["Gaston Festus", "Example Inc.", "Tampa", "FL"],
+  // ];
 
   return (
   <>
-    <PageTitle title="Socios" button={(
+    <PageTitle title="Patrocinadores" button={(
       <>
         <Button
       variant="contained"
@@ -103,20 +102,19 @@ const Socios = () =>{
         onChange={(e, id) => setActiveTabId(id)}
         className={classes.iconsBar}
       >
-        <Tab label="Socios" classes={{ root: classes.tab }} />
+        <Tab label="Desarrolladores" classes={{ root: classes.tab }} />
         <Tab label="Agregar" classes={{ root: classes.tab }} />
       </Tabs>
       {activeTabId === 0 && (
-        // helper de tablas 
-       <Tables title={"Todos los socios"} columns={["Name", "Company", "City", "State"]} tableData={datatableData}/>
+        <Tables title={"Todos los Desarrolladores"} columns={["Name", "Company", "City", "State"]} tableData={datatableData}/>
+
       )}
 
       {activeTabId === 1 && (
-        //formulario 
-       <SpecificForm/>
+        <SpecificForm/>
       )}
     </Paper>
   </>
 );}
 
-export default Socios;
+export default Desarrolladores;

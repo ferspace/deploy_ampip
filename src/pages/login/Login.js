@@ -21,6 +21,8 @@ import google from "../../images/google.svg";
 
 // context
 import { useUserDispatch, loginUser } from "../../context/UserContext";
+import axios from "axios";
+
 
 function Login(props) {
   var classes = useStyles();
@@ -36,6 +38,46 @@ function Login(props) {
   var [loginValue, setLoginValue] = useState("admin@flatlogic.com");
   var [passwordValue, setPasswordValue] = useState("password");
 
+  //usuario y contraseña
+  const [user, setUser] = useState({email:"",});
+
+  const loginAction = () => {
+    var data = JSON.stringify({
+      "user": {
+        "email": loginValue,
+        "password": passwordValue,
+      }
+    });
+  
+    var config = {
+      method: 'post',
+      url: 'http://localhost:3001/api/v1/sign_in',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      data: data
+    };
+  
+    axios(config)
+      .then(function (response) {
+        if(response.data.messages === "Signed In Successfully"){
+          loginUser(
+              userDispatch,
+              loginValue,
+              passwordValue,
+              props.history,
+              setIsLoading,
+              setError,) 
+          }else{
+            alert("Usuario no autorizado")
+          }
+        }
+      )
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+  
   return (
     <Grid container className={classes.container}>
       <div className={classes.logotypeContainer}>
@@ -112,14 +154,15 @@ function Login(props) {
                       loginValue.length === 0 || passwordValue.length === 0
                     }
                     onClick={() =>
-                      loginUser(
-                        userDispatch,
-                        loginValue,
-                        passwordValue,
-                        props.history,
-                        setIsLoading,
-                        setError,
-                      )
+                      // loginUser(
+                      //   userDispatch,
+                      //   loginValue,
+                      //   passwordValue,
+                      //   props.history,
+                      //   setIsLoading,
+                      //   setError,
+                      // )
+                      loginAction()
                     }
                     variant="contained"
                     color="primary"
@@ -245,7 +288,7 @@ function Login(props) {
           )}
         </div>
         <Typography color="primary" className={classes.copyright}>
-        © 2014-{new Date().getFullYear()} <a style={{ textDecoration: 'none', color: 'inherit' }} href="https://flatlogic.com" rel="noopener noreferrer" target="_blank">Flatlogic</a>, LLC. All rights reserved.
+          © 2014-{new Date().getFullYear()} <a style={{ textDecoration: 'none', color: 'inherit' }} href="https://flatlogic.com" rel="noopener noreferrer" target="_blank">Flatlogic</a>, LLC. All rights reserved.
         </Typography>
       </div>
     </Grid>

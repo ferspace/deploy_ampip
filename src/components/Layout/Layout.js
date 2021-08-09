@@ -28,7 +28,7 @@ import Dashboard from "../../pages/dashboard";
 import Notifications from "../../pages/notifications";
 import Maps from "../../pages/maps";
 import Desarrolladores from "../../pages/Desarrolladores";
-import Socios from "../../pages/SociosReport";
+import Socios from "../../pages/Socios";
 import Terrenos from "../../pages/Terrenos";
 import Naves from "../../pages/Naves";
 import Parques from "../../pages/Parques";
