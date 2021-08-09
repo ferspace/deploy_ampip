@@ -127,7 +127,10 @@ const Parques = () =>{
       )}
 
       {activeTabId === 1 && (
-        <SpecificForm/>
+        <>
+          <SpecificForm/>
+         
+        </>
       )}
     </Paper>
   </>
