@@ -25,12 +25,13 @@ import Sidebar from "../Sidebar";
 
 // pages
 import Dashboard from "../../pages/dashboard";
-import Typography from "../../pages/typography";
 import Notifications from "../../pages/notifications";
 import Maps from "../../pages/maps";
-import Tables from "../../pages/tables";
-import Icons from "../../pages/icons";
-import Charts from "../../pages/charts";
+import Desarrolladores from "../../pages/Desarrolladores";
+import Socios from "../../pages/SociosReport";
+import Terrenos from "../../pages/Terrenos";
+import Naves from "../../pages/Naves";
+import Parques from "../../pages/Parques";
 
 // context
 import { useLayoutState } from "../../context/LayoutContext";
@@ -54,17 +55,18 @@ function Layout(props) {
             <div className={classes.fakeToolbar} />
             <Switch>
               <Route path="/app/dashboard" component={Dashboard} />
-              <Route path="/app/typography" component={Typography} />
-              <Route path="/app/tables" component={Tables} />
-              <Route path="/app/notifications" component={Notifications} />
+              <Route path="/app/usuarios" component={Notifications} />
               <Route
                 exact
                 path="/app/ui"
                 render={() => <Redirect to="/app/ui/icons" />}
               />
               <Route path="/app/ui/maps" component={Maps} />
-              <Route path="/app/ui/icons" component={Icons} />
-              <Route path="/app/ui/charts" component={Charts} />
+              <Route path="/app/ui/parques" component={Parques} />
+              <Route path="/app/ui/naves" component={Naves} />
+              <Route path="/app/ui/terrenos" component={Terrenos} />
+              <Route path="/app/ui/socios" component={Socios} />
+              <Route path="/app/ui/desarrolladores" component={Desarrolladores} />
             </Switch>
             <Box
               mt={5}

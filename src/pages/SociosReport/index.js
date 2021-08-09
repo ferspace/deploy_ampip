@@ -73,7 +73,7 @@ const pieChartData = [
   { name: "Group D", value: 200 },
 ];
 
-export default function Charts(props) {
+const SociosReport = (props) => {
   var theme = useTheme();
 
   // local
@@ -87,7 +87,7 @@ export default function Charts(props) {
           size="medium"
           color="secondary"
         >
-          Latest Reports
+          Socios
         </Button>
       } />
       <Grid container spacing={4}>
@@ -157,7 +157,6 @@ export default function Charts(props) {
     </>
   );
 }
-
 // ################################################################
 
 function renderActiveShape(props) {
@@ -232,3 +231,5 @@ function renderActiveShape(props) {
     </g>
   );
 }
+
+export default SociosReport;
