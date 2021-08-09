@@ -41,9 +41,26 @@ const Desarrolladores = () => {
   var [activeTabId, setActiveTabId] = useState(0);
 
   useEffect(() => {    //aqui va la peticion al endpoint , se va aprocesar la informacion del tipo [[dato1,dato2]]
-    axios.get(`http://localhost:3001/api/v1/corporates`).then((response) => {
+    axios.get(`http://localhost:3001/api/v1/corporates`, {
+      headers: { 
+        'Authorization': 'VPSszAvXt83bU5TRnxZc'
+      }
+    }).then((response) => {
       //setDatatableData(response.data);
-      console.log(response.data)
+      if(response.data.error){
+        alert("error")
+      } else{
+        var corporatesAdd = [];
+        response.data.map((i)=>{
+          var corporates = [];
+          corporates.push(i.name)
+          corporates.push(i.english_name)
+          corporates.push(i.address)
+          corporatesAdd.push(corporates);
+        });
+      
+        setDatatableData([...corporatesAdd]);
+      }
     }).catch(error => {
       console.log(error); // poner alerta cuando tengamos tiempo
     });
@@ -86,7 +103,7 @@ const Desarrolladores = () => {
           <Tab label="Agregar" classes={{ root: classes.tab }} />
         </Tabs>
         {activeTabId === 0 && (
-          <Tables title={"Todos los Desarrolladores"} columns={["Name", "Company", "City", "State"]} tableData={datatableData} />
+          <Tables title={"Todos los Desarrolladores"} columns={["Name", "Nombre_en", "Direccion"]} tableData={datatableData} />
 
         )}
 

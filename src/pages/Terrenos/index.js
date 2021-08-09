@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Typography,
   Grid,
@@ -26,7 +26,7 @@ import "font-awesome/css/font-awesome.min.css";
 
 const Terrenos = () =>{
   const [anchorEl, setAnchorEl] = React.useState(null)
-  //const [datatableData, setDatatableData] = ([]) descomentar al integrar apis
+  const [datatableData, setDatatableData] = useState([]) 
 
   const handleClick = (e) => {
     setAnchorEl(e.currentTarget)
@@ -41,34 +41,49 @@ const Terrenos = () =>{
   // local
   var [activeTabId, setActiveTabId] = useState(0);
 
- /*  useEffect(() => {    aqui va la peticion al endpoint , se va aprocesar la informacion del tipo [[dato1,dato2]]
-    axios.get(``).then((response) => {
-      setDatatableData(response.data);
+  useEffect(() => {    //aqui va la peticion al endpoint , se va aprocesar la informacion del tipo [[dato1,dato2]]
+    axios.get(`http://localhost:3001/api/v1/property_informations`).then((response) => {
+      //setDatatableData(response.data);
+      if(response.data.message == "Sin datos para mostrar"){
+        console.log(response.data)
+        setDatatableData([["s","s","s"]]);
+      } else{
+        var corporatesAdd = [];
+        response.data.map((i)=>{
+          var corporates = [];
+          corporates.push(i.name)
+          corporates.push(i.english_name)
+          corporates.push(i.updated_at)
+          corporates.push(i.address)
+          corporatesAdd.push(corporates);
+        });
+      
+        setDatatableData([...corporatesAdd]);
+      }
     }).catch(error => {
       console.log(error); // poner alerta cuando tengamos tiempo
     });
-  }, []); */
+  }, []);
 
-
-  const datatableData = [ // esto viene de axios
-    ["fer vargas", "Example Inc.", "Yonkers", "NY"],
-    ["John Walsh", "Example Inc.", "Hartford", "CT"],
-    ["Bob Herm", "Example Inc.", "Tampa", "FL"],
-    ["James Houston", "Example Inc.", "Dallas", "TX"],
-    ["Prabhakar Linwood", "Example Inc.", "Hartford", "CT"],
-    ["Kaui Ignace", "Example Inc.", "Yonkers", "NY"],
-    ["Esperanza Susanne", "Example Inc.", "Hartford", "CT"],
-    ["Christian Birgitte", "Example Inc.", "Tampa", "FL"],
-    ["Meral Elias", "Example Inc.", "Hartford", "CT"],
-    ["Deep Pau", "Example Inc.", "Yonkers", "NY"],
-    ["Sebastiana Hani", "Example Inc.", "Dallas", "TX"],
-    ["Marciano Oihana", "Example Inc.", "Yonkers", "NY"],
-    ["Brigid Ankur", "Example Inc.", "Dallas", "TX"],
-    ["Anna Siranush", "Example Inc.", "Yonkers", "NY"],
-    ["Avram Sylva", "Example Inc.", "Hartford", "CT"],
-    ["Serafima Babatunde", "Example Inc.", "Tampa", "FL"],
-    ["Gaston Festus", "Example Inc.", "Tampa", "FL"],
-  ];
+  // const datatableData = [ // esto viene de axios
+  //   ["fer vargas", "Example Inc.", "Yonkers", "NY"],
+  //   ["John Walsh", "Example Inc.", "Hartford", "CT"],
+  //   ["Bob Herm", "Example Inc.", "Tampa", "FL"],
+  //   ["James Houston", "Example Inc.", "Dallas", "TX"],
+  //   ["Prabhakar Linwood", "Example Inc.", "Hartford", "CT"],
+  //   ["Kaui Ignace", "Example Inc.", "Yonkers", "NY"],
+  //   ["Esperanza Susanne", "Example Inc.", "Hartford", "CT"],
+  //   ["Christian Birgitte", "Example Inc.", "Tampa", "FL"],
+  //   ["Meral Elias", "Example Inc.", "Hartford", "CT"],
+  //   ["Deep Pau", "Example Inc.", "Yonkers", "NY"],
+  //   ["Sebastiana Hani", "Example Inc.", "Dallas", "TX"],
+  //   ["Marciano Oihana", "Example Inc.", "Yonkers", "NY"],
+  //   ["Brigid Ankur", "Example Inc.", "Dallas", "TX"],
+  //   ["Anna Siranush", "Example Inc.", "Yonkers", "NY"],
+  //   ["Avram Sylva", "Example Inc.", "Hartford", "CT"],
+  //   ["Serafima Babatunde", "Example Inc.", "Tampa", "FL"],
+  //   ["Gaston Festus", "Example Inc.", "Tampa", "FL"],
+  // ];
 
   return (
   <>
