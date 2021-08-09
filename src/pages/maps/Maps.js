@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
 import {
-  Typography,
-  Grid,
   Tabs,
   Tab,
   Paper,
