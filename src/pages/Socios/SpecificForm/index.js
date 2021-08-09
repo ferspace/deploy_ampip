@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { Form, Input, InputNumber, Button } from 'antd';
+import axios from 'axios';
+import Swal from 'sweetalert2';
 
 const layout = {
   labelCol: { span: 8 },
@@ -20,7 +22,30 @@ const validateMessages = {
 const SpecificForm = (props)=>{
 
   const onFinish = (values) => {
-    console.log(values);
+     /*  axios.post(url, {
+      data: values
+    }, {
+      headers: {
+        'Authorization': `${token}` 
+      }
+    }).then((res) => {
+      console.log(res.data)
+      Swal.fire({
+        icon: 'success',
+        title: 'Se agergo correctamente',
+        showConfirmButton: false,
+        timer: 1500
+      })
+    })
+    .catch((error) => {
+      console.error(error)
+      Swal.fire({
+        icon: 'error',
+        title: 'Error al agregar datos',
+        showConfirmButton: false,
+        timer: 1500
+      })
+    }) */
   };
 
   return(
