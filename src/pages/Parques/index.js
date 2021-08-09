@@ -19,7 +19,7 @@ import PageTitle from "../../components/PageTitle/PageTitle";
 import SpecificForm from './SpecificForm'
 import axios from 'axios';
 import Tables from '../tables'
-
+import ModalInformation from './ModalInformation'
 
 // icons sets
 import "font-awesome/css/font-awesome.min.css";
@@ -127,7 +127,10 @@ const Parques = () =>{
       )}
 
       {activeTabId === 1 && (
-        <SpecificForm/>
+        <>
+          <SpecificForm/>
+          <ModalInformation/>
+        </>
       )}
     </Paper>
   </>
