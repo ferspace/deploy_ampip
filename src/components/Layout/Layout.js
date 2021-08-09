@@ -27,7 +27,6 @@ import Sidebar from "../Sidebar";
 import Dashboard from "../../pages/dashboard";
 import Notifications from "../../pages/notifications";
 import Maps from "../../pages/maps";
-import Icons from "../../pages/icons";
 import Desarrolladores from "../../pages/Desarrolladores";
 import Socios from "../../pages/Socios";
 import Terrenos from "../../pages/Terrenos";
@@ -77,25 +76,18 @@ function Layout(props) {
               justifyContent="space-between"
             >
               <div>
+                
                 <Link
                   color={'primary'}
-                  href={'https://flatlogic.com/'}
+                  href={'https://www.space.bar'}
                   target={'_blank'}
                   className={classes.link}
                 >
-                  Flatlogic
+                  SpaceBar
                 </Link>
                 <Link
                   color={'primary'}
-                  href={'https://flatlogic.com/about'}
-                  target={'_blank'}
-                  className={classes.link}
-                >
-                  About Us
-                </Link>
-                <Link
-                  color={'primary'}
-                  href={'https://flatlogic.com/blog'}
+                  href={'https://www.space.bar/'}
                   target={'_blank'}
                   className={classes.link}
                 >
@@ -104,7 +96,7 @@ function Layout(props) {
               </div>
               <div>
                 <Link
-                  href={'https://www.facebook.com/flatlogic'}
+                  href={'https://www.space.bar/'}
                   target={'_blank'}
                 >
                   <IconButton aria-label="facebook">
@@ -116,7 +108,7 @@ function Layout(props) {
                   </IconButton>
                 </Link>
                 <Link
-                  href={'https://twitter.com/flatlogic'}
+                  href={'https://www.space.bar/'}
                   target={'_blank'}
                 >
                   <IconButton aria-label="twitter">
@@ -128,7 +120,7 @@ function Layout(props) {
                   </IconButton>
                 </Link>
                 <Link
-                  href={'https://github.com/flatlogic'}
+                  href={'https://www.space.bar/'}
                   target={'_blank'}
                 >
                   <IconButton

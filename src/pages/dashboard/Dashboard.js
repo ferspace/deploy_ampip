@@ -56,7 +56,7 @@ export default function Dashboard(props) {
       size="medium"
       color="secondary"
     >
-        Latest Reports
+        Ultimo reporte
     </Button>} />
       <Grid container spacing={4}>
         <Grid item lg={3} md={4} sm={6} xs={12}>

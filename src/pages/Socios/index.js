@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Typography,
   Grid,
@@ -10,24 +10,21 @@ import {
   Button
 } from "@material-ui/core";
 import * as Icons from "@material-ui/icons";
-
+import SpecificForm from './SpecificForm'
 // styles
 import useStyles from "./styles";
-
+import Tables from '../Tables'
 // components
 import PageTitle from "../../components/PageTitle/PageTitle";
-import SpecificForm from './SpecificForm'
 import axios from 'axios';
-import Tables from '../Tables'
-
 
 // icons sets
 import "font-awesome/css/font-awesome.min.css";
 
-const Desarrolladores = () =>{
+
+const Socios = () =>{
   const [anchorEl, setAnchorEl] = React.useState(null)
   //const [datatableData, setDatatableData] = ([]) descomentar al integrar apis
-
   const handleClick = (e) => {
     setAnchorEl(e.currentTarget)
   }
@@ -35,6 +32,10 @@ const Desarrolladores = () =>{
   const handleClose = () => {
     setAnchorEl(null)
   }
+
+  const onFinish = (values) => {
+    console.log(values);
+  };
 
   var classes = useStyles();
 
@@ -72,7 +73,7 @@ const Desarrolladores = () =>{
 
   return (
   <>
-    <PageTitle title="Desarrolladores" button={(
+    <PageTitle title="Socios" button={(
       <>
         <Button
       variant="contained"
@@ -102,19 +103,20 @@ const Desarrolladores = () =>{
         onChange={(e, id) => setActiveTabId(id)}
         className={classes.iconsBar}
       >
-        <Tab label="Desarrolladores" classes={{ root: classes.tab }} />
+        <Tab label="Socios" classes={{ root: classes.tab }} />
         <Tab label="Agregar" classes={{ root: classes.tab }} />
       </Tabs>
       {activeTabId === 0 && (
-        <Tables title={"Todos los Desarrolladores"} columns={["Name", "Company", "City", "State"]} tableData={datatableData}/>
-
+        // helper de tablas 
+       <Tables title={"Todos los socios"} columns={["Name", "Company", "City", "State"]} tableData={datatableData}/>
       )}
 
       {activeTabId === 1 && (
-        <SpecificForm/>
+        //formulario 
+       <SpecificForm/>
       )}
     </Paper>
   </>
 );}
 
-export default Desarrolladores;
+export default Socios;
