@@ -33,6 +33,7 @@ import { Typography } from "../../components/Wrappers";
 import Dot from "../../components/Sidebar/components/Dot";
 import Table from "./components/Table/Table";
 import BigStat from "./components/BigStat/BigStat";
+import FormUser from "../../components/Forms/User/index"
 
 const mainChartData = getMainChartData();
 const PieChartData = [
@@ -59,6 +60,9 @@ export default function Dashboard(props) {
         Latest Reports
     </Button>} />
       <Grid container spacing={4}>
+        <Grid item sm={12}>
+          <FormUser></FormUser>
+        </Grid>
         <Grid item lg={3} md={4} sm={6} xs={12}>
           <Widget
             title="Visits Today"
