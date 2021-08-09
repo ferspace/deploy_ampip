@@ -18,13 +18,8 @@ import useStyles from "./styles";
 import PageTitle from "../../components/PageTitle/PageTitle";
 import SpecificForm from './SpecificForm'
 import axios from 'axios';
-<<<<<<< HEAD
-import Tables from '../tables'
-import ModalInformation from './ModalInformation'
-=======
 import Tables from '../Tables'
 
->>>>>>> a084f9b9be8c084fe3ea60bc76be81419ce0884f
 
 // icons sets
 import "font-awesome/css/font-awesome.min.css";
