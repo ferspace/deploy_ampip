@@ -76,6 +76,7 @@ function Login(props) {
               props.history,
               setIsLoading,
               setError,) 
+          localStorage.setItem('data', JSON.stringify(response.data.data.user))
           }else{
             alert("Usuario no autorizado")
           }
@@ -153,14 +154,6 @@ function Login(props) {
                       loginValue.length === 0 || passwordValue.length === 0
                     }
                     onClick={() =>
-                      // loginUser(
-                      //   userDispatch,
-                      //   loginValue,
-                      //   passwordValue,
-                      //   props.history,
-                      //   setIsLoading,
-                      //   setError,
-                      // )
                       loginAction()
                     }
                     variant="contained"
