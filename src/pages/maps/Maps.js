@@ -1,39 +1,118 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
-  withGoogleMap,
-  withScriptjs,
-  GoogleMap,
-  Marker,
-} from "react-google-maps";
+  Typography,
+  Grid,
+  Tabs,
+  Tab,
+  Paper,
+  Menu,
+  MenuItem,
+  Button
+} from "@material-ui/core";
+import * as Icons from "@material-ui/icons";
 
 // styles
 import useStyles from "./styles";
 
-const BasicMap = withScriptjs(
-  withGoogleMap(() => (
-    <GoogleMap
-      defaultZoom={12}
-      defaultCenter={{
-        lat: parseFloat(-37.813179),
-        lng: parseFloat(144.950259),
-      }}
-    >
-      <Marker position={{ lat: -37.813179, lng: 144.950259 }} />
-    </GoogleMap>
-  )),
-);
+// components
+import PageTitle from "../../components/PageTitle/PageTitle";
+import SpecificForm from './SpecificForm'
+import axios from 'axios';
+import Tables from '../tables'
 
-export default function Maps() {
+
+// icons sets
+import "font-awesome/css/font-awesome.min.css";
+
+const Desarrolladores = () => {
+  const [anchorEl, setAnchorEl] = React.useState(null)
+  const [datatableData, setDatatableData] = useState([]) //descomentar al integrar apis
+  const handleClick = (e) => {
+    setAnchorEl(e.currentTarget)
+  }
+
+  const handleClose = () => {
+    setAnchorEl(null)
+  }
+
   var classes = useStyles();
 
+  // local
+  var [activeTabId, setActiveTabId] = useState(0);
+
+  useEffect(() => {    //aqui va la peticion al endpoint , se va aprocesar la informacion del tipo [[dato1,dato2]]
+    axios.get(`http://localhost:3001/api/v1/corporates`, {
+      headers: { 
+        'Authorization': 'VPSszAvXt83bU5TRnxZc'
+      }
+    }).then((response) => {
+      //setDatatableData(response.data);
+      if(response.data.error){
+        alert("error")
+      } else{
+        var corporatesAdd = [];
+        response.data.map((i)=>{
+          var corporates = [];
+          corporates.push(i.name)
+          corporates.push(i.english_name)
+          corporates.push(i.address)
+          corporatesAdd.push(corporates);
+        });
+      
+        setDatatableData([...corporatesAdd]);
+      }
+    }).catch(error => {
+      console.log(error); // poner alerta cuando tengamos tiempo
+    });
+  }, []);
+
+
   return (
-    <div className={classes.mapContainer}>
-      <BasicMap
-        googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=AIzaSyB7OXmzfQYua_1LEhRdqsoYzyJOPh9hGLg"
-        loadingElement={<div style={{ height: "inherit", width: "inherit" }} />}
-        containerElement={<div style={{ height: "100%" }} />}
-        mapElement={<div style={{ height: "100%" }} />}
-      />
-    </div>
+    <>
+      <PageTitle title="Espacio Disponible" button={(
+        <>
+          <Button
+            variant="contained"
+            size="medium"
+            color="secondary"
+            onClick={e => handleClick(e)}
+          >
+            Actions
+          </Button>
+          <Menu
+            id="simple-menu"
+            anchorEl={anchorEl}
+            keepMounted
+            open={Boolean(anchorEl)}
+            onClose={handleClose}
+          >
+            <MenuItem onClick={handleClose}><Icons.Print style={{ marginRight: 16 }} /> Print PDF</MenuItem>
+            <MenuItem onClick={handleClose}><Icons.GetApp style={{ marginRight: 16 }} /> Download</MenuItem>
+          </Menu>
+        </>
+      )} />
+      <Paper className={classes.iconsContainer}>
+        <Tabs
+          indicatorColor="primary"
+          textColor="primary"
+          value={activeTabId}
+          onChange={(e, id) => setActiveTabId(id)}
+          className={classes.iconsBar}
+        >
+          <Tab label="Espacios" classes={{ root: classes.tab }} />
+          <Tab label="Agregar" classes={{ root: classes.tab }} />
+        </Tabs>
+        {activeTabId === 0 && (
+          <Tables title={"Todos los Espacios"} columns={["Name", "Nombre_en", "Direccion"]} tableData={datatableData} />
+
+        )}
+
+        {activeTabId === 1 && (
+          <SpecificForm />
+        )}
+      </Paper>
+    </>
   );
 }
+
+export default Desarrolladores;
