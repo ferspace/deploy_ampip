@@ -25,7 +25,7 @@ import Sidebar from "../Sidebar";
 
 // pages
 import Dashboard from "../../pages/dashboard";
-import Notifications from "../../pages/notifications";
+import Notifications from "../../pages/Users";
 import Maps from "../../pages/maps";
 import Desarrolladores from "../../pages/Desarrolladores";
 import Socios from "../../pages/Socios";
