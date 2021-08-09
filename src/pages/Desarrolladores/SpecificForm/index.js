@@ -1,11 +1,7 @@
 import React, { useState } from "react";
 import { Form, Input, InputNumber, Button } from 'antd';
-<<<<<<< HEAD
-import axios from "axios"
-=======
 import axios from 'axios'
 import Swal from 'sweetalert2';
->>>>>>> bd04d50111446d0b4dca846dee84b98a855055d0
 
 const layout = {
   labelCol: { span: 8 },
@@ -26,8 +22,6 @@ const validateMessages = {
 const SpecificForm = (props)=>{
 
   const onFinish = (values) => {
-<<<<<<< HEAD
-    console.log(values)
     var data = JSON.stringify({
         "corporate": {
         "name": values.user.name,
@@ -63,7 +57,6 @@ const SpecificForm = (props)=>{
       if (response.data.message != 0){
         var data = JSON.stringify({
             "corporate_information": {
-            "id": 1,
             "rfc": values.user.RFC,
             "social_media_tw": values.user.social_media_tw,
             "social_media_fb": values.user.social_media_fb,
@@ -78,7 +71,7 @@ const SpecificForm = (props)=>{
           method: 'post',
           url: 'http://localhost:3001/api/v1//corporate_informations',
           headers: { 
-            'Authorization': 'yt28TwQSW2VZKoCf473g', 
+            'Authorization': 'rBkdw8e3A8kKhczq1vix', 
             'Content-Type': 'application/json'
           },
           data : data
@@ -96,32 +89,6 @@ const SpecificForm = (props)=>{
     .catch(function (error) {
       console.log(error);
     });
-=======
-     /*  axios.post(url, {
-      data: values
-    }, {
-      headers: {
-        'Authorization': `${token}` 
-      }
-    }).then((res) => {
-      console.log(res.data)
-      Swal.fire({
-        icon: 'success',
-        title: 'Se agergo correctamente',
-        showConfirmButton: false,
-        timer: 1500
-      })
-    })
-    .catch((error) => {
-      console.error(error)
-      Swal.fire({
-        icon: 'error',
-        title: 'Error al agregar datos',
-        showConfirmButton: false,
-        timer: 1500
-      })
-    }) */
->>>>>>> bd04d50111446d0b4dca846dee84b98a855055d0
   };
 
   return(

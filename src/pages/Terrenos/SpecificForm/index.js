@@ -1,7 +1,9 @@
 import React, { useState } from "react";
-import { Form, Input, InputNumber, Button } from 'antd';
+import { Form, Input, InputNumber, Button, Select } from 'antd';
 import axios from 'axios';
 import Swal from 'sweetalert2';
+
+const { Option } = Select;
 
 const layout = {
   labelCol: { span: 8 },
@@ -22,98 +24,105 @@ const validateMessages = {
 const SpecificForm = (props)=>{
 
   const onFinish = (values) => {
-     /*  axios.post(url, {
-      data: values
-    }, {
-      headers: {
-        'Authorization': `${token}` 
+    var data = JSON.stringify({
+      "propieties": {
+        "corporate_id": 1,
+        "tipo": 1
       }
-    }).then((res) => {
-      console.log(res.data)
-      Swal.fire({
-        icon: 'success',
-        title: 'Se agergo correctamente',
-        showConfirmButton: false,
-        timer: 1500
-      })
+    });
+    
+    var config = {
+      method: 'post',
+      url: 'http://localhost:3001/api/v1//propieties',
+      headers: { 
+        'Authorization': 'WG4yiqiNVwc7XJvozBoQ', 
+        'Content-Type': 'application/json'
+      },
+      data : data
+    };
+    
+    axios(config)
+    .then(function (response) {
+      console.log(JSON.stringify(response.data));
     })
-    .catch((error) => {
-      console.error(error)
-      Swal.fire({
-        icon: 'error',
-        title: 'Error al agregar datos',
-        showConfirmButton: false,
-        timer: 1500
-      })
-    }) */
+    .catch(function (error) {
+      console.log(error);
+    });
   };
+
+  const Corporate = ()=>{
+    var corps = ["1","1", "1"]
+    var x = corps.map(i=>{
+        return (<a>i</a>)
+    })
+
+    return x;
+
+}
 
   return(
     <Form {...layout} name="nest-messages" onFinish={onFinish} validateMessages={validateMessages}>
+      <select value="" children={Corporate}>
+        {Corporate}
+      </select>
       <Form.Item name={['user', 'name']} label="Nombre" rules={[{ required: true }]}>
         <Input />
       </Form.Item>
-      <Form.Item name={['user', 'email']} label="Tipo" rules={[{ type: 'email' }]}>
+      <Form.Item name={['user', 'tup']} label="Tipo" rules={[{ required: true }]}>
         <Input />
       </Form.Item>
-      <Form.Item name={['user', 'website']} label="Superficie">
+      <Form.Item name={['user', 'superficie']} label="Superficie" rules={[{ required: true }]}>
         <Input />
       </Form.Item>
-      <Form.Item name={['user', 'introduction']} label="Direccion">
+      <Form.Item name={['user', 'address']} label="Direccion" rules={[{ required: true }]}>
         <Input.TextArea />
       </Form.Item>
-      <Form.Item name={['user', 'introduction']} label="Nombre en ingles">
+      <Form.Item name={['user', 'name_en']} label="Nombre en ingles" rules={[{ required: true }]}>
         <Input.TextArea />
       </Form.Item>
-      <Form.Item name={['user', 'introduction']} label="Nombre en español">
+      <Form.Item name={['user', 'park_property']} label="Propietario" rules={[{ required: true }]}>
         <Input.TextArea />
       </Form.Item>
-      <Form.Item name={['user', 'introduction']} label="Propietario">
+      <Form.Item name={['user', 'region']} label="Region" rules={[{ required: true }]}>
         <Input.TextArea />
       </Form.Item>
-      <Form.Item name={['user', 'introduction']} label="Region">
+      <Form.Item name={['user', 'market']} label="Mercado" rules={[{ required: true }]}>
         <Input.TextArea />
       </Form.Item>
-      <Form.Item name={['user', 'introduction']} label="Mercado">
+      <Form.Item name={['user', 'industry']} label="Industria" rules={[{ required: true }]}>
         <Input.TextArea />
       </Form.Item>
-      <Form.Item name={['user', 'introduction']} label="Industria">
+      <Form.Item name={['user', 'suprficie_total']} label="Superficie total" rules={[{ required: true }]}>
         <Input.TextArea />
       </Form.Item>
-      <Form.Item name={['user', 'introduction']} label="Superficie total">
+      <Form.Item name={['user', 'superficie_urbanizada']} label="Superficie urbanizada" rules={[{ required: true }]}>
         <Input.TextArea />
       </Form.Item>
-      <Form.Item name={['user', 'introduction']} label="Superficie urbanizada">
+      <Form.Item name={['user', 'superficie_disponible']} label="Superficie disponible" rules={[{ required: true }]}>
         <Input.TextArea />
       </Form.Item>
-      <Form.Item name={['user', 'introduction']} label="Superficie ocupada">
+      <Form.Item name={['user', 'inicio_de_operaciones']} label="Inicio de operaciones" rules={[{ required: true }]}>
         <Input.TextArea />
       </Form.Item>
-      <Form.Item name={['user', 'introduction']} label="Superficie disponible">
+      <Form.Item name={['user', 'number_employe']} label="Numero de empleados" rules={[{ required: true }]}>
         <Input.TextArea />
       </Form.Item>
-      <Form.Item name={['user', 'introduction']} label="Inicio de operaciones">
+      <Form.Item name={['user', 'introduction']} label="Reconocimiento a mejores  practicas" rules={[{ required: true }]}>
         <Input.TextArea />
       </Form.Item>
-      <Form.Item name={['user', 'introduction']} label="Numero de empleados">
+      <Form.Item name={['user', 'infrastructure']} label="Infraestructura" rules={[{ required: true }]}>
         <Input.TextArea />
       </Form.Item>
-      <Form.Item name={['user', 'introduction']} label="Reconocimiento a mejores  practicas">
+      <Form.Item name={['user', 'introduction']} label="Codigo Postal" rules={[{ required: true }]}>
         <Input.TextArea />
       </Form.Item>
-      <Form.Item name={['user', 'introduction']} label="Infraestructura">
+      <Form.Item name={['user', 'introduction']} label="Colonia" rules={[{ required: true }]}>
         <Input.TextArea />
       </Form.Item>
-      <Form.Item name={['user', 'introduction']} label="Codigo Postal">
+      <Form.Item name={['user', 'introduction']} label="Municipio" rules={[{ required: true }]}>
         <Input.TextArea />
       </Form.Item>
-      <Form.Item name={['user', 'introduction']} label="Colonia">
-        <Input.TextArea />
-      </Form.Item>
-      <Form.Item name={['user', 'introduction']} label="Municipio">
-        <Input.TextArea />
-      </Form.Item>
-      <Form.Item name={['user', 'introduction']} label="Estado">
+      <Form.Item name={['user', 'introduction']} label="Estado" rules={[{ required: true }]}>
         <Input.TextArea />
       </Form.Item>
       <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
