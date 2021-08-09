@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Form, Input, InputNumber, Button } from 'antd';
 import axios from 'axios'
+import Swal from 'sweetalert2';
+
 const layout = {
   labelCol: { span: 8 },
   wrapperCol: { span: 16 },

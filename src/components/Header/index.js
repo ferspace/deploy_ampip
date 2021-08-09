@@ -89,7 +89,7 @@ const notifications = [
   },
 ];
 
-const Header=(props)=> {
+export default function Header(props) {
   var classes = useStyles();
 
   // global
@@ -337,5 +337,3 @@ const Header=(props)=> {
     </AppBar>
   );
 }
-
-export default Header;

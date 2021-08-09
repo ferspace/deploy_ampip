@@ -82,6 +82,7 @@ function Sidebar({ location }) {
 
   return (
     <Drawer
+      style={{zIndex: 0}}
       variant={isPermanent ? "permanent" : "temporary"}
       className={classNames(classes.drawer, {
         [classes.drawerOpen]: isSidebarOpened,
