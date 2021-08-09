@@ -73,7 +73,7 @@ const pieChartData = [
   { name: "Group D", value: 200 },
 ];
 
-const Socios = (props) => {
+const SociosReport = (props) => {
   var theme = useTheme();
 
   // local
@@ -232,4 +232,4 @@ function renderActiveShape(props) {
   );
 }
 
-export default Socios
+export default SociosReport;
