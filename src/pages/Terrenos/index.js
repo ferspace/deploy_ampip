@@ -18,7 +18,7 @@ import useStyles from "./styles";
 import PageTitle from "../../components/PageTitle/PageTitle";
 import SpecificForm from './SpecificForm'
 import axios from 'axios';
-import Tables from '../Tables'
+import Tables from '../tables'
 
 
 // icons sets
