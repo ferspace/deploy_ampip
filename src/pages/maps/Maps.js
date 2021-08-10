@@ -100,7 +100,6 @@ const Desarrolladores = () => {
           className={classes.iconsBar}
         >
           <Tab label="Espacios" classes={{ root: classes.tab }} />
-          <Tab label="Agregar" classes={{ root: classes.tab }} />
         </Tabs>
         {activeTabId === 0 && (
           <Tables title={"Todos los Espacios"} columns={["id","Name", "Nombre_en", "Direccion",{

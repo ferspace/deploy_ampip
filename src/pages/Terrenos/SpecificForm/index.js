@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { Form, Input, InputNumber, Button, Select } from 'antd';
+import { Form, Input, Button, Select } from 'antd';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 
+const { Option } = Select;
 
 const layout = {
   labelCol: { span: 8 },
@@ -51,14 +52,27 @@ const SpecificForm = (props)=>{
   return(
   
     <Form {...layout} name="nest-messages" onFinish={onFinish} validateMessages={validateMessages}>
-      <Form.Item name={['user', 'type']} label="Corporativos" rules={[{ required: true }]}>
-      <select name="select">
-        <option value="value">Select</option>
-
-        {corporates.map((value, i) => {
-          return <option key={i} value={value.id}>{value.name}</option>;
-        })}
-      </select>
+      <Form.Item
+        name={["user", "type"]}
+        label="Corporativos"
+        rules={[
+          {
+            required: true,
+          },
+        ]}
+      >
+        <Select
+          placeholder="Select a option and change input text above"
+          allowClear
+        >
+          {corporates.map((value, i) => {
+            return (
+              <Option key={i} value={value.id}>
+                {value.name}
+              </Option>
+            );
+          })}
+        </Select>
       </Form.Item>
       <Form.Item name={['user', 'name']} label="Nombre" rules={[{ required: true }]}>
         <Input />
