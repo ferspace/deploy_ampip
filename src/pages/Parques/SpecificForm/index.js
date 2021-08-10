@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Form, Input, InputNumber, Button } from 'antd';
 import axios from 'axios';
 import Swal from 'sweetalert2';
@@ -20,100 +20,57 @@ const validateMessages = {
 };
 
 const SpecificForm = (props)=>{
-
   const onFinish = (values) => {
- /*  axios.post(url, {
-      data: values
-    }, {
-      headers: {
-        'Authorization': `${token}` 
+    var data = JSON.stringify({
+      "propieties": {
+        "corporate_id": 1,
+        "tipo": 0
       }
-    }).then((res) => {
-      console.log(res.data)
-      Swal.fire({
-        icon: 'success',
-        title: 'Se agergo correctamente',
-        showConfirmButton: false,
-        timer: 1500
-      })
+    });
+    
+    var config = {
+      method: 'post',
+      url: 'http://localhost:3001/api/v1//propieties',
+      headers: { 
+        'Authorization': 'rBkdw8e3A8kKhczq1vix', 
+        'Content-Type': 'application/json'
+      },
+      data : data
+    };
+    
+    axios(config)
+    .then(function (response) {
+      console.log(JSON.stringify(response.data));
     })
-    .catch((error) => {
-      console.error(error)
-      Swal.fire({
-        icon: 'error',
-        title: 'Error al agregar datos',
-        showConfirmButton: false,
-        timer: 1500
-      })
-    }) */
+    .catch(function (error) {
+      console.log(error);
+    });
   };
+
+  const [ corporates, setCorporates ] = useState([])
+  useEffect(() => {
+    axios.get('http://localhost:3001/api/v1/corporates', {headers: { 
+      'Authorization': 'rBkdw8e3A8kKhczq1vix', 
+      'Content-Type': 'application/json'
+    },}).then((response) => {
+      if(response.data.massage !== "Sin datos para mostrar") setCorporates(response.data)
+      //setPost(response.data);
+    });
+  }, []);
 
   return(
     <Form {...layout} name="nest-messages" onFinish={onFinish} validateMessages={validateMessages}>
+      <select name="select">
+        <option value="value">Select</option>
+
+        {corporates.map((value, i) => {
+          return <option key={i}>{value.name}</option>;
+        })}
+      </select>
       <Form.Item name={['user', 'name']} label="Nombre" rules={[{ required: true }]}>
         <Input />
       </Form.Item>
-      <Form.Item name={['user', 'email']} label="Tipo" rules={[{ type: 'email' }]}>
-        <Input />
-      </Form.Item>
-      <Form.Item name={['user', 'website']} label="Superficie">
-        <Input />
-      </Form.Item>
-      <Form.Item name={['user', 'introduction']} label="Direccion">
-        <Input.TextArea />
-      </Form.Item>
-      <Form.Item name={['user', 'introduction']} label="Nombre en ingles">
-        <Input.TextArea />
-      </Form.Item>
-      <Form.Item name={['user', 'introduction']} label="Nombre en español">
-        <Input.TextArea />
-      </Form.Item>
-      <Form.Item name={['user', 'introduction']} label="Propietario">
-        <Input.TextArea />
-      </Form.Item>
-      <Form.Item name={['user', 'introduction']} label="Region">
-        <Input.TextArea />
-      </Form.Item>
-      <Form.Item name={['user', 'introduction']} label="Mercado">
-        <Input.TextArea />
-      </Form.Item>
-      <Form.Item name={['user', 'introduction']} label="Industria">
-        <Input.TextArea />
-      </Form.Item>
-      <Form.Item name={['user', 'introduction']} label="Superficie total">
-        <Input.TextArea />
-      </Form.Item>
-      <Form.Item name={['user', 'introduction']} label="Superficie urbanizada">
-        <Input.TextArea />
-      </Form.Item>
-      <Form.Item name={['user', 'introduction']} label="Superficie ocupada">
-        <Input.TextArea />
-      </Form.Item>
-      <Form.Item name={['user', 'introduction']} label="Superficie disponible">
-        <Input.TextArea />
-      </Form.Item>
-      <Form.Item name={['user', 'introduction']} label="Inicio de operaciones">
-        <Input.TextArea />
-      </Form.Item>
-      <Form.Item name={['user', 'introduction']} label="Numero de empleados">
-        <Input.TextArea />
-      </Form.Item>
-      <Form.Item name={['user', 'introduction']} label="Reconocimiento a mejores  practicas">
-        <Input.TextArea />
-      </Form.Item>
-      <Form.Item name={['user', 'introduction']} label="Infraestructura">
-        <Input.TextArea />
-      </Form.Item>
-      <Form.Item name={['user', 'introduction']} label="Codigo Postal">
-        <Input.TextArea />
-      </Form.Item>
-      <Form.Item name={['user', 'introduction']} label="Colonia">
-        <Input.TextArea />
-      </Form.Item>
-      <Form.Item name={['user', 'introduction']} label="Municipio">
-        <Input.TextArea />
-      </Form.Item>
-      <Form.Item name={['user', 'introduction']} label="Estado">
+      <Form.Item name={['user', 'name_en']} label="Nombre en ingles" rules={[{ required: true }]}>
         <Input.TextArea />
       </Form.Item>
       <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
