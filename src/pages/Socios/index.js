@@ -23,7 +23,7 @@ import Tables from '../Tables'
 
 // icons sets
 import "font-awesome/css/font-awesome.min.css";
-
+import ModalInformation from '../../components/ModalInformation'
 const Desarrolladores = () => {
   const [anchorEl, setAnchorEl] = React.useState(null)
   const [datatableData, setDatatableData] = useState([]) //descomentar al integrar apis
@@ -53,6 +53,7 @@ const Desarrolladores = () => {
         var corporatesAdd = [];
         response.data.map((i)=>{
           var corporates = [];
+          corporates.push(i.id);
           corporates.push(i.name)
           corporates.push(i.english_name)
           corporates.push(i.address)
@@ -103,7 +104,26 @@ const Desarrolladores = () => {
           <Tab label="Agregar" classes={{ root: classes.tab }} />
         </Tabs>
         {activeTabId === 0 && (
-          <Tables title={"Todos los Desarrolladores"} columns={["Name", "Nombre_en", "Direccion"]} tableData={datatableData} />
+          <Tables title={"Todos los Desarrolladores"} columns={["id","Name", "Nombre_en", "Direccion", {
+            label: "Ver",
+            options: {
+              customBodyRender: (value, tableMeta, updateValue) => {
+                return (
+                  <ModalInformation data={tableMeta.rowData[0]}/>
+                )
+              }
+            }
+          },
+          {
+            label: "Editar",
+            options: {
+              customBodyRender: (value, tableMeta, updateValue) => {
+                return (
+                  <ModalInformation data={tableMeta.rowData[0]}/>
+                )
+              }
+            }
+          }]} tableData={datatableData} />
         )}
 
         {activeTabId === 1 && (

@@ -51,7 +51,7 @@ export default function SimpleModal({data}) {
   return (
     <div>
       <button type="button" onClick={handleOpen}>
-        Ver
+        Editar
       </button>
       <Modal
         open={open}

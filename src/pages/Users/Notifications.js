@@ -59,6 +59,7 @@ export default function NotificationsPage(props) {
         var UsersAdd = []
         response.data.map((item) => {
           var User = [];
+          User.push(item.id);
           User.push(item.full_name)   
           User.push(item.last_name)    
           User.push(item.address)   
@@ -87,7 +88,7 @@ export default function NotificationsPage(props) {
           <Tab label="Agregar" classes={{ root: classes.tab }} />
         </Tabs>
         {activeTabId === 0 && (
-          <Tables title={"Todos los Desarrolladores"} columns={["Nombre", "Apellido", "Direccion"]} tableData={datatableData} />
+          <Tables title={"Todos los Desarrolladores"} columns={["id","Nombre", "Apellido", "Direccion"]} tableData={datatableData} />
 
         )}
 

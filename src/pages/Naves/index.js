@@ -23,6 +23,8 @@ import Tables from '../Tables'
 
 // icons sets
 import "font-awesome/css/font-awesome.min.css";
+import ModalInformation from '../../components/ModalInformation'
+import ModaEdit from '../../components/ModalEdit'
 
 const Naves = () =>{
   const [anchorEl, setAnchorEl] = React.useState(null)
@@ -50,6 +52,7 @@ const Naves = () =>{
         var corporatesAdd = [];
         response.data.map((i)=>{
           var corporates = [];
+          corporates.push(i.id);
           corporates.push(i.name)
           corporates.push(i.english_name)
           corporates.push(i.updated_at)
@@ -100,7 +103,26 @@ const Naves = () =>{
         <Tab label="Agregar" classes={{ root: classes.tab }} />
       </Tabs>
       {activeTabId === 0 && (
-        <Tables title={"Todas las naves"} columns={["Name", "Company", "City", "State"]} tableData={datatableData}/>
+        <Tables title={"Todas las naves"} columns={["id","Name", "Company", "City", "State", {
+          label: "Ver",
+          options: {
+            customBodyRender: (value, tableMeta, updateValue) => {
+              return (
+                <ModalInformation data={tableMeta.rowData[0]}/>
+              )
+            }
+          }
+        },
+        {
+          label: "Editar",
+          options: {
+            customBodyRender: (value, tableMeta, updateValue) => {
+              return (
+                <ModaEdit data={tableMeta.rowData[0]}/>
+              )
+            }
+          }
+        }]} tableData={datatableData}/>
 
       )}
 
