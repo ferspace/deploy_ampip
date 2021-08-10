@@ -11,6 +11,8 @@ import Table from "../dashboard/components/Table/Table";
 // data
 import mock from "../dashboard/mock";
 
+
+
 const useStyles = makeStyles(theme => ({
   tableOverflow: {
     overflow: 'auto'
@@ -18,6 +20,12 @@ const useStyles = makeStyles(theme => ({
 }))
 
 const Tables =(props)=>{
+
+  console.log(props.columns)
+  const change = ()=>{
+    console.log("change");
+  }
+
   const classes = useStyles();
   return (
     <>
@@ -27,8 +35,11 @@ const Tables =(props)=>{
             title={props.title}
             data={props.tableData}
             columns={props.columns}
+            
           />
+
         </Grid>
+  
         {/* <Grid item xs={12}>
           <Widget title="Material-UI Table" upperTitle noBodyPadding bodyClass={classes.tableOverflow}>
             <Table data={mock.table} />

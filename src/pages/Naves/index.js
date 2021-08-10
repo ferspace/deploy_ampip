@@ -50,6 +50,7 @@ const Naves = () =>{
         var corporatesAdd = [];
         response.data.map((i)=>{
           var corporates = [];
+          corporates.push(i.id);
           corporates.push(i.name)
           corporates.push(i.english_name)
           corporates.push(i.updated_at)
@@ -100,7 +101,18 @@ const Naves = () =>{
         <Tab label="Agregar" classes={{ root: classes.tab }} />
       </Tabs>
       {activeTabId === 0 && (
-        <Tables title={"Todas las naves"} columns={["Name", "Company", "City", "State"]} tableData={datatableData}/>
+        <Tables title={"Todas las naves"} columns={["id","Name", "Company", "City", "State", {
+          label: "Actions",
+          options: {
+              customBodyRender: (value, tableMeta, updateValue) => {
+                  return (
+                      <button onClick={()=>{console.log(tableMeta.rowData[0])} }>
+                          Ver
+                      </button>
+                  )
+              }
+          }
+        }]} tableData={datatableData}/>
 
       )}
 

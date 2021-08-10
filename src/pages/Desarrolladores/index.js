@@ -53,6 +53,7 @@ const Desarrolladores = () => {
         var corporatesAdd = [];
         response.data.map((i)=>{
           var corporates = [];
+          corporates.push(i.id);
           corporates.push(i.name)
           corporates.push(i.english_name)
           corporates.push(i.address)
@@ -103,7 +104,18 @@ const Desarrolladores = () => {
           <Tab label="Agregar" classes={{ root: classes.tab }} />
         </Tabs>
         {activeTabId === 0 && (
-          <Tables title={"Todos los Desarrolladores"} columns={["Name", "Nombre_en", "Direccion"]} tableData={datatableData} />
+          <Tables title={"Todos los Desarrolladores"} columns={["id","Name", "Nombre_en", "Direccion", {
+            label: "Actions",
+            options: {
+                customBodyRender: (value, tableMeta, updateValue) => {
+                    return (
+                        <button onClick={()=>{console.log(tableMeta.rowData[0])} }>
+                            Ver
+                        </button>
+                    )
+                }
+            }
+          }]} tableData={datatableData} />
 
         )}
 
