@@ -50,20 +50,16 @@ const SpecificForm = (props)=>{
     });
   };
 
-  const Corporate = ()=>{
-    var corps = ["1","1", "1"]
-    var x = corps.map(i=>{
-        return (<a>i</a>)
-    })
-
-    return x;
-
-}
+  var corporates = [{ name: 1 }, { name: 2 }, { name: 3 }];
 
   return(
     <Form {...layout} name="nest-messages" onFinish={onFinish} validateMessages={validateMessages}>
-      <select value="" children={Corporate}>
-        {Corporate}
+      <select name="select">
+        <option value="value">Select</option>
+
+        {corporates.map(i => {
+          return <option>Value {i.name}</option>;
+        })}
       </select>
       <Form.Item name={['user', 'name']} label="Nombre" rules={[{ required: true }]}>
         <Input />
