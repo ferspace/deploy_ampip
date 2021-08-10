@@ -43,7 +43,7 @@ const Desarrolladores = () => {
   useEffect(() => {    //aqui va la peticion al endpoint , se va aprocesar la informacion del tipo [[dato1,dato2]]
     axios.get(`http://localhost:3001/api/v1/corporates`, {
       headers: { 
-        'Authorization': 'VPSszAvXt83bU5TRnxZc'
+        'Authorization': 'rBkdw8e3A8kKhczq1vix'
       }
     }).then((response) => {
       //setDatatableData(response.data);
