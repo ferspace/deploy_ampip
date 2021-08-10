@@ -39,7 +39,7 @@ function Login(props) {
   var [passwordValue, setPasswordValue] = useState("");
 
   //usuario y contraseña
-  const [user, setUser] = useState({email:"",});
+  const [user, setUser] = useState({ email: "", });
 
   const loginAction = () => {
     var data = JSON.stringify({
@@ -48,7 +48,7 @@ function Login(props) {
         "password": passwordValue,
       }
     });
-  
+
     var config = {
       method: 'post',
       url: 'http://localhost:3001/api/v1/sign_in',
@@ -57,28 +57,35 @@ function Login(props) {
       },
       data: data
     };
-    
+
+    loginUser(
+      userDispatch,
+      loginValue,
+      passwordValue,
+      props.history,
+      setIsLoading,
+      setError)
     axios(config)
       .then(function (response) {
-        if(response.data.messages === "Signed In Successfully"){
+        if (response.data.messages === "Signed In Successfully") {
           loginUser(
-              userDispatch,
-              loginValue,
-              passwordValue,
-              props.history,
-              setIsLoading,
-              setError,) 
+            userDispatch,
+            loginValue,
+            passwordValue,
+            props.history,
+            setIsLoading,
+            setError)
           localStorage.setItem('data', JSON.stringify(response.data.data.user))
-          }else{
-            alert("Usuario no autorizado")
-          }
+        } else {
+          alert("Usuario no autorizado")
         }
+      }
       )
       .catch(function (error) {
         console.log(error);
       });
   }
-  
+
   return (
     <Grid container className={classes.container}>
       <div className={classes.logotypeContainer}>
@@ -94,14 +101,14 @@ function Login(props) {
             centered
           >
             <Tab label="Login" classes={{ root: classes.tab }} />
-{/*             <Tab label="New User" classes={{ root: classes.tab }} />
+            {/*             <Tab label="New User" classes={{ root: classes.tab }} />
  */}          </Tabs>
           {activeTabId === 0 && (
             <React.Fragment>
               <Typography variant="h1" className={classes.greeting}>
                 <img src={logo} alt="logo" className={classes.logotypeImage} />
               </Typography>
-            
+
               <Fade in={error}>
                 <Typography color="secondary" className={classes.errorMessage}>
                   Something is wrong with your login or password :(
