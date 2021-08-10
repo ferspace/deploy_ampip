@@ -52,10 +52,9 @@ export default function Dashboard(props) {
 
   return (
     <>
-      <PageTitle title="Dashboard" button={<Button
+      <PageTitle title="Dashboard" button={<Button style={{backgroundColor:"#333333", color:"#ffffff"}}
       variant="contained"
       size="medium"
-      color="secondary"
     >
         Ultimo reporte
     </Button>} />

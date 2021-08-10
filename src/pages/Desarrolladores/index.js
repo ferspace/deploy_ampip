@@ -74,10 +74,9 @@ const Desarrolladores = () => {
     <>
       <PageTitle title="Desarrolladores" button={(
         <>
-          <Button
+          <Button style={{backgroundColor:"#78b63c", color:"#ffffff"}}
             variant="contained"
             size="medium"
-            color="secondary"
             onClick={e => handleClick(e)}
           >
             Actions
@@ -97,16 +96,16 @@ const Desarrolladores = () => {
       <Paper className={classes.iconsContainer}>
         <Tabs
           indicatorColor="primary"
-          textColor="primary"
+          textColor="#fffff"
           value={activeTabId}
           onChange={(e, id) => setActiveTabId(id)}
           className={classes.iconsBar}
         >
-          <Tab label="Desarrolladores" classes={{ root: classes.tab }} />
-          <Tab label="Agregar" classes={{ root: classes.tab }} />
+          <Tab label="Desarrolladores" className={classes.menuspace} />
+          <Tab label="Agregar" className={classes.menuspace} />
         </Tabs>
         {activeTabId === 0 && (
-          <Tables title={"Todos los Desarrolladores"} columns={["id", "Name", "Nombre_en", "Direccion", 
+          <Tables  title={"Todos los Desarrolladores"} columns={["id", "Name", "Nombre_en", "Direccion",
           {
             label: "Ver",
             options: {

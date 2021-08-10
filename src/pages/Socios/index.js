@@ -70,9 +70,9 @@ const Desarrolladores = () => {
 
   return (
     <>
-      <PageTitle title="Desarrolladores" button={(
+      <PageTitle title="Socios" button={(
         <>
-          <Button
+          <Button style={{backgroundColor:"#78b63c", color:"#ffffff"}}
             variant="contained"
             size="medium"
             color="secondary"
@@ -100,8 +100,8 @@ const Desarrolladores = () => {
           onChange={(e, id) => setActiveTabId(id)}
           className={classes.iconsBar}
         >
-          <Tab label="Desarrolladores" classes={{ root: classes.tab }} />
-          <Tab label="Agregar" classes={{ root: classes.tab }} />
+          <Tab label="Desarrolladores" className={classes.menuspace}  />
+          <Tab label="Agregar" className={classes.menuspace} />
         </Tabs>
         {activeTabId === 0 && (
           <Tables title={"Todos los Desarrolladores"} columns={["id","Name", "Nombre_en", "Direccion", {

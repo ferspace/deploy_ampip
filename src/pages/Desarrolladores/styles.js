@@ -1,6 +1,9 @@
 import { makeStyles } from "@material-ui/styles";
 
 export default makeStyles(theme => ({
+  menuspace: {
+    color:"#00afb7",
+  },
   titleBold: {
     fontWeight: 600,
   },
