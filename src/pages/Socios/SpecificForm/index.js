@@ -27,7 +27,7 @@ const SpecificForm = (props)=>{
       "corporate": {
       "name": values.user.name,
       "english_name": values.user.name_en,
-      "social_type": 0,
+      "social_type": 1,
       "address": values.user.address,
       "postal_code": values.user.cp,
       "colony": values.user.colony,
