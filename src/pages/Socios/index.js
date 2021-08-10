@@ -95,12 +95,12 @@ const Desarrolladores = () => {
       <Paper className={classes.iconsContainer}>
         <Tabs
           indicatorColor="primary"
-          textColor="primary"
+          textColor="#fffff"
           value={activeTabId}
           onChange={(e, id) => setActiveTabId(id)}
           className={classes.iconsBar}
         >
-          <Tab label="Desarrolladores" className={classes.menuspace}  />
+          <Tab label="Socios" className={classes.menuspace}  />
           <Tab label="Agregar" className={classes.menuspace} />
         </Tabs>
         {activeTabId === 0 && (
