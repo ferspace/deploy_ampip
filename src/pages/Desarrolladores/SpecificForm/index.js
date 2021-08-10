@@ -54,7 +54,7 @@ const SpecificForm = (props)=>{
     
     axios(config)
     .then(function (response) {
-      if (response.data.message != 0){
+      if (response.data.message !== 0){
         var data = JSON.stringify({
             "corporate_information": {
             "rfc": values.user.RFC,
