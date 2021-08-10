@@ -21,7 +21,8 @@ import Tables from '../Tables'
 
 // icons sets
 import "font-awesome/css/font-awesome.min.css";
-
+import ModalInformation from '../../components/ModalInformation'
+import ModaEdit from '../../components/ModalEdit'
 const Desarrolladores = () => {
   const [anchorEl, setAnchorEl] = React.useState(null)
   const [datatableData, setDatatableData] = useState([]) //descomentar al integrar apis
@@ -102,16 +103,24 @@ const Desarrolladores = () => {
           <Tab label="Agregar" classes={{ root: classes.tab }} />
         </Tabs>
         {activeTabId === 0 && (
-          <Tables title={"Todos los Espacios"} columns={["id","Name", "Nombre_en", "Direccion", {
-            label: "Actions",
+          <Tables title={"Todos los Espacios"} columns={["id","Name", "Nombre_en", "Direccion",{
+            label: "Ver",
             options: {
-                customBodyRender: (value, tableMeta, updateValue) => {
-                    return (
-                        <button onClick={()=>{console.log(tableMeta.rowData[0])} }>
-                            Ver
-                        </button>
-                    )
-                }
+              customBodyRender: (value, tableMeta, updateValue) => {
+                return (
+                  <ModalInformation data={tableMeta.rowData[0]}/>
+                )
+              }
+            }
+          },
+          {
+            label: "Editar",
+            options: {
+              customBodyRender: (value, tableMeta, updateValue) => {
+                return (
+                  <ModaEdit data={tableMeta.rowData[0]}/>
+                )
+              }
             }
           }]} tableData={datatableData} />
 

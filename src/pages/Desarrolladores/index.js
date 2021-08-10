@@ -23,6 +23,8 @@ import Tables from '../Tables'
 
 // icons sets
 import "font-awesome/css/font-awesome.min.css";
+import ModalInformation from '../../components/ModalInformation'
+import ModaEdit from '../../components/ModalEdit'
 
 const Desarrolladores = () => {
   const [anchorEl, setAnchorEl] = React.useState(null)
@@ -42,16 +44,16 @@ const Desarrolladores = () => {
 
   useEffect(() => {    //aqui va la peticion al endpoint , se va aprocesar la informacion del tipo [[dato1,dato2]]
     axios.get(`http://localhost:3001/api/v1/corporates`, {
-      headers: { 
+      headers: {
         'Authorization': 'VPSszAvXt83bU5TRnxZc'
       }
     }).then((response) => {
       //setDatatableData(response.data);
-      if(response.data.error){
+      if (response.data.error) {
         alert("error")
-      } else{
+      } else {
         var corporatesAdd = [];
-        response.data.map((i)=>{
+        response.data.map((i) => {
           var corporates = [];
           corporates.push(i.id);
           corporates.push(i.name)
@@ -59,7 +61,7 @@ const Desarrolladores = () => {
           corporates.push(i.address)
           corporatesAdd.push(corporates);
         });
-      
+
         setDatatableData([...corporatesAdd]);
       }
     }).catch(error => {
@@ -104,23 +106,34 @@ const Desarrolladores = () => {
           <Tab label="Agregar" classes={{ root: classes.tab }} />
         </Tabs>
         {activeTabId === 0 && (
-          <Tables title={"Todos los Desarrolladores"} columns={["id","Name", "Nombre_en", "Direccion", {
-            label: "Actions",
+          <Tables title={"Todos los Desarrolladores"} columns={["id", "Name", "Nombre_en", "Direccion", 
+          {
+            label: "Ver",
             options: {
-                customBodyRender: (value, tableMeta, updateValue) => {
-                    return (
-                        <button onClick={()=>{console.log(tableMeta.rowData[0])} }>
-                            Ver
-                        </button>
-                    )
-                }
+              customBodyRender: (value, tableMeta, updateValue) => {
+                return (
+                  <ModalInformation data={tableMeta.rowData[0]}/>
+                )
+              }
+            }
+          },
+          {
+            label: "Editar",
+            options: {
+              customBodyRender: (value, tableMeta, updateValue) => {
+                return (
+                  <ModaEdit data={tableMeta.rowData[0]}/>
+                )
+              }
             }
           }]} tableData={datatableData} />
 
         )}
 
         {activeTabId === 1 && (
-          <SpecificForm />
+          <>
+            <SpecificForm />
+          </>
         )}
       </Paper>
     </>

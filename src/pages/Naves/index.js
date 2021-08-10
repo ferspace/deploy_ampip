@@ -23,6 +23,8 @@ import Tables from '../Tables'
 
 // icons sets
 import "font-awesome/css/font-awesome.min.css";
+import ModalInformation from '../../components/ModalInformation'
+import ModaEdit from '../../components/ModalEdit'
 
 const Naves = () =>{
   const [anchorEl, setAnchorEl] = React.useState(null)
@@ -102,15 +104,23 @@ const Naves = () =>{
       </Tabs>
       {activeTabId === 0 && (
         <Tables title={"Todas las naves"} columns={["id","Name", "Company", "City", "State", {
-          label: "Actions",
+          label: "Ver",
           options: {
-              customBodyRender: (value, tableMeta, updateValue) => {
-                  return (
-                      <button onClick={()=>{console.log(tableMeta.rowData[0])} }>
-                          Ver
-                      </button>
-                  )
-              }
+            customBodyRender: (value, tableMeta, updateValue) => {
+              return (
+                <ModalInformation data={tableMeta.rowData[0]}/>
+              )
+            }
+          }
+        },
+        {
+          label: "Editar",
+          options: {
+            customBodyRender: (value, tableMeta, updateValue) => {
+              return (
+                <ModaEdit data={tableMeta.rowData[0]}/>
+              )
+            }
           }
         }]} tableData={datatableData}/>
 
