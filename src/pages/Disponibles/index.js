@@ -8,6 +8,7 @@ import {
   Button
 } from "@material-ui/core";
 import * as Icons from "@material-ui/icons";
+import Maps from "./Maps"
 
 // styles
 import useStyles from "./styles";
@@ -121,7 +122,17 @@ const Disponibles = () => {
         </Tabs>
         {activeTabId === 0 && (
           <div style={{padding:20}}>
-          <Tables title={"Todos los Espacios"} columns={["id","Nombre", "Alta",
+            <Maps />
+          <Tables title={"Todos los Espacios"} columns={["id","Name", "Nombre_en", "Direccion",{
+            label: "Ver",
+            options: {
+              customBodyRender: (value, tableMeta, updateValue) => {
+                return (
+                  <ModalInformation data={tableMeta.rowData[0]}/>
+                )
+              }
+            }
+          },
           {
             label: "Status",
             options: {
