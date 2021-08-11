@@ -72,7 +72,7 @@ const SpecificForm = (props)=>{
           method: 'post',
           url: 'http://localhost:3001/api/v1//corporate_informations',
           headers: { 
-            'Authorization': 'oCgmymybxa_n5RhKdNsS', 
+            'Authorization': DataOption.authentication_token, 
             'Content-Type': 'application/json'
           },
           data : data

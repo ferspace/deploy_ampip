@@ -3,6 +3,7 @@ import { Form, Input, InputNumber, Button } from 'antd';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 
+const DataOption = JSON.parse(localStorage.getItem("data"));
 const layout = {
   labelCol: { span: 8 },
   wrapperCol: { span: 16 },
@@ -52,7 +53,7 @@ const SpecificForm = (props)=>{
     method: 'post',
     url: 'http://localhost:3001/api/v1//corporates',
     headers: { 
-      'Authorization': 'RHsyvmBgQRQoiuvum6uJ', 
+      'Authorization': DataOption.authentication_token,
       'Content-Type': 'application/json'
     },
     data : data
@@ -77,7 +78,7 @@ const SpecificForm = (props)=>{
         method: 'post',
         url: 'http://localhost:3001/api/v1//corporate_informations',
         headers: { 
-          'Authorization': 'rBkdw8e3A8kKhczq1vix', 
+          'Authorization': DataOption.authentication_token, 
           'Content-Type': 'application/json'
         },
         data : data
