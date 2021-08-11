@@ -173,6 +173,7 @@ const SpecificForm = (props)=>{
       <Select
             placeholder="Select a option and change input text above"
             allowClear
+            mode="multiple"
           >
             <Option value="Al menos 0.5 litros agua por segundo por ha">Al menos 0.5 litros agua por segundo por ha</Option>
             <Option value="Pavimento">Pavimento</Option>
@@ -219,6 +220,7 @@ const SpecificForm = (props)=>{
       <Select
             placeholder="Select a option and change input text above"
             allowClear
+            mode="multiple"
           >
             <Option value="Norma Mexiana de Parque Industrial">Norma Mexiana de Parque Industrial</Option>
             <Option value="Parque Industrial Verde">Parque Industrial Verde</Option>
