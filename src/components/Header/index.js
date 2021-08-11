@@ -110,6 +110,10 @@ export default function Header(props) {
 
   const showModal = () => {
     setVisible(!visible)
+
+    if(visible){
+      setProfileMenu(null)
+    }
   };
 
   return (
@@ -199,7 +203,6 @@ export default function Header(props) {
               classes.headerMenuItem,
             )}
           >
-            <UserModal show={visible} showFunction={()=>showModal()}/>
             <AccountIcon className={classes.profileMenuIcon} /> Perfil
           </MenuItem>
 
@@ -213,6 +216,7 @@ export default function Header(props) {
             </Typography>
           </div>
         </Menu>
+        <UserModal show={visible} showFunction={()=>showModal()}/>
       </Toolbar>
     </AppBar>
   );
