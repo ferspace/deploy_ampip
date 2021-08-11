@@ -21,11 +21,9 @@ const validateMessages = {
 
 
 const UserModal = (props) => {
-  console.log(props.show)
-  const [isModalVisible, setIsModalVisible] = useState(props.show)
 
   const handleCancel = () => {
-    setIsModalVisible(false);
+    props.showFunction(!props.show);
   };
 
   const [userData, setUserData] = useState({
@@ -66,7 +64,7 @@ const UserModal = (props) => {
       console.log('no user');
     }
 
-  });
+  },[]);
 
   const onFinish = (values) => {
 
@@ -75,7 +73,7 @@ const UserModal = (props) => {
 
   return (
     <>
-      <Modal title="Informacion Usuario" visible={props.show} onCancel={handleCancel} centered>
+      <Modal title="Informacion Usuario" visible={props.show} onCancel={()=>handleCancel()} centered>
         <Form {...layout} name="nest-messages" onFinish={onFinish} validateMessages={validateMessages} initialValues={{full_name:"Hello"}}>
           <Form.Item name={['dataOf', 'full_name']} label="Nombre" rules={[{ required: true }]} >
             <Input />
