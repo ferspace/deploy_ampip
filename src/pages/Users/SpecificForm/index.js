@@ -21,6 +21,7 @@ const validateMessages = {
     range: "${label} must be between ${min} and ${max}",
   },
 };
+const DataOption = JSON.parse(localStorage.getItem("data"));
 
 const SpecificForm = (props) => {
   useEffect(() => {
@@ -59,7 +60,48 @@ const SpecificForm = (props) => {
 
     axios(config)
       .then(function (response) {
-        console.log(JSON.stringify(response.data));
+        var user_id = response.data.data.user.id
+        var data = JSON.stringify({
+          "information": {
+            "user_id": user_id,
+            "full_name": values.user.name,
+            "last_name": values.user.lastName,
+            "address": "",
+            "state": "",
+            "office_address": "",
+            "charge": "",
+            "date_of_birth": "",
+            "phone_office": "",
+            "cel": "",
+            "corporate_id": "",
+            "status": "",
+            "municipality": "",
+            "colony": "",
+            "postal_code_number": "",
+            "user_type_permision_id": "",
+            "user_type": "",
+            "created_at": "",
+            "updated_at": ""
+          }
+        });
+        
+        var config = {
+          method: 'post',
+          url: 'http://localhost:3001/api/v1/user_informations/',
+          headers: { 
+            'Authorization': DataOption.authentication_token , 
+            'Content-Type': 'application/json'
+          },
+          data : data
+        };
+        
+        axios(config)
+        .then(function (response) {
+          console.log(JSON.stringify(response.data));
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
       })
       .catch(function (error) {
         console.log(error);
