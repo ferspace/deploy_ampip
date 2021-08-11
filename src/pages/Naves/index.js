@@ -19,7 +19,7 @@ import PageTitle from "../../components/PageTitle/PageTitle";
 import SpecificForm from './SpecificForm'
 import axios from 'axios';
 import Tables from '../Tables'
-
+import EditForm from './EditForm'
 
 // icons sets
 import "font-awesome/css/font-awesome.min.css";
@@ -112,7 +112,7 @@ const Naves = () =>{
           options: {
             customBodyRender: (value, tableMeta, updateValue) => {
               return (
-                <ModaEdit data={tableMeta.rowData[0]}/>
+                <ModaEdit data={tableMeta.rowData[0]} children={<EditForm id={tableMeta.rowData[0]}/>}/>
               )
             }
           }
