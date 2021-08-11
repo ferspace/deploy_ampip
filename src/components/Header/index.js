@@ -111,7 +111,7 @@ export default function Header(props) {
   const showModal = () => {
     setVisible(!visible)
 
-    if(!visible){
+    if(visible){
       setProfileMenu(null)
     }
   };
