@@ -67,7 +67,7 @@ export default function NotificationsPage(props) {
           User.push(item.address)   
           UsersAdd.push(User)  
         })
-
+        console.log(UsersAdd)
         setDatatableData([... UsersAdd])
       }
     }).catch(error => {
