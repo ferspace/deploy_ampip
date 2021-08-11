@@ -27,7 +27,7 @@ const SpecificForm = (props) => {
     axios
       .get("http://localhost:3001/api/v1/user_rol", {
         headers: {
-          Authorization: "q1DqMqDdBQUnXmCUHaM5",
+          Authorization: DataOption.authentication_token,
           "Content-Type": "application/json",
         },
       })
@@ -51,7 +51,7 @@ const SpecificForm = (props) => {
       method: 'post',
       url: 'http://localhost:3001/api/v1/sign_up',
       headers: {
-        Authorization: "q1DqMqDdBQUnXmCUHaM5",
+        Authorization: DataOption.authentication_token,
         "Content-Type": "application/json",
       },
       data: data
