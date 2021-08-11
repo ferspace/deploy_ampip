@@ -24,6 +24,9 @@ import Tables from '../Tables'
 // icons sets
 import "font-awesome/css/font-awesome.min.css";
 import ModalInformation from '../../components/ModalInformation'
+import ModaEdit from '../../components/ModalEdit'
+import EditForm from './EditForm'
+
 const Desarrolladores = () => {
   const [anchorEl, setAnchorEl] = React.useState(null)
   const [datatableData, setDatatableData] = useState([]) //descomentar al integrar apis
@@ -119,7 +122,7 @@ const Desarrolladores = () => {
             options: {
               customBodyRender: (value, tableMeta, updateValue) => {
                 return (
-                  <ModalInformation data={tableMeta.rowData[0]}/>
+                  <ModaEdit data={tableMeta.rowData[0]} children={<EditForm id={tableMeta.rowData[0]}/>}/>
                 )
               }
             }
