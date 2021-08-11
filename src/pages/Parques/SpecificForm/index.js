@@ -2,8 +2,28 @@ import React, { useState, useEffect } from "react";
 import { Form, Input, Select, Button } from 'antd';
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import {
+  withGoogleMap,
+  withScriptjs,
+  GoogleMap,
+  Marker,
+} from "react-google-maps";
 
 const { Option } = Select;
+
+const BasicMap = withScriptjs(
+  withGoogleMap(() => (
+    <GoogleMap
+      defaultZoom={12}
+      defaultCenter={{
+        lat: parseFloat(-37.813179),
+        lng: parseFloat(144.950259),
+      }}
+    >
+      <Marker position={{ lat: -37.813179, lng: 144.950259 }} />
+    </GoogleMap>
+  )),
+);
 
 const layout = {
   labelCol: { span: 8 },
@@ -124,7 +144,7 @@ const SpecificForm = (props) => {
   }, []);
 
   return (
-    <Form {...layout} name="nest-messages" onFinish={onFinish} validateMessages={validateMessages}>
+    <Form {...layout} name="nest-messages" onFinish={onFinish} validateMessages={validateMessages} style={{height:"1900px"}}>
       <Form.Item name={["user", "corpoate_id"]} label="Corporativos" rules={[{ required: true }]}>
         <Select
           placeholder="Select a option and change input text above"
@@ -260,10 +280,16 @@ const SpecificForm = (props) => {
           <Option value="Ha">Ha</Option>
         </Select>
       </Form.Item>
+      <BasicMap
+        googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=AIzaSyCFdQ7O0MIewEqbyXhW0k9XemMqnYx0aDQ"
+        loadingElement={<div style={{ height: "inherit", width: "inherit" }} />}
+        containerElement={<div style={{ height: "30%" }} />}
+        mapElement={<div style={{ height: "30%" }} />}
+      />
       <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
         <Button style={{ backgroundColor: "#00afb7", borderColor: "#00afb7", color: "#ffffff" }} type="primary" htmlType="submit">
           Enviar
-        </Button>
+        </Button> 
       </Form.Item>
     </Form>
   )
