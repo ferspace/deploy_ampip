@@ -92,14 +92,7 @@ const Parques = () =>{
   <>
     <PageTitle title="Parques" button={(
       <>
-        <Button
-      variant="contained"
-      size="medium"
-      color="secondary"
-      onClick={e => handleClick(e)}
-    >
-      Actions
-    </Button>
+        
         <Menu
       id="simple-menu"
       anchorEl={anchorEl}
@@ -115,15 +108,16 @@ const Parques = () =>{
     <Paper className={classes.iconsContainer}>
       <Tabs
         indicatorColor="primary"
-        textColor="primary"
+        textColor="#ffffff"
         value={activeTabId}
         onChange={(e, id) => setActiveTabId(id)}
         className={classes.iconsBar}
       >
-        <Tab label="Parques" classes={{ root: classes.tab }} />
-        <Tab label="Agregar" classes={{ root: classes.tab }} />
+        <Tab label="Parques" className={classes.menuspace} />
+        <Tab label="Agregar" className={classes.menuspace} />
       </Tabs>
       {activeTabId === 0 && (
+        <div style={{padding:20}}>
         <Tables title={"Todos los parques"} columns={["id","Name", "Company", "City", "State", {
           label: "Ver",
           options: {
@@ -144,14 +138,13 @@ const Parques = () =>{
             }
           }
         }]} tableData={datatableData}/>
-
+        </div>
       )}
 
       {activeTabId === 1 && (
-        <>
-          <SpecificForm/>
-         
-        </>
+        <div style={{display:'flex', justifyContent:'center'}}>
+        <SpecificForm/>
+      </div>
       )}
     </Paper>
   </>

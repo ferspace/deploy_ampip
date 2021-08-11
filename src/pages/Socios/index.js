@@ -72,14 +72,6 @@ const Desarrolladores = () => {
     <>
       <PageTitle title="Socios" button={(
         <>
-          <Button style={{backgroundColor:"#78b63c", color:"#ffffff"}}
-            variant="contained"
-            size="medium"
-            color="secondary"
-            onClick={e => handleClick(e)}
-          >
-            Actions
-          </Button>
           <Menu
             id="simple-menu"
             anchorEl={anchorEl}
@@ -127,7 +119,9 @@ const Desarrolladores = () => {
         )}
 
         {activeTabId === 1 && (
-          <SpecificForm />
+          <div style={{display:'flex', justifyContent:'center'}}>
+          <SpecificForm/>
+          </div>
         )}
       </Paper>
     </>

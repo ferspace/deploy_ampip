@@ -71,14 +71,7 @@ const Naves = () =>{
   <>
     <PageTitle title="Naves" button={(
       <>
-        <Button
-      variant="contained"
-      size="medium"
-      color="secondary"
-      onClick={e => handleClick(e)}
-    >
-      Actions
-    </Button>
+        
         <Menu
       id="simple-menu"
       anchorEl={anchorEl}
@@ -94,16 +87,17 @@ const Naves = () =>{
     <Paper className={classes.iconsContainer}>
       <Tabs
         indicatorColor="primary"
-        textColor="primary"
+        textColor="#ffffff"
         value={activeTabId}
         onChange={(e, id) => setActiveTabId(id)}
         className={classes.iconsBar}
       >
-        <Tab label="Naves" classes={{ root: classes.tab }} />
-        <Tab label="Agregar" classes={{ root: classes.tab }} />
+        <Tab label="Naves" className={classes.menuspace} />
+        <Tab label="Agregar" className={classes.menuspace} />
       </Tabs>
       {activeTabId === 0 && (
-        <Tables title={"Todas las naves"} columns={["id","Name", "Company", "City", "State", {
+        <div style={{padding:20}}>
+          <Tables title={"Todas las naves"} columns={["id","Name", "Company", "City", "State", {
           label: "Ver",
           options: {
             customBodyRender: (value, tableMeta, updateValue) => {
@@ -123,11 +117,14 @@ const Naves = () =>{
             }
           }
         }]} tableData={datatableData}/>
+        </div>
 
       )}
 
       {activeTabId === 1 && (
+        <div style={{display:'flex', justifyContent:'center'}}>
         <SpecificForm/>
+      </div>
       )}
     </Paper>
   </>

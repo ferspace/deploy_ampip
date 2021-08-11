@@ -74,13 +74,6 @@ const Desarrolladores = () => {
     <>
       <PageTitle title="Desarrolladores" button={(
         <>
-          <Button style={{backgroundColor:"#78b63c", color:"#ffffff"}}
-            variant="contained"
-            size="medium"
-            onClick={e => handleClick(e)}
-          >
-            Actions
-          </Button>
           <Menu
             id="simple-menu"
             anchorEl={anchorEl}
@@ -105,6 +98,7 @@ const Desarrolladores = () => {
           <Tab label="Agregar" className={classes.menuspace} />
         </Tabs>
         {activeTabId === 0 && (
+          <div style={{padding:20}}>
           <Tables  title={"Todos los Desarrolladores"} columns={["id", "Name", "Nombre_en", "Direccion",
           {
             label: "Ver",
@@ -126,13 +120,13 @@ const Desarrolladores = () => {
               }
             }
           }]} tableData={datatableData} />
-
+          </div>
         )}
 
         {activeTabId === 1 && (
-          <>
-            <SpecificForm />
-          </>
+          <div style={{display:'flex', justifyContent:'center'}}>
+          <SpecificForm/>
+          </div>
         )}
       </Paper>
     </>
