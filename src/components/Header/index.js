@@ -19,6 +19,7 @@ import {
   ArrowBack as ArrowBackIcon,
 } from "@material-ui/icons";
 import classNames from "classnames";
+import UserModal from '../UserModal'
 
 // styles
 import useStyles from "./styles";
@@ -105,6 +106,11 @@ export default function Header(props) {
   var [profileMenu, setProfileMenu] = useState(null);
   var [isSearchOpen, setSearchOpen] = useState(false);
 
+  const [visible, setVisible] = useState(false)
+  const showModal = () => {
+    setVisible(!visible)
+  };
+
   return (
     <AppBar position="fixed" className={classes.appBar}>
       <Toolbar className={classes.toolbar}>
@@ -186,11 +192,13 @@ export default function Header(props) {
             
           </div>
           <MenuItem
+            onClick={() => showModal()}
             className={classNames(
               classes.profileMenuItem,
               classes.headerMenuItem,
             )}
           >
+            <UserModal show={visible}/>
             <AccountIcon className={classes.profileMenuIcon} /> Perfil
           </MenuItem>
 

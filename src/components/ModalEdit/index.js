@@ -16,7 +16,7 @@ const ModalEdit = (props) => {
   
   return (
     <>
-      <Button type="primary" onClick={showModal}>
+      <Button style={{backgroundColor: '#02AFB7'}} onClick={showModal}>
         Editar
       </Button>
       <Modal title="Editar" visible={isModalVisible} onCancel={handleCancel}>

@@ -4,7 +4,6 @@ import { Form, Input, Select, Button } from "antd";
 import axios from "axios";
 
 const { Option } = Select;
-const data = JSON.parse(localStorage.getItem("data"));
 
 const layout = {
   labelCol: { span: 8 },
@@ -25,11 +24,10 @@ const DataOption = JSON.parse(localStorage.getItem("data"));
 
 const SpecificForm = (props) => {
   useEffect(() => {
-    console.log(data.authentication_token)
     axios
       .get("http://localhost:3001/api/v1/user_rol", {
         headers: {
-          Authorization: data.authentication_token,
+          Authorization: DataOption.authentication_token,
           "Content-Type": "application/json",
         },
       })
@@ -53,7 +51,8 @@ const SpecificForm = (props) => {
       method: 'post',
       url: 'http://localhost:3001/api/v1/sign_up',
       headers: {
-        'Content-Type': 'application/json'
+        Authorization: DataOption.authentication_token,
+        "Content-Type": "application/json",
       },
       data: data
     };
@@ -176,8 +175,8 @@ const SpecificForm = (props) => {
       </Form.Item>
       <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
         <br />
-        <Button style={{ backgroundColor: "#00afb7", borderColor: "#00afb7", color: "#ffffff" }} type="primary" htmlType="submit">
-          Enviar
+        <Button type="primary" htmlType="submit">
+          Submit
         </Button>
       </Form.Item>
     </Form>
