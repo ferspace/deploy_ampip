@@ -98,7 +98,7 @@ const SpecificForm = (props)=>{
 
   const [ corporates, setCorporates ] = useState([])
   useEffect(() => {
-    axios.get('http://localhost:3001/api/v1/corporates', {headers: { 
+    axios.get('http://localhost:3001/api/v1/corporates?type=0', {headers: { 
       'Authorization': DataOption.authentication_token, 
       'Content-Type': 'application/json'
     },}).then((response) => {

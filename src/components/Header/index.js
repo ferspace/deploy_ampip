@@ -181,7 +181,7 @@ export default function Header(props) {
         >
           <div className={classes.profileMenuUser}>
             <Typography variant="h4" weight="medium">
-              Nombre del usuario
+              {JSON.parse(localStorage.getItem("data")).email}
             </Typography>
             
           </div>
@@ -193,15 +193,7 @@ export default function Header(props) {
           >
             <AccountIcon className={classes.profileMenuIcon} /> Perfil
           </MenuItem>
-          
-          <MenuItem
-            className={classNames(
-              classes.profileMenuItem,
-              classes.headerMenuItem,
-            )}
-          >
-            <AccountIcon className={classes.profileMenuIcon} /> extras
-          </MenuItem>
+
           <div className={classes.profileMenuUser}>
             <Typography
               className={classes.profileMenuLink}

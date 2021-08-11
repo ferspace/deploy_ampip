@@ -27,7 +27,7 @@ import ModalInformation from '../../components/ModalInformation'
 import ModaEdit from '../../components/ModalEdit'
 import EditForm from './EditForm'
 
-const data = JSON.parse(localStorage.getItem("data"));
+const dataOpt = JSON.parse(localStorage.getItem("data"));
 const Desarrolladores = () => {
   const [anchorEl, setAnchorEl] = React.useState(null)
   const [datatableData, setDatatableData] = useState([]) //descomentar al integrar apis
@@ -45,14 +45,16 @@ const Desarrolladores = () => {
   var [activeTabId, setActiveTabId] = useState(0);
 
   useEffect(() => {    //aqui va la peticion al endpoint , se va aprocesar la informacion del tipo [[dato1,dato2]]
-    axios.get(`http://localhost:3001/api/v1/corporates`, {
+
+    var x = new URLSearchParams();
+    axios.get(`http://localhost:3001/api/v1/corporates?type=0`,{
       headers: {
-        'Authorization': data.authentication_token,
+        'Authorization': dataOpt.authentication_token,
       }
     }).then((response) => {
       //setDatatableData(response.data);
       if (response.data.error) {
-        alert("error")
+        console.log(response.data.error);
       } else {
         var corporatesAdd = [];
         response.data.map((i) => {
@@ -100,34 +102,34 @@ const Desarrolladores = () => {
           <Tab label="Agregar" className={classes.menuspace} />
         </Tabs>
         {activeTabId === 0 && (
-          <div style={{padding:20}}>
-          <Tables  title={"Todos los Desarrolladores"} columns={["id", "Name", "Nombre_en", "Direccion",
-          {
-            label: "Ver",
-            options: {
-              customBodyRender: (value, tableMeta, updateValue) => {
-                return (
-                  <ModalInformation data={tableMeta.rowData[0]}/>
-                )
-              }
-            }
-          },
-          {
-            label: "Editar",
-            options: {
-              customBodyRender: (value, tableMeta, updateValue) => {
-                return (
-                  <ModaEdit data={tableMeta.rowData[0]} children={<EditForm id={tableMeta.rowData[0]}/>}/>
-                )
-              }
-            }
-          }]} tableData={datatableData} />
+          <div style={{ padding: 20 }}>
+            <Tables title={"Todos los Desarrolladores"} columns={["id", "Name", "Nombre_en", "Direccion",
+              {
+                label: "Ver",
+                options: {
+                  customBodyRender: (value, tableMeta, updateValue) => {
+                    return (
+                      <ModalInformation data={tableMeta.rowData[0]} />
+                    )
+                  }
+                }
+              },
+              {
+                label: "Editar",
+                options: {
+                  customBodyRender: (value, tableMeta, updateValue) => {
+                    return (
+                      <ModaEdit data={tableMeta.rowData[0]} children={<EditForm id={tableMeta.rowData[0]} />} />
+                    )
+                  }
+                }
+              }]} tableData={datatableData} />
           </div>
         )}
 
         {activeTabId === 1 && (
-          <div style={{display:'flex', justifyContent:'center'}}>
-          <SpecificForm/>
+          <div style={{ display: 'flex', justifyContent: 'center' }}>
+            <SpecificForm />
           </div>
         )}
       </Paper>
