@@ -36,6 +36,19 @@ const SpecificForm = (props) => {
         setPermissions(response.data);
         //setPost(response.data);
       });
+
+      //corporativos
+      if (corporates.length === 0) {
+        axios.get('http://localhost:3001/api/v1/corporates?type=0', {
+          headers: {
+            'Authorization': DataOption.authentication_token,
+            'Content-Type': 'application/json'
+          },
+        }).then((response) => {
+          setCorporates(response.data)
+          //setPost(response.data);
+        });
+      }
   }, []);
 
   const onFinish = (values) => {
@@ -121,14 +134,37 @@ const SpecificForm = (props) => {
 
   };
   const [permissions, setPermissions] = useState([]);
+  const [corporates, setCorporates] = useState([]);
 
   return (
-    <Form
+    <Form 
       {...layout}
       name="nest-messages"
       onFinish={onFinish}
       validateMessages={validateMessages}
     >
+      <Form.Item
+        name={["user", "type"]}
+        label="Corporativos"
+        rules={[
+          {
+            required: true,
+          },
+        ]}
+      >
+        <Select
+          placeholder="Select a option and change input text above"
+          allowClear
+        >
+          {corporates.map((value, i) => {
+            return (
+              <Option key={i} value={value.id}>
+                {value.name}
+              </Option>
+            );
+          })}
+        </Select>
+      </Form.Item>
       <Form.Item
         name={["user", "user_type"]}
         label="Rol"
