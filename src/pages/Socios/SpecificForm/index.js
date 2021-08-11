@@ -132,7 +132,6 @@ const SpecificForm = (props)=>{
       <Form.Item name={['user', 'address']} label="Direccion" rules={[{ required: true }]}>
         <Input />
       </Form.Item>
-<<<<<<< HEAD
       <Form.Item name={['user', 'cp']} label="Codigo Postal" rules={[{ required: true }]}>
         <Input />
       </Form.Item>
@@ -144,19 +143,6 @@ const SpecificForm = (props)=>{
       </Form.Item>
       <Form.Item name={['user', 'municipality']} label="Municipio" rules={[{ required: true }]}>
         <Input />
-=======
-      <Form.Item name={['user', 'cp']} label="Codigo Postal" rules={[{ required: true }]} onChange={(e) => findAddress(e)}>
-        <Input/>
-      </Form.Item>
-      <Form.Item name={['user', 'colony']} label="Colonia" rules={[{ required: true }]}>
-        <Input  value={address.colonia}/>
-      </Form.Item>
-      <Form.Item name={['user', 'state']} label="Estado">
-        <Input value={address.estado}/>
-      </Form.Item>
-      <Form.Item  name={['user', 'municipality']} label="Municipio" rules={[{ required: true }]}>
-        <Input value={address.municipio}/>
->>>>>>> dev
       </Form.Item>
       <Form.Item name={['user', 'cel']} label="Celular" rules={[{ required: true }]}>
         <Input />

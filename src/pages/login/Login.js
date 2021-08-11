@@ -57,19 +57,6 @@ function Login(props) {
       },
       data: data
     };
-<<<<<<< HEAD
-
-=======
-    
->>>>>>> bb6f29abb849a207d76fb023f305789c964221e8
-    loginUser(
-      userDispatch,
-      loginValue,
-      passwordValue,
-      props.history,
-      setIsLoading,
-<<<<<<< HEAD
-      setError)
     axios(config)
       .then(function (response) {
         if (response.data.messages === "Signed In Successfully") {
@@ -89,9 +76,6 @@ function Login(props) {
       .catch(function (error) {
         console.log(error);
       });
-=======
-      setError,) 
->>>>>>> bb6f29abb849a207d76fb023f305789c964221e8
   }
 
   return (
@@ -110,13 +94,8 @@ function Login(props) {
             textColor="primary"
             centered
           >
-<<<<<<< HEAD
             <Tab label="Login" classes={{ root: classes.tab }} />
             {/*             <Tab label="New User" classes={{ root: classes.tab }} />
-=======
-            <Tab style={{color:"#00afb7", borderBottom:"solid 1px #00afb7 !important"}} label="Login" classes={{ root: classes.tab }} />
-{/*             <Tab label="New User" classes={{ root: classes.tab }} />
->>>>>>> bb6f29abb849a207d76fb023f305789c964221e8
  */}          </Tabs>
           {activeTabId === 0 && (
             <React.Fragment>
