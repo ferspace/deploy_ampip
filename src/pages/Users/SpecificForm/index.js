@@ -36,19 +36,35 @@ const SpecificForm = (props) => {
         setPermissions(response.data);
         //setPost(response.data);
       });
-  });
+  }, []);
 
   const onFinish = (values) => {
-    axios.post('http://localhost:3001/api/v1/sign_up', {
-      headers: {
-        Authorization: data.authentication_token,
-        "Content-Type": "application/json",
-      },
-      data: values
-    })
-    .then((response) => {
-      console.log(response)
+    var data = JSON.stringify({
+      "user": {
+        "email": values.user.email,
+        "password": values.user.password,
+        "password_confirmation": values.user.password,
+        "user_type": values.user.user_type,
+      }
     });
+
+    var config = {
+      method: 'post',
+      url: 'http://localhost:3001/api/v1/sign_up',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      data: data
+    };
+
+    axios(config)
+      .then(function (response) {
+        console.log(JSON.stringify(response.data));
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+
   };
   const [permissions, setPermissions] = useState([]);
 
@@ -60,7 +76,7 @@ const SpecificForm = (props) => {
       validateMessages={validateMessages}
     >
       <Form.Item
-        name={["user", "permissions"]}
+        name={["user", "user_type"]}
         label="Rol"
         rules={[
           {
@@ -109,9 +125,16 @@ const SpecificForm = (props) => {
       >
         <Input />
       </Form.Item>
+      <Form.Item
+        name={["user", "password_confirmation"]}
+        label="Password"
+        rules={[{ required: true }]}
+      >
+        <Input />
+      </Form.Item>
       <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
         <br />
-        <Button style={{backgroundColor:"#00afb7",borderColor:"#00afb7", color:"#ffffff"}} type="primary" htmlType="submit">
+        <Button style={{ backgroundColor: "#00afb7", borderColor: "#00afb7", color: "#ffffff" }} type="primary" htmlType="submit">
           Enviar
         </Button>
       </Form.Item>
