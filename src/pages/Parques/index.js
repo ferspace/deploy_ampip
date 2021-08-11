@@ -61,10 +61,8 @@ const Parques = () => {
         response.data.map((i) => {
           var corporates = [];
           corporates.push(i.id);
-          corporates.push(i.name)
-          corporates.push(i.english_name)
+          corporates.push(i.nombre)
           corporates.push(i.updated_at)
-          corporates.push(i.address)
           corporatesAdd.push(corporates);
         });
 

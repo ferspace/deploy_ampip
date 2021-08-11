@@ -24,16 +24,81 @@ const validateMessages = {
 const SpecificForm = (props)=>{
 
   const onFinish = (values) => {
-    axios.post('http://localhost:3001/api/v1/corporates?type=0', {headers: { 
-      'Authorization': DataOption.authentication_token,  
-      'Content-Type': 'application/json'
-    }, data: values }).then((response) => {
-       setCorporates(response.data)
-      //setPost(response.data);
-    }).catch((error) => {
-      console.log(error)
+    var data = JSON.stringify({
+      "propieties": {
+        "corporate_id": values.user.type,
+        "tipo": 2,
+        "nombre": values.user.name,
+      }
+    });
+    
+    var config = {
+      method: 'post',
+      url: 'http://localhost:3001/api/v1/propieties',
+      headers: { 
+        'Authorization': DataOption.authentication_token, 
+        'Content-Type': 'application/json'
+      },
+      data : data
+    };
+    
+    axios(config)
+    .then(function (response) {
+      //console.log(JSON.stringify(response.data));
+      if(response.data.message !== 0) {
+        console.log(response.data)
+        var data = JSON.stringify({
+          "property_information": {
+            "property_id": response.data.data,
+            "name": values.user.name,
+            "superficie": "",
+            "address": "",
+            "english_name":response.data.name_en,
+            "park_property": "",
+            "region": "",
+            "market": "",
+            "industry": "",
+            "suprficie_total": "",
+            "superficie_urbanizada": "",
+            "superficie_disponible": "",
+            "inicio_de_operaciones": "",
+            "number_employe": "",
+            "practices_recognition": "",
+            "infrastructure": "",
+            "navy_number": "",
+            "message": "",
+            "postal_code": "",
+            "colony": "",
+            "municipality": "",
+            "state": "",
+            "status": 1,
+          }
+        });
+        
+        var config = {
+          method: 'post',
+          url: 'http://localhost:3001/api/v1/property_informations',
+          headers: { 
+            'Authorization': DataOption.authentication_token, 
+            'Content-Type': 'application/json'
+          },
+          data : data
+        };
+        
+        axios(config)
+        .then(function (response) {
+          console.log(JSON.stringify(response.data));
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+      } 
     })
+    .catch(function (error) {
+      console.log(error);
+    });
   };
+
 
   const [ corporates, setCorporates ] = useState([])
 
