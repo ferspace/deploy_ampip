@@ -107,8 +107,13 @@ export default function Header(props) {
   var [isSearchOpen, setSearchOpen] = useState(false);
 
   const [visible, setVisible] = useState(false)
+
   const showModal = () => {
     setVisible(!visible)
+
+    if(visible){
+      setProfileMenu(null)
+    }
   };
 
   return (
@@ -198,7 +203,6 @@ export default function Header(props) {
               classes.headerMenuItem,
             )}
           >
-            <UserModal show={visible}/>
             <AccountIcon className={classes.profileMenuIcon} /> Perfil
           </MenuItem>
 
@@ -212,6 +216,7 @@ export default function Header(props) {
             </Typography>
           </div>
         </Menu>
+        <UserModal show={visible} showFunction={()=>showModal()}/>
       </Toolbar>
     </AppBar>
   );

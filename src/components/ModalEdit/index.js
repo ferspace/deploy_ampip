@@ -5,13 +5,15 @@ const ModalEdit = (props) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   const showModal = () => {
-    setIsModalVisible(true);
+    setIsModalVisible(true); 
   };
 
   const handleCancel = () => {
     setIsModalVisible(false);
   };
 
+  //cargamos Corporativos desarrolladores
+  
   return (
     <>
       <Button style={{backgroundColor: '#02AFB7'}} onClick={showModal}>

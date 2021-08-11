@@ -37,7 +37,7 @@ const structure = [
     link: "/app/corporativos",
     icon: <TypographyIcon />,
     children: [
-      { label: "Socios", link: "/app/ui/socios" },
+      { label: "Patrocinadores", link: "/app/ui/socios" },
       { label: "Desarrolladores", link: "/app/ui/desarrolladores" }
     ],
   },
