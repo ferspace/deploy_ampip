@@ -9,7 +9,7 @@ const layout = {
   labelCol: { span: 8 },
   wrapperCol: { span: 16 },
 };
-
+const DataOption = JSON.parse(localStorage.getItem("data"));
 const validateMessages = {
   required: '${label} is required!',
   types: {
@@ -34,7 +34,7 @@ const SpecificForm = (props)=>{
       method: 'post',
       url: 'http://localhost:3001/api/v1/propieties',
       headers: { 
-        'Authorization': 'rBkdw8e3A8kKhczq1vix', 
+        'Authorization': DataOption.authentication_token, 
         'Content-Type': 'application/json'
       },
       data : data
@@ -76,7 +76,7 @@ const SpecificForm = (props)=>{
           method: 'post',
           url: 'http://localhost:3001/api/v1/property_informations',
           headers: { 
-            'Authorization': 'rBkdw8e3A8kKhczq1vix', 
+            'Authorization': DataOption.authentication_token, 
             'Content-Type': 'application/json'
           },
           data : data
@@ -99,7 +99,7 @@ const SpecificForm = (props)=>{
   const [ corporates, setCorporates ] = useState([])
   useEffect(() => {
     axios.get('http://localhost:3001/api/v1/corporates', {headers: { 
-      'Authorization': 'rBkdw8e3A8kKhczq1vix', 
+      'Authorization': DataOption.authentication_token, 
       'Content-Type': 'application/json'
     },}).then((response) => {
       if(response.data.massage !== "Sin datos para mostrar") setCorporates(response.data)

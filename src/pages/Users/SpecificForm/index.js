@@ -34,19 +34,36 @@ const SpecificForm = (props) => {
         setPermissions(response.data);
         //setPost(response.data);
       });
-  });
+  }, []);
 
   const onFinish = (values) => {
-    axios.post('http://localhost:3001/api/v1/sign_up', {
+    var data = JSON.stringify({
+      "user": {
+        "email": values.user.email,
+        "password": values.user.password,
+        "password_confirmation": values.user.password,
+        "user_type": values.user.user_type,
+      }
+    });
+
+    var config = {
+      method: 'post',
+      url: 'http://localhost:3001/api/v1/sign_up',
       headers: {
         Authorization: "q1DqMqDdBQUnXmCUHaM5",
         "Content-Type": "application/json",
       },
-      data: values
-    })
-    .then((response) => {
-      console.log(response)
-    });
+      data: data
+    };
+
+    axios(config)
+      .then(function (response) {
+        console.log(JSON.stringify(response.data));
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+
   };
   const [permissions, setPermissions] = useState([]);
 
@@ -58,7 +75,7 @@ const SpecificForm = (props) => {
       validateMessages={validateMessages}
     >
       <Form.Item
-        name={["user", "permissions"]}
+        name={["user", "user_type"]}
         label="Rol"
         rules={[
           {
@@ -102,6 +119,13 @@ const SpecificForm = (props) => {
       </Form.Item>
       <Form.Item
         name={["user", "password"]}
+        label="Password"
+        rules={[{ required: true }]}
+      >
+        <Input />
+      </Form.Item>
+      <Form.Item
+        name={["user", "password_confirmation"]}
         label="Password"
         rules={[{ required: true }]}
       >

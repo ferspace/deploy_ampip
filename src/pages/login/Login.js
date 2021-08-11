@@ -273,7 +273,7 @@ function Login(props) {
           )}
         </div>
         <Typography style={{color:"#333333"}} className={classes.copyright}>
-          © 2014-{new Date().getFullYear()} <a style={{ textDecoration: 'none', color: 'inherit' }} href="https://flatlogic.com" rel="noopener noreferrer" target="_blank">Flatlogic</a>, LLC. All rights reserved.
+          © {new Date().getFullYear()} <a style={{ textDecoration: 'none', color: 'inherit' }} href="https://space.bar" rel="noopener noreferrer" target="_blank">SpaceBar</a>.
         </Typography>
       </div>
     </Grid>

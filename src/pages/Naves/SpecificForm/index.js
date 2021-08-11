@@ -9,7 +9,7 @@ const layout = {
   labelCol: { span: 8 },
   wrapperCol: { span: 16 },
 };
-
+const DataOption = JSON.parse(localStorage.getItem("data"));
 const validateMessages = {
   required: '${label} is required!',
   types: {
@@ -25,7 +25,7 @@ const SpecificForm = (props)=>{
   useEffect(() => {
     if(corporates.length === 0){
       axios.get('http://localhost:3001/api/v1/corporates', {headers: { 
-      'Authorization': 'rBkdw8e3A8kKhczq1vix', 
+      'Authorization':  DataOption.authentication_token, 
       'Content-Type': 'application/json'
     },}).then((response) => {
        setCorporates(response.data)
@@ -37,7 +37,7 @@ const SpecificForm = (props)=>{
 
   const onFinish = (values) => {
     axios.post('http://localhost:3001/api/v1/corporates', {headers: { 
-      'Authorization': 'rBkdw8e3A8kKhczq1vix', 
+      'Authorization':  DataOption.authentication_token,  
       'Content-Type': 'application/json'
     }, data: values }).then((response) => {
        setCorporates(response.data)
