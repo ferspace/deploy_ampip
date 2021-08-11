@@ -75,14 +75,6 @@ const Desarrolladores = () => {
     <>
       <PageTitle title="Desarrolladores" button={(
         <>
-          <Button
-            variant="contained"
-            size="medium"
-            color="secondary"
-            onClick={e => handleClick(e)}
-          >
-            Actions
-          </Button>
           <Menu
             id="simple-menu"
             anchorEl={anchorEl}
@@ -98,16 +90,17 @@ const Desarrolladores = () => {
       <Paper className={classes.iconsContainer}>
         <Tabs
           indicatorColor="primary"
-          textColor="primary"
+          textColor="#fffff"
           value={activeTabId}
           onChange={(e, id) => setActiveTabId(id)}
           className={classes.iconsBar}
         >
-          <Tab label="Desarrolladores" classes={{ root: classes.tab }} />
-          <Tab label="Agregar" classes={{ root: classes.tab }} />
+          <Tab label="Desarrolladores" className={classes.menuspace} />
+          <Tab label="Agregar" className={classes.menuspace} />
         </Tabs>
         {activeTabId === 0 && (
-          <Tables title={"Todos los Desarrolladores"} columns={["id", "Name", "Nombre_en", "Direccion", 
+          <div style={{padding:20}}>
+          <Tables  title={"Todos los Desarrolladores"} columns={["id", "Name", "Nombre_en", "Direccion",
           {
             label: "Ver",
             options: {
@@ -128,13 +121,13 @@ const Desarrolladores = () => {
               }
             }
           }]} tableData={datatableData} />
-
+          </div>
         )}
 
         {activeTabId === 1 && (
-          <>
-            <SpecificForm />
-          </>
+          <div style={{display:'flex', justifyContent:'center'}}>
+          <SpecificForm/>
+          </div>
         )}
       </Paper>
     </>

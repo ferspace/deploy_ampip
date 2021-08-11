@@ -26,6 +26,11 @@ export default makeStyles(theme => ({
       display: "none",
     },
   },
+  ampipImage: {
+    width: "100%",
+    backgroundColor:"#ffffff !important",
+    marginBottom: theme.spacing(4),
+  },
   logotypeImage: {
     width: 165,
     marginBottom: theme.spacing(4),
@@ -37,6 +42,9 @@ export default makeStyles(theme => ({
     [theme.breakpoints.down("md")]: {
       fontSize: 48,
     },
+  },
+  botonSpace: {
+    backgrounColor:"#333333",
   },
   formContainer: {
     width: "40%",

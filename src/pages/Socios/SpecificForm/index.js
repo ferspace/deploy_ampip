@@ -20,6 +20,11 @@ const validateMessages = {
 };
 
 const SpecificForm = (props)=>{
+  const [address, setAddress] = useState({
+    municipio: '',
+    estado: '',
+    colonia: ''
+  })
 
   const onFinish = (values) => {
     console.log(values)
@@ -92,6 +97,30 @@ const SpecificForm = (props)=>{
   });
   };
 
+  const findAddress = (e) =>{
+    
+    if (e.target.value.length === 5 ){
+      console.log(e.target.value)
+      setAddress({
+        municipio: 'municipio',
+        estado: 'estado',
+        colonia: 'colonia'
+      });
+
+      // descomentar al implementar api
+
+      /* axios.get(`https://localhost:3000/api/v1/zip_codes?zip_code=${e.target.value}`).then((response) => {
+        setAddress({
+          municipio: 'municipio',
+          estado: 'estado',
+          colonia: 'colonia'
+        });
+      }); */
+    }
+  }
+
+  console.log(address)
+
   return(
     <Form {...layout} name="nest-messages" onFinish={onFinish} validateMessages={validateMessages}>
       <Form.Item name={['user', 'name']} label="Nombre en español" rules={[{ required: true }]}>
@@ -103,6 +132,7 @@ const SpecificForm = (props)=>{
       <Form.Item name={['user', 'address']} label="Direccion" rules={[{ required: true }]}>
         <Input />
       </Form.Item>
+<<<<<<< HEAD
       <Form.Item name={['user', 'cp']} label="Codigo Postal" rules={[{ required: true }]}>
         <Input />
       </Form.Item>
@@ -114,6 +144,19 @@ const SpecificForm = (props)=>{
       </Form.Item>
       <Form.Item name={['user', 'municipality']} label="Municipio" rules={[{ required: true }]}>
         <Input />
+=======
+      <Form.Item name={['user', 'cp']} label="Codigo Postal" rules={[{ required: true }]} onChange={(e) => findAddress(e)}>
+        <Input/>
+      </Form.Item>
+      <Form.Item name={['user', 'colony']} label="Colonia" rules={[{ required: true }]}>
+        <Input  value={address.colonia}/>
+      </Form.Item>
+      <Form.Item name={['user', 'state']} label="Estado">
+        <Input value={address.estado}/>
+      </Form.Item>
+      <Form.Item  name={['user', 'municipality']} label="Municipio" rules={[{ required: true }]}>
+        <Input value={address.municipio}/>
+>>>>>>> dev
       </Form.Item>
       <Form.Item name={['user', 'cel']} label="Celular" rules={[{ required: true }]}>
         <Input />
@@ -149,8 +192,8 @@ const SpecificForm = (props)=>{
         <Input />
       </Form.Item>
       <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
-        <Button type="primary" htmlType="submit">
-          Submit
+        <Button style={{backgroundColor:"#00afb7",borderColor:"#00afb7", color:"#ffffff"}} type="primary" htmlType="submit">
+          Enviar
         </Button>
       </Form.Item>
     </Form>
