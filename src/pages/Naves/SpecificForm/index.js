@@ -24,7 +24,7 @@ const validateMessages = {
 const SpecificForm = (props)=>{
   useEffect(() => {
     if(corporates.length === 0){
-      axios.get('http://localhost:3001/api/v1/corporates', {headers: { 
+      axios.get('http://localhost:3001/api/v1/corporates?type=0', {headers: { 
       'Authorization':  DataOption.authentication_token, 
       'Content-Type': 'application/json'
     },}).then((response) => {
@@ -36,7 +36,7 @@ const SpecificForm = (props)=>{
   const [corporates, setCorporates] = useState([]);
 
   const onFinish = (values) => {
-    axios.post('http://localhost:3001/api/v1/corporates', {headers: { 
+    axios.post('http://localhost:3001/api/v1/corporates?type=0', {headers: { 
       'Authorization':  DataOption.authentication_token,  
       'Content-Type': 'application/json'
     }, data: values }).then((response) => {
