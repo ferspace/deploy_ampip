@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { Form, Input, Select, Button } from "antd";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 const { Option } = Select;
 const data = JSON.parse(localStorage.getItem("data"));
@@ -97,9 +98,21 @@ const SpecificForm = (props) => {
         
         axios(config)
         .then(function (response) {
+          Swal.fire({
+            icon: 'success',
+            title: '¡Se agrego correctamente!',
+            showConfirmButton: false,
+            timer: 1500
+          })
           console.log(JSON.stringify(response.data));
         })
         .catch(function (error) {
+          Swal.fire({
+            icon: 'error',
+            title: '¡Error al agregar!',
+            showConfirmButton: false,
+            timer: 1500
+          })
           console.log(error);
         });
       })
