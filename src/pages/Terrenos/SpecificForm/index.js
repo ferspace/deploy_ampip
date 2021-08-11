@@ -78,14 +78,14 @@ const SpecificForm = (props)=>{
         <Input />
       </Form.Item>
       <Form.Item name={['user', 'name_en']} label="Nombre en ingles" rules={[{ required: true }]}>
-        <Input.TextArea />
+        <Input />
       </Form.Item>
       <Form.Item name={['user', 'type']} value={2} label="type" hidden={true} >
         <Input />
       </Form.Item>
       <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
-        <Button type="primary" htmlType="submit">
-          Submit
+        <Button style={{backgroundColor:"#00afb7",borderColor:"#00afb7", color:"#ffffff"}} type="primary" htmlType="submit">
+          Enviar
         </Button>
       </Form.Item>
     </Form>

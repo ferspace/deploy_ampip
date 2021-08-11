@@ -71,14 +71,6 @@ const Desarrolladores = () => {
     <>
       <PageTitle title="Espacio Disponible" button={(
         <>
-          <Button
-            variant="contained"
-            size="medium"
-            color="secondary"
-            onClick={e => handleClick(e)}
-          >
-            Actions
-          </Button>
           <Menu
             id="simple-menu"
             anchorEl={anchorEl}
@@ -99,9 +91,10 @@ const Desarrolladores = () => {
           onChange={(e, id) => setActiveTabId(id)}
           className={classes.iconsBar}
         >
-          <Tab label="Espacios" classes={{ root: classes.tab }} />
+          <Tab label="Espacios" style={{color:"#00afb7"}} />
         </Tabs>
         {activeTabId === 0 && (
+          <div style={{padding:20}}>
           <Tables title={"Todos los Espacios"} columns={["id","Name", "Nombre_en", "Direccion",{
             label: "Ver",
             options: {
@@ -122,11 +115,13 @@ const Desarrolladores = () => {
               }
             }
           }]} tableData={datatableData} />
-
+          </div>
         )}
 
         {activeTabId === 1 && (
-          <SpecificForm />
+          <div style={{display:'flex', justifyContent:'center'}}>
+          <SpecificForm/>
+          </div>
         )}
       </Paper>
     </>

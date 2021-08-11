@@ -78,7 +78,7 @@ function Layout(props) {
               <div>
                 
                 <Link
-                  color={'primary'}
+                  color={"#333333"}
                   href={'https://www.space.bar'}
                   target={'_blank'}
                   className={classes.link}
@@ -86,7 +86,7 @@ function Layout(props) {
                   SpaceBar
                 </Link>
                 <Link
-                  color={'primary'}
+                  color={"#333333"}
                   href={'https://www.space.bar/'}
                   target={'_blank'}
                   className={classes.link}

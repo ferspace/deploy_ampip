@@ -13,7 +13,11 @@ export default makeStyles(theme => ({
       display: "none",
     },
   },
+  MuiAppBar: {
+    backgroundColor: "rgba(0, 0, 0, 0.35)",
+  },
   appBar: {
+    backgroundColor:"#00afb7 !important",
     width: "100vw",
     zIndex: theme.zIndex.drawer + 1,
     transition: theme.transitions.create(["margin"], {
@@ -24,6 +28,9 @@ export default makeStyles(theme => ({
   toolbar: {
     paddingLeft: theme.spacing(2),
     paddingRight: theme.spacing(2),
+  },
+  MuiAppBarcolorPrimary: {
+    backgroundColor:(theme.palette.common.black, 0.08),
   },
   hide: {
     display: "none",

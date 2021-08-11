@@ -18,7 +18,7 @@ import useStyles from "./styles";
 // logo
 import logo from "./ampip.png";
 import google from "../../images/google.svg";
-
+import imgampip from "../../images/imagen-ampip.jpg";
 // context
 import { useUserDispatch, loginUser } from "../../context/UserContext";
 import axios from "axios";
@@ -57,13 +57,18 @@ function Login(props) {
       },
       data: data
     };
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> bb6f29abb849a207d76fb023f305789c964221e8
     loginUser(
       userDispatch,
       loginValue,
       passwordValue,
       props.history,
       setIsLoading,
+<<<<<<< HEAD
       setError)
     axios(config)
       .then(function (response) {
@@ -84,12 +89,17 @@ function Login(props) {
       .catch(function (error) {
         console.log(error);
       });
+=======
+      setError,) 
+>>>>>>> bb6f29abb849a207d76fb023f305789c964221e8
   }
 
   return (
     <Grid container className={classes.container}>
-      <div className={classes.logotypeContainer}>
-        <Typography className={classes.logotypeText}>imagen inspiracion</Typography>
+      <div className={classes.logotypeContainer} style={{backgroundColor:"#ffffff"}}>
+      <Typography variant="h1" className={classes.greeting}>
+                <img src={imgampip} alt="logo" className={classes.ampipImage} />
+       </Typography>
       </div>
       <div className={classes.formContainer}>
         <div className={classes.form}>
@@ -100,8 +110,13 @@ function Login(props) {
             textColor="primary"
             centered
           >
+<<<<<<< HEAD
             <Tab label="Login" classes={{ root: classes.tab }} />
             {/*             <Tab label="New User" classes={{ root: classes.tab }} />
+=======
+            <Tab style={{color:"#00afb7", borderBottom:"solid 1px #00afb7 !important"}} label="Login" classes={{ root: classes.tab }} />
+{/*             <Tab label="New User" classes={{ root: classes.tab }} />
+>>>>>>> bb6f29abb849a207d76fb023f305789c964221e8
  */}          </Tabs>
           {activeTabId === 0 && (
             <React.Fragment>
@@ -148,7 +163,7 @@ function Login(props) {
                 {isLoading ? (
                   <CircularProgress size={26} className={classes.loginLoader} />
                 ) : (
-                  <Button
+                  <Button style={{backgroundColor:"#00afb7", color:"#ffffff", cursor:"pointer"}}
                     disabled={
                       loginValue.length === 0 || passwordValue.length === 0
                     }
@@ -162,7 +177,7 @@ function Login(props) {
                     Login
                   </Button>
                 )}
-                <Button
+                <Button style={{color:"#00afb7"}}
                   color="primary"
                   size="large"
                   className={classes.forgetButton}
@@ -278,7 +293,7 @@ function Login(props) {
             </React.Fragment>
           )}
         </div>
-        <Typography color="primary" className={classes.copyright}>
+        <Typography style={{color:"#333333"}} className={classes.copyright}>
           © 2014-{new Date().getFullYear()} <a style={{ textDecoration: 'none', color: 'inherit' }} href="https://flatlogic.com" rel="noopener noreferrer" target="_blank">Flatlogic</a>, LLC. All rights reserved.
         </Typography>
       </div>

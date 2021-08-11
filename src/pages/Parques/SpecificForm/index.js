@@ -25,14 +25,14 @@ const SpecificForm = (props)=>{
   const onFinish = (values) => {
     var data = JSON.stringify({
       "propieties": {
-        "corporate_id": 1,
+        "corporate_id": values.user.corporate_id,
         "tipo": 0
       }
     });
     
     var config = {
       method: 'post',
-      url: 'http://localhost:3001/api/v1//propieties',
+      url: 'http://localhost:3001/api/v1/propieties',
       headers: { 
         'Authorization': 'rBkdw8e3A8kKhczq1vix', 
         'Content-Type': 'application/json'
@@ -44,6 +44,7 @@ const SpecificForm = (props)=>{
     .then(function (response) {
       //console.log(JSON.stringify(response.data));
       if(response.data.message !== 0) {
+        console.log(response.data)
         var data = JSON.stringify({
           "property_information": {
             "name": values.user.name,
@@ -73,7 +74,7 @@ const SpecificForm = (props)=>{
         
         var config = {
           method: 'post',
-          url: 'http://localhost:3001/api/v1//property_informations',
+          url: 'http://localhost:3001/api/v1/property_informations',
           headers: { 
             'Authorization': 'rBkdw8e3A8kKhczq1vix', 
             'Content-Type': 'application/json'
@@ -108,15 +109,7 @@ const SpecificForm = (props)=>{
 
   return(
     <Form {...layout} name="nest-messages" onFinish={onFinish} validateMessages={validateMessages}>
-      <Form.Item
-        name={["user", "type"]}
-        label="Corporativos"
-        rules={[
-          {
-            required: true,
-          },
-        ]}
-      >
+      <Form.Item name={["user", "corpoate_id"]} label="Corporativos" rules={[{required: true}]}>
         <Select
           placeholder="Select a option and change input text above"
           allowClear
@@ -236,8 +229,8 @@ const SpecificForm = (props)=>{
         <Input/>
       </Form.Item>
       <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
-        <Button type="primary" htmlType="submit">
-          Submit
+        <Button style={{backgroundColor:"#00afb7",borderColor:"#00afb7", color:"#ffffff"}} type="primary" htmlType="submit">
+          Enviar
         </Button>
       </Form.Item>
     </Form>
