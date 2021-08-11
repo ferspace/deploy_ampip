@@ -4,7 +4,7 @@ import axios from 'axios';
 import Swal from 'sweetalert2';
 
 const { Option } = Select;
-
+const DataOption = JSON.parse(localStorage.getItem("data"));
 const layout = {
   labelCol: { span: 8 },
   wrapperCol: { span: 16 },
@@ -25,7 +25,7 @@ const SpecificForm = (props)=>{
 
   const onFinish = (values) => {
     axios.post('http://localhost:3001/api/v1/corporates', {headers: { 
-      'Authorization': 'rBkdw8e3A8kKhczq1vix', 
+      'Authorization': DataOption.authentication_token,  
       'Content-Type': 'application/json'
     }, data: values }).then((response) => {
        setCorporates(response.data)
@@ -40,7 +40,7 @@ const SpecificForm = (props)=>{
   useEffect(() => {
     if(corporates.length === 0){
       axios.get('http://localhost:3001/api/v1/corporates', {headers: { 
-      'Authorization': 'rBkdw8e3A8kKhczq1vix', 
+      'Authorization': DataOption.authentication_token,  
       'Content-Type': 'application/json'
     },}).then((response) => {
        setCorporates(response.data)

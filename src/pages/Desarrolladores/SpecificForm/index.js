@@ -8,6 +8,7 @@ const layout = {
   wrapperCol: { span: 16 },
 };
 
+const DataOption = JSON.parse(localStorage.getItem("data"));
 const validateMessages = {
   required: '${label} is required!',
   types: {
@@ -46,7 +47,7 @@ const SpecificForm = (props)=>{
       method: 'post',
       url: 'http://localhost:3001/api/v1//corporates',
       headers: { 
-        'Authorization': 'oCgmymybxa_n5RhKdNsS', 
+        'Authorization': DataOption.authentication_token, 
         'Content-Type': 'application/json'
       },
       data : data
