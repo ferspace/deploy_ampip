@@ -69,7 +69,7 @@ const Terrenos = () => {
     }).catch(error => {
       console.log(error); // poner alerta cuando tengamos tiempo
     });
-  }, []);
+  });
 
   /*    const datatableData = [ // esto viene de axios
        [2,"fer vargas", "Example Inc.", "Yonkers", "NY"],
