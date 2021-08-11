@@ -1,6 +1,6 @@
-import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Modal from '@material-ui/core/Modal';
+import React, { useState } from 'react';
+import { Modal, Button } from 'antd';
 
 function rand() {
   return Math.round(Math.random() * 20) - 10;
@@ -28,39 +28,26 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SimpleModal({data}) {
-  const classes = useStyles();
-  // getModalStyle is not a pure function, we roll the style only on the first render
-  const [modalStyle] = React.useState(getModalStyle);
-  const [open, setOpen] = React.useState(false);
+export default function SimpleModal(props) {
+  const [isModalVisible, setIsModalVisible] = useState(false);
 
-  const handleOpen = () => {
-    setOpen(true);
+  const showModal = () => {
+    setIsModalVisible(true); 
   };
 
-  const handleClose = () => {
-    setOpen(false);
+  const handleCancel = () => {
+    setIsModalVisible(false);
   };
 
-  const body = (
-    <div style={modalStyle} className={classes.paper}>
-      {data}
-    </div>
-  );
 
   return (
-    <div>
-      <button type="button" onClick={handleOpen}>
-        Ver
-      </button>
-      <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="simple-modal-title"
-        aria-describedby="simple-modal-description"
-      >
-        {body}
+    <>
+      <Button type="primary" onClick={showModal}>
+        Editar
+      </Button>
+      <Modal title="Editar" visible={isModalVisible} onCancel={handleCancel}>
+        {props.children}
       </Modal>
-    </div>
+    </>
   );
 }

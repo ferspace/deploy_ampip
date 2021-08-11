@@ -82,9 +82,21 @@ const SpecificForm = (props)=>{
         
         axios(config)
         .then(function (response) {
+          Swal.fire({
+            icon: 'success',
+            title: '¡Se agrego correctamente!',
+            showConfirmButton: false,
+            timer: 1500
+          })
           console.log(JSON.stringify(response.data));
         })
         .catch(function (error) {
+          Swal.fire({
+            icon: 'success',
+            title: '¡Error al agregar!',
+            showConfirmButton: false,
+            timer: 1500
+          })
           console.log(error);
         });
       }
