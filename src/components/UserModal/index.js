@@ -66,7 +66,7 @@ const UserModal = (props) => {
       console.log('no user');
     }
 
-    setIsModalVisible(props.show);
+    
 
     console.log(isModalVisible);
   },[]);
