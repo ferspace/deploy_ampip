@@ -40,11 +40,11 @@ const SpecificForm = (props)=>{
       "state": values.user.state,
       "municipality": values.user.municipality,
       "cel": values.user.cel,
-      "anual_invetsment": values.user.inv_anu_on,
-      "previus_anual_inv": values.user.inv_anu_last,
-      "next_anual_inv": values.user.inv_anu_next,
+      "anual_invetsment": "",
+      "previus_anual_inv": "",
+      "next_anual_inv": "",
       "downt_date": null,
-      "corporate_type": values.user.corporate_type,
+      "corporate_type": "",
       "status": true
     }
   });
@@ -158,18 +158,6 @@ const SpecificForm = (props)=>{
         <Input />
       </Form.Item>
       <Form.Item name={['user', 'cel']} label="Celular" rules={[{ required: true }]}>
-        <Input />
-      </Form.Item>
-      <Form.Item name={['user', 'inv_anu_on']} label="Inversion anual (Pipeline año en curso)" rules={[{ required: true }]}>
-        <Input />
-      </Form.Item>
-      <Form.Item name={['user', 'inv_anu_next']} label="Inversion anual (Pipeline año siguiente)" rules={[{ required: true }]}>
-        <Input />
-      </Form.Item>
-      <Form.Item name={['user', 'inv_anu_last']} label="Inversion anual (Pipeline año anterior)" rules={[{ required: true }]}>
-        <Input />
-      </Form.Item>
-      <Form.Item name={['user', 'corporate_type']} label="Tipo de corporativo" rules={[{ required: true }]}>
         <Input />
       </Form.Item>
       <Form.Item name={['user', 'RFC']} label="RFC" rules={[{ required: true }]}>

@@ -84,6 +84,20 @@ const EditForm = (props)=>{
       </Form.Item>
       <Form.Item name={['user', 'type']} value={2} label="type" hidden={true} >
         <Input />
+      </Form.Item><Form.Item name={['user', 'adress']} label="Dirección" rules={[{ required: true }]}>
+        <Input />
+      </Form.Item>
+      <Form.Item name={['user', 'postal_code']} label="Código Postal" rules={[{ required: true }]}>
+        <Input/>
+      </Form.Item>
+      <Form.Item name={['user', 'colony']} label="Colonia" rules={[{ required: true }]}>
+        <Input/>
+      </Form.Item>
+      <Form.Item name={['user', 'state']} label="Estado" rules={[{ required: true }]}>
+        <Input/>
+      </Form.Item>
+      <Form.Item name={['user', 'municipality']} label="Municipio" rules={[{ required: true }]}>
+        <Input/>
       </Form.Item>
       <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
         <Button type="primary" htmlType="submit">
