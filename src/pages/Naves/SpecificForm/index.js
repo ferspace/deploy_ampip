@@ -72,10 +72,10 @@ const SpecificForm = (props)=>{
         </Select>
       </Form.Item>
       <Form.Item name={['user', 'name']} label="Nombre" rules={[{ required: true }]}>
-        <Input.TextArea />
+        <Input />
       </Form.Item>
       <Form.Item name={['user', 'name_en']} label="Nombre en ingles" rules={[{ required: true }]}>
-        <Input.TextArea />
+        <Input />
       </Form.Item>
       <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
         <Button type="primary" htmlType="submit">

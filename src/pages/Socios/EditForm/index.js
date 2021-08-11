@@ -47,7 +47,7 @@ const EditForm = (props)=>{
     method: 'put',
     url: `http://localhost:3001/api/v1//corporates${props.id}`,
     headers: { 
-      'Authorization': 'RHsyvmBgQRQoiuvum6uJ', 
+      'Authorization': 'oCgmymybxa_n5RhKdNsS', 
       'Content-Type': 'application/json'
     },
     data : data
@@ -72,7 +72,7 @@ const EditForm = (props)=>{
         method: 'post',
         url: 'http://localhost:3001/api/v1//corporate_informations',
         headers: { 
-          'Authorization': 'rBkdw8e3A8kKhczq1vix', 
+          'Authorization': 'oCgmymybxa_n5RhKdNsS', 
           'Content-Type': 'application/json'
         },
         data : data

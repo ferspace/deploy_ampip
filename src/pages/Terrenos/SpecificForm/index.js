@@ -78,7 +78,7 @@ const SpecificForm = (props)=>{
         <Input />
       </Form.Item>
       <Form.Item name={['user', 'name_en']} label="Nombre en ingles" rules={[{ required: true }]}>
-        <Input.TextArea />
+        <Input />
       </Form.Item>
       <Form.Item name={['user', 'type']} value={2} label="type" hidden={true} >
         <Input />

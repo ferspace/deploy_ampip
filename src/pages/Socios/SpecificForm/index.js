@@ -101,52 +101,52 @@ const SpecificForm = (props)=>{
         <Input />
       </Form.Item>
       <Form.Item name={['user', 'address']} label="Direccion" rules={[{ required: true }]}>
-        <Input.TextArea />
+        <Input />
       </Form.Item>
       <Form.Item name={['user', 'cp']} label="Codigo Postal" rules={[{ required: true }]}>
-        <Input.TextArea />
+        <Input />
       </Form.Item>
       <Form.Item name={['user', 'colony']} label="Colonia" rules={[{ required: true }]}>
-        <Input.TextArea />
+        <Input />
       </Form.Item>
       <Form.Item name={['user', 'state']} label="Estado" rules={[{ required: true }]}>
-        <Input.TextArea />
+        <Input />
       </Form.Item>
       <Form.Item name={['user', 'municipality']} label="Municipio" rules={[{ required: true }]}>
-        <Input.TextArea />
+        <Input />
       </Form.Item>
       <Form.Item name={['user', 'cel']} label="Celular" rules={[{ required: true }]}>
-        <Input.TextArea />
+        <Input />
       </Form.Item>
       <Form.Item name={['user', 'inv_anu_on']} label="Inversion anual (Pipeline año en curso)" rules={[{ required: true }]}>
-        <Input.TextArea />
+        <Input />
       </Form.Item>
       <Form.Item name={['user', 'inv_anu_next']} label="Inversion anual (Pipeline año siguiente)" rules={[{ required: true }]}>
-        <Input.TextArea />
+        <Input />
       </Form.Item>
       <Form.Item name={['user', 'inv_anu_last']} label="Inversion anual (Pipeline año anterior)" rules={[{ required: true }]}>
-        <Input.TextArea />
+        <Input />
       </Form.Item>
       <Form.Item name={['user', 'corporate_type']} label="Tipo de corporativo" rules={[{ required: true }]}>
-        <Input.TextArea />
+        <Input />
       </Form.Item>
       <Form.Item name={['user', 'RFC']} label="RFC" rules={[{ required: true }]}>
-        <Input.TextArea />
+        <Input />
       </Form.Item>
       <Form.Item name={['user', 'social_media_tw']} label="Twitter" rules={[{ required: true }]}>
-        <Input.TextArea />
+        <Input />
       </Form.Item>
       <Form.Item name={['user', 'social_media_fb']} label="Facebook" rules={[{ required: true }]}>
-        <Input.TextArea />
+        <Input />
       </Form.Item>
       <Form.Item name={['user', 'social_media_inst']} label="Instagram" rules={[{ required: true }]}>
-        <Input.TextArea />
+        <Input />
       </Form.Item>
       <Form.Item name={['user', 'social_media_link']} label="LinkedIn" rules={[{ required: true }]}>
-        <Input.TextArea />
+        <Input />
       </Form.Item>
       <Form.Item name={['user', 'social_media_web']} label="web" rules={[{ required: true }]}>
-        <Input.TextArea />
+        <Input />
       </Form.Item>
       <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
         <Button type="primary" htmlType="submit">
