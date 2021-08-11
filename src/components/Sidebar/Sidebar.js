@@ -50,7 +50,7 @@ const structure = [
       { label: "Parques", link: "/app/ui/parques" },
       { label: "Naves", link: "/app/ui/naves" },
       { label: "Terrenos", link: "/app/ui/terrenos" },
-      { label: "Disponibles", link: "/app/ui/maps" },
+      { label: "Disponibles", link: "/app/ui/disponibles" },
     ],
   },
   {
