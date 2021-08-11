@@ -180,7 +180,7 @@ const SpecificForm = (props) => {
         >
           {permissions.map((value, i) => {
             return (
-              <Option key={i} value={value.id}>
+              <Option key={i} value={i}>
                 {value.name}
               </Option>
             );
