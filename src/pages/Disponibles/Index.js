@@ -26,7 +26,7 @@ import ModaEdit from '../../components/ModalEdit'
 
 const data = JSON.parse(localStorage.getItem("data"));
 
-const Desarrolladores = () => {
+const Disponibles = () => {
   const [anchorEl, setAnchorEl] = React.useState(null)
   const [datatableData, setDatatableData] = useState([]) //descomentar al integrar apis
   const handleClick = (e) => {
@@ -130,4 +130,4 @@ const Desarrolladores = () => {
   );
 }
 
-export default Desarrolladores;
+export default Disponibles;
