@@ -68,6 +68,9 @@ function Login(props) {
             setIsLoading,
             setError)
           localStorage.setItem('data', JSON.stringify(response.data.data.user))
+
+          
+
         } else {
           alert("Usuario no autorizado")
         }
@@ -76,6 +79,7 @@ function Login(props) {
       .catch(function (error) {
         console.log(error);
       });
+
   }
 
   return (
