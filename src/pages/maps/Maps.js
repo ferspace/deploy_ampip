@@ -43,7 +43,7 @@ const Desarrolladores = () => {
   var [activeTabId, setActiveTabId] = useState(0);
 
   useEffect(() => {    //aqui va la peticion al endpoint , se va aprocesar la informacion del tipo [[dato1,dato2]]
-    axios.get(`http://localhost:3001/api/v1/property_informations`, {
+    axios.get(`http://localhost:3001/api/v1/propieties?type=2`, {
       headers: { 
         'Authorization': data.authentication_token,
       }
@@ -56,9 +56,8 @@ const Desarrolladores = () => {
         response.data.map((i)=>{
           var corporates = [];
           corporates.push(i.id);
-          corporates.push(i.name)
-          corporates.push(i.english_name)
-          corporates.push(i.address)
+          corporates.push(i.nombre)
+          corporates.push(i.updated_at)
           corporatesAdd.push(corporates);
         });
       

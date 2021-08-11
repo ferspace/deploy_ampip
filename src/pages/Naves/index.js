@@ -58,10 +58,8 @@ const Naves = () => {
         response.data.map((i) => {
           var corporates = [];
           corporates.push(i.id);
-          corporates.push(i.name)
-          corporates.push(i.english_name)
+          corporates.push(i.nombre)
           corporates.push(i.updated_at)
-          corporates.push(i.address)
           corporatesAdd.push(corporates);
         });
 
@@ -70,7 +68,7 @@ const Naves = () => {
     }).catch(error => {
       console.log(error); // poner alerta cuando tengamos tiempo
     });
-  }, []);
+  });
 
   return (
     <>
@@ -102,7 +100,7 @@ const Naves = () => {
         </Tabs>
         {activeTabId === 0 && (
           <div style={{ padding: 20 }}>
-            <Tables title={"Todas las naves"} columns={["id", "Name", "Company", "City", "State", {
+            <Tables title={"Todas las naves"} columns={["id", "Name", "Alta", {
               label: "Ver",
               options: {
                 customBodyRender: (value, tableMeta, updateValue) => {

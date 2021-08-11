@@ -61,10 +61,8 @@ const Parques = () => {
         response.data.map((i) => {
           var corporates = [];
           corporates.push(i.id);
-          corporates.push(i.name)
-          corporates.push(i.english_name)
+          corporates.push(i.nombre)
           corporates.push(i.updated_at)
-          corporates.push(i.address)
           corporatesAdd.push(corporates);
         });
 
@@ -73,7 +71,7 @@ const Parques = () => {
     }).catch(error => {
       console.log(error); // poner alerta cuando tengamos tiempo
     });
-}, []);
+});
 
 
 // const datatableData = [ // esto viene de axios

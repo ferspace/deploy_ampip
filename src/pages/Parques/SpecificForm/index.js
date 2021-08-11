@@ -25,8 +25,9 @@ const SpecificForm = (props)=>{
   const onFinish = (values) => {
     var data = JSON.stringify({
       "propieties": {
-        "corporate_id": values.user.corporate_id,
-        "tipo": 0
+        "corporate_id": values.user.corpoate_id,
+        "tipo": 0,
+        "nombre": values.user.name,
       }
     });
     
@@ -47,6 +48,7 @@ const SpecificForm = (props)=>{
         console.log(response.data)
         var data = JSON.stringify({
           "property_information": {
+            "property_id": response.data.data,
             "name": values.user.name,
             "superficie": values.user.superficie,
             "address": values.user.address,
@@ -84,10 +86,21 @@ const SpecificForm = (props)=>{
         
         axios(config)
         .then(function (response) {
+          Swal.fire({
+            icon: 'success',
+            title: '¡Se agrego correctamente!',
+            showConfirmButton: false,
+            timer: 1500
+          })
           console.log(JSON.stringify(response.data));
         })
         .catch(function (error) {
-          console.log(error);
+          Swal.fire({
+            icon: 'error',
+            title: '¡Error al agregar!',
+            showConfirmButton: false,
+            timer: 1500
+          })
         });
       } 
     })
