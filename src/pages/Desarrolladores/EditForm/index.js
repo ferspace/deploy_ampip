@@ -73,7 +73,7 @@ const EditForm = (props)=>{
           method: 'put',
           url: `http://localhost:3001/api/v1//corporate_informations${props.id}`,
           headers: { 
-            'Authorization': 'rBkdw8e3A8kKhczq1vix', 
+            'Authorization': DataOption.authentication_token, 
             'Content-Type': 'application/json'
           },
           data : data
