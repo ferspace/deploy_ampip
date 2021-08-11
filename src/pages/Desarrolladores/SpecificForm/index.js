@@ -46,7 +46,7 @@ const SpecificForm = (props)=>{
       method: 'post',
       url: 'http://localhost:3001/api/v1//corporates',
       headers: { 
-        'Authorization': 'oCgmymybxa_n5RhKdNsS', 
+        'Authorization': 'q1DqMqDdBQUnXmCUHaM5', 
         'Content-Type': 'application/json'
       },
       data : data
@@ -71,7 +71,7 @@ const SpecificForm = (props)=>{
           method: 'post',
           url: 'http://localhost:3001/api/v1//corporate_informations',
           headers: { 
-            'Authorization': 'oCgmymybxa_n5RhKdNsS', 
+            'Authorization': 'q1DqMqDdBQUnXmCUHaM5', 
             'Content-Type': 'application/json'
           },
           data : data
@@ -92,7 +92,7 @@ const SpecificForm = (props)=>{
   };
 
   return(
-    <Form  {...layout} name="nest-messages" onFinish={onFinish} validateMessages={validateMessages}>
+    <Form {...layout} name="nest-messages" onFinish={onFinish} validateMessages={validateMessages}>
       <Form.Item name={['user', 'name']} label="Nombre en español" rules={[{ required: true }]}>
         <Input />
       </Form.Item>
@@ -148,8 +148,8 @@ const SpecificForm = (props)=>{
         <Input />
       </Form.Item>
       <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
-        <Button style={{backgroundColor:"#00afb7",borderColor:"#00afb7", color:"#ffffff"}} type="primary" htmlType="submit">
-          Enviar
+        <Button type="primary" htmlType="submit">
+          Submit
         </Button>
       </Form.Item>
     </Form>
