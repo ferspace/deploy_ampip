@@ -19,7 +19,7 @@ import PageTitle from "../../components/PageTitle/PageTitle";
 import SpecificForm from './SpecificForm'
 import axios from 'axios';
 import Tables from '../Tables'
-
+import EditForm from './EditForm'
 
 // icons sets
 import "font-awesome/css/font-awesome.min.css";
@@ -42,7 +42,7 @@ const Terrenos = () =>{
   // local
   var [activeTabId, setActiveTabId] = useState(0);
 
-  useEffect(() => {    //aqui va la peticion al endpoint , se va aprocesar la informacion del tipo [[dato1,dato2]]
+   useEffect(() => {    //aqui va la peticion al endpoint , se va aprocesar la informacion del tipo [[dato1,dato2]]
     axios.get(`http://localhost:3001/api/v1/property_informations`).then((response) => {
       //setDatatableData(response.data);
       if(response.data.message == "Sin datos para mostrar"){
@@ -67,25 +67,25 @@ const Terrenos = () =>{
     });
   }, []);
 
-  // const datatableData = [ // esto viene de axios
-  //   ["fer vargas", "Example Inc.", "Yonkers", "NY"],
-  //   ["John Walsh", "Example Inc.", "Hartford", "CT"],
-  //   ["Bob Herm", "Example Inc.", "Tampa", "FL"],
-  //   ["James Houston", "Example Inc.", "Dallas", "TX"],
-  //   ["Prabhakar Linwood", "Example Inc.", "Hartford", "CT"],
-  //   ["Kaui Ignace", "Example Inc.", "Yonkers", "NY"],
-  //   ["Esperanza Susanne", "Example Inc.", "Hartford", "CT"],
-  //   ["Christian Birgitte", "Example Inc.", "Tampa", "FL"],
-  //   ["Meral Elias", "Example Inc.", "Hartford", "CT"],
-  //   ["Deep Pau", "Example Inc.", "Yonkers", "NY"],
-  //   ["Sebastiana Hani", "Example Inc.", "Dallas", "TX"],
-  //   ["Marciano Oihana", "Example Inc.", "Yonkers", "NY"],
-  //   ["Brigid Ankur", "Example Inc.", "Dallas", "TX"],
-  //   ["Anna Siranush", "Example Inc.", "Yonkers", "NY"],
-  //   ["Avram Sylva", "Example Inc.", "Hartford", "CT"],
-  //   ["Serafima Babatunde", "Example Inc.", "Tampa", "FL"],
-  //   ["Gaston Festus", "Example Inc.", "Tampa", "FL"],
-  // ];
+/*    const datatableData = [ // esto viene de axios
+     [2,"fer vargas", "Example Inc.", "Yonkers", "NY"],
+     [1,"John Walsh", "Example Inc.", "Hartford", "CT"],
+     [4,"Bob Herm", "Example Inc.", "Tampa", "FL"],
+     [5,"James Houston", "Example Inc.", "Dallas", "TX"],
+     [6,"Prabhakar Linwood", "Example Inc.", "Hartford", "CT"],
+     [7,"Kaui Ignace", "Example Inc.", "Yonkers", "NY"],
+     [8,"Esperanza Susanne", "Example Inc.", "Hartford", "CT"],
+     [9,"Christian Birgitte", "Example Inc.", "Tampa", "FL"],
+     [10,"Meral Elias", "Example Inc.", "Hartford", "CT"],
+     [11,"Deep Pau", "Example Inc.", "Yonkers", "NY"],
+     [12,"Sebastiana Hani", "Example Inc.", "Dallas", "TX"],
+     [13,"Marciano Oihana", "Example Inc.", "Yonkers", "NY"],
+     [15,"Brigid Ankur", "Example Inc.", "Dallas", "TX"],
+     [17,"Anna Siranush", "Example Inc.", "Yonkers", "NY"],
+     [18,"Avram Sylva", "Example Inc.", "Hartford", "CT"],
+     [20,"Serafima Babatunde", "Example Inc.", "Tampa", "FL"],
+     [21,"Gaston Festus", "Example Inc.", "Tampa", "FL"],
+   ]; */
 
   return (
   <>
@@ -138,7 +138,7 @@ const Terrenos = () =>{
           options: {
             customBodyRender: (value, tableMeta, updateValue) => {
               return (
-                <ModaEdit data={tableMeta.rowData[0]}/>
+                <ModaEdit data={tableMeta.rowData[0]} children={<EditForm id={tableMeta.rowData[0]}/>}/>
               )
             }
           }
