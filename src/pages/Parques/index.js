@@ -29,7 +29,7 @@ import EditForm from "./EditForm";
 
 const data = JSON.parse(localStorage.getItem("data"));
 
-const Parques = () => {
+const Parques = (props) => {
   const [anchorEl, setAnchorEl] = React.useState(null)
   const [datatableData, setDatatableData] = useState([])
 

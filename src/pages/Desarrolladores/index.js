@@ -28,7 +28,7 @@ import ModaEdit from '../../components/ModalEdit'
 import EditForm from './EditForm'
 
 const dataOpt = JSON.parse(localStorage.getItem("data"));
-const Desarrolladores = () => {
+const Desarrolladores = (props) => {
   const [anchorEl, setAnchorEl] = React.useState(null)
   const [datatableData, setDatatableData] = useState([]) //descomentar al integrar apis
   const handleClick = (e) => {
