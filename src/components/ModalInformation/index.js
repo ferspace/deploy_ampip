@@ -43,7 +43,7 @@ export default function SimpleModal(props) {
   return (
     <>
       <Button type="primary" onClick={showModal}>
-        Editar
+          ver
       </Button>
       <Modal title="Editar" visible={isModalVisible} onCancel={handleCancel}>
         {props.children}
