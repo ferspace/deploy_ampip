@@ -4,7 +4,7 @@ import axios from 'axios';
 import Swal from 'sweetalert2';
 
 const { Option } = Select;
-
+const DataOption = JSON.parse(localStorage.getItem("data"));
 const layout = {
   labelCol: { span: 8 },
   wrapperCol: { span: 16 },
@@ -24,23 +24,88 @@ const validateMessages = {
 const SpecificForm = (props)=>{
 
   const onFinish = (values) => {
-    axios.post('http://localhost:3001/api/v1/corporates', {headers: { 
-      'Authorization': 'rBkdw8e3A8kKhczq1vix', 
-      'Content-Type': 'application/json'
-    }, data: values }).then((response) => {
-       setCorporates(response.data)
-      //setPost(response.data);
-    }).catch((error) => {
-      console.log(error)
+    var data = JSON.stringify({
+      "propieties": {
+        "corporate_id": values.user.type,
+        "tipo": 2,
+        "nombre": values.user.name,
+      }
+    });
+    
+    var config = {
+      method: 'post',
+      url: 'http://localhost:3001/api/v1/propieties',
+      headers: { 
+        'Authorization': DataOption.authentication_token, 
+        'Content-Type': 'application/json'
+      },
+      data : data
+    };
+    
+    axios(config)
+    .then(function (response) {
+      //console.log(JSON.stringify(response.data));
+      if(response.data.message !== 0) {
+        console.log(response.data)
+        var data = JSON.stringify({
+          "property_information": {
+            "property_id": response.data.data,
+            "name": values.user.name,
+            "superficie": "",
+            "address": "",
+            "english_name":response.data.name_en,
+            "park_property": "",
+            "region": "",
+            "market": "",
+            "industry": "",
+            "suprficie_total": "",
+            "superficie_urbanizada": "",
+            "superficie_disponible": "",
+            "inicio_de_operaciones": "",
+            "number_employe": "",
+            "practices_recognition": "",
+            "infrastructure": "",
+            "navy_number": "",
+            "message": "",
+            "postal_code": "",
+            "colony": "",
+            "municipality": "",
+            "state": "",
+            "status": 1,
+          }
+        });
+        
+        var config = {
+          method: 'post',
+          url: 'http://localhost:3001/api/v1/property_informations',
+          headers: { 
+            'Authorization': DataOption.authentication_token, 
+            'Content-Type': 'application/json'
+          },
+          data : data
+        };
+        
+        axios(config)
+        .then(function (response) {
+          console.log(JSON.stringify(response.data));
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+      } 
     })
+    .catch(function (error) {
+      console.log(error);
+    });
   };
+
 
   const [ corporates, setCorporates ] = useState([])
 
   useEffect(() => {
     if(corporates.length === 0){
-      axios.get('http://localhost:3001/api/v1/corporates', {headers: { 
-      'Authorization': 'rBkdw8e3A8kKhczq1vix', 
+      axios.get('http://localhost:3001/api/v1/corporates?type=0', {headers: { 
+      'Authorization': DataOption.authentication_token,  
       'Content-Type': 'application/json'
     },}).then((response) => {
        setCorporates(response.data)
@@ -78,7 +143,7 @@ const SpecificForm = (props)=>{
         <Input />
       </Form.Item>
       <Form.Item name={['user', 'name_en']} label="Nombre en ingles" rules={[{ required: true }]}>
-        <Input.TextArea />
+        <Input />
       </Form.Item>
       <Form.Item name={['user', 'type']} value={2} label="type" hidden={true} >
         <Input />

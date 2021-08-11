@@ -8,6 +8,8 @@ const layout = {
   wrapperCol: { span: 16 },
 };
 
+const DataOption = JSON.parse(localStorage.getItem("data"));
+
 const validateMessages = {
   required: '${label} is required!',
   types: {
@@ -46,7 +48,7 @@ const EditForm = (props)=>{
       method: 'put',
       url: `http://localhost:3001/api/v1//corporates${props.id}`,
       headers: { 
-        'Authorization': 'RHsyvmBgQRQoiuvum6uJ', 
+        'Authorization': DataOption.authentication_token,  
         'Content-Type': 'application/json'
       },
       data: data
@@ -71,7 +73,7 @@ const EditForm = (props)=>{
           method: 'put',
           url: `http://localhost:3001/api/v1//corporate_informations${props.id}`,
           headers: { 
-            'Authorization': 'rBkdw8e3A8kKhczq1vix', 
+            'Authorization': DataOption.authentication_token, 
             'Content-Type': 'application/json'
           },
           data : data

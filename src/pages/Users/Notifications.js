@@ -25,6 +25,8 @@ import Widget from "../../components/Widget/Widget";
 import PageTitle from "../../components/PageTitle/PageTitle";
 import Notification from "../../components/Notification";
 
+const data = JSON.parse(localStorage.getItem("data"));
+
 const positions = [
   toast.POSITION.TOP_LEFT,
   toast.POSITION.TOP_CENTER,
@@ -48,7 +50,7 @@ export default function NotificationsPage(props) {
   useEffect(() => {    //aqui va la peticion al endpoint , se va aprocesar la informacion del tipo [[dato1,dato2]]
     axios.get(`http://localhost:3001/api/v1/user_informations`, {
       headers: {
-        'Authorization': 'VPSszAvXt83bU5TRnxZc'
+        'Authorization': data.authentication_token,
       }
     }).then((response) => {
       //setDatatableData(response.data);
@@ -65,7 +67,7 @@ export default function NotificationsPage(props) {
           User.push(item.address)   
           UsersAdd.push(User)  
         })
-
+        console.log(UsersAdd)
         setDatatableData([... UsersAdd])
       }
     }).catch(error => {

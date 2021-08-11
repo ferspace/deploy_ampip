@@ -39,7 +39,7 @@ function Login(props) {
   var [passwordValue, setPasswordValue] = useState("");
 
   //usuario y contraseña
-  const [user, setUser] = useState({email:"",});
+  const [user, setUser] = useState({ email: "", });
 
   const loginAction = () => {
     var data = JSON.stringify({
@@ -48,7 +48,7 @@ function Login(props) {
         "password": passwordValue,
       }
     });
-  
+
     var config = {
       method: 'post',
       url: 'http://localhost:3001/api/v1/sign_in',
@@ -57,16 +57,27 @@ function Login(props) {
       },
       data: data
     };
-    
-    loginUser(
-      userDispatch,
-      loginValue,
-      passwordValue,
-      props.history,
-      setIsLoading,
-      setError,) 
+    axios(config)
+      .then(function (response) {
+        if (response.data.messages === "Signed In Successfully") {
+          loginUser(
+            userDispatch,
+            loginValue,
+            passwordValue,
+            props.history,
+            setIsLoading,
+            setError)
+          localStorage.setItem('data', JSON.stringify(response.data.data.user))
+        } else {
+          alert("Usuario no autorizado")
+        }
+      }
+      )
+      .catch(function (error) {
+        console.log(error);
+      });
   }
-  
+
   return (
     <Grid container className={classes.container}>
       <div className={classes.logotypeContainer} style={{backgroundColor:"#ffffff"}}>
@@ -83,15 +94,15 @@ function Login(props) {
             textColor="primary"
             centered
           >
-            <Tab style={{color:"#00afb7", borderBottom:"solid 1px #00afb7 !important"}} label="Login" classes={{ root: classes.tab }} />
-{/*             <Tab label="New User" classes={{ root: classes.tab }} />
+            <Tab label="Login" classes={{ root: classes.tab }} />
+            {/*             <Tab label="New User" classes={{ root: classes.tab }} />
  */}          </Tabs>
           {activeTabId === 0 && (
             <React.Fragment>
               <Typography variant="h1" className={classes.greeting}>
                 <img src={logo} alt="logo" className={classes.logotypeImage} />
               </Typography>
-            
+
               <Fade in={error}>
                 <Typography color="secondary" className={classes.errorMessage}>
                   Something is wrong with your login or password :(
@@ -262,7 +273,7 @@ function Login(props) {
           )}
         </div>
         <Typography style={{color:"#333333"}} className={classes.copyright}>
-          © 2014-{new Date().getFullYear()} <a style={{ textDecoration: 'none', color: 'inherit' }} href="https://flatlogic.com" rel="noopener noreferrer" target="_blank">Flatlogic</a>, LLC. All rights reserved.
+          © {new Date().getFullYear()} <a style={{ textDecoration: 'none', color: 'inherit' }} href="https://space.bar" rel="noopener noreferrer" target="_blank">SpaceBar</a>.
         </Typography>
       </div>
     </Grid>

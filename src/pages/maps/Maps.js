@@ -23,6 +23,9 @@ import Tables from '../Tables'
 import "font-awesome/css/font-awesome.min.css";
 import ModalInformation from '../../components/ModalInformation'
 import ModaEdit from '../../components/ModalEdit'
+
+const data = JSON.parse(localStorage.getItem("data"));
+
 const Desarrolladores = () => {
   const [anchorEl, setAnchorEl] = React.useState(null)
   const [datatableData, setDatatableData] = useState([]) //descomentar al integrar apis
@@ -40,22 +43,21 @@ const Desarrolladores = () => {
   var [activeTabId, setActiveTabId] = useState(0);
 
   useEffect(() => {    //aqui va la peticion al endpoint , se va aprocesar la informacion del tipo [[dato1,dato2]]
-    axios.get(`http://localhost:3001/api/v1/corporates`, {
+    axios.get(`http://localhost:3001/api/v1/propieties?type=2`, {
       headers: { 
-        'Authorization': 'VPSszAvXt83bU5TRnxZc'
+        'Authorization': data.authentication_token,
       }
     }).then((response) => {
       //setDatatableData(response.data);
       if(response.data.error){
-        alert("error")
+        console.log(response.data)
       } else{
         var corporatesAdd = [];
         response.data.map((i)=>{
           var corporates = [];
           corporates.push(i.id);
-          corporates.push(i.name)
-          corporates.push(i.english_name)
-          corporates.push(i.address)
+          corporates.push(i.nombre)
+          corporates.push(i.updated_at)
           corporatesAdd.push(corporates);
         });
       

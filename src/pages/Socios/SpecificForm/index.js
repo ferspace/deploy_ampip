@@ -3,6 +3,7 @@ import { Form, Input, InputNumber, Button } from 'antd';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 
+const DataOption = JSON.parse(localStorage.getItem("data"));
 const layout = {
   labelCol: { span: 8 },
   wrapperCol: { span: 16 },
@@ -20,6 +21,11 @@ const validateMessages = {
 };
 
 const SpecificForm = (props)=>{
+  const [address, setAddress] = useState({
+    municipio: '',
+    estado: '',
+    colonia: ''
+  })
 
   const onFinish = (values) => {
     console.log(values)
@@ -47,7 +53,7 @@ const SpecificForm = (props)=>{
     method: 'post',
     url: 'http://localhost:3001/api/v1//corporates',
     headers: { 
-      'Authorization': 'RHsyvmBgQRQoiuvum6uJ', 
+      'Authorization': DataOption.authentication_token,
       'Content-Type': 'application/json'
     },
     data : data
@@ -72,7 +78,7 @@ const SpecificForm = (props)=>{
         method: 'post',
         url: 'http://localhost:3001/api/v1//corporate_informations',
         headers: { 
-          'Authorization': 'rBkdw8e3A8kKhczq1vix', 
+          'Authorization': DataOption.authentication_token, 
           'Content-Type': 'application/json'
         },
         data : data
@@ -92,6 +98,30 @@ const SpecificForm = (props)=>{
   });
   };
 
+  const findAddress = (e) =>{
+    
+    if (e.target.value.length === 5 ){
+      console.log(e.target.value)
+      setAddress({
+        municipio: 'municipio',
+        estado: 'estado',
+        colonia: 'colonia'
+      });
+
+      // descomentar al implementar api
+
+      /* axios.get(`https://localhost:3000/api/v1/zip_codes?zip_code=${e.target.value}`).then((response) => {
+        setAddress({
+          municipio: 'municipio',
+          estado: 'estado',
+          colonia: 'colonia'
+        });
+      }); */
+    }
+  }
+
+  console.log(address)
+
   return(
     <Form {...layout} name="nest-messages" onFinish={onFinish} validateMessages={validateMessages}>
       <Form.Item name={['user', 'name']} label="Nombre en español" rules={[{ required: true }]}>
@@ -101,52 +131,52 @@ const SpecificForm = (props)=>{
         <Input />
       </Form.Item>
       <Form.Item name={['user', 'address']} label="Direccion" rules={[{ required: true }]}>
-        <Input.TextArea />
+        <Input />
       </Form.Item>
       <Form.Item name={['user', 'cp']} label="Codigo Postal" rules={[{ required: true }]}>
-        <Input.TextArea />
+        <Input />
       </Form.Item>
       <Form.Item name={['user', 'colony']} label="Colonia" rules={[{ required: true }]}>
-        <Input.TextArea />
+        <Input />
       </Form.Item>
       <Form.Item name={['user', 'state']} label="Estado" rules={[{ required: true }]}>
-        <Input.TextArea />
+        <Input />
       </Form.Item>
       <Form.Item name={['user', 'municipality']} label="Municipio" rules={[{ required: true }]}>
-        <Input.TextArea />
+        <Input />
       </Form.Item>
       <Form.Item name={['user', 'cel']} label="Celular" rules={[{ required: true }]}>
-        <Input.TextArea />
+        <Input />
       </Form.Item>
       <Form.Item name={['user', 'inv_anu_on']} label="Inversion anual (Pipeline año en curso)" rules={[{ required: true }]}>
-        <Input.TextArea />
+        <Input />
       </Form.Item>
       <Form.Item name={['user', 'inv_anu_next']} label="Inversion anual (Pipeline año siguiente)" rules={[{ required: true }]}>
-        <Input.TextArea />
+        <Input />
       </Form.Item>
       <Form.Item name={['user', 'inv_anu_last']} label="Inversion anual (Pipeline año anterior)" rules={[{ required: true }]}>
-        <Input.TextArea />
+        <Input />
       </Form.Item>
       <Form.Item name={['user', 'corporate_type']} label="Tipo de corporativo" rules={[{ required: true }]}>
-        <Input.TextArea />
+        <Input />
       </Form.Item>
       <Form.Item name={['user', 'RFC']} label="RFC" rules={[{ required: true }]}>
-        <Input.TextArea />
+        <Input />
       </Form.Item>
       <Form.Item name={['user', 'social_media_tw']} label="Twitter" rules={[{ required: true }]}>
-        <Input.TextArea />
+        <Input />
       </Form.Item>
       <Form.Item name={['user', 'social_media_fb']} label="Facebook" rules={[{ required: true }]}>
-        <Input.TextArea />
+        <Input />
       </Form.Item>
       <Form.Item name={['user', 'social_media_inst']} label="Instagram" rules={[{ required: true }]}>
-        <Input.TextArea />
+        <Input />
       </Form.Item>
       <Form.Item name={['user', 'social_media_link']} label="LinkedIn" rules={[{ required: true }]}>
-        <Input.TextArea />
+        <Input />
       </Form.Item>
       <Form.Item name={['user', 'social_media_web']} label="web" rules={[{ required: true }]}>
-        <Input.TextArea />
+        <Input />
       </Form.Item>
       <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
         <Button style={{backgroundColor:"#00afb7",borderColor:"#00afb7", color:"#ffffff"}} type="primary" htmlType="submit">

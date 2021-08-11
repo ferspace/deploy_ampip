@@ -27,6 +27,8 @@ import ModalInformation from '../../components/ModalInformation'
 import ModaEdit from '../../components/ModalEdit'
 import EditForm from './EditForm'
 
+const data = JSON.parse(localStorage.getItem("data"));
+
 const Desarrolladores = () => {
   const [anchorEl, setAnchorEl] = React.useState(null)
   const [datatableData, setDatatableData] = useState([]) //descomentar al integrar apis
@@ -44,9 +46,9 @@ const Desarrolladores = () => {
   var [activeTabId, setActiveTabId] = useState(0);
 
   useEffect(() => {    //aqui va la peticion al endpoint , se va aprocesar la informacion del tipo [[dato1,dato2]]
-    axios.get(`http://localhost:3001/api/v1/corporates`, {
+    axios.get(`http://localhost:3001/api/v1/corporates?type=1`, {
       headers: { 
-        'Authorization': 'rBkdw8e3A8kKhczq1vix'
+        'Authorization': data.authentication_token,
       }
     }).then((response) => {
       //setDatatableData(response.data);

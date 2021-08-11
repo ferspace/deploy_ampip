@@ -4,6 +4,7 @@ import { Form, Input, Select, Button } from "antd";
 import axios from "axios";
 
 const { Option } = Select;
+const data = JSON.parse(localStorage.getItem("data"));
 
 const layout = {
   labelCol: { span: 8 },
@@ -20,13 +21,15 @@ const validateMessages = {
     range: "${label} must be between ${min} and ${max}",
   },
 };
+const DataOption = JSON.parse(localStorage.getItem("data"));
 
 const SpecificForm = (props) => {
   useEffect(() => {
+    console.log(data.authentication_token)
     axios
       .get("http://localhost:3001/api/v1/user_rol", {
         headers: {
-          Authorization: "rBkdw8e3A8kKhczq1vix",
+          Authorization: data.authentication_token,
           "Content-Type": "application/json",
         },
       })
@@ -34,19 +37,76 @@ const SpecificForm = (props) => {
         setPermissions(response.data);
         //setPost(response.data);
       });
-  });
+  }, []);
 
   const onFinish = (values) => {
-    axios.post('http://localhost:3001/api/v1/sign_up', {
-      headers: {
-        Authorization: "rBkdw8e3A8kKhczq1vix",
-        "Content-Type": "application/json",
-      },
-      data: values
-    })
-    .then((response) => {
-      console.log(response)
+    var data = JSON.stringify({
+      "user": {
+        "email": values.user.email,
+        "password": values.user.password,
+        "password_confirmation": values.user.password,
+        "user_type": values.user.user_type,
+      }
     });
+
+    var config = {
+      method: 'post',
+      url: 'http://localhost:3001/api/v1/sign_up',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      data: data
+    };
+
+    axios(config)
+      .then(function (response) {
+        var user_id = response.data.data.user.id
+        var data = JSON.stringify({
+          "information": {
+            "user_id": user_id,
+            "full_name": values.user.name,
+            "last_name": values.user.lastName,
+            "address": "",
+            "state": "",
+            "office_address": "",
+            "charge": "",
+            "date_of_birth": "",
+            "phone_office": "",
+            "cel": "",
+            "corporate_id": "",
+            "status": "",
+            "municipality": "",
+            "colony": "",
+            "postal_code_number": "",
+            "user_type_permision_id": "",
+            "user_type": "",
+            "created_at": "",
+            "updated_at": ""
+          }
+        });
+        
+        var config = {
+          method: 'post',
+          url: 'http://localhost:3001/api/v1/user_informations/',
+          headers: { 
+            'Authorization': DataOption.authentication_token , 
+            'Content-Type': 'application/json'
+          },
+          data : data
+        };
+        
+        axios(config)
+        .then(function (response) {
+          console.log(JSON.stringify(response.data));
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+
   };
   const [permissions, setPermissions] = useState([]);
 
@@ -58,7 +118,7 @@ const SpecificForm = (props) => {
       validateMessages={validateMessages}
     >
       <Form.Item
-        name={["user", "permissions"]}
+        name={["user", "user_type"]}
         label="Rol"
         rules={[
           {
@@ -107,9 +167,16 @@ const SpecificForm = (props) => {
       >
         <Input />
       </Form.Item>
+      <Form.Item
+        name={["user", "password_confirmation"]}
+        label="Password"
+        rules={[{ required: true }]}
+      >
+        <Input />
+      </Form.Item>
       <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
         <br />
-        <Button style={{backgroundColor:"#00afb7",borderColor:"#00afb7", color:"#ffffff"}} type="primary" htmlType="submit">
+        <Button style={{ backgroundColor: "#00afb7", borderColor: "#00afb7", color: "#ffffff" }} type="primary" htmlType="submit">
           Enviar
         </Button>
       </Form.Item>

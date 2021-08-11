@@ -5,6 +5,8 @@ import Swal from 'sweetalert2';
 
 const { Option } = Select;
 
+const DataOption = JSON.parse(localStorage.getItem("data"));
+
 const layout = {
   labelCol: { span: 8 },
   wrapperCol: { span: 16 },
@@ -35,7 +37,7 @@ const EditForm = (props)=>{
       method: 'put',
       url: `http://localhost:3001/api/v1//propieties${props.id}`,
       headers: { 
-        'Authorization': 'rBkdw8e3A8kKhczq1vix', 
+        'Authorization': DataOption.authentication_token,  
         'Content-Type': 'application/json'
       },
       data : data
@@ -76,7 +78,7 @@ const EditForm = (props)=>{
           method: 'post',
           url: 'http://localhost:3001/api/v1//property_informations',
           headers: { 
-            'Authorization': 'rBkdw8e3A8kKhczq1vix', 
+            'Authorization': DataOption.authentication_token,  
             'Content-Type': 'application/json'
           },
           data : data
@@ -99,7 +101,7 @@ const EditForm = (props)=>{
   const [ corporates, setCorporates ] = useState([])
   useEffect(() => {
     axios.get('http://localhost:3001/api/v1/corporates', {headers: { 
-      'Authorization': 'rBkdw8e3A8kKhczq1vix', 
+      'Authorization': DataOption.authentication_token,  
       'Content-Type': 'application/json'
     },}).then((response) => {
       if(response.data.massage !== "Sin datos para mostrar") setCorporates(response.data)

@@ -9,7 +9,7 @@ const layout = {
   labelCol: { span: 8 },
   wrapperCol: { span: 16 },
 };
-
+const DataOption = JSON.parse(localStorage.getItem("data"));
 const validateMessages = {
   required: '${label} is required!',
   types: {
@@ -25,16 +25,17 @@ const SpecificForm = (props)=>{
   const onFinish = (values) => {
     var data = JSON.stringify({
       "propieties": {
-        "corporate_id": 1,
-        "tipo": 0
+        "corporate_id": values.user.corpoate_id,
+        "tipo": 0,
+        "nombre": values.user.name,
       }
     });
     
     var config = {
       method: 'post',
-      url: 'http://localhost:3001/api/v1//propieties',
+      url: 'http://localhost:3001/api/v1/propieties',
       headers: { 
-        'Authorization': 'rBkdw8e3A8kKhczq1vix', 
+        'Authorization': DataOption.authentication_token, 
         'Content-Type': 'application/json'
       },
       data : data
@@ -44,8 +45,10 @@ const SpecificForm = (props)=>{
     .then(function (response) {
       //console.log(JSON.stringify(response.data));
       if(response.data.message !== 0) {
+        console.log(response.data)
         var data = JSON.stringify({
           "property_information": {
+            "property_id": response.data.data,
             "name": values.user.name,
             "superficie": values.user.superficie,
             "address": values.user.address,
@@ -73,9 +76,9 @@ const SpecificForm = (props)=>{
         
         var config = {
           method: 'post',
-          url: 'http://localhost:3001/api/v1//property_informations',
+          url: 'http://localhost:3001/api/v1/property_informations',
           headers: { 
-            'Authorization': 'rBkdw8e3A8kKhczq1vix', 
+            'Authorization': DataOption.authentication_token, 
             'Content-Type': 'application/json'
           },
           data : data
@@ -97,8 +100,8 @@ const SpecificForm = (props)=>{
 
   const [ corporates, setCorporates ] = useState([])
   useEffect(() => {
-    axios.get('http://localhost:3001/api/v1/corporates', {headers: { 
-      'Authorization': 'rBkdw8e3A8kKhczq1vix', 
+    axios.get('http://localhost:3001/api/v1/corporates?type=0', {headers: { 
+      'Authorization': DataOption.authentication_token, 
       'Content-Type': 'application/json'
     },}).then((response) => {
       if(response.data.massage !== "Sin datos para mostrar") setCorporates(response.data)
@@ -108,15 +111,7 @@ const SpecificForm = (props)=>{
 
   return(
     <Form {...layout} name="nest-messages" onFinish={onFinish} validateMessages={validateMessages}>
-      <Form.Item
-        name={["user", "type"]}
-        label="Corporativos"
-        rules={[
-          {
-            required: true,
-          },
-        ]}
-      >
+      <Form.Item name={["user", "corpoate_id"]} label="Corporativos" rules={[{required: true}]}>
         <Select
           placeholder="Select a option and change input text above"
           allowClear
