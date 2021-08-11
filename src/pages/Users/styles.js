@@ -13,6 +13,9 @@ export default makeStyles(theme => ({
     borderColor: theme.palette.primary.main,
     position: "relative",
   },
+  menuspace: {
+    color:"#00afb7",
+  },
   layoutText: {
     color: tinycolor(theme.palette.background.light)
       .darken()

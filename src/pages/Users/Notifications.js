@@ -79,21 +79,24 @@ export default function NotificationsPage(props) {
       <Paper className={classes.iconsContainer}>
         <Tabs
           indicatorColor="primary"
-          textColor="primary"
+          textColor="#ffffff"
           value={activeTabId}
           onChange={(e, id) => setActiveTabId(id)}
           className={classes.iconsBar}
         >
-          <Tab label="Usuarios" classes={{ root: classes.tab }} />
-          <Tab label="Agregar" classes={{ root: classes.tab }} />
+          <Tab label="Usuarios" className={classes.menuspace} />
+          <Tab label="Agregar" className={classes.menuspace} />
         </Tabs>
         {activeTabId === 0 && (
+          <div style={{padding:20}}>
           <Tables title={"Todos los Desarrolladores"} columns={["id","Nombre", "Apellido", "Direccion"]} tableData={datatableData} />
-
+          </div>
         )}
 
         {activeTabId === 1 && (
-          <SpecificForm />
+          <div style={{display:'flex', justifyContent:'center'}}>
+          <SpecificForm/>
+        </div>
         )}
       </Paper>
     </>
