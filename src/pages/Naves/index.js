@@ -44,7 +44,7 @@ const Naves = () => {
   // local
   var [activeTabId, setActiveTabId] = useState(0);
   useEffect(() => {    //aqui va la peticion al endpoint , se va aprocesar la informacion del tipo [[dato1,dato2]]
-    axios.get(`http://localhost:3001/api/v1/property_informations`,{
+    axios.get(`http://localhost:3001/api/v1/propieties?type=1`,{
       headers: {
         'Authorization': data.authentication_token,
       }
