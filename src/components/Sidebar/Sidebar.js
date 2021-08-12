@@ -30,7 +30,7 @@ import {
   toggleSidebar,
 } from "../../context/LayoutContext";
 
-const structure = [
+const admin_ampip = [
   {
     id: 1,
     label: "Corporativos",
@@ -61,7 +61,91 @@ const structure = [
   }
 ];
 
+const user_ampip = [
+  {
+    id: 2,
+    label: "Propiedades",
+    link: "/app/propiedades",
+    icon: <TableIcon />,
+    children: [
+      { label: "Parques", link: "/app/ui/parques" },
+      { label: "Naves", link: "/app/ui/naves" },
+      { label: "Terrenos", link: "/app/ui/terrenos" },
+      { label: "Disponibles", link: "/app/ui/disponibles" },
+    ],
+  },
+  {
+    id: 3,
+    label: "Usuarios",
+    link: "/app/usuarios",
+    icon: <AccountIcon />,
+  }
+];
+
+const admin_society = [
+  
+  {
+    id: 2,
+    label: "Propiedades",
+    link: "/app/propiedades",
+    icon: <TableIcon />,
+    children: [
+      { label: "Parques", link: "/app/ui/parques" },
+      { label: "Naves", link: "/app/ui/naves" },
+      { label: "Terrenos", link: "/app/ui/terrenos" },
+      { label: "Disponibles", link: "/app/ui/disponibles" },
+    ],
+  }
+];
+
+const user_society = [
+  {
+    id: 2,
+    label: "Propiedades",
+    link: "/app/propiedades",
+    icon: <TableIcon />,
+    children: [
+      { label: "Parques", link: "/app/ui/parques" },
+      { label: "Naves", link: "/app/ui/naves" },
+      { label: "Terrenos", link: "/app/ui/terrenos" },
+      { label: "Disponibles", link: "/app/ui/disponibles" },
+    ],
+  },
+  {
+    id: 3,
+    label: "Usuarios",
+    link: "/app/usuarios",
+    icon: <AccountIcon />,
+  }
+];
+
+const admin_propiety = [
+  {
+    id: 2,
+    label: "Propiedades",
+    link: "/app/propiedades",
+    icon: <TableIcon />,
+    children: [
+      { label: "Parques", link: "/app/ui/parques" },
+      { label: "Naves", link: "/app/ui/naves" },
+      { label: "Terrenos", link: "/app/ui/terrenos" },
+      { label: "Disponibles", link: "/app/ui/disponibles" },
+    ],
+  }
+];
+
+const user_propiety = [
+  {
+    id: 3,
+    label: "Usuarios",
+    link: "/app/usuarios",
+    icon: <AccountIcon />,
+  }
+];
+
 function Sidebar({ location }) {
+
+  const [structure, setStructure] = useState([])
   var classes = useStyles();
   var theme = useTheme();
 
@@ -72,17 +156,39 @@ function Sidebar({ location }) {
   // local
   var [isPermanent, setPermanent] = useState(true);
 
-  useEffect(function() {
+  useEffect(function () {
     window.addEventListener("resize", handleWindowWidthChange);
     handleWindowWidthChange();
     return function cleanup() {
       window.removeEventListener("resize", handleWindowWidthChange);
     };
+
+
   });
+
+  useEffect(() => {
+    var type = JSON.parse(localStorage.getItem("data")).user_type;
+    console.log(type);
+
+    switch (type) {
+      case "admin_ampip":
+        return setStructure(admin_ampip);
+      case "user_ampip":
+        return setStructure(user_ampip)
+      case "admin_society":
+        return setStructure(admin_society)
+      case "user_society":
+        return setStructure(user_society)
+      case "admin_propiety":
+        return setStructure(admin_propiety)
+      default:
+        return setStructure(user_propiety)
+      }
+  }, [])
 
   return (
     <Drawer
-      style={{zIndex: 0}}
+      style={{ zIndex: 0 }}
       variant={isPermanent ? "permanent" : "temporary"}
       className={classNames(classes.drawer, {
         [classes.drawerOpen]: isSidebarOpened,
