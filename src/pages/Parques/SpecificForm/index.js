@@ -21,7 +21,7 @@ const validateMessages = {
   },
 };
 
-const SpecificForm = (props)=>{
+const SpecificForm = (props) => {
   const onFinish = (values) => {
     var data = JSON.stringify({
       "propieties": {
@@ -30,99 +30,102 @@ const SpecificForm = (props)=>{
         "nombre": values.user.name,
       }
     });
-    
+
     var config = {
       method: 'post',
       url: 'http://localhost:3001/api/v1/propieties',
-      headers: { 
-        'Authorization': DataOption.authentication_token, 
+      headers: {
+        'Authorization': DataOption.authentication_token,
         'Content-Type': 'application/json'
       },
-      data : data
+      data: data
     };
-    
+
     axios(config)
-    .then(function (response) {
-      //console.log(JSON.stringify(response.data));
-      if(response.data.message !== 0) {
-        console.log(response.data)
-        var data = JSON.stringify({
-          "property_information": {
-            "property_id": response.data.data,
-            "name": values.user.name,
-            "superficie": values.user.superficie,
-            "address": values.user.address,
-            "english_name": values.user.name_en,
-            "park_property": values.user.park_property,
-            "region": values.user.region,
-            "market": values.user.market,
-            "industry": values.user.industry,
-            "suprficie_total": values.user.suprficie_total,
-            "superficie_urbanizada": values.user.superficie_urbanizada,
-            "superficie_disponible": values.user.superficie_disponible,
-            "inicio_de_operaciones": values.user.inicio_de_operaciones,
-            "number_employe": values.user.number_employe,
-            "practices_recognition": values.user.practices_recognition,
-            "infrastructure": values.user.infrastructure,
-            "navy_number": values.user.navy_number,
-            "message": values.user.message,
-            "postal_code": values.user.postal_code,
-            "colony": values.user.colony,
-            "municipality": values.user.municipality,
-            "state": values.user.state,
-            "status": 1,
-          }
-        });
-        
-        var config = {
-          method: 'post',
-          url: 'http://localhost:3001/api/v1/property_informations',
-          headers: { 
-            'Authorization': DataOption.authentication_token, 
-            'Content-Type': 'application/json'
-          },
-          data : data
-        };
-        
-        axios(config)
-        .then(function (response) {
-          Swal.fire({
-            icon: 'success',
-            title: '¡Se agrego correctamente!',
-            showConfirmButton: false,
-            timer: 1500
-          })
-          console.log(JSON.stringify(response.data));
-        })
-        .catch(function (error) {
-          Swal.fire({
-            icon: 'error',
-            title: '¡Error al agregar!',
-            showConfirmButton: false,
-            timer: 1500
-          })
-        });
-      } 
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
+      .then(function (response) {
+        //console.log(JSON.stringify(response.data));
+        if (response.data.message !== 0) {
+          console.log(response.data)
+          var data = JSON.stringify({
+            "property_information": {
+              "property_id": response.data.data,
+              "name": values.user.name,
+              "address": values.user.address,
+              "english_name": values.user.name_en,
+              "park_property": values.user.park_property,
+              "region": values.user.region,
+              "market": values.user.market,
+              "industry": values.user.industry,
+              "superficie": values.user.superficie,
+              "suprficie_total": values.user.suprficie_total,
+              "superficie_urbanizada": values.user.superficie_urbanizada ,
+              "superficie_disponible": values.user.superficie_disponible ,
+              "inicio_de_operaciones": values.user.inicio_de_operaciones,
+              "number_employe": values.user.number_employe,
+              "practices_recognition": values.user.practices_recognition,
+              "infrastructure": values.user.infrastructure,
+              "navy_number": values.user.navy_number,
+              "message": values.user.message,
+              "postal_code": values.user.postal_code,
+              "colony": values.user.colony,
+              "municipality": values.user.municipality,
+              "state": values.user.state,
+              "status": 1,
+              "unity": values.user.unity
+            }
+          });
+
+          var config = {
+            method: 'post',
+            url: 'http://localhost:3001/api/v1/property_informations',
+            headers: {
+              'Authorization': DataOption.authentication_token,
+              'Content-Type': 'application/json'
+            },
+            data: data
+          };
+
+          axios(config)
+            .then(function (response) {
+              Swal.fire({
+                icon: 'success',
+                title: '¡Se agrego correctamente!',
+                showConfirmButton: false,
+                timer: 1500
+              })
+              console.log(JSON.stringify(response.data));
+            })
+            .catch(function (error) {
+              Swal.fire({
+                icon: 'error',
+                title: '¡Error al agregar!',
+                showConfirmButton: false,
+                timer: 1500
+              })
+            });
+        }
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   };
 
-  const [ corporates, setCorporates ] = useState([])
+  const [corporates, setCorporates] = useState([])
   useEffect(() => {
-    axios.get('http://localhost:3001/api/v1/corporates?type=0', {headers: { 
-      'Authorization': DataOption.authentication_token, 
-      'Content-Type': 'application/json'
-    },}).then((response) => {
-      if(response.data.massage !== "Sin datos para mostrar") setCorporates(response.data)
+    axios.get('http://localhost:3001/api/v1/corporates?type=0', {
+      headers: {
+        'Authorization': DataOption.authentication_token,
+        'Content-Type': 'application/json'
+      },
+    }).then((response) => {
+      if (response.data.massage !== "Sin datos para mostrar") setCorporates(response.data)
       //setPost(response.data);
     });
   }, []);
 
-  return(
+  return (
     <Form {...layout} name="nest-messages" onFinish={onFinish} validateMessages={validateMessages}>
-      <Form.Item name={["user", "corpoate_id"]} label="Corporativos" rules={[{required: true}]}>
+      <Form.Item name={["user", "corpoate_id"]} label="Corporativos" rules={[{ required: true }]}>
         <Select
           placeholder="Select a option and change input text above"
           allowClear
@@ -146,33 +149,34 @@ const SpecificForm = (props)=>{
         <Input />
       </Form.Item>
       <Form.Item name={['user', 'postal_code']} label="Código Postal" rules={[{ required: true }]}>
-        <Input/>
+        <Input />
       </Form.Item>
       <Form.Item name={['user', 'colony']} label="Colonia" rules={[{ required: true }]}>
-        <Input/>
+        <Input />
       </Form.Item>
       <Form.Item name={['user', 'state']} label="Estado" rules={[{ required: true }]}>
-        <Input/>
+        <Input />
       </Form.Item>
       <Form.Item name={['user', 'municipality']} label="Municipio" rules={[{ required: true }]}>
-        <Input/>
+        <Input />
       </Form.Item>
       <Form.Item name={['user', 'region']} label="Región" rules={[{ required: true }]}>
-        <Input/>
+        <Input />
       </Form.Item>
       <Form.Item name={['user', 'park_property']} label="Propietario" rules={[{ required: true }]}>
-        <Input/>
+        <Input />
       </Form.Item>
       <Form.Item name={['user', 'market']} label="Mercado" rules={[{ required: true }]}>
-        <Input/>
+        <Input />
       </Form.Item>
       <Form.Item name={['user', 'industry']} label="Industria" rules={[{ required: true }]}>
-        <Input/>
+        <Input />
       </Form.Item>
       <Form.Item name={['user', 'infrastructure']} label="Infraestructura Disponible" rules={[{ required: true }]}>
       <Select
             placeholder="Select a option and change input text above"
             allowClear
+            mode="multiple"
           >
             <Option value="Al menos 0.5 litros agua por segundo por ha">Al menos 0.5 litros agua por segundo por ha</Option>
             <Option value="Pavimento">Pavimento</Option>
@@ -207,18 +211,19 @@ const SpecificForm = (props)=>{
           </Select>
       </Form.Item>
       <Form.Item name={['user', 'inicio_de_operaciones']} label="Inicio de Operaciones" rules={[{ required: true }]}>
-        <Input/>
+        <Input />
       </Form.Item>
       <Form.Item name={['user', 'number_employe']} label="Número de empleados" rules={[{ required: true }]}>
-        <Input/>
+        <Input />
       </Form.Item>
       <Form.Item name={['user', 'message']} label="Mensaje" rules={[{ required: true }]}>
-        <Input/>
+        <Input />
       </Form.Item>
       <Form.Item name={['user', 'practices_recognition']} label="Reconocimientos mejores Prácticas" rules={[{ required: true }]}>
       <Select
             placeholder="Select a option and change input text above"
             allowClear
+            mode="multiple"
           >
             <Option value="Norma Mexiana de Parque Industrial">Norma Mexiana de Parque Industrial</Option>
             <Option value="Parque Industrial Verde">Parque Industrial Verde</Option>
@@ -232,17 +237,31 @@ const SpecificForm = (props)=>{
       <Form.Item name={['user', 'superficie']} label="Superficie" rules={[{ required: true }]}>
         <Input/>
       </Form.Item>
+
       <Form.Item name={['user', 'superficie_total']} label="Superficie Total" rules={[{ required: true }]}>
-        <Input/>
+        <Input />
+      </Form.Item>
+      <Form.Item name={['user', 'superficie']} label="Superficie Ocupada" rules={[{ required: true }]}>
+        <Input />
       </Form.Item>
       <Form.Item name={['user', 'superficie_urbanizada']} label="Superficie Urbanizada" rules={[{ required: true }]}>
-        <Input/>
+        <Input />
       </Form.Item>
       <Form.Item name={['user', 'superficie_disponible']} label="Superficie Disponible" rules={[{ required: true }]}>
-        <Input/>
+        <Input />
+      </Form.Item>
+      <Form.Item name={['user', 'unity']} label="Unidad De Medida" rules={[{ required: true }]}>
+        <Select
+          placeholder="Selecciona la unidad de medida"
+          allowClear
+        >
+          <Option value="M2">M2</Option>
+          <Option value="Km2">Km2</Option>
+          <Option value="Ha">Ha</Option>
+        </Select>
       </Form.Item>
       <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
-        <Button style={{backgroundColor:"#00afb7",borderColor:"#00afb7", color:"#ffffff"}} type="primary" htmlType="submit">
+        <Button style={{ backgroundColor: "#00afb7", borderColor: "#00afb7", color: "#ffffff" }} type="primary" htmlType="submit">
           Enviar
         </Button>
       </Form.Item>

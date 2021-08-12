@@ -8,6 +8,7 @@ import {
   Button
 } from "@material-ui/core";
 import * as Icons from "@material-ui/icons";
+import Maps from "./Maps"
 
 // styles
 import useStyles from "./styles";
@@ -26,7 +27,7 @@ import ModaEdit from '../../components/ModalEdit'
 
 const data = JSON.parse(localStorage.getItem("data"));
 
-const Desarrolladores = () => {
+const Disponibles = () => {
   const [anchorEl, setAnchorEl] = React.useState(null)
   const [datatableData, setDatatableData] = useState([]) //descomentar al integrar apis
   const handleClick = (e) => {
@@ -61,11 +62,35 @@ const Desarrolladores = () => {
           corporatesAdd.push(corporates);
         });
       
-        setDatatableData([...corporatesAdd]);
+        // setDatatableData([...corporatesAdd]);
+        axios.get(`http://localhost:3001/api/v1/propieties?type=2`, {
+          headers: { 
+            'Authorization': data.authentication_token,
+          }
+        }).then((response) => {
+          //setDatatableData(response.data);
+          if(response.data.error){
+            console.log(response.data)
+          } else{
+            var corporatesAdd2 = [];
+            response.data.map((i)=>{
+              var corporates = [];
+              corporates.push(i.id);
+              corporates.push(i.nombre)
+              corporates.push(i.updated_at)
+              corporatesAdd2.push(corporates);
+            });
+          
+            setDatatableData([...corporatesAdd, ...corporatesAdd2]);
+          }
+        }).catch(error => {
+          console.log(error); // poner alerta cuando tengamos tiempo
+        });
       }
     }).catch(error => {
       console.log(error); // poner alerta cuando tengamos tiempo
     });
+    
   }, []);
 
 
@@ -97,6 +122,7 @@ const Desarrolladores = () => {
         </Tabs>
         {activeTabId === 0 && (
           <div style={{padding:20}}>
+            <Maps />
           <Tables title={"Todos los Espacios"} columns={["id","Name", "Nombre_en", "Direccion",{
             label: "Ver",
             options: {
@@ -108,7 +134,7 @@ const Desarrolladores = () => {
             }
           },
           {
-            label: "Editar",
+            label: "Status",
             options: {
               customBodyRender: (value, tableMeta, updateValue) => {
                 return (
@@ -130,4 +156,4 @@ const Desarrolladores = () => {
   );
 }
 
-export default Desarrolladores;
+export default Disponibles;

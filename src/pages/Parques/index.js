@@ -29,7 +29,7 @@ import EditForm from "./EditForm";
 
 const data = JSON.parse(localStorage.getItem("data"));
 
-const Parques = () => {
+const Parques = (props) => {
   const [anchorEl, setAnchorEl] = React.useState(null)
   const [datatableData, setDatatableData] = useState([])
 
@@ -124,7 +124,7 @@ return (
       </Tabs>
       {activeTabId === 0 && (
         <div style={{ padding: 20 }}>
-          <Tables title={"Todos los parques"} columns={["id", "Name", "Company", "City", "State", {
+          <Tables title={"Todos los parques"} columns={["id", "Name", "Alta", {
             label: "Ver",
             options: {
               customBodyRender: (value, tableMeta, updateValue) => {

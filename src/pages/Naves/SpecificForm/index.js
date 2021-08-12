@@ -66,7 +66,7 @@ const SpecificForm = (props) => {
               "property_id": response.data.data,
               "name": values.user.name,
               "superficie": "",
-              "address": "",
+              "address": values.user.address,
               "english_name": response.data.name_en,
               "park_property": "",
               "region": "",
@@ -81,10 +81,10 @@ const SpecificForm = (props) => {
               "infrastructure": "",
               "navy_number": "",
               "message": "",
-              "postal_code": "",
-              "colony": "",
-              "municipality": "",
-              "state": "",
+              "postal_code": values.user.postal_code,
+              "colony": values.user.colony,
+              "municipality": values.user.municipality,
+              "state": values.user.state,
               "status": 1,
             }
           });
@@ -155,6 +155,21 @@ const SpecificForm = (props) => {
       </Form.Item>
       <Form.Item name={['user', 'name_en']} label="Nombre en ingles" rules={[{ required: true }]}>
         <Input />
+      </Form.Item>
+      <Form.Item name={['user', 'adress']} label="Dirección" rules={[{ required: true }]}>
+        <Input />
+      </Form.Item>
+      <Form.Item name={['user', 'postal_code']} label="Código Postal" rules={[{ required: true }]}>
+        <Input/>
+      </Form.Item>
+      <Form.Item name={['user', 'colony']} label="Colonia" rules={[{ required: true }]}>
+        <Input/>
+      </Form.Item>
+      <Form.Item name={['user', 'state']} label="Estado" rules={[{ required: true }]}>
+        <Input/>
+      </Form.Item>
+      <Form.Item name={['user', 'municipality']} label="Municipio" rules={[{ required: true }]}>
+        <Input/>
       </Form.Item>
       <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
         <Button style={{ backgroundColor: "#00afb7", borderColor: "#00afb7", color: "#ffffff" }} type="primary" htmlType="submit">

@@ -1,7 +1,9 @@
 import React, { useState } from "react";
-import { Form, Input, InputNumber, Button } from 'antd';
+import { Form, Input, Select, Button } from 'antd';
 import axios from 'axios'
 import Swal from 'sweetalert2';
+
+const { Option } = Select;
 
 const layout = {
   labelCol: { span: 8 },
@@ -80,9 +82,21 @@ const SpecificForm = (props)=>{
         
         axios(config)
         .then(function (response) {
+          Swal.fire({
+            icon: 'success',
+            title: '¡Se agrego correctamente!',
+            showConfirmButton: false,
+            timer: 1500
+          })
           console.log(JSON.stringify(response.data));
         })
         .catch(function (error) {
+          Swal.fire({
+            icon: 'success',
+            title: '¡Error al agregar!',
+            showConfirmButton: false,
+            timer: 1500
+          })
           console.log(error);
         });
       }
@@ -93,7 +107,7 @@ const SpecificForm = (props)=>{
   };
 
   return(
-    <Form  {...layout} name="nest-messages" onFinish={onFinish} validateMessages={validateMessages}>
+    <Form {...layout} name="nest-messages" onFinish={onFinish} validateMessages={validateMessages}>
       <Form.Item name={['user', 'name']} label="Nombre en español" rules={[{ required: true }]}>
         <Input />
       </Form.Item>
@@ -127,8 +141,17 @@ const SpecificForm = (props)=>{
       <Form.Item name={['user', 'inv_anu_last']} label="Inversion anual (Pipeline año anterior)" rules={[{ required: true }]}>
         <Input />
       </Form.Item>
-      <Form.Item name={['user', 'corporate_type']} label="Tipo de corporativo" rules={[{ required: true }]}>
-        <Input />
+      <Form.Item name={['user', 'corporate_type']} label="Tipo de Socio" rules={[{ required: true }]}>
+      <Select
+            placeholder="Select a option and change input text above"
+            allowClear
+          >
+            <Option value="Desarrollador Privado">Desarrollador Privado</Option>
+            <Option value="Gobierno Estatal">Gobierno Estatal</Option>
+            <Option value="Fondo de inversión">Fondo de inversión</Option>
+            <Option value="FIBRA">FIBRA</Option>
+            <Option value="No socio AMPIP">No socio AMPIP</Option>
+          </Select>
       </Form.Item>
       <Form.Item name={['user', 'RFC']} label="RFC" rules={[{ required: true }]}>
         <Input />
@@ -149,8 +172,8 @@ const SpecificForm = (props)=>{
         <Input />
       </Form.Item>
       <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
-        <Button style={{backgroundColor:"#00afb7",borderColor:"#00afb7", color:"#ffffff"}} type="primary" htmlType="submit">
-          Enviar
+        <Button type="primary" htmlType="submit">
+          Submit
         </Button>
       </Form.Item>
     </Form>

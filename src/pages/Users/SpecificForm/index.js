@@ -5,7 +5,6 @@ import axios from "axios";
 import Swal from "sweetalert2";
 
 const { Option } = Select;
-const data = JSON.parse(localStorage.getItem("data"));
 
 const layout = {
   labelCol: { span: 8 },
@@ -26,11 +25,10 @@ const DataOption = JSON.parse(localStorage.getItem("data"));
 
 const SpecificForm = (props) => {
   useEffect(() => {
-    console.log(data.authentication_token)
     axios
       .get("http://localhost:3001/api/v1/user_rol", {
         headers: {
-          Authorization: data.authentication_token,
+          Authorization: DataOption.authentication_token,
           "Content-Type": "application/json",
         },
       })
@@ -38,6 +36,19 @@ const SpecificForm = (props) => {
         setPermissions(response.data);
         //setPost(response.data);
       });
+
+      //corporativos
+      if (corporates.length === 0) {
+        axios.get('http://localhost:3001/api/v1/corporates?type=0', {
+          headers: {
+            'Authorization': DataOption.authentication_token,
+            'Content-Type': 'application/json'
+          },
+        }).then((response) => {
+          setCorporates(response.data)
+          //setPost(response.data);
+        });
+      }
   }, []);
 
   const onFinish = (values) => {
@@ -54,7 +65,8 @@ const SpecificForm = (props) => {
       method: 'post',
       url: 'http://localhost:3001/api/v1/sign_up',
       headers: {
-        'Content-Type': 'application/json'
+        Authorization: DataOption.authentication_token,
+        "Content-Type": "application/json",
       },
       data: data
     };
@@ -122,14 +134,37 @@ const SpecificForm = (props) => {
 
   };
   const [permissions, setPermissions] = useState([]);
+  const [corporates, setCorporates] = useState([]);
 
   return (
-    <Form
+    <Form 
       {...layout}
       name="nest-messages"
       onFinish={onFinish}
       validateMessages={validateMessages}
     >
+      <Form.Item
+        name={["user", "type"]}
+        label="Corporativos"
+        rules={[
+          {
+            required: true,
+          },
+        ]}
+      >
+        <Select
+          placeholder="Select a option and change input text above"
+          allowClear
+        >
+          {corporates.map((value, i) => {
+            return (
+              <Option key={i} value={value.id}>
+                {value.name}
+              </Option>
+            );
+          })}
+        </Select>
+      </Form.Item>
       <Form.Item
         name={["user", "user_type"]}
         label="Rol"
@@ -145,7 +180,7 @@ const SpecificForm = (props) => {
         >
           {permissions.map((value, i) => {
             return (
-              <Option key={i} value={value.id}>
+              <Option key={i} value={i}>
                 {value.name}
               </Option>
             );
@@ -189,8 +224,8 @@ const SpecificForm = (props) => {
       </Form.Item>
       <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
         <br />
-        <Button style={{ backgroundColor: "#00afb7", borderColor: "#00afb7", color: "#ffffff" }} type="primary" htmlType="submit">
-          Enviar
+        <Button type="primary" htmlType="submit">
+          Submit
         </Button>
       </Form.Item>
     </Form>

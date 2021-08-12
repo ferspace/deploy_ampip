@@ -29,7 +29,7 @@ import EditForm from './EditForm'
 
 const data = JSON.parse(localStorage.getItem("data"));
 
-const Desarrolladores = () => {
+const Desarrolladores = (props) => {
   const [anchorEl, setAnchorEl] = React.useState(null)
   const [datatableData, setDatatableData] = useState([]) //descomentar al integrar apis
   const handleClick = (e) => {
@@ -75,7 +75,7 @@ const Desarrolladores = () => {
 
   return (
     <>
-      <PageTitle title="Socios" button={(
+      <PageTitle title="Patrocinadores" button={(
         <>
           <Menu
             id="simple-menu"
@@ -101,7 +101,7 @@ const Desarrolladores = () => {
           <Tab label="Agregar" className={classes.menuspace} />
         </Tabs>
         {activeTabId === 0 && (
-          <Tables title={"Todos los Desarrolladores"} columns={["id","Name", "Nombre_en", "Direccion", {
+          <Tables title={"Todos los Patrocinadores"} columns={["id","Name", "Nombre_en", "Direccion", {
             label: "Ver",
             options: {
               customBodyRender: (value, tableMeta, updateValue) => {
