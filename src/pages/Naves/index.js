@@ -27,7 +27,7 @@ import ModalInformation from '../../components/ModalInformation'
 import ModaEdit from '../../components/ModalEdit'
 
 const data = JSON.parse(localStorage.getItem("data"));
-const Naves = () => {
+const Naves = (props) => {
   const [anchorEl, setAnchorEl] = React.useState(null)
   const [datatableData, setDatatableData] = useState([])
 
