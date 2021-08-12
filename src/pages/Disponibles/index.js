@@ -8,6 +8,7 @@ import {
   Button
 } from "@material-ui/core";
 import * as Icons from "@material-ui/icons";
+import Maps from "./Maps"
 
 // styles
 import useStyles from "./styles";
@@ -26,7 +27,7 @@ import ModaEdit from '../../components/ModalEdit'
 
 const data = JSON.parse(localStorage.getItem("data"));
 
-const Desarrolladores = () => {
+const Disponibles = () => {
   const [anchorEl, setAnchorEl] = React.useState(null)
   const [datatableData, setDatatableData] = useState([]) //descomentar al integrar apis
   const handleClick = (e) => {
@@ -121,7 +122,17 @@ const Desarrolladores = () => {
         </Tabs>
         {activeTabId === 0 && (
           <div style={{padding:20}}>
-          <Tables title={"Todos los Espacios"} columns={["id","Nombre", "Alta",
+            <Maps />
+          <Tables title={"Todos los Espacios"} columns={["id","Name", "Nombre_en", "Direccion",{
+            label: "Ver",
+            options: {
+              customBodyRender: (value, tableMeta, updateValue) => {
+                return (
+                  <ModalInformation data={tableMeta.rowData[0]}/>
+                )
+              }
+            }
+          },
           {
             label: "Status",
             options: {
@@ -145,4 +156,4 @@ const Desarrolladores = () => {
   );
 }
 
-export default Desarrolladores;
+export default Disponibles;

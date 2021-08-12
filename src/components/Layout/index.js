@@ -26,7 +26,7 @@ import Sidebar from "../Sidebar";
 // pages
 import Dashboard from "../../pages/dashboard";
 import Notifications from "../../pages/Users";
-import Maps from "../../pages/maps";
+import Disponibles from "../../pages/Disponibles";
 import Desarrolladores from "../../pages/Desarrolladores";
 import Socios from "../../pages/Socios";
 import Terrenos from "../../pages/Terrenos";
@@ -61,7 +61,7 @@ function Layout(props) {
                 path="/app/ui"
                 render={() => <Redirect to="/app/ui/icons" />}
               />
-              <Route path="/app/ui/maps" component={Maps} />
+              <Route path="/app/ui/disponibles" component={Disponibles} />
               <Route path="/app/ui/parques" component={Parques} />
               <Route path="/app/ui/naves" component={Naves} />
               <Route path="/app/ui/terrenos" component={Terrenos} />
