@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Form, Input, Select, Button } from "antd";
 import axios from "axios";
 import Swal from "sweetalert2";
-
+import Mailer from "../../../components/Mailer"; // importamos el mailer
 const { Option } = Select;
 
 const layout = {
@@ -52,6 +52,8 @@ const SpecificForm = (props) => {
   }, []);
 
   const onFinish = (values) => {
+    
+
     var data = JSON.stringify({
       "user": {
         "email": values.user.email,
@@ -116,7 +118,8 @@ const SpecificForm = (props) => {
             showConfirmButton: false,
             timer: 1500
           })
-          console.log(JSON.stringify(response.data));
+          
+          
         })
         .catch(function (error) {
           Swal.fire({
@@ -133,6 +136,7 @@ const SpecificForm = (props) => {
       });
 
   };
+
   const [permissions, setPermissions] = useState([]);
   const [corporates, setCorporates] = useState([]);
 
@@ -142,6 +146,7 @@ const SpecificForm = (props) => {
       name="nest-messages"
       onFinish={onFinish}
       validateMessages={validateMessages}
+      onSubmitCapture={(e)=>{Mailer(e, "registro")}}
     >
       <Form.Item
         name={["user", "type"]}
@@ -210,21 +215,14 @@ const SpecificForm = (props) => {
       </Form.Item>
       <Form.Item
         name={["user", "password"]}
-        label="Password"
+        label="Contraseña"
         rules={[{ required: true }]}
       >
-        <Input />
-      </Form.Item>
-      <Form.Item
-        name={["user", "password_confirmation"]}
-        label="Password"
-        rules={[{ required: true }]}
-      >
-        <Input />
+        <Input type="password" />
       </Form.Item>
       <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
         <br />
-        <Button type="primary" htmlType="submit">
+        <Button type="primary" htmlType="submit" >
           Submit
         </Button>
       </Form.Item>
