@@ -63,6 +63,12 @@ const admin_ampip = [
 
 const user_ampip = [
   {
+    id: 0,
+    label: "Dashboard",
+    link: "/app/dashboard",
+    icon: <AccountIcon />,
+  },
+  {
     id: 2,
     label: "Propiedades",
     link: "/app/propiedades",

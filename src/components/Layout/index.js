@@ -54,7 +54,7 @@ function Layout(props) {
           >
             <div className={classes.fakeToolbar} />
             <Switch>
-              
+              <Route path="/app/dashboard" component={Dashboard} />
               <Route path="/app/usuarios" component={Notifications} />
               <Route
                 exact

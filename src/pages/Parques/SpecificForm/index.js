@@ -144,7 +144,7 @@ const SpecificForm = (props) => {
   }, []);
 
   return (
-    <Form {...layout} name="nest-messages" onFinish={onFinish} validateMessages={validateMessages} style={{height:"1900px"}}>
+    <Form {...layout} name="nest-messages" onFinish={onFinish} validateMessages={validateMessages} style={{height:"1700px"}}>
       <Form.Item name={["user", "corpoate_id"]} label="Corporativos" rules={[{ required: true }]}>
         <Select
           placeholder="Select a option and change input text above"
@@ -280,12 +280,14 @@ const SpecificForm = (props) => {
           <Option value="Ha">Ha</Option>
         </Select>
       </Form.Item>
+      <Form.Item>
       <BasicMap
         googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=AIzaSyCFdQ7O0MIewEqbyXhW0k9XemMqnYx0aDQ"
-        loadingElement={<div style={{ height: "inherit", width: "inherit" }} />}
-        containerElement={<div style={{ height: "30%" }} />}
-        mapElement={<div style={{ height: "30%" }} />}
+        loadingElement={<div style={{ width: "inherit" }} />}
+        containerElement={<div style={{ height: "15em" }} />}
+        mapElement={<div style={{ height: "100%" }} />}
       />
+      </Form.Item>
       <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
         <Button style={{ backgroundColor: "#00afb7", borderColor: "#00afb7", color: "#ffffff" }} type="primary" htmlType="submit">
           Enviar
