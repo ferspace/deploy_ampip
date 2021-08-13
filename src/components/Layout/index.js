@@ -8,12 +8,14 @@ import {
 import classnames from "classnames";
 import {Box, IconButton, Link} from '@material-ui/core'
 import Icon from '@mdi/react'
+import ampip from '../../images/icono.png'
 
 //icons
 import {
   mdiFacebook as FacebookIcon,
   mdiTwitter as TwitterIcon,
   mdiGithub as GithubIcon,
+  mdiEye,
 } from '@mdi/js'
 
 // styles
@@ -79,59 +81,21 @@ function Layout(props) {
                 
                 <Link
                   color={"#333333"}
-                  href={'https://www.space.bar'}
+                  href={'https://www.ampip.org.mx/en'}
                   target={'_blank'}
                   className={classes.link}
                 >
                   SpaceBar
                 </Link>
-                <Link
-                  color={"#333333"}
-                  href={'https://www.space.bar/'}
-                  target={'_blank'}
-                  className={classes.link}
-                >
-                  Blog
-                </Link>
+                
               </div>
               <div>
                 <Link
-                  href={'https://www.space.bar/'}
+                  href={'https://www.ampip.org.mx/en/'}
                   target={'_blank'}
                 >
-                  <IconButton aria-label="facebook">
-                    <Icon
-                      path={FacebookIcon}
-                      size={1}
-                      color="#6E6E6E99"
-                    />
-                  </IconButton>
-                </Link>
-                <Link
-                  href={'https://www.space.bar/'}
-                  target={'_blank'}
-                >
-                  <IconButton aria-label="twitter">
-                    <Icon
-                      path={TwitterIcon}
-                      size={1}
-                      color="#6E6E6E99"
-                    />
-                  </IconButton>
-                </Link>
-                <Link
-                  href={'https://www.space.bar/'}
-                  target={'_blank'}
-                >
-                  <IconButton
-                    aria-label="github"
-                    style={{marginRight: -12}}
-                  >
-                    <Icon
-                      path={GithubIcon}
-                      size={1}
-                      color="#6E6E6E99"
-                    />
+                  <IconButton aria-label="ampip">
+                  <img src={ampip} alt="ampip" className={classes.googleIcon} size={1} color="#6E6E6E99" />
                   </IconButton>
                 </Link>
               </div>

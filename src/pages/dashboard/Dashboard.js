@@ -189,7 +189,7 @@ export default function Dashboard(props) {
         </Grid>
         <Grid item lg={3} md={8} sm={6} xs={12}>
           <Widget
-            title="Server Overview"
+            title="Parques"
             upperTitle
             className={classes.card}
             bodyClass={classes.fullHeightBody}
@@ -269,7 +269,7 @@ export default function Dashboard(props) {
           </Widget>
         </Grid>
         <Grid item lg={3} md={4} sm={6} xs={12}>
-          <Widget title="Revenue Breakdown" upperTitle className={classes.card}>
+          <Widget title="Naves" upperTitle className={classes.card}>
             <Grid container spacing={2}>
               <Grid item xs={6}>
                 <ResponsiveContainer width="100%" height={144}>

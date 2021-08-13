@@ -133,16 +133,7 @@ const Disponibles = () => {
               }
             }
           },
-          {
-            label: "Status",
-            options: {
-              customBodyRender: (value, tableMeta, updateValue) => {
-                return (
-                  <ModaEdit data={tableMeta.rowData[0]}/>
-                )
-              }
-            }
-          }]} tableData={datatableData} />
+          ]} tableData={datatableData} />
           </div>
         )}
 
