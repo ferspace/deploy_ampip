@@ -21,12 +21,6 @@ const validateMessages = {
 
 
 const UserModal = (props) => {
-  console.log(props.show)
-  const [isModalVisible, setIsModalVisible] = useState(props.show)
-
-  const handleCancel = () => {
-    setIsModalVisible(false);
-  };
 
   const [userData, setUserData] = useState({
     "full_name": "",
@@ -41,45 +35,36 @@ const UserModal = (props) => {
     "created_at": "",
   });
 
-  useEffect(() => {
-    var user = JSON.parse(localStorage.getItem('data'));
-    if (user) {
-      var config = {
-        method: 'get',
-        url: `http://localhost:3001/api/v1/user_informations/${user.id}`,
-        headers: {
-          'Authorization': user.authentication_token
-        }
-      };
-
-      axios(config)
-        .then(function (response) {
-          setUserData(response.data);
-          console.log(response.data);
-          console.log(userData)
-          console.log("---------------------------------")
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
-    } else {
-      console.log('no user');
-    }
-
-    
-
-    console.log(isModalVisible);
-  },[]);
-
   const onFinish = (values) => {
-
+    console.log(values);
   }
 
 
+
+
+  const [isModalVisible, setIsModalVisible] = useState(false);
+
+  const showModal = () => {
+    setIsModalVisible(true);
+  };
+
+  const handleOk = () => {
+    setIsModalVisible(false);
+  };
+
+  const handleCancel = () => {
+    setIsModalVisible(false);
+  };
+
+  
   return (
     <>
+        <Button type="primary" onClick={showModal}>
+          Perfil
+        </Button>
+
       <Modal title="Informacion Usuario" visible={isModalVisible} onCancel={handleCancel} centered>
-        <Form {...layout} name="nest-messages" onFinish={onFinish} validateMessages={validateMessages} initialValues={{full_name:"Hello"}}>
+        <Form {...layout} name="nest-messages" onFinish={onFinish} validateMessages={validateMessages} initialValues={{ full_name: "Hello" }}>
           <Form.Item name={['dataOf', 'full_name']} label="Nombre" rules={[{ required: true }]} >
             <Input />
           </Form.Item>
@@ -98,7 +83,7 @@ const UserModal = (props) => {
           <Form.Item name={['dataOf', 'municipality']} label="Municipio" rules={[{ required: true }]}>
             <Input />
           </Form.Item>
-          
+
           <Form.Item name={['dataOf', 'office_address']} label="Direccion de oficina" rules={[{ required: true }]}>
             <Input />
           </Form.Item>
@@ -108,8 +93,8 @@ const UserModal = (props) => {
           <Form.Item name={['dataOf', 'phone_office']} label="Celular" rules={[{ required: true }]}>
             <Input />
           </Form.Item>
-          
-          
+
+
           <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
             <Button style={{ backgroundColor: "#00afb7", borderColor: "#00afb7", color: "#ffffff" }} type="primary" htmlType="submit">
               Enviar
