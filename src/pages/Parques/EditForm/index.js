@@ -35,7 +35,7 @@ const EditForm = (props)=>{
     
     var config = {
       method: 'put',
-      url: `http://localhost:3001/api/v1//propieties${props.id}`,
+      url: `https://ampip-back-33cr9.ondigitalocean.app/api/v1/propieties${props.id}`,
       headers: { 
         'Authorization': DataOption.authentication_token,  
         'Content-Type': 'application/json'
@@ -76,7 +76,7 @@ const EditForm = (props)=>{
         
         var config = {
           method: 'post',
-          url: 'http://localhost:3001/api/v1//property_informations',
+          url: 'https://ampip-back-33cr9.ondigitalocean.app/api/v1/property_informations',
           headers: { 
             'Authorization': DataOption.authentication_token,  
             'Content-Type': 'application/json'
@@ -100,7 +100,7 @@ const EditForm = (props)=>{
 
   const [ corporates, setCorporates ] = useState([])
   useEffect(() => {
-    axios.get('http://localhost:3001/api/v1/corporates', {headers: { 
+    axios.get('https://ampip-back-33cr9.ondigitalocean.app/api/v1corporates', {headers: { 
       'Authorization': DataOption.authentication_token,  
       'Content-Type': 'application/json'
     },}).then((response) => {

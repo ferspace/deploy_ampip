@@ -51,7 +51,7 @@ function Login(props) {
 
     var config = {
       method: 'post',
-      url: 'http://localhost:3001/api/v1/sign_in',
+      url: 'https://ampip-back-33cr9.ondigitalocean.app/api/v1/sign_in',
       headers: {
         'Content-Type': 'application/json'
       },
@@ -71,7 +71,7 @@ function Login(props) {
 
           var config = {
             method: 'get',
-            url: 'http://localhost:3001/api/v1/dashboard',
+            url: 'https://ampip-back-33cr9.ondigitalocean.app/api/v1/dashboard',
             headers: { 
               'Authorization': JSON.parse(localStorage.getItem('data')).authentication_token
             }
