@@ -81,7 +81,7 @@ function Layout(props) {
                 
                 <Link
                   color={"#333333"}
-                  href={'https://www.ampip.org.mx/en'}
+                  href={'https://www.space.bar'}
                   target={'_blank'}
                   className={classes.link}
                 >

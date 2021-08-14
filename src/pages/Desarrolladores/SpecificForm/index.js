@@ -114,7 +114,13 @@ const SpecificForm = (props)=>{
       <Form.Item name={['user', 'name_en']} label="Nombre en ingles" rules={[{ required: true }]}>
         <Input />
       </Form.Item>
+      {/* <Form.Item name={['user', 'RFC']} label="RFC" rules={[{ required: true }]}>
+        <Input />
+      </Form.Item> */}
       <Form.Item name={['user', 'address']} label="Direccion" rules={[{ required: true }]}> 
+        <Input />
+      </Form.Item>
+      <Form.Item name={['user', 'address']} label="Calle y numero" rules={[{ required: true }]}> 
         <Input />
       </Form.Item>
       <Form.Item name={['user', 'cp']} label="Codigo Postal" rules={[{ required: true }]}>
@@ -129,16 +135,22 @@ const SpecificForm = (props)=>{
       <Form.Item name={['user', 'municipality']} label="Municipio" rules={[{ required: true }]}>
         <Input />
       </Form.Item>
-      <Form.Item name={['user', 'cel']} label="Celular" rules={[{ required: true }]}>
+      <Form.Item name={['user', 'cel']} label="Codigo de país" rules={[{ required: true }]}>
         <Input />
       </Form.Item>
-      <Form.Item name={['user', 'inv_anu_on']} label="Inversion anual (Pipeline año en curso)" rules={[{ required: true }]}>
+      <Form.Item name={['user', 'cel']} label="Lada" rules={[{ required: true }]}>
         <Input />
       </Form.Item>
-      <Form.Item name={['user', 'inv_anu_next']} label="Inversion anual (Pipeline año siguiente)" rules={[{ required: true }]}>
+      <Form.Item name={['user', 'cel']} label="Numero Local" rules={[{ required: true }]}>
         <Input />
       </Form.Item>
-      <Form.Item name={['user', 'inv_anu_last']} label="Inversion anual (Pipeline año anterior)" rules={[{ required: true }]}>
+      <Form.Item name={['user', 'inv_anu_on']} label="Inversion anual (Pipeline año en curso)" >
+        <Input />
+      </Form.Item>
+      <Form.Item name={['user', 'inv_anu_next']} label="Inversion anual (Pipeline año siguiente)">
+        <Input />
+      </Form.Item>
+      <Form.Item name={['user', 'inv_anu_last']} label="Inversion anual (Pipeline año anterior)">
         <Input />
       </Form.Item>
       <Form.Item name={['user', 'corporate_type']} label="Tipo de Socio" rules={[{ required: true }]}>
@@ -153,22 +165,20 @@ const SpecificForm = (props)=>{
             <Option value="No socio AMPIP">No socio AMPIP</Option>
           </Select>
       </Form.Item>
-      <Form.Item name={['user', 'RFC']} label="RFC" rules={[{ required: true }]}>
+      
+      <Form.Item name={['user', 'social_media_tw']} label="Twitter">
         <Input />
       </Form.Item>
-      <Form.Item name={['user', 'social_media_tw']} label="Twitter" rules={[{ required: true }]}>
+      <Form.Item name={['user', 'social_media_fb']} label="Facebook" >
         <Input />
       </Form.Item>
-      <Form.Item name={['user', 'social_media_fb']} label="Facebook" rules={[{ required: true }]}>
+      <Form.Item name={['user', 'social_media_inst']} label="Instagram" >
         <Input />
       </Form.Item>
-      <Form.Item name={['user', 'social_media_inst']} label="Instagram" rules={[{ required: true }]}>
+      <Form.Item name={['user', 'social_media_link']} label="LinkedIn" >
         <Input />
       </Form.Item>
-      <Form.Item name={['user', 'social_media_link']} label="LinkedIn" rules={[{ required: true }]}>
-        <Input />
-      </Form.Item>
-      <Form.Item name={['user', 'social_media_web']} label="web" rules={[{ required: true }]}>
+      <Form.Item name={['user', 'social_media_web']} label="web" >
         <Input />
       </Form.Item>
       <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>

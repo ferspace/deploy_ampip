@@ -136,13 +136,18 @@ const SpecificForm = (props)=>{
 
   return(
     <Form {...layout} name="nest-messages" onFinish={onFinish} validateMessages={validateMessages}>
+      <h1>Imagen</h1>
       <Form.Item name={['user', 'name']} label="Nombre en español" rules={[{ required: true }]}>
         <Input />
       </Form.Item>
       <Form.Item name={['user', 'name_en']} label="Nombre en ingles" rules={[{ required: true }]}>
         <Input />
       </Form.Item>
+      <spam>Direccion</spam>
       <Form.Item name={['user', 'address']} label="Direccion" rules={[{ required: true }]}>
+        <Input />
+      </Form.Item>
+      <Form.Item name={['user', 'address']} label="Calle y numero" rules={[{ required: true }]}>
         <Input />
       </Form.Item>
       <Form.Item name={['user', 'cp']} label="Codigo Postal" rules={[{ required: true }]}>
@@ -157,27 +162,23 @@ const SpecificForm = (props)=>{
       <Form.Item name={['user', 'municipality']} label="Municipio" rules={[{ required: true }]}>
         <Input />
       </Form.Item>
-      <Form.Item name={['user', 'cel']} label="Celular" rules={[{ required: true }]}>
+      <spam>Telefono</spam>      
+      <Form.Item name={['user', 'cel']} label="Lada" rules={[{ required: true }]}>
         <Input />
       </Form.Item>
-      <Form.Item name={['user', 'RFC']} label="RFC" rules={[{ required: true }]}>
+      
+      <Form.Item name={['user', 'cel']} label="Codigo de pais" rules={[{ required: true }]}>
         <Input />
       </Form.Item>
-      <Form.Item name={['user', 'social_media_tw']} label="Twitter" rules={[{ required: true }]}>
+
+      <Form.Item name={['user', 'cel']} label="Numero" rules={[{ required: true }]}>
         <Input />
       </Form.Item>
-      <Form.Item name={['user', 'social_media_fb']} label="Facebook" rules={[{ required: true }]}>
+
+      <Form.Item name={['user', 'social_media_tw']} label="Clasificacion" rules={[{ required: true }]}>
         <Input />
       </Form.Item>
-      <Form.Item name={['user', 'social_media_inst']} label="Instagram" rules={[{ required: true }]}>
-        <Input />
-      </Form.Item>
-      <Form.Item name={['user', 'social_media_link']} label="LinkedIn" rules={[{ required: true }]}>
-        <Input />
-      </Form.Item>
-      <Form.Item name={['user', 'social_media_web']} label="web" rules={[{ required: true }]}>
-        <Input />
-      </Form.Item>
+      
       <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
         <Button style={{backgroundColor:"#00afb7",borderColor:"#00afb7", color:"#ffffff"}} type="primary" htmlType="submit">
           Enviar
