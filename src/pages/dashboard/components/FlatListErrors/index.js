@@ -45,7 +45,7 @@ const FlatListErrors=() =>{
             <ListItemText id={labelId} primary={`usario ${value + 1}`} />
             <ListItemSecondaryAction>
               <IconButton edge="end" aria-label="comments">
-                <CommentIcon color={'red'}/>
+                <CommentIcon color={'red  '}/>
               </IconButton>
             </ListItemSecondaryAction>
           </ListItem>
