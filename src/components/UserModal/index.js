@@ -59,7 +59,7 @@ const UserModal = (props) => {
   
   return (
     <>
-        <Button type="primary" onClick={showModal}>
+        <Button style={{ backgroundColor: "#00afb7", borderColor: "#00afb7", color: "#ffffff" }} type="primary" onClick={showModal}>
           Perfil
         </Button>
 
