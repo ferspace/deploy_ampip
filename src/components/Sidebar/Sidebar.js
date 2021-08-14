@@ -59,6 +59,7 @@ const admin_ampip = [
       { label: "Naves", link: "/app/ui/naves" },
       { label: "Terrenos", link: "/app/ui/terrenos" },
       { label: "Disponibles", link: "/app/ui/disponibles" },
+      { label: "Arrendatarios", link: "/app/ui/arrendatarios" },
     ],
   },
   {
