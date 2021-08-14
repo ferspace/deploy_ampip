@@ -34,7 +34,7 @@ const SpecificForm = (props) => {
         //setPost(response.data);
       });
     }
-  });
+  }, []);
   const [corporates, setCorporates] = useState([]);
 
   const onFinish = (values) => {
@@ -134,6 +134,28 @@ const SpecificForm = (props) => {
         rules={[
           {
             required: true,
+          },
+        ]}
+      >
+        <Select
+          placeholder="Select a option and change input text above"
+          allowClear
+        >
+          {corporates.map((value, i) => {
+            return (
+              <Option key={i} value={value.id}>
+                {value.name}
+              </Option>
+            );
+          })}
+        </Select>
+      </Form.Item>
+      <Form.Item
+        name={["user", "propertyId"]}
+        label="Pertenece a"
+        rules={[
+          {
+            required: false,
           },
         ]}
       >

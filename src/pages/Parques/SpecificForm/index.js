@@ -11,21 +11,21 @@ import {
 
 const { Option } = Select;
 
+//
 const BasicMap = withScriptjs(
-  withGoogleMap(() => (
+  withGoogleMap((props) => (
     <GoogleMap
       defaultZoom={12}
       defaultCenter={{
-        lat: parseFloat(-37.813179),
-        lng: parseFloat(144.950259),
-      }}
+        lat: parseFloat(props.datas.lat),
+        lng: parseFloat(props.datas.lng),
+      }}  
 
       onClick={ev => {
-        console.log("latitide = ", ev.latLng.lat());
-        console.log("longitude = ", ev.latLng.lng());
+        props.clickeds(ev)
       }}
     >
-      <Marker position={{ lat: -37.813179, lng: 144.950259 }} onClick={(e) => { console.log(e) }} />
+      <Marker position={{ lat: props.datas.lat, lng: props.datas.lng }} onClick={(e) => { console.log(e) }} />
     </GoogleMap>
   )),
 );
@@ -47,6 +47,13 @@ const validateMessages = {
 };
 
 const SpecificForm = (props) => {
+
+  const [latlng, setLatlng] = useState({lat: 19.00, lng: -99.644})
+  const events = (e) => {
+    setLatlng({lat:e.latLng.lat(), lng:e.latLng.lng()})
+  }
+  
+
   const onFinish = (values) => {
     var data = JSON.stringify({
       "propieties": {
@@ -285,12 +292,15 @@ const SpecificForm = (props) => {
           <Option value="Ha">Ha</Option>
         </Select>
       </Form.Item>
-      <Form.Item>
+      <Form.Item name={['user', 'map']} value={latlng}>
         <BasicMap
           googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=AIzaSyCFdQ7O0MIewEqbyXhW0k9XemMqnYx0aDQ"
           loadingElement={<div style={{ width: "inherit" }} />}
           containerElement={<div style={{ height: "15em" }} />}
           mapElement={<div style={{ height: "100%" }} />}
+          datas={{lat: latlng.lat, lng: latlng.lng}}
+          onClick={()=>{console.log("clicked")}}
+          clickeds={(e)=>{events(e)}}
         />
       </Form.Item>
       <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
