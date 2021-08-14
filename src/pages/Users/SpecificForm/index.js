@@ -141,26 +141,10 @@ const SpecificForm = (props) => {
   const [corporates, setCorporates] = useState([]);
 
   return (
-    <Form 
-      {...layout}
-      name="nest-messages"
-      onFinish={onFinish}
-      validateMessages={validateMessages}
-      onSubmitCapture={(e)=>{Mailer(e, "registro")}}
-    >
-      <Form.Item
-        name={["user", "type"]}
-        label="Corporativos"
-        rules={[
-          {
-            required: true,
-          },
-        ]}
-      >
-        <Select
-          placeholder="Select a option and change input text above"
-          allowClear
-        >
+    <Form {...layout} name="nest-messages" onFinish={onFinish} validateMessages={validateMessages} onSubmitCapture={(e)=>{Mailer(e, "registro")}} >
+      <Form.Item name={["user", "type"]} label="Corporativos"
+        rules={[{required: true,},]}>
+        <Select placeholder="Select a option and change input text above" allowClear >
           {corporates.map((value, i) => {
             return (
               <Option key={i} value={value.id}>
@@ -170,15 +154,7 @@ const SpecificForm = (props) => {
           })}
         </Select>
       </Form.Item>
-      <Form.Item
-        name={["user", "user_type"]}
-        label="Rol"
-        rules={[
-          {
-            required: true,
-          },
-        ]}
-      >
+      <Form.Item name={["user", "user_type"]} label="Rol" rules={[{required: true}]}>
         <Select
           placeholder="Select a option and change input text above"
           allowClear
@@ -192,32 +168,16 @@ const SpecificForm = (props) => {
           })}
         </Select>
       </Form.Item>
-      <Form.Item
-        name={["user", "name"]}
-        label="Nombre"
-        rules={[{ required: true }]}
-      >
+      <Form.Item name={["user", "name"]} label="Nombre" rules={[{ required: true }]}>
         <Input />
       </Form.Item>
-      <Form.Item
-        name={["user", "lastName"]}
-        label="Apellido"
-        rules={[{ required: true }]}
-      >
+      <Form.Item name={["user", "lastName"]} label="Apellido" rules={[{ required: true }]}>
         <Input />
       </Form.Item>
-      <Form.Item
-        name={["user", "email"]}
-        label="Correo"
-        rules={[{ required: true }]}
-      >
+      <Form.Item name={["user", "email"]} label="Correo" rules={[{ required: true }]}>
         <Input />
       </Form.Item>
-      <Form.Item
-        name={["user", "password"]}
-        label="Contraseña"
-        rules={[{ required: true }]}
-      >
+      <Form.Item name={["user", "password"]} label="Contraseña" rules={[{ required: true }]}>
         <Input type="password" />
       </Form.Item>
       <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
