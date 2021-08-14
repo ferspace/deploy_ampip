@@ -32,7 +32,7 @@ const EditForm = (props)=>{
       //setPost(response.data);
     });
     }
-  });
+  },[]);
   const [corporates, setCorporates] = useState([]);
 
   const onFinish = (values) => {

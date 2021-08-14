@@ -70,7 +70,7 @@ const Desarrolladores = (props) => {
     }).catch(error => {
       console.log(error); // poner alerta cuando tengamos tiempo
     });
-  });
+  },[]);
 
 
   return (
