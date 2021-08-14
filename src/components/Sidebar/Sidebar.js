@@ -32,19 +32,25 @@ import {
 
 const admin_ampip = [
   {
+    id: 0,
+    label: "Dashboard",
+    link: "/app/dashboard",
+    icon: <AccountIcon />,
+  },
+  {
     id: 1,
     label: "Patrocinadores",
     link: "/app/ui/socios",
     icon: <TypographyIcon />
   },
   {
-    id: 1,
+    id: 2,
     label: "Desarrolladores",
     link: "/app/ui/desarrolladores",
     icon: <TypographyIcon />
   },
   {
-    id: 2,
+    id: 3,
     label: "Propiedades",
     link: "/app/propiedades",
     icon: <TableIcon />,
@@ -56,7 +62,7 @@ const admin_ampip = [
     ],
   },
   {
-    id: 3,
+    id: 4,
     label: "Usuarios",
     link: "/app/usuarios",
     icon: <AccountIcon />,
