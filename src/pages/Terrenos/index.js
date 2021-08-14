@@ -45,7 +45,7 @@ const Terrenos = (props) => {
   var [activeTabId, setActiveTabId] = useState(0);
 
   useEffect(() => {    //aqui va la peticion al endpoint , se va aprocesar la informacion del tipo [[dato1,dato2]]
-    axios.get(`http://localhost:3001/api/v1/propieties?type=2`, {
+    axios.get(`https://ampip-back-33cr9.ondigitalocean.app/api/v1propieties?type=2`, {
       headers: {
         'Authorization': data.authentication_token,
       }
@@ -109,7 +109,7 @@ const Terrenos = (props) => {
       )} />
       <Paper className={classes.iconsContainer}>
         <Tabs
-          indicatorColor="primary"
+          indicatorColor="#ffffff"
           textColor="#ffffff"
           value={activeTabId}
           onChange={(e, id) => setActiveTabId(id)}

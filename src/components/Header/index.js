@@ -23,7 +23,8 @@ import UserModal from '../UserModal'
 
 // styles
 import useStyles from "./styles";
-
+// logo
+import imgampiplo from "../../images/logo-ampip-negativo.png";
 // components
 import { Badge, Typography, Button } from "../Wrappers";
 import Notification from "../Notification/Notification";
@@ -140,7 +141,7 @@ export default function Header(props) {
           )}
         </IconButton>
         <Typography variant="h6" weight="medium" className={classes.logotype}>
-          Ampip
+        <img src={imgampiplo} alt="logo" className={classes.ampipImage} /> 
         </Typography>
         <div className={classes.grow} />
   

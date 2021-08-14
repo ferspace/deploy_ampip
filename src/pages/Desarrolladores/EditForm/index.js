@@ -46,7 +46,7 @@ const EditForm = (props)=>{
     
     var config = {
       method: 'put',
-      url: `http://localhost:3001/api/v1//corporates${props.id}`,
+      url: `https://ampip-back-33cr9.ondigitalocean.app/api/v1/corporates${props.id}`,
       headers: { 
         'Authorization': DataOption.authentication_token,  
         'Content-Type': 'application/json'
@@ -71,7 +71,7 @@ const EditForm = (props)=>{
         
         var config = {
           method: 'put',
-          url: `http://localhost:3001/api/v1//corporate_informations${props.id}`,
+          url: `https://ampip-back-33cr9.ondigitalocean.app/api/v1/corporate_informations${props.id}`,
           headers: { 
             'Authorization': DataOption.authentication_token, 
             'Content-Type': 'application/json'
@@ -150,8 +150,8 @@ const EditForm = (props)=>{
         <Input.TextArea />
       </Form.Item>
       <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
-        <Button type="primary" htmlType="submit">
-          Submit
+        <Button style={{ backgroundColor: "#00afb7", borderColor: "#00afb7", color: "#ffffff" }} type="primary" htmlType="submit">
+          Enviar
         </Button>
       </Form.Item>
     </Form>

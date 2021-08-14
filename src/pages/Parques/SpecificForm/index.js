@@ -11,16 +11,21 @@ import {
 
 const { Option } = Select;
 
+//
 const BasicMap = withScriptjs(
-  withGoogleMap(() => (
+  withGoogleMap((props) => (
     <GoogleMap
       defaultZoom={12}
       defaultCenter={{
-        lat: parseFloat(-37.813179),
-        lng: parseFloat(144.950259),
+        lat: parseFloat(props.datas.lat),
+        lng: parseFloat(props.datas.lng),
+      }}  
+
+      onClick={ev => {
+        props.clickeds(ev)
       }}
     >
-      <Marker position={{ lat: -37.813179, lng: 144.950259 }} />
+      <Marker position={{ lat: props.datas.lat, lng: props.datas.lng }} onClick={(e) => { console.log(e) }} />
     </GoogleMap>
   )),
 );
@@ -42,6 +47,13 @@ const validateMessages = {
 };
 
 const SpecificForm = (props) => {
+
+  const [latlng, setLatlng] = useState({lat: 19.00, lng: -99.644})
+  const events = (e) => {
+    setLatlng({lat:e.latLng.lat(), lng:e.latLng.lng()})
+  }
+  
+
   const onFinish = (values) => {
     var data = JSON.stringify({
       "propieties": {
@@ -53,7 +65,7 @@ const SpecificForm = (props) => {
 
     var config = {
       method: 'post',
-      url: 'http://localhost:3001/api/v1/propieties',
+      url: 'https://ampip-back-33cr9.ondigitalocean.app/api/v1propieties',
       headers: {
         'Authorization': DataOption.authentication_token,
         'Content-Type': 'application/json'
@@ -78,8 +90,8 @@ const SpecificForm = (props) => {
               "industry": values.user.industry,
               "superficie": values.user.superficie,
               "suprficie_total": values.user.suprficie_total,
-              "superficie_urbanizada": values.user.superficie_urbanizada ,
-              "superficie_disponible": values.user.superficie_disponible ,
+              "superficie_urbanizada": values.user.superficie_urbanizada,
+              "superficie_disponible": values.user.superficie_disponible,
               "inicio_de_operaciones": values.user.inicio_de_operaciones,
               "number_employe": values.user.number_employe,
               "practices_recognition": values.user.practices_recognition,
@@ -97,7 +109,7 @@ const SpecificForm = (props) => {
 
           var config = {
             method: 'post',
-            url: 'http://localhost:3001/api/v1/property_informations',
+            url: 'https://ampip-back-33cr9.ondigitalocean.app/api/v1property_informations',
             headers: {
               'Authorization': DataOption.authentication_token,
               'Content-Type': 'application/json'
@@ -132,7 +144,7 @@ const SpecificForm = (props) => {
 
   const [corporates, setCorporates] = useState([])
   useEffect(() => {
-    axios.get('http://localhost:3001/api/v1/corporates?type=0', {
+    axios.get('https://ampip-back-33cr9.ondigitalocean.app/api/v1corporates?type=0', {
       headers: {
         'Authorization': DataOption.authentication_token,
         'Content-Type': 'application/json'
@@ -144,7 +156,7 @@ const SpecificForm = (props) => {
   }, []);
 
   return (
-    <Form {...layout} name="nest-messages" onFinish={onFinish} validateMessages={validateMessages} style={{height:"1700px"}}>
+    <Form {...layout} name="nest-messages" onFinish={onFinish} validateMessages={validateMessages} style={{ height: "1700px" }}>
       <Form.Item name={["user", "corpoate_id"]} label="Corporativos" rules={[{ required: true }]}>
         <Select
           placeholder="Select a option and change input text above"
@@ -193,42 +205,42 @@ const SpecificForm = (props) => {
         <Input />
       </Form.Item>
       <Form.Item name={['user', 'infrastructure']} label="Infraestructura Disponible" rules={[{ required: true }]}>
-      <Select
-            placeholder="Select a option and change input text above"
-            allowClear
-            mode="multiple"
-          >
-            <Option value="Al menos 0.5 litros agua por segundo por ha">Al menos 0.5 litros agua por segundo por ha</Option>
-            <Option value="Pavimento">Pavimento</Option>
-            <Option value="Banquetas">Banquetas</Option>
-            <Option value="Drenaje Sanitario">Drenaje Sanitario</Option>
-            <Option value="Drenaje Pluvial">Drenaje Pluvial</Option>
-            <Option value="Planta de tratamiento de Agua">Planta de tratamiento de Agua</Option>
-            <Option value="Gas Natural">Gas Natural</Option>
-            <Option value="Alumbrado público">Alumbrado público</Option>
-            <Option value="Instalación eléctrica">Instalación eléctrica</Option>
-            <Option value="Subestación eléctrica">Subestación eléctrica</Option>
-            <Option value="Telefonía">Telefonía</Option>
-            <Option value="Comunicación Satelital">Comunicación Satelital</Option>
-            <Option value="Instalación Digital">Instalación Digital</Option>
-            <Option value="Espuela de Ferrocarril">Espuela de Ferrocarril</Option>
-            <Option value="Estación de bomberos">Estación de bomberos</Option>
-            <Option value="Áreas verdes o recreativas">Áreas verdes o recreativas</Option>
-            <Option value="Guardería">Guardería</Option>
-            <Option value="Centro de Capacitación">Centro de Capacitación</Option>
-            <Option value="Seguridad">Seguridad</Option>
-            <Option value="Transporte interno de personal">Transporte interno de personal</Option>
-            <Option value="Transporte Urbano">Transporte Urbano</Option>
-            <Option value="Recolección de basura">Recolección de basura</Option>
-            <Option value="Aduana interna">Aduana interna</Option>
-            <Option value="Agente aduanal">Agente aduanal</Option>
-            <Option value="Servicios de consultoria">Servicios de consultoria</Option>
-            <Option value="Programa shelter">Programa shelter</Option>
-            <Option value="Servicio Built to suit">Servicio Built to suit</Option>
-            <Option value="Reglamento interno">Reglamento interno</Option>
-            <Option value="Oficinas administrativas">Oficinas administrativas</Option>
-            <Option value="Otros">Otros</Option>
-          </Select>
+        <Select
+          placeholder="Select a option and change input text above"
+          allowClear
+          mode="multiple"
+        >
+          <Option value="Al menos 0.5 litros agua por segundo por ha">Al menos 0.5 litros agua por segundo por ha</Option>
+          <Option value="Pavimento">Pavimento</Option>
+          <Option value="Banquetas">Banquetas</Option>
+          <Option value="Drenaje Sanitario">Drenaje Sanitario</Option>
+          <Option value="Drenaje Pluvial">Drenaje Pluvial</Option>
+          <Option value="Planta de tratamiento de Agua">Planta de tratamiento de Agua</Option>
+          <Option value="Gas Natural">Gas Natural</Option>
+          <Option value="Alumbrado público">Alumbrado público</Option>
+          <Option value="Instalación eléctrica">Instalación eléctrica</Option>
+          <Option value="Subestación eléctrica">Subestación eléctrica</Option>
+          <Option value="Telefonía">Telefonía</Option>
+          <Option value="Comunicación Satelital">Comunicación Satelital</Option>
+          <Option value="Instalación Digital">Instalación Digital</Option>
+          <Option value="Espuela de Ferrocarril">Espuela de Ferrocarril</Option>
+          <Option value="Estación de bomberos">Estación de bomberos</Option>
+          <Option value="Áreas verdes o recreativas">Áreas verdes o recreativas</Option>
+          <Option value="Guardería">Guardería</Option>
+          <Option value="Centro de Capacitación">Centro de Capacitación</Option>
+          <Option value="Seguridad">Seguridad</Option>
+          <Option value="Transporte interno de personal">Transporte interno de personal</Option>
+          <Option value="Transporte Urbano">Transporte Urbano</Option>
+          <Option value="Recolección de basura">Recolección de basura</Option>
+          <Option value="Aduana interna">Aduana interna</Option>
+          <Option value="Agente aduanal">Agente aduanal</Option>
+          <Option value="Servicios de consultoria">Servicios de consultoria</Option>
+          <Option value="Programa shelter">Programa shelter</Option>
+          <Option value="Servicio Built to suit">Servicio Built to suit</Option>
+          <Option value="Reglamento interno">Reglamento interno</Option>
+          <Option value="Oficinas administrativas">Oficinas administrativas</Option>
+          <Option value="Otros">Otros</Option>
+        </Select>
       </Form.Item>
       <Form.Item name={['user', 'inicio_de_operaciones']} label="Inicio de Operaciones" rules={[{ required: true }]}>
         <Input />
@@ -240,22 +252,22 @@ const SpecificForm = (props) => {
         <Input />
       </Form.Item>
       <Form.Item name={['user', 'practices_recognition']} label="Reconocimientos mejores Prácticas" rules={[{ required: true }]}>
-      <Select
-            placeholder="Select a option and change input text above"
-            allowClear
-            mode="multiple"
-          >
-            <Option value="Norma Mexiana de Parque Industrial">Norma Mexiana de Parque Industrial</Option>
-            <Option value="Parque Industrial Verde">Parque Industrial Verde</Option>
-            <Option value="Calidad Ambiental (PROFEPA)">Calidad Ambiental (PROFEPA)</Option>
-            <Option value="Parque Industrial Sustentable">Parque Industrial Sustentable</Option>
-            <Option value="Parque Industrial Limpio">Parque Industrial Limpio</Option>
-            <Option value="Parque Industrial Seguro">Parque Industrial Seguro</Option>
-            <Option value="OEA">OEA</Option>
-          </Select>
+        <Select
+          placeholder="Select a option and change input text above"
+          allowClear
+          mode="multiple"
+        >
+          <Option value="Norma Mexiana de Parque Industrial">Norma Mexiana de Parque Industrial</Option>
+          <Option value="Parque Industrial Verde">Parque Industrial Verde</Option>
+          <Option value="Calidad Ambiental (PROFEPA)">Calidad Ambiental (PROFEPA)</Option>
+          <Option value="Parque Industrial Sustentable">Parque Industrial Sustentable</Option>
+          <Option value="Parque Industrial Limpio">Parque Industrial Limpio</Option>
+          <Option value="Parque Industrial Seguro">Parque Industrial Seguro</Option>
+          <Option value="OEA">OEA</Option>
+        </Select>
       </Form.Item>
       <Form.Item name={['user', 'superficie']} label="Superficie" rules={[{ required: true }]}>
-        <Input/>
+        <Input />
       </Form.Item>
 
       <Form.Item name={['user', 'superficie_total']} label="Superficie Total" rules={[{ required: true }]}>
@@ -280,18 +292,21 @@ const SpecificForm = (props) => {
           <Option value="Ha">Ha</Option>
         </Select>
       </Form.Item>
-      <Form.Item>
-      <BasicMap
-        googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=AIzaSyCFdQ7O0MIewEqbyXhW0k9XemMqnYx0aDQ"
-        loadingElement={<div style={{ width: "inherit" }} />}
-        containerElement={<div style={{ height: "15em" }} />}
-        mapElement={<div style={{ height: "100%" }} />}
-      />
+      <Form.Item name={['user', 'map']} value={latlng}>
+        <BasicMap
+          googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=AIzaSyCFdQ7O0MIewEqbyXhW0k9XemMqnYx0aDQ"
+          loadingElement={<div style={{ width: "inherit" }} />}
+          containerElement={<div style={{ height: "15em" }} />}
+          mapElement={<div style={{ height: "100%" }} />}
+          datas={{lat: latlng.lat, lng: latlng.lng}}
+          onClick={()=>{console.log("clicked")}}
+          clickeds={(e)=>{events(e)}}
+        />
       </Form.Item>
       <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
         <Button style={{ backgroundColor: "#00afb7", borderColor: "#00afb7", color: "#ffffff" }} type="primary" htmlType="submit">
           Enviar
-        </Button> 
+        </Button>
       </Form.Item>
     </Form>
   )

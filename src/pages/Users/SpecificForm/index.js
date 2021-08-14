@@ -26,7 +26,7 @@ const DataOption = JSON.parse(localStorage.getItem("data"));
 const SpecificForm = (props) => {
   useEffect(() => {
     axios
-      .get("http://localhost:3001/api/v1/user_rol", {
+      .get("https://ampip-back-33cr9.ondigitalocean.app/api/v1user_rol", {
         headers: {
           Authorization: DataOption.authentication_token,
           "Content-Type": "application/json",
@@ -39,7 +39,7 @@ const SpecificForm = (props) => {
 
       //corporativos
       if (corporates.length === 0) {
-        axios.get('http://localhost:3001/api/v1/corporates?type=0', {
+        axios.get('https://ampip-back-33cr9.ondigitalocean.app/api/v1corporates?type=0', {
           headers: {
             'Authorization': DataOption.authentication_token,
             'Content-Type': 'application/json'
@@ -65,7 +65,7 @@ const SpecificForm = (props) => {
 
     var config = {
       method: 'post',
-      url: 'http://localhost:3001/api/v1/sign_up',
+      url: 'https://ampip-back-33cr9.ondigitalocean.app/api/v1sign_up',
       headers: {
         Authorization: DataOption.authentication_token,
         "Content-Type": "application/json",
@@ -102,7 +102,7 @@ const SpecificForm = (props) => {
         
         var config = {
           method: 'post',
-          url: 'http://localhost:3001/api/v1/user_informations/',
+          url: 'https://ampip-back-33cr9.ondigitalocean.app/api/v1user_informations/',
           headers: { 
             'Authorization': DataOption.authentication_token , 
             'Content-Type': 'application/json'

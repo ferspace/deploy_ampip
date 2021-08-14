@@ -41,7 +41,9 @@ const PieChartData = [
   { name: "Group C", value: 300, color: "warning" },
   { name: "Group D", value: 200, color: "success" },
 ];
-
+const ulistyles={
+  btnColor:{backgoundColor:"#333 !important"},
+}
 export default function Dashboard(props) {
   var classes = useStyles();
   var theme = useTheme();
@@ -51,13 +53,14 @@ export default function Dashboard(props) {
 
   return (
     <>
-      <PageTitle
-        title="Dashboard"
-        button={
-          <Button variant="contained" size="medium" color="secondary">
-            Latest Reports
-          </Button>
-        }
+    
+      <PageTitle style={{ backgroundColor: "#00afb7", borderColor: "#00afb7", color: "#ffffff" }}
+        title="Bienvenidos Dashboard"
+        //button={
+        //  <Button variant="contained" size="medium" style={ulistyles.btnColor} >
+        //    Últimos informes
+        //  </Button>
+        //}
       />
       <Grid container spacing={4}>
         <Grid item lg={3} md={4} sm={6} xs={12}>

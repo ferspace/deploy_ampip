@@ -24,7 +24,7 @@ const validateMessages = {
 const EditForm = (props)=>{
   useEffect(() => {
     if(corporates.length === 0){
-      axios.get('http://localhost:3001/api/v1/corporates', {headers: { 
+      axios.get('https://ampip-back-33cr9.ondigitalocean.app/api/v1corporates', {headers: { 
       'Authorization': DataOption.authentication_token, 
       'Content-Type': 'application/json'
     },}).then((response) => {
@@ -36,7 +36,7 @@ const EditForm = (props)=>{
   const [corporates, setCorporates] = useState([]);
 
   const onFinish = (values) => {
-    axios.put(`http://localhost:3001/api/v1/corporates/${props.id}`, {headers: { 
+    axios.put(`https://ampip-back-33cr9.ondigitalocean.app/api/v1corporates/${props.id}`, {headers: { 
       'Authorization': DataOption.authentication_token, 
       'Content-Type': 'application/json'
     }, data: values }).then((response) => {

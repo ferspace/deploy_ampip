@@ -34,7 +34,7 @@ const SpecificForm = (props)=>{
     
     var config = {
       method: 'post',
-      url: 'http://localhost:3001/api/v1/propieties',
+      url: 'https://ampip-back-33cr9.ondigitalocean.app/api/v1propieties',
       headers: { 
         'Authorization': DataOption.authentication_token, 
         'Content-Type': 'application/json'
@@ -77,7 +77,7 @@ const SpecificForm = (props)=>{
         
         var config = {
           method: 'post',
-          url: 'http://localhost:3001/api/v1/property_informations',
+          url: 'https://ampip-back-33cr9.ondigitalocean.app/api/v1property_informations',
           headers: { 
             'Authorization': DataOption.authentication_token, 
             'Content-Type': 'application/json'
@@ -116,7 +116,7 @@ const SpecificForm = (props)=>{
 
   useEffect(() => {
     if(corporates.length === 0){
-      axios.get('http://localhost:3001/api/v1/corporates?type=0', {headers: { 
+      axios.get('https://ampip-back-33cr9.ondigitalocean.app/api/v1corporates?type=0', {headers: { 
       'Authorization': DataOption.authentication_token,  
       'Content-Type': 'application/json'
     },}).then((response) => {
@@ -135,6 +135,28 @@ const SpecificForm = (props)=>{
         rules={[
           {
             required: true,
+          },
+        ]}
+      >
+        <Select
+          placeholder="Select a option and change input text above"
+          allowClear
+        >
+          {corporates.map((value, i) => {
+            return (
+              <Option key={i} value={value.id}>
+                {value.name}
+              </Option>
+            );
+          })}
+        </Select>
+      </Form.Item>
+      <Form.Item
+        name={["user", "property"]}
+        label="Pertenece a "
+        rules={[
+          {
+            required: false,
           },
         ]}
       >

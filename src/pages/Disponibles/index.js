@@ -44,7 +44,7 @@ const Disponibles = () => {
   var [activeTabId, setActiveTabId] = useState(0);
 
   useEffect(() => {    //aqui va la peticion al endpoint , se va aprocesar la informacion del tipo [[dato1,dato2]]
-    axios.get(`http://localhost:3001/api/v1/propieties?type=2`, {
+    axios.get(`https://ampip-back-33cr9.ondigitalocean.app/api/v1propieties?type=2`, {
       headers: { 
         'Authorization': data.authentication_token,
       }
@@ -63,7 +63,7 @@ const Disponibles = () => {
         });
       
         // setDatatableData([...corporatesAdd]);
-        axios.get(`http://localhost:3001/api/v1/propieties?type=2`, {
+        axios.get(`https://ampip-back-33cr9.ondigitalocean.app/api/v1propieties?type=2`, {
           headers: { 
             'Authorization': data.authentication_token,
           }
@@ -112,16 +112,16 @@ const Disponibles = () => {
       )} />
       <Paper className={classes.iconsContainer}>
         <Tabs
-          indicatorColor="primary"
-          textColor="primary"
+          indicatorColor="#ffffff"
+          textColor="#ffffff"
           value={activeTabId}
           onChange={(e, id) => setActiveTabId(id)}
           className={classes.iconsBar}
         >
-          <Tab label="Espacios" style={{color:"#00afb7"}} />
+          <Tab label="Espacios" className={classes.menuspace} />
         </Tabs>
         {activeTabId === 0 && (
-          <div style={{padding:20}}>
+          <div style={{padding:40}}>
             <Maps />
           <Tables title={"Todos los Espacios"} columns={["id","Name", "Nombre_en", "Direccion",{
             label: "Ver",

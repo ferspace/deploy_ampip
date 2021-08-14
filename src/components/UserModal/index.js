@@ -114,7 +114,8 @@ const UserModal = (props) => {
   
   return (
     <>
-        <Button type="primary" onClick={showModal} borderRadius="30%">
+
+        <Button style={{ backgroundColor: "#00afb7", borderColor: "#00afb7", color: "#ffffff" }} type="primary" onClick={showModal}>
           Perfil
         </Button>
 

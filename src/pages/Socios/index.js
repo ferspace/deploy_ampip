@@ -46,7 +46,7 @@ const Desarrolladores = (props) => {
   var [activeTabId, setActiveTabId] = useState(0);
 
   useEffect(() => {    //aqui va la peticion al endpoint , se va aprocesar la informacion del tipo [[dato1,dato2]]
-    axios.get(`http://localhost:3001/api/v1/corporates?type=1`, {
+    axios.get(`https://ampip-back-33cr9.ondigitalocean.app/api/v1/corporates?type=1`, {
       headers: { 
         'Authorization': data.authentication_token,
       }
@@ -91,13 +91,13 @@ const Desarrolladores = (props) => {
       )} />
       <Paper className={classes.iconsContainer}>
         <Tabs
-          indicatorColor="primary"
+          indicatorColor="#fffff"
           textColor="#fffff"
           value={activeTabId}
           onChange={(e, id) => setActiveTabId(id)}
           className={classes.iconsBar}
         >
-          <Tab label="Socios" className={classes.menuspace}  />
+          <Tab label="Patrocinadores" className={classes.menuspace}  />
           <Tab label="Agregar" className={classes.menuspace} />
         </Tabs>
         {activeTabId === 0 && (

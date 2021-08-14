@@ -47,7 +47,7 @@ const SpecificForm = (props)=>{
     
     var config = {
       method: 'post',
-      url: 'http://localhost:3001/api/v1//corporates',
+      url: 'https://ampip-back-33cr9.ondigitalocean.app/api/v1/corporates',
       headers: { 
         'Authorization': DataOption.authentication_token, 
         'Content-Type': 'application/json'
@@ -72,7 +72,7 @@ const SpecificForm = (props)=>{
         
         var config = {
           method: 'post',
-          url: 'http://localhost:3001/api/v1//corporate_informations',
+          url: 'https://ampip-back-33cr9.ondigitalocean.app/api/v1/corporate_informations',
           headers: { 
             'Authorization': DataOption.authentication_token, 
             'Content-Type': 'application/json'
@@ -172,8 +172,8 @@ const SpecificForm = (props)=>{
         <Input />
       </Form.Item>
       <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
-        <Button type="primary" htmlType="submit">
-          Submit
+        <Button style={{ backgroundColor: "#00afb7", borderColor: "#00afb7", color: "#ffffff" }} type="primary" htmlType="submit">
+          Enviar
         </Button>
       </Form.Item>
     </Form>
