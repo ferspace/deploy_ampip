@@ -44,7 +44,7 @@ const Disponibles = () => {
   var [activeTabId, setActiveTabId] = useState(0);
 
   useEffect(() => {    //aqui va la peticion al endpoint , se va aprocesar la informacion del tipo [[dato1,dato2]]
-    axios.get(`http://localhost:3001/api/v1/propieties?type=2`, {
+    axios.get(`https://ampip-back-33cr9.ondigitalocean.app/api/v1propieties?type=2`, {
       headers: { 
         'Authorization': data.authentication_token,
       }
@@ -63,7 +63,7 @@ const Disponibles = () => {
         });
       
         // setDatatableData([...corporatesAdd]);
-        axios.get(`http://localhost:3001/api/v1/propieties?type=2`, {
+        axios.get(`https://ampip-back-33cr9.ondigitalocean.app/api/v1propieties?type=2`, {
           headers: { 
             'Authorization': data.authentication_token,
           }
@@ -133,16 +133,7 @@ const Disponibles = () => {
               }
             }
           },
-          {
-            label: "Status",
-            options: {
-              customBodyRender: (value, tableMeta, updateValue) => {
-                return (
-                  <ModaEdit data={tableMeta.rowData[0]}/>
-                )
-              }
-            }
-          }]} tableData={datatableData} />
+          ]} tableData={datatableData} />
           </div>
         )}
 

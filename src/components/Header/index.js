@@ -106,15 +106,7 @@ export default function Header(props) {
   var [profileMenu, setProfileMenu] = useState(null);
   var [isSearchOpen, setSearchOpen] = useState(false);
 
-  const [visible, setVisible] = useState(false)
 
-  const showModal = () => {
-    setVisible(!visible)
-
-    if(visible){
-      setProfileMenu(null)
-    }
-  };
 
   return (
     <AppBar position="fixed" className={classes.appBar}>
@@ -151,8 +143,7 @@ export default function Header(props) {
           Ampip
         </Typography>
         <div className={classes.grow} />
-      
-
+  
         <IconButton
           aria-haspopup="true"
           color="inherit"
@@ -196,15 +187,6 @@ export default function Header(props) {
             </Typography>
             
           </div>
-          <MenuItem
-            onClick={() => showModal()}
-            className={classNames(
-              classes.profileMenuItem,
-              classes.headerMenuItem,
-            )}
-          >
-            <AccountIcon className={classes.profileMenuIcon} /> Perfil
-          </MenuItem>
 
           <div className={classes.profileMenuUser}>
             <Typography
@@ -216,7 +198,7 @@ export default function Header(props) {
             </Typography>
           </div>
         </Menu>
-        <UserModal show={visible} showFunction={()=>showModal()}/>
+        <UserModal  />
       </Toolbar>
     </AppBar>
   );

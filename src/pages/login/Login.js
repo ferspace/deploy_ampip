@@ -51,7 +51,7 @@ function Login(props) {
 
     var config = {
       method: 'post',
-      url: 'http://localhost:3001/api/v1/sign_in',
+      url: 'https://ampip-back-33cr9.ondigitalocean.app/api/v1/sign_in',
       headers: {
         'Content-Type': 'application/json'
       },
@@ -68,6 +68,24 @@ function Login(props) {
             setIsLoading,
             setError)
           localStorage.setItem('data', JSON.stringify(response.data.data.user))
+
+          var config = {
+            method: 'get',
+            url: 'https://ampip-back-33cr9.ondigitalocean.app/api/v1/dashboard',
+            headers: { 
+              'Authorization': JSON.parse(localStorage.getItem('data')).authentication_token
+            }
+          };
+          
+          axios(config)
+          .then(function (response) {
+            localStorage.setItem('permisos', JSON.stringify(response.data.message.permissions))
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+          
+
         } else {
           alert("Usuario no autorizado")
         }
@@ -76,6 +94,7 @@ function Login(props) {
       .catch(function (error) {
         console.log(error);
       });
+
   }
 
   return (

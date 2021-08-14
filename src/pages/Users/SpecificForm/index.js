@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Form, Input, Select, Button } from "antd";
 import axios from "axios";
 import Swal from "sweetalert2";
-
+import Mailer from "../../../components/Mailer"; // importamos el mailer
 const { Option } = Select;
 
 const layout = {
@@ -26,7 +26,7 @@ const DataOption = JSON.parse(localStorage.getItem("data"));
 const SpecificForm = (props) => {
   useEffect(() => {
     axios
-      .get("http://localhost:3001/api/v1/user_rol", {
+      .get("https://ampip-back-33cr9.ondigitalocean.app/api/v1user_rol", {
         headers: {
           Authorization: DataOption.authentication_token,
           "Content-Type": "application/json",
@@ -39,7 +39,7 @@ const SpecificForm = (props) => {
 
       //corporativos
       if (corporates.length === 0) {
-        axios.get('http://localhost:3001/api/v1/corporates?type=0', {
+        axios.get('https://ampip-back-33cr9.ondigitalocean.app/api/v1corporates?type=0', {
           headers: {
             'Authorization': DataOption.authentication_token,
             'Content-Type': 'application/json'
@@ -52,6 +52,8 @@ const SpecificForm = (props) => {
   }, []);
 
   const onFinish = (values) => {
+    
+
     var data = JSON.stringify({
       "user": {
         "email": values.user.email,
@@ -63,7 +65,7 @@ const SpecificForm = (props) => {
 
     var config = {
       method: 'post',
-      url: 'http://localhost:3001/api/v1/sign_up',
+      url: 'https://ampip-back-33cr9.ondigitalocean.app/api/v1sign_up',
       headers: {
         Authorization: DataOption.authentication_token,
         "Content-Type": "application/json",
@@ -100,7 +102,7 @@ const SpecificForm = (props) => {
         
         var config = {
           method: 'post',
-          url: 'http://localhost:3001/api/v1/user_informations/',
+          url: 'https://ampip-back-33cr9.ondigitalocean.app/api/v1user_informations/',
           headers: { 
             'Authorization': DataOption.authentication_token , 
             'Content-Type': 'application/json'
@@ -116,7 +118,8 @@ const SpecificForm = (props) => {
             showConfirmButton: false,
             timer: 1500
           })
-          console.log(JSON.stringify(response.data));
+          
+          
         })
         .catch(function (error) {
           Swal.fire({
@@ -133,6 +136,7 @@ const SpecificForm = (props) => {
       });
 
   };
+
   const [permissions, setPermissions] = useState([]);
   const [corporates, setCorporates] = useState([]);
 
@@ -142,6 +146,7 @@ const SpecificForm = (props) => {
       name="nest-messages"
       onFinish={onFinish}
       validateMessages={validateMessages}
+      onSubmitCapture={(e)=>{Mailer(e, "registro")}}
     >
       <Form.Item
         name={["user", "type"]}
@@ -210,21 +215,14 @@ const SpecificForm = (props) => {
       </Form.Item>
       <Form.Item
         name={["user", "password"]}
-        label="Password"
+        label="Contraseña"
         rules={[{ required: true }]}
       >
-        <Input />
-      </Form.Item>
-      <Form.Item
-        name={["user", "password_confirmation"]}
-        label="Password"
-        rules={[{ required: true }]}
-      >
-        <Input />
+        <Input type="password" />
       </Form.Item>
       <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
         <br />
-        <Button type="primary" htmlType="submit">
+        <Button type="primary" htmlType="submit" >
           Submit
         </Button>
       </Form.Item>

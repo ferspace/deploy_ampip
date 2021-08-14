@@ -51,7 +51,7 @@ const SpecificForm = (props)=>{
   
   var config = {
     method: 'post',
-    url: 'http://localhost:3001/api/v1//corporates',
+    url: 'https://ampip-back-33cr9.ondigitalocean.app/api/v1/corporates',
     headers: { 
       'Authorization': DataOption.authentication_token,
       'Content-Type': 'application/json'
@@ -76,7 +76,7 @@ const SpecificForm = (props)=>{
       
       var config = {
         method: 'post',
-        url: 'http://localhost:3001/api/v1//corporate_informations',
+        url: 'https://ampip-back-33cr9.ondigitalocean.app/api/v1/corporate_informations',
         headers: { 
           'Authorization': DataOption.authentication_token, 
           'Content-Type': 'application/json'
