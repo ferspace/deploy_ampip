@@ -112,16 +112,16 @@ const Disponibles = () => {
       )} />
       <Paper className={classes.iconsContainer}>
         <Tabs
-          indicatorColor="primary"
-          textColor="primary"
+          indicatorColor="#ffffff"
+          textColor="#ffffff"
           value={activeTabId}
           onChange={(e, id) => setActiveTabId(id)}
           className={classes.iconsBar}
         >
-          <Tab label="Espacios" style={{color:"#00afb7"}} />
+          <Tab label="Espacios" className={classes.menuspace} />
         </Tabs>
         {activeTabId === 0 && (
-          <div style={{padding:20}}>
+          <div style={{padding:40}}>
             <Maps />
           <Tables title={"Todos los Espacios"} columns={["id","Name", "Nombre_en", "Direccion",{
             label: "Ver",
