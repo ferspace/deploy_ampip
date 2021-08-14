@@ -180,6 +180,9 @@ const SpecificForm = (props) => {
       <Form.Item name={['user', 'adress']} label="Dirección" rules={[{ required: true }]}>
         <Input />
       </Form.Item>
+      <Form.Item name={['user', 'adress']} label="Calle y numero" rules={[{ required: true }]}>
+        <Input />
+      </Form.Item>
       <Form.Item name={['user', 'postal_code']} label="Código Postal" rules={[{ required: true }]}>
         <Input />
       </Form.Item>
@@ -248,9 +251,9 @@ const SpecificForm = (props) => {
       <Form.Item name={['user', 'number_employe']} label="Número de empleados" rules={[{ required: true }]}>
         <Input />
       </Form.Item>
-      <Form.Item name={['user', 'message']} label="Mensaje" rules={[{ required: true }]}>
+      {/* <Form.Item name={['user', 'message']} label="Mensaje" rules={[{ required: true }]}>
         <Input />
-      </Form.Item>
+      </Form.Item> */}
       <Form.Item name={['user', 'practices_recognition']} label="Reconocimientos mejores Prácticas" rules={[{ required: true }]}>
         <Select
           placeholder="Select a option and change input text above"

@@ -49,7 +49,7 @@ const EditForm = (props)=>{
       //setPost(response.data);
     });
     }
-  });
+  },[]);
 
   return(
   

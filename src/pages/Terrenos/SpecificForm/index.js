@@ -124,7 +124,7 @@ const SpecificForm = (props)=>{
       //setPost(response.data);
     });
     }
-  });
+  },[]);
 
   return(
   
