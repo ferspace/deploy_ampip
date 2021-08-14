@@ -59,6 +59,8 @@ const UserModal = (props) => {
   
   return (
     <>
+        <h1>Corporativo</h1>
+        <span>Pagina actual</span>
         <Button type="primary" onClick={showModal}>
           Perfil
         </Button>
