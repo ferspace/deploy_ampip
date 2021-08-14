@@ -150,8 +150,8 @@ const EditForm = (props)=>{
         <Input.TextArea />
       </Form.Item>
       <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
-        <Button type="primary" htmlType="submit">
-          Submit
+        <Button style={{ backgroundColor: "#00afb7", borderColor: "#00afb7", color: "#ffffff" }} type="primary" htmlType="submit">
+          Enviar
         </Button>
       </Form.Item>
     </Form>

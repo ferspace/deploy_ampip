@@ -91,13 +91,13 @@ const Desarrolladores = (props) => {
       )} />
       <Paper className={classes.iconsContainer}>
         <Tabs
-          indicatorColor="primary"
+          indicatorColor="#fffff"
           textColor="#fffff"
           value={activeTabId}
           onChange={(e, id) => setActiveTabId(id)}
           className={classes.iconsBar}
         >
-          <Tab label="Socios" className={classes.menuspace}  />
+          <Tab label="Patrocinadores" className={classes.menuspace}  />
           <Tab label="Agregar" className={classes.menuspace} />
         </Tabs>
         {activeTabId === 0 && (

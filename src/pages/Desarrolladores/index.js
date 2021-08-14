@@ -76,7 +76,7 @@ const Desarrolladores = (props) => {
 
   return (
     <>
-      <PageTitle title="Desarrolladores" button={(
+      <PageTitle style={{color:"red"}} title="Desarrolladores" button={(
         <>
           <Menu
             id="simple-menu"
@@ -92,7 +92,7 @@ const Desarrolladores = (props) => {
       )} />
       <Paper className={classes.iconsContainer}>
         <Tabs
-          indicatorColor="primary"
+          indicatorColor="#fffff"
           textColor="#fffff"
           value={activeTabId}
           onChange={(e, id) => setActiveTabId(id)}

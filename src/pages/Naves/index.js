@@ -89,7 +89,7 @@ const Naves = (props) => {
       )} />
       <Paper className={classes.iconsContainer}>
         <Tabs
-          indicatorColor="primary"
+          indicatorColor="#ffffff"
           textColor="#ffffff"
           value={activeTabId}
           onChange={(e, id) => setActiveTabId(id)}

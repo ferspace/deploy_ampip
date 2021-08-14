@@ -169,7 +169,7 @@ function Login(props) {
                       loginAction()
                     }
                     variant="contained"
-                    color="primary"
+                    color="#ffffff"
                     size="large"
                   >
                     Login
