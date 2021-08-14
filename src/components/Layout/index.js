@@ -7,16 +7,7 @@ import {
 } from "react-router-dom";
 import classnames from "classnames";
 import {Box, IconButton, Link} from '@material-ui/core'
-import Icon from '@mdi/react'
 import ampip from '../../images/icono.png'
-
-//icons
-import {
-  mdiFacebook as FacebookIcon,
-  mdiTwitter as TwitterIcon,
-  mdiGithub as GithubIcon,
-  mdiEye,
-} from '@mdi/js'
 
 // styles
 import useStyles from "./styles";
@@ -34,7 +25,7 @@ import Socios from "../../pages/Socios";
 import Terrenos from "../../pages/Terrenos";
 import Naves from "../../pages/Naves";
 import Parques from "../../pages/Parques";
-
+import Arendatario from "../../pages/Arrendatario";
 // context
 import { useLayoutState } from "../../context/LayoutContext";
 
@@ -69,6 +60,7 @@ function Layout(props) {
               <Route path="/app/ui/terrenos" component={Terrenos} />
               <Route path="/app/ui/socios" component={Socios} />
               <Route path="/app/ui/desarrolladores" component={Desarrolladores} />
+              <Route path="/app/ui/arrendatarios" component={Arendatario} />
             </Switch>
             <Box
               mt={5}

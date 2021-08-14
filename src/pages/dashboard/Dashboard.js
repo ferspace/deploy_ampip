@@ -33,7 +33,7 @@ import { Typography } from "../../components/Wrappers";
 import Dot from "../../components/Sidebar/components/Dot";
 import Table from "./components/Table/Table";
 import BigStat from "./components/BigStat/BigStat";
-
+import FlatListErrors from "./components/FlatListErrors";
 const mainChartData = getMainChartData();
 const PieChartData = [
   { name: "Group A", value: 400, color: "primary" },
@@ -56,13 +56,13 @@ export default function Dashboard(props) {
     
       <PageTitle style={{ backgroundColor: "#00afb7", borderColor: "#00afb7", color: "#ffffff" }}
         title="Bienvenidos Dashboard"
-        //button={
-        //  <Button variant="contained" size="medium" style={ulistyles.btnColor} >
-        //    Últimos informes
-        //  </Button>
-        //}
       />
-      <Grid container spacing={4}>
+      <Grid container spacing={2}>
+      {mock.bigStat.map((stat) => (
+          <Grid item md={4} sm={6} xs={12} key={stat.product}>
+            <BigStat {...stat} />
+          </Grid>
+        ))}
         <Grid item lg={3} md={4} sm={6} xs={12}>
           <Widget
             title="Visits Today"
@@ -127,69 +127,7 @@ export default function Dashboard(props) {
             </Grid>
           </Widget>
         </Grid>
-        <Grid item lg={3} md={8} sm={6} xs={12}>
-          <Widget
-            title="App Performance"
-            upperTitle
-            className={classes.card}
-            bodyClass={classes.fullHeightBody}
-          >
-            <div className={classes.performanceLegendWrapper}>
-              <div className={classes.legendElement}>
-                <Dot color="warning" />
-                <Typography
-                  color="text"
-                  colorBrightness="secondary"
-                  className={classes.legendElementText}
-                >
-                  Integration
-                </Typography>
-              </div>
-              <div className={classes.legendElement}>
-                <Dot color="primary" />
-                <Typography
-                  color="text"
-                  colorBrightness="secondary"
-                  className={classes.legendElementText}
-                >
-                  SDK
-                </Typography>
-              </div>
-            </div>
-            <div className={classes.progressSection}>
-              <Typography
-                size="md"
-                color="text"
-                colorBrightness="secondary"
-                className={classes.progressSectionTitle}
-              >
-                Integration
-              </Typography>
-              <LinearProgress
-                variant="determinate"
-                value={77}
-                classes={{ barColorPrimary: classes.progressBarPrimary }}
-                className={classes.progress}
-              />
-            </div>
-            <div>
-              <Typography
-                size="md"
-                color="text"
-                colorBrightness="secondary"
-                className={classes.progressSectionTitle}
-              >
-                SDK
-              </Typography>
-              <LinearProgress
-                variant="determinate"
-                value={73}
-                classes={{ barColorPrimary: classes.progressBarWarning }}
-                className={classes.progress}
-              />
-            </div>
-          </Widget>
-        </Grid>
+        
         <Grid item lg={3} md={8} sm={6} xs={12}>
           <Widget
             title="Parques"
@@ -313,11 +251,16 @@ export default function Dashboard(props) {
             </Grid>
           </Widget>
         </Grid>
-        {mock.bigStat.map((stat) => (
-          <Grid item md={4} sm={6} xs={12} key={stat.product}>
-            <BigStat {...stat} />
-          </Grid>
-        ))}
+        <Grid item lg={3} md={8} sm={6} xs={12}>
+            <Widget
+              title="Errores"
+              upperTitle
+              className={classes.card}
+              bodyClass={classes.fullHeightBody}
+            >
+              <FlatListErrors/>
+            </Widget>
+        </Grid>
         <Grid item md={6} xs={12}>
           <Widget
             title="Usuarios pendientes de activar"
@@ -331,16 +274,6 @@ export default function Dashboard(props) {
         <Grid item md={6} xs={12}>
           <Widget
             title="Solicitud de cambios"
-            upperTitle
-            noBodyPadding
-            bodyClass={classes.tableWidget}
-          >
-            <Table data={mock.table} />
-          </Widget>
-        </Grid>
-        <Grid item xs={12}>
-          <Widget
-            title="Errores"
             upperTitle
             noBodyPadding
             bodyClass={classes.tableWidget}
