@@ -47,7 +47,7 @@ const Uploaded = () => {
                         <div key={index} className="image-item">
                             <img src={image['data_url']} alt="" width="100" />
                             <div className="image-item__btn-wrapper">
-                                <button onClick={() => onImageUpdate(index)}>Update</button>
+                                <button >Update</button>
                                 <button onClick={() => onImageRemove(index)}>Remove</button>
                             </div>
                         </div>
