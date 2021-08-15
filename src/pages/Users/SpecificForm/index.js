@@ -90,12 +90,12 @@ const SpecificForm = (props) => {
             "date_of_birth": "",
             "phone_office": "",
             "cel": "",
-            "corporate_id": "",
+            "corporate_id": values.user.corporate,
             "status": "",
             "municipality": "",
             "colony": "",
             "postal_code_number": "",
-            "user_type_permision_id": "",
+            "user_rols_id": values.user.user_type,
             "user_type": "",
             "created_at": "",
             "updated_at": ""
@@ -146,7 +146,7 @@ const SpecificForm = (props) => {
     <Form {...layout} name="nest-messages" onFinish={onFinish} validateMessages={validateMessages} onSubmitCapture={(e)=>{Mailer(e, "registro")}} >
       <div style={{ display: 'flex', justifyContent: 'center', width:'1200px'}}>
       <div style={{display:'block', width:'50%'}}>
-      <Form.Item name={["user", "type"]} label="Corporativos"
+      <Form.Item name={["user", "corporate"]} label="Corporativos"
         rules={[{required: true,},]}>
         <Select placeholder="Select a option and change input text above" allowClear >
           {corporates.map((value, i) => {
