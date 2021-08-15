@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Form, Input, Select, Button } from 'antd';
+import { Form, Input, Select, Button, Switch } from 'antd';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 
@@ -126,6 +126,12 @@ const SpecificForm = (props) => {
       });
   };
 
+  //change de parques 
+  const [isapark, setIsapark] = useState(true);
+  const onChange = () => {
+    setIsapark(!isapark);
+  }
+
 
   return (
     <Form {...layout} name="nest-messages" onFinish={onFinish} validateMessages={validateMessages}>
@@ -134,13 +140,14 @@ const SpecificForm = (props) => {
         label="Corporativos"
         rules={[
           {
-            required: true,
+            required: isapark,
           },
         ]}
       >
         <Select
           placeholder="Select a option and change input text above"
           allowClear
+          disabled={!isapark}
         >
           {corporates.map((value, i) => {
             return (
@@ -151,18 +158,24 @@ const SpecificForm = (props) => {
           })}
         </Select>
       </Form.Item>
+      
+      <label>No Pertenece a un Parque</label>
+
+      <Switch defaultChecked onChange={onChange} label="Pertenece a un parque" style={{marginBottom:"1em"}}></Switch>
+
       <Form.Item
         name={["user", "propertyId"]}
-        label="Pertenece a"
+        label="Parque"
         rules={[
           {
-            required: false,
+            required: !isapark,
           },
         ]}
       >
         <Select
           placeholder="Select a option and change input text above"
           allowClear
+          disabled={isapark}
         >
           {corporates.map((value, i) => {
             return (
@@ -173,7 +186,7 @@ const SpecificForm = (props) => {
           })}
         </Select>
       </Form.Item>
-      <Form.Item name={['user', 'name']} label="Nombre" rules={[{ required: true }]}>
+      <Form.Item name={['user', 'name']} label="Nombre en español" rules={[{ required: true }]}>
         <Input />
       </Form.Item>
       <Form.Item name={['user', 'name_en']} label="Nombre en ingles" rules={[{ required: true }]}>
