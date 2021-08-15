@@ -100,7 +100,7 @@ const EditForm = (props)=>{
 
   const [ corporates, setCorporates ] = useState([])
   useEffect(() => {
-    axios.get('https://ampip-back-33cr9.ondigitalocean.app/api/v1corporates', {headers: { 
+    axios.get('https://ampip-back-33cr9.ondigitalocean.app/api/v1/corporates', {headers: { 
       'Authorization': DataOption.authentication_token,  
       'Content-Type': 'application/json'
     },}).then((response) => {

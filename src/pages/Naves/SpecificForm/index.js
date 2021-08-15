@@ -24,7 +24,7 @@ const validateMessages = {
 const SpecificForm = (props) => {
   useEffect(() => {
     if (corporates.length === 0) {
-      axios.get('https://ampip-back-33cr9.ondigitalocean.app/api/v1corporates?type=0', {
+      axios.get('https://ampip-back-33cr9.ondigitalocean.app/api/v1/corporates?type=0', {
         headers: {
           'Authorization': DataOption.authentication_token,
           'Content-Type': 'application/json'
@@ -49,7 +49,7 @@ const SpecificForm = (props) => {
 
     var config = {
       method: 'post',
-      url: 'https://ampip-back-33cr9.ondigitalocean.app/api/v1propieties',
+      url: 'https://ampip-back-33cr9.ondigitalocean.app/api/v1/propieties',
       headers: {
         'Authorization': DataOption.authentication_token,
         'Content-Type': 'application/json'
