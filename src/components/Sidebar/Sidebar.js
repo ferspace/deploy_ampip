@@ -192,7 +192,7 @@ function Sidebar({ location }) {
   });
 
   useEffect(() => {
-    var type = JSON.parse(localStorage.getItem("data")).user_type;
+    var type = localStorage.getItem("data") === null ? null : JSON.parse(localStorage.getItem("data")).user_type;
     console.log(type);
 
     switch (type) {

@@ -26,7 +26,7 @@ const DataOption = JSON.parse(localStorage.getItem("data"));
 const SpecificForm = (props) => {
   useEffect(() => {
     axios
-      .get("https://ampip-back-33cr9.ondigitalocean.app/api/v1user_rol", {
+      .get("https://ampip-back-33cr9.ondigitalocean.app/api/v1/user_rol", {
         headers: {
           Authorization: DataOption.authentication_token,
           "Content-Type": "application/json",
@@ -39,7 +39,7 @@ const SpecificForm = (props) => {
 
       //corporativos
       if (corporates.length === 0) {
-        axios.get('https://ampip-back-33cr9.ondigitalocean.app/api/v1corporates?type=0', {
+        axios.get('https://ampip-back-33cr9.ondigitalocean.app/api/v1/corporates?type=0', {
           headers: {
             'Authorization': DataOption.authentication_token,
             'Content-Type': 'application/json'
@@ -65,7 +65,7 @@ const SpecificForm = (props) => {
 
     var config = {
       method: 'post',
-      url: 'https://ampip-back-33cr9.ondigitalocean.app/api/v1sign_up',
+      url: 'https://ampip-back-33cr9.ondigitalocean.app/api/v1/sign_up',
       headers: {
         Authorization: DataOption.authentication_token,
         "Content-Type": "application/json",
@@ -102,7 +102,7 @@ const SpecificForm = (props) => {
         
         var config = {
           method: 'post',
-          url: 'https://ampip-back-33cr9.ondigitalocean.app/api/v1user_informations/',
+          url: 'https://ampip-back-33cr9.ondigitalocean.app/api/v1/user_informations/',
           headers: { 
             'Authorization': DataOption.authentication_token , 
             'Content-Type': 'application/json'
@@ -142,6 +142,8 @@ const SpecificForm = (props) => {
 
   return (
     <Form {...layout} name="nest-messages" onFinish={onFinish} validateMessages={validateMessages} onSubmitCapture={(e)=>{Mailer(e, "registro")}} >
+      <div style={{ display: 'flex', justifyContent: 'center', width:'1200px'}}>
+      <div style={{display:'block', width:'50%'}}>
       <Form.Item name={["user", "type"]} label="Corporativos"
         rules={[{required: true,},]}>
         <Select placeholder="Select a option and change input text above" allowClear >
@@ -171,6 +173,9 @@ const SpecificForm = (props) => {
       <Form.Item name={["user", "name"]} label="Nombre" rules={[{ required: true }]}>
         <Input />
       </Form.Item>
+      
+      </div>
+      <div style={{display:'block', width:'50%'}}>
       <Form.Item name={["user", "lastName"]} label="Apellido" rules={[{ required: true }]}>
         <Input />
       </Form.Item>
@@ -180,12 +185,16 @@ const SpecificForm = (props) => {
       <Form.Item name={["user", "password"]} label="Contraseña" rules={[{ required: true }]}>
         <Input type="password" />
       </Form.Item>
+      </div>
+      </div>
+      <div style={{display:'flex', justifyContent:'center', width:'100%'}}>
       <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
         <br />
-        <Button type="primary" htmlType="submit" >
-          Submit
+        <Button style={{ backgroundColor: "#00afb7", borderColor: "#00afb7", color: "#ffffff" }} type="primary" htmlType="submit" >
+          Enviar
         </Button>
       </Form.Item>
+      </div>
     </Form>
   );
 };

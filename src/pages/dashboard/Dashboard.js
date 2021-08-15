@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Grid,
   LinearProgress,
@@ -21,6 +21,7 @@ import {
   YAxis,
   XAxis,
 } from "recharts";
+import axios from "axios";
 
 // styles
 import useStyles from "./styles";
@@ -45,10 +46,29 @@ const ulistyles={
   btnColor:{backgoundColor:"#333 !important"},
 }
 export default function Dashboard(props) {
+
+  const [widgets, setWidgets] = useState({developers: [], sponsors: []});
+  useEffect(() => {
+    var config = {
+      method: 'get',
+      url: 'https://ampip-back-33cr9.ondigitalocean.app/api/v1/dashboard',
+      headers: { 
+        'Authorization': 'm8vTyPSMuh4CYM88QyUA'
+      }
+    };
+    
+    axios(config)
+    .then(function (response) {
+      setWidgets({developers:response.data.message.widgets[0].developers,sponsors:response.data.message.widgets[0].sponsors});
+    })
+    .catch(function (error) {
+      console.log(error);
+    }); 
+  }, []);
+
   var classes = useStyles();
   var theme = useTheme();
 
-  // local
   var [mainChartState, setMainChartState] = useState("monthly");
 
   return (

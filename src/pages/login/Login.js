@@ -68,7 +68,7 @@ function Login(props) {
             setIsLoading,
             setError)
           localStorage.setItem('data', JSON.stringify(response.data.data.user))
-
+          console.log(response.data)
           var config = {
             method: 'get',
             url: 'https://ampip-back-33cr9.ondigitalocean.app/api/v1/dashboard',

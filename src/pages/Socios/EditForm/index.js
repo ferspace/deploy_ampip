@@ -45,7 +45,7 @@ const EditForm = (props)=>{
   
   var config = {
     method: 'put',
-    url: `https://ampip-back-33cr9.ondigitalocean.app/api/v1corporates${props.id}`,
+    url: `https://ampip-back-33cr9.ondigitalocean.app/api/v1/corporates${props.id}`,
     headers: { 
       'Authorization': DataOption.authentication_token, 
       'Content-Type': 'application/json'
@@ -145,12 +145,12 @@ const EditForm = (props)=>{
       <Form.Item name={['user', 'social_media_link']} label="LinkedIn" rules={[{ required: true }]}>
         <Input.TextArea />
       </Form.Item>
-      <Form.Item name={['user', 'social_media_web']} label="web" rules={[{ required: true }]}>
+      <Form.Item name={['user', 'social_media_web']} label="Web" rules={[{ required: true }]}>
         <Input.TextArea />
       </Form.Item>
       <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
         <Button type="primary" htmlType="submit">
-          Submit
+          Enviar
         </Button>
       </Form.Item>
     </Form>
