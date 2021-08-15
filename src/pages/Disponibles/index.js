@@ -131,6 +131,7 @@ const Disponibles = () => {
         <Tabs
           indicatorColor="#ffffff"
           textColor="#ffffff"
+          inkBarStyle={{background: 'red'}}
           value={activeTabId}
           onChange={(e, id) => setActiveTabId(id)}
           className={classes.iconsBar}

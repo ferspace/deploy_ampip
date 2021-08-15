@@ -126,12 +126,13 @@ const Terrenos = (props) => {
       )} />
       <Paper className={classes.iconsContainer}>
         <Tabs
-          indicatorColor="#ffffff"
+          //indicatorColor="#00AFB7"
+          TabIndicatorProps={{style: {background:'#00AFB7'}}}
           textColor="#ffffff"
           value={activeTabId}
           onChange={(e, id) => setActiveTabId(id)}
           className={classes.iconsBar}
-        >
+          >
           <Tab label="Terrenos" className={classes.menuspace} />
           <Tab label="Agregar" className={classes.menuspace} />
         </Tabs>
