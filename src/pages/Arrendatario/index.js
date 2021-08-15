@@ -20,7 +20,7 @@ import SpecificForm from './SpecificForm'
 import axios from 'axios';
 import Tables from '../Tables'
 import EditForm from './EditForm'
-
+import store from '../../store/index'
 // icons sets
 import "font-awesome/css/font-awesome.min.css";
 import ModalInformation from '../../components/ModalInformation'
@@ -43,8 +43,8 @@ const Arendatario = (props) => {
 
   // local
   var [activeTabId, setActiveTabId] = useState(0);
-  useEffect(() => {    //aqui va la peticion al endpoint , se va aprocesar la informacion del tipo [[dato1,dato2]]
-    axios.get(`https://ampip-back-33cr9.ondigitalocean.app/api/v1propieties?type=1`,{
+  useEffect(() => {    //
+    axios.get(`${store.URL_PRODUCTION}/propieties?type=1`,{
       headers: {
         'Authorization': data.authentication_token,
       }

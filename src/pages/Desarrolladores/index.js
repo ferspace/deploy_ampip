@@ -26,7 +26,7 @@ import "font-awesome/css/font-awesome.min.css";
 import ModalInformation from '../../components/ModalInformation'
 import ModaEdit from '../../components/ModalEdit'
 import EditForm from './EditForm'
-
+import store from '../../store/index'
 const dataOpt = JSON.parse(localStorage.getItem("data"));
 const Desarrolladores = (props) => {
   const [anchorEl, setAnchorEl] = React.useState(null)
@@ -47,7 +47,7 @@ const Desarrolladores = (props) => {
   useEffect(() => {    //aqui va la peticion al endpoint , se va aprocesar la informacion del tipo [[dato1,dato2]]
 
     var x = new URLSearchParams();
-    axios.get(`https://ampip-back-33cr9.ondigitalocean.app/api/v1corporates?type=0`,{
+    axios.get(`${store.URL_PRODUCTION}/corporates?type=0`,{
       headers: {
         'Authorization': dataOpt.authentication_token,
       }
@@ -128,7 +128,7 @@ const Desarrolladores = (props) => {
         )}
 
         {activeTabId === 1 && (
-          <div style={{ display: 'flex', justifyContent: 'center' }}>
+          <div style={{ display: 'flex', justifyContent: 'flex-start' }}>
             <SpecificForm />
           </div>
         )}

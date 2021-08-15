@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Grid,
   LinearProgress,
@@ -21,6 +21,7 @@ import {
   YAxis,
   XAxis,
 } from "recharts";
+import axios from "axios";
 
 // styles
 import useStyles from "./styles";
@@ -34,6 +35,8 @@ import Dot from "../../components/Sidebar/components/Dot";
 import Table from "./components/Table/Table";
 import BigStat from "./components/BigStat/BigStat";
 import FlatListErrors from "./components/FlatListErrors";
+import store from '../../store/index'
+
 const mainChartData = getMainChartData();
 const PieChartData = [
   { name: "Group A", value: 400, color: "primary" },
@@ -45,10 +48,29 @@ const ulistyles={
   btnColor:{backgoundColor:"#333 !important"},
 }
 export default function Dashboard(props) {
+
+  const [widgets, setWidgets] = useState({developers: [], sponsors: []});
+  useEffect(() => {
+    var config = {
+      method: 'get',
+      url: `${store.URL_PRODUCTION}/dashboard`,
+      headers: { 
+        'Authorization': 'm8vTyPSMuh4CYM88QyUA'
+      }
+    };
+    
+    axios(config)
+    .then(function (response) {
+      setWidgets({developers:response.data.message.widgets[0].developers,sponsors:response.data.message.widgets[0].sponsors});
+    })
+    .catch(function (error) {
+      console.log(error);
+    }); 
+  }, []);
+
   var classes = useStyles();
   var theme = useTheme();
 
-  // local
   var [mainChartState, setMainChartState] = useState("monthly");
 
   return (

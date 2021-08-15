@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Form, Input, Button, Select } from 'antd';
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import store from '../../../store/index'
 
 const { Option } = Select;
 const DataOption = JSON.parse(localStorage.getItem("data"));
@@ -26,7 +27,7 @@ const EditForm = (props)=>{
   console.log(props.id, 'props del formulario')
 
   const onFinish = (values) => {
-    axios.put(`https://ampip-back-33cr9.ondigitalocean.app/api/v1corporates/${props.id}`, {headers: { 
+    axios.put(`${store.URL_PRODUCTION}/corporates/${props.id}`, {headers: { 
       'Authorization': DataOption.authentication_token,  
       'Content-Type': 'application/json'
     }, data: values }).then((response) => {
@@ -41,7 +42,7 @@ const EditForm = (props)=>{
 
   useEffect(() => {
     if(corporates.length === 0){
-      axios.get('https://ampip-back-33cr9.ondigitalocean.app/api/v1corporates', {headers: { 
+      axios.get(`${store.URL_PRODUCTION}/corporates`, {headers: { 
       'Authorization': DataOption.authentication_token,  
       'Content-Type': 'application/json'
     },}).then((response) => {

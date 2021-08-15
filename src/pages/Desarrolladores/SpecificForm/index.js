@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { Form, Input, Select, Button } from 'antd';
 import axios from 'axios'
 import Swal from 'sweetalert2';
-
+import store from '../../../store/index'
+import ImageUpload from '../../../components/ImageUpload'
 const { Option } = Select;
 
 const layout = {
@@ -12,7 +13,7 @@ const layout = {
 
 const DataOption = JSON.parse(localStorage.getItem("data"));
 const validateMessages = {
-  required: '${label} is required!',
+  required: '${label} es obligatorio',
   types: {
     email: '${label} is not a valid email!',
     number: '${label} is not a valid number!',
@@ -47,7 +48,7 @@ const SpecificForm = (props)=>{
     
     var config = {
       method: 'post',
-      url: 'https://ampip-back-33cr9.ondigitalocean.app/api/v1/corporates',
+      url: `${store.URL_PRODUCTION}/corporates`,
       headers: { 
         'Authorization': DataOption.authentication_token, 
         'Content-Type': 'application/json'
@@ -72,7 +73,7 @@ const SpecificForm = (props)=>{
         
         var config = {
           method: 'post',
-          url: 'https://ampip-back-33cr9.ondigitalocean.app/api/v1/corporate_informations',
+          url: `${store.URL_PRODUCTION}/corporate_informations`,
           headers: { 
             'Authorization': DataOption.authentication_token, 
             'Content-Type': 'application/json'
@@ -108,6 +109,11 @@ const SpecificForm = (props)=>{
 
   return(
     <Form {...layout} name="nest-messages" onFinish={onFinish} validateMessages={validateMessages}>
+      <div style={{ display: 'flex', justifyContent: 'center', width:'1200px'}}>
+      <div style={{display:'block', width:'50%'}}>
+
+      <ImageUpload/>
+        
       <Form.Item name={['user', 'name']} label="Nombre en español" rules={[{ required: true }]}>
         <Input />
       </Form.Item>
@@ -117,13 +123,13 @@ const SpecificForm = (props)=>{
       {/* <Form.Item name={['user', 'RFC']} label="RFC" rules={[{ required: true }]}>
         <Input />
       </Form.Item> */}
-      <Form.Item name={['user', 'address']} label="Direccion" rules={[{ required: true }]}> 
+      <Form.Item name={['user', 'address']} label="Dirección" rules={[{ required: true }]}> 
         <Input />
       </Form.Item>
-      <Form.Item name={['user', 'address']} label="Calle y numero" rules={[{ required: true }]}> 
+      <Form.Item name={['user', 'address']} label="Calle y número" rules={[{ required: true }]}> 
         <Input />
       </Form.Item>
-      <Form.Item name={['user', 'cp']} label="Codigo Postal" rules={[{ required: true }]}>
+      <Form.Item name={['user', 'cp']} label="Código Postal" rules={[{ required: true }]}>
         <Input />
       </Form.Item>
       <Form.Item name={['user', 'colony']} label="Colonia" rules={[{ required: true }]}>
@@ -135,22 +141,24 @@ const SpecificForm = (props)=>{
       <Form.Item name={['user', 'municipality']} label="Municipio" rules={[{ required: true }]}>
         <Input />
       </Form.Item>
-      <Form.Item name={['user', 'cel']} label="Codigo de país" rules={[{ required: true }]}>
+      <Form.Item name={['user', 'cel']} label="Código de país" rules={[{ required: true }]}>
         <Input />
       </Form.Item>
       <Form.Item name={['user', 'cel']} label="Lada" rules={[{ required: true }]}>
         <Input />
       </Form.Item>
-      <Form.Item name={['user', 'cel']} label="Numero Local" rules={[{ required: true }]}>
+      <Form.Item name={['user', 'cel']} label="Número Local" rules={[{ required: true }]}>
         <Input />
       </Form.Item>
-      <Form.Item name={['user', 'inv_anu_on']} label="Inversion anual (Pipeline año en curso)" >
+      </div>
+      <div style={{display:'block', width:'50%'}}>
+        <Form.Item name={['user', 'inv_anu_on']} label="Inversión anual" placeholder="(Pipeline año en curso)" >
         <Input />
       </Form.Item>
-      <Form.Item name={['user', 'inv_anu_next']} label="Inversion anual (Pipeline año siguiente)">
+      <Form.Item name={['user', 'inv_anu_next']} label="Inversión anual" placeholder="(Pipeline año siguiente)">
         <Input />
       </Form.Item>
-      <Form.Item name={['user', 'inv_anu_last']} label="Inversion anual (Pipeline año anterior)">
+      <Form.Item name={['user', 'inv_anu_last']} label="Inversión anual" placeholder="(Pipeline año anterior)">
         <Input />
       </Form.Item>
       <Form.Item name={['user', 'corporate_type']} label="Tipo de Socio" rules={[{ required: true }]}>
@@ -181,11 +189,15 @@ const SpecificForm = (props)=>{
       <Form.Item name={['user', 'social_media_web']} label="web" >
         <Input />
       </Form.Item>
+      </div>
+      </div>
+      <div style={{display:'flex', justifyContent:'center', width:'100%'}}>
       <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
         <Button style={{ backgroundColor: "#00afb7", borderColor: "#00afb7", color: "#ffffff" }} type="primary" htmlType="submit">
           Enviar
         </Button>
       </Form.Item>
+      </div>
     </Form>
   )
 }

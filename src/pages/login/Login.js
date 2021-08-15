@@ -11,7 +11,7 @@ import {
 } from "@material-ui/core";
 import { withRouter } from "react-router-dom";
 import classnames from "classnames";
-
+import store from '../../store/index'
 // styles
 import useStyles from "./styles";
 
@@ -42,6 +42,7 @@ function Login(props) {
   const [user, setUser] = useState({ email: "", });
 
   const loginAction = () => {
+    console.log(`${store.URL_PRODUCTION}/sign_in`)
     var data = JSON.stringify({
       "user": {
         "email": loginValue,
@@ -51,7 +52,7 @@ function Login(props) {
 
     var config = {
       method: 'post',
-      url: 'https://ampip-back-33cr9.ondigitalocean.app/api/v1/sign_in',
+      url: `${store.URL_PRODUCTION}/sign_in`, 
       headers: {
         'Content-Type': 'application/json'
       },
@@ -68,10 +69,10 @@ function Login(props) {
             setIsLoading,
             setError)
           localStorage.setItem('data', JSON.stringify(response.data.data.user))
-
+          console.log(response.data)
           var config = {
             method: 'get',
-            url: 'https://ampip-back-33cr9.ondigitalocean.app/api/v1/dashboard',
+            url: `${store.URL_PRODUCTION}/dashboard`,
             headers: { 
               'Authorization': JSON.parse(localStorage.getItem('data')).authentication_token
             }

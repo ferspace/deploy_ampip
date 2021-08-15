@@ -8,6 +8,7 @@ import {
   GoogleMap,
   Marker,
 } from "react-google-maps";
+import store from '../../../store/index'
 
 const { Option } = Select;
 
@@ -65,7 +66,7 @@ const SpecificForm = (props) => {
 
     var config = {
       method: 'post',
-      url: 'https://ampip-back-33cr9.ondigitalocean.app/api/v1propieties',
+      url: `${store.URL_PRODUCTION}/propieties`,
       headers: {
         'Authorization': DataOption.authentication_token,
         'Content-Type': 'application/json'
@@ -109,7 +110,7 @@ const SpecificForm = (props) => {
 
           var config = {
             method: 'post',
-            url: 'https://ampip-back-33cr9.ondigitalocean.app/api/v1property_informations',
+            url: `${store.URL_PRODUCTION}/property_informations`,
             headers: {
               'Authorization': DataOption.authentication_token,
               'Content-Type': 'application/json'
@@ -144,7 +145,7 @@ const SpecificForm = (props) => {
 
   const [corporates, setCorporates] = useState([])
   useEffect(() => {
-    axios.get('https://ampip-back-33cr9.ondigitalocean.app/api/v1corporates?type=0', {
+    axios.get(`${store.URL_PRODUCTION}/corporates?type=0`, {
       headers: {
         'Authorization': DataOption.authentication_token,
         'Content-Type': 'application/json'
@@ -157,6 +158,8 @@ const SpecificForm = (props) => {
 
   return (
     <Form {...layout} name="nest-messages" onFinish={onFinish} validateMessages={validateMessages} style={{ height: "1700px" }}>
+      <div style={{ display: 'flex', justifyContent: 'center', width:'1200px'}}>
+      <div style={{display:'block', width:'50%'}}>
       <Form.Item name={["user", "corpoate_id"]} label="Corporativos" rules={[{ required: true }]}>
         <Select
           placeholder="Select a option and change input text above"
@@ -180,7 +183,7 @@ const SpecificForm = (props) => {
       <Form.Item name={['user', 'adress']} label="Dirección" rules={[{ required: true }]}>
         <Input />
       </Form.Item>
-      <Form.Item name={['user', 'adress']} label="Calle y numero" rules={[{ required: true }]}>
+      <Form.Item name={['user', 'adress']} label="Calle y número" rules={[{ required: true }]}>
         <Input />
       </Form.Item>
       <Form.Item name={['user', 'postal_code']} label="Código Postal" rules={[{ required: true }]}>
@@ -245,6 +248,8 @@ const SpecificForm = (props) => {
           <Option value="Otros">Otros</Option>
         </Select>
       </Form.Item>
+      </div>
+      <div style={{display:'block', width:'50%'}}>
       <Form.Item name={['user', 'inicio_de_operaciones']} label="Inicio de Operaciones" rules={[{ required: true }]}>
         <Input />
       </Form.Item>
@@ -295,7 +300,7 @@ const SpecificForm = (props) => {
           <Option value="Ha">Ha</Option>
         </Select>
       </Form.Item>
-      <Form.Item name={['user', 'map']} value={latlng}>
+      <Form.Item name={['user', 'map']} value={latlng} style={{display:'flex', justifyContent:'center', width:'100%', marginTop:'30px'}}>
         <BasicMap
           googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=AIzaSyCFdQ7O0MIewEqbyXhW0k9XemMqnYx0aDQ"
           loadingElement={<div style={{ width: "inherit" }} />}
@@ -306,11 +311,15 @@ const SpecificForm = (props) => {
           clickeds={(e)=>{events(e)}}
         />
       </Form.Item>
+      </div>
+      </div>
+      <div style={{display:'flex', justifyContent:'center', width:'100%'}}>
       <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
         <Button style={{ backgroundColor: "#00afb7", borderColor: "#00afb7", color: "#ffffff" }} type="primary" htmlType="submit">
           Enviar
         </Button>
       </Form.Item>
+      </div>
     </Form>
   )
 }

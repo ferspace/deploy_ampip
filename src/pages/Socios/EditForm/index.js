@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Form, Input, InputNumber, Button } from 'antd';
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import store from '../../../store/index'
 
 const layout = {
   labelCol: { span: 8 },
@@ -45,7 +46,7 @@ const EditForm = (props)=>{
   
   var config = {
     method: 'put',
-    url: `https://ampip-back-33cr9.ondigitalocean.app/api/v1corporates${props.id}`,
+    url: `${store.URL_PRODUCTION}/corporates${props.id}`,
     headers: { 
       'Authorization': DataOption.authentication_token, 
       'Content-Type': 'application/json'
@@ -70,7 +71,7 @@ const EditForm = (props)=>{
       
       var config = {
         method: 'post',
-        url: 'https://ampip-back-33cr9.ondigitalocean.app/api/v1/corporate_informations',
+        url: `${store.URL_PRODUCTION}/corporate_informations`,
         headers: { 
           'Authorization': DataOption.authentication_token,  
           'Content-Type': 'application/json'
@@ -145,12 +146,12 @@ const EditForm = (props)=>{
       <Form.Item name={['user', 'social_media_link']} label="LinkedIn" rules={[{ required: true }]}>
         <Input.TextArea />
       </Form.Item>
-      <Form.Item name={['user', 'social_media_web']} label="web" rules={[{ required: true }]}>
+      <Form.Item name={['user', 'social_media_web']} label="Web" rules={[{ required: true }]}>
         <Input.TextArea />
       </Form.Item>
       <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
         <Button type="primary" htmlType="submit">
-          Submit
+          Enviar
         </Button>
       </Form.Item>
     </Form>
