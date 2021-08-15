@@ -33,7 +33,7 @@ const UserModal = (props) => {
       method: 'get',
       url: `${store.URL_PRODUCTION}/user_informations/${JSON.parse(localStorage.getItem("data")).id}`,
       headers: {
-        'Authorization': 'm8vTyPSMuh4CYM88QyUA'
+        'Authorization': JSON.parse(localStorage.getItem("data")).authentication_token
       },
       data: data
     };
@@ -83,7 +83,9 @@ const UserModal = (props) => {
         "user_rols_id": 1,
         "user_type": "",
         "created_at": "",
-        "updated_at": ""
+        "updated_at": "",
+        "phone_office_lada":values.dataOf.phone_office_lada,
+        "phone_office_code":values.dataOf.phone_office_code
       }
     });
 
@@ -168,7 +170,13 @@ const UserModal = (props) => {
           <Form.Item name={['dataOf', 'charge']} label="Cargo" rules={[{ required: true }]}>
             <Input defaultValue="mysite" />
           </Form.Item>
-          <Form.Item name={['dataOf', 'phone_office']} label="Celular" rules={[{ required: true }]}>
+          <Form.Item name={['dataOf', 'phone_office_lada']} label="Lada" rules={[{ required: true }]}>
+            <Input defaultValue="mysite" />
+          </Form.Item>
+          <Form.Item name={['dataOf', 'phone_office_code']} label="Codigo de pais" rules={[{ required: true }]}>
+            <Input defaultValue="mysite" />
+          </Form.Item>
+          <Form.Item name={['dataOf', 'phone_office']} label="Telefono" rules={[{ required: true }]}>
             <Input defaultValue="mysite" />
           </Form.Item>
           <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>

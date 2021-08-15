@@ -79,13 +79,15 @@ const user_ampip = [
   },
   {
     id: 1,
-    label: "Corporativos",
-    link: "/app/corporativos",
-    icon: <TypographyIcon />,
-    children: [
-      { label: "Patrocinadores", link: "/app/ui/socios" },
-      { label: "Desarrolladores", link: "/app/ui/desarrolladores" }
-    ],
+    label: "Patrocinadores",
+    link: "/app/ui/socios",
+    icon: <TypographyIcon />
+  },
+  {
+    id: 1,
+    label: "Desarrolladores",
+    link: "/app/ui/desarrolladores",
+    icon: <TypographyIcon />
   },
   {
     id: 2,
@@ -165,6 +167,18 @@ const user_propiety = [
     label: "Usuarios",
     link: "/app/usuarios",
     icon: <AccountIcon />,
+  },
+  {
+    id: 2,
+    label: "Propiedades",
+    link: "/app/propiedades",
+    icon: <TableIcon />,
+    children: [
+      { label: "Parques", link: "/app/ui/parques" },
+      { label: "Naves", link: "/app/ui/naves" },
+      { label: "Terrenos", link: "/app/ui/terrenos" },
+      { label: "Disponibles", link: "/app/ui/disponibles" },
+    ],
   }
 ];
 

@@ -50,7 +50,7 @@ const validateMessages = {
 
 const SpecificForm = (props) => {
 
-  const [latlng, setLatlng] = useState({lat: 19.00, lng: -99.644})
+  const [latlng, setLatlng] = useState({lat: 19.00, lng: -99.644}) // latlng.lat, latlng.lng
   const events = (e) => {
     setLatlng({lat:e.latLng.lat(), lng:e.latLng.lng()})
   }
@@ -105,7 +105,9 @@ const SpecificForm = (props) => {
               "municipality": values.user.municipality,
               "state": values.user.state,
               "status": 1,
-              "unity": values.user.unity
+              "unity": values.user.unity,
+              "lat": latlng.lat,  
+              "lng": latlng.lng
             }
           });
 
@@ -249,11 +251,12 @@ const SpecificForm = (props) => {
           <Option value="Otros">Otros</Option>
         </Select>
       </Form.Item>
-      </div>
-      <div style={{display:'block', width:'50%'}}>
       <Form.Item name={['user', 'inicio_de_operaciones']} label="Inicio de Operaciones" rules={[{ required: true }]}>
         <Input />
       </Form.Item>
+     
+      </div>
+      <div style={{display:'block', width:'50%'}}>
       <Form.Item name={['user', 'number_employe']} label="Número de empleados" rules={[{ required: true }]}>
         <Input />
       </Form.Item>
@@ -305,16 +308,17 @@ const SpecificForm = (props) => {
         <BasicMap
           googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=AIzaSyCFdQ7O0MIewEqbyXhW0k9XemMqnYx0aDQ"
           loadingElement={<div style={{ width: "inherit" }} />}
-          containerElement={<div style={{ height: "15em" }} />}
+          containerElement={<div style={{ height: "25em" }} />}
           mapElement={<div style={{ height: "100%" }} />}
           datas={{lat: latlng.lat, lng: latlng.lng}}
           onClick={()=>{console.log("clicked")}}
           clickeds={(e)=>{events(e)}}
         />
       </Form.Item>
-      
-      <ImageUpload/>
       </div>
+      </div>
+      <div style={{display:'flex', justifyContent:'center', width:'100%', padding:'20px'}}>
+        <ImageUpload/>
       </div>
       <div style={{display:'flex', justifyContent:'center', width:'100%'}}>
       <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>

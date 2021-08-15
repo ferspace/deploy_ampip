@@ -55,7 +55,7 @@ export default function Dashboard(props) {
       method: 'get',
       url: `${store.URL_PRODUCTION}/dashboard`,
       headers: { 
-        'Authorization': 'm8vTyPSMuh4CYM88QyUA'
+        'Authorization': JSON.parse(localStorage.getItem('data')).authentication_token
       }
     };
     
