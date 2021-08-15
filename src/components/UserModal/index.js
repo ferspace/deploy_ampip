@@ -33,7 +33,7 @@ const UserModal = (props) => {
       method: 'get',
       url: `${store.URL_PRODUCTION}/user_informations/${JSON.parse(localStorage.getItem("data")).id}`,
       headers: {
-        'Authorization': 'm8vTyPSMuh4CYM88QyUA'
+        'Authorization': JSON.parse(localStorage.getItem("data")).authentication_token
       },
       data: data
     };
