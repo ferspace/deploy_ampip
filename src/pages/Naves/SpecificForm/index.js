@@ -63,7 +63,7 @@ const SpecificForm = (props) => {
 
     var config = {
       method: 'post',
-      url: 'https://ampip-back-33cr9.ondigitalocean.app/api/v1propieties',
+      url: 'https://ampip-back-33cr9.ondigitalocean.app/api/v1/propieties',
       headers: {
         'Authorization': DataOption.authentication_token,
         'Content-Type': 'application/json'

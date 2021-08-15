@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   AppBar,
   Toolbar,
@@ -106,8 +106,16 @@ export default function Header(props) {
   var [isNotificationsUnread, setIsNotificationsUnread] = useState(true);
   var [profileMenu, setProfileMenu] = useState(null);
   var [isSearchOpen, setSearchOpen] = useState(false);
+  const [emailUser, setEmailUser] = useState('') 
 
-
+  useEffect(()=>{
+    var email_storage = localStorage.getItem("data") === null ? null : JSON.parse(localStorage.getItem("data")).email
+    if(email_storage === null ){
+      setEmailUser("")
+    }else{
+      setEmailUser(email_storage)
+    }
+  },[])
 
   return (
     <AppBar position="fixed" className={classes.appBar}>
@@ -184,7 +192,7 @@ export default function Header(props) {
         >
           <div className={classes.profileMenuUser}>
             <Typography variant="h4" weight="medium">
-              {JSON.parse(localStorage.getItem("data")).email}
+              {emailUser}
             </Typography>
             
           </div>
