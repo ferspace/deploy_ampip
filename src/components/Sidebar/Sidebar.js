@@ -79,13 +79,15 @@ const user_ampip = [
   },
   {
     id: 1,
-    label: "Corporativos",
-    link: "/app/corporativos",
-    icon: <TypographyIcon />,
-    children: [
-      { label: "Patrocinadores", link: "/app/ui/socios" },
-      { label: "Desarrolladores", link: "/app/ui/desarrolladores" }
-    ],
+    label: "Patrocinadores",
+    link: "/app/ui/socios",
+    icon: <TypographyIcon />
+  },
+  {
+    id: 1,
+    label: "Desarrolladores",
+    link: "/app/ui/desarrolladores",
+    icon: <TypographyIcon />
   },
   {
     id: 2,
