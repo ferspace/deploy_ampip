@@ -133,29 +133,7 @@ const SpecificForm = (props) => {
     <Form {...layout} name="nest-messages" onFinish={onFinish} validateMessages={validateMessages}>
       <div style={{ display: 'flex', justifyContent: 'center', width:'1200px'}}>
       <div style={{display:'block', width:'50%'}}>
-      <Form.Item
-        name={["user", "type"]}
-        label="Corporativos"
-        rules={[
-          {
-            required: true,
-          },
-        ]}
-      >
-        <Select
-          placeholder="Select a option and change input text above"
-          allowClear
-        >
-          {corporates.map((value, i) => {
-            return (
-              <Option key={i} value={value.id}>
-                {value.name}
-              </Option>
-            );
-          })}
-        </Select>
-      </Form.Item>
-      <Form.Item
+     <Form.Item
         name={["user", "propertyId"]}
         label="Pertenece a"
         rules={[
@@ -177,30 +155,27 @@ const SpecificForm = (props) => {
           })}
         </Select>
       </Form.Item>
-      <Form.Item name={['user', 'name']} label="Nombre" rules={[{ required: true }]}>
+      <Form.Item name={['user', 'name_busines']} label="Nombre de la empresa" rules={[{ required: true }]}>
         <Input />
       </Form.Item>
-      <Form.Item name={['user', 'name_en']} label="Nombre en ingles" rules={[{ required: true }]}>
+      <Form.Item name={['user', 'country']} label="País" rules={[{ required: true }]}>
         <Input />
       </Form.Item>
-      <Form.Item name={['user', 'adress']} label="Dirección" rules={[{ required: true }]}>
+      <Form.Item name={['user', 'product_badge']} label="Producto insignia" rules={[{ required: true }]}>
         <Input />
       </Form.Item>
       </div>
       <div style={{display:'block', width:'50%'}}>  
-      <Form.Item name={['user', 'adress']} label="Calle y Número" rules={[{ required: true }]}>
+      <Form.Item name={['user', 'IDSCIAN']} label="ID SCIAN" rules={[{ required: true }]}>
         <Input />
       </Form.Item> 
-      <Form.Item name={['user', 'postal_code']} label="Código Postal" rules={[{ required: true }]}>
+      <Form.Item name={['user', 'IDDENUE']} label="ID DENUE" rules={[{ required: true }]}>
         <Input/>
       </Form.Item>
-      <Form.Item name={['user', 'colony']} label="Colonia" rules={[{ required: true }]}>
+      <Form.Item name={['user', 'antiquity']} label="Antiquity" rules={[{ required: true }]}>
         <Input/>
       </Form.Item>
-      <Form.Item name={['user', 'state']} label="Estado" rules={[{ required: true }]}>
-        <Input/>
-      </Form.Item>
-      <Form.Item name={['user', 'municipality']} label="Municipio" rules={[{ required: true }]}>
+      <Form.Item name={['user', 'siperficie']} label="Superficie" rules={[{ required: true }]}>
         <Input/>
       </Form.Item>
       </div>
