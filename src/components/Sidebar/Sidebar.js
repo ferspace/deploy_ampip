@@ -167,6 +167,18 @@ const user_propiety = [
     label: "Usuarios",
     link: "/app/usuarios",
     icon: <AccountIcon />,
+  },
+  {
+    id: 2,
+    label: "Propiedades",
+    link: "/app/propiedades",
+    icon: <TableIcon />,
+    children: [
+      { label: "Parques", link: "/app/ui/parques" },
+      { label: "Naves", link: "/app/ui/naves" },
+      { label: "Terrenos", link: "/app/ui/terrenos" },
+      { label: "Disponibles", link: "/app/ui/disponibles" },
+    ],
   }
 ];
 

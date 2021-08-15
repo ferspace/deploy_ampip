@@ -50,7 +50,7 @@ const validateMessages = {
 
 const SpecificForm = (props) => {
 
-  const [latlng, setLatlng] = useState({lat: 19.00, lng: -99.644})
+  const [latlng, setLatlng] = useState({lat: 19.00, lng: -99.644}) // latlng.lat, latlng.lng
   const events = (e) => {
     setLatlng({lat:e.latLng.lat(), lng:e.latLng.lng()})
   }
@@ -105,7 +105,9 @@ const SpecificForm = (props) => {
               "municipality": values.user.municipality,
               "state": values.user.state,
               "status": 1,
-              "unity": values.user.unity
+              "unity": values.user.unity,
+              "lat": latlng.lat,  
+              "lng": latlng.lng
             }
           });
 
