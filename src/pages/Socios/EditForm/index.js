@@ -145,12 +145,12 @@ const EditForm = (props)=>{
       <Form.Item name={['user', 'social_media_link']} label="LinkedIn" rules={[{ required: true }]}>
         <Input.TextArea />
       </Form.Item>
-      <Form.Item name={['user', 'social_media_web']} label="web" rules={[{ required: true }]}>
+      <Form.Item name={['user', 'social_media_web']} label="Web" rules={[{ required: true }]}>
         <Input.TextArea />
       </Form.Item>
       <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
         <Button type="primary" htmlType="submit">
-          Submit
+          Enviar
         </Button>
       </Form.Item>
     </Form>

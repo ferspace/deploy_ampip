@@ -128,7 +128,7 @@ const Desarrolladores = (props) => {
         )}
 
         {activeTabId === 1 && (
-          <div style={{ display: 'flex', justifyContent: 'center' }}>
+          <div style={{ display: 'flex', justifyContent: 'flex-start' }}>
             <SpecificForm />
           </div>
         )}

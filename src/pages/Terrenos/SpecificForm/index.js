@@ -129,6 +129,8 @@ const SpecificForm = (props)=>{
   return(
   
     <Form {...layout} name="nest-messages" onFinish={onFinish} validateMessages={validateMessages}>
+      <div style={{ display: 'flex', justifyContent: 'center', width:'1200px'}}>
+      <div style={{display:'block', width:'50%'}}>
       <Form.Item
         name={["user", "type"]}
         label="Corporativos"
@@ -185,6 +187,8 @@ const SpecificForm = (props)=>{
       <Form.Item name={['user', 'adress']} label="Dirección" rules={[{ required: true }]}>
         <Input />
       </Form.Item>
+      </div>
+      <div style={{display:'block', width:'50%'}}>
       <Form.Item name={['user', 'postal_code']} label="Código Postal" rules={[{ required: true }]}>
         <Input/>
       </Form.Item>
@@ -197,11 +201,15 @@ const SpecificForm = (props)=>{
       <Form.Item name={['user', 'municipality']} label="Municipio" rules={[{ required: true }]}>
         <Input/>
       </Form.Item>
+      </div>
+      </div>
+      <div style={{display:'flex', justifyContent:'center', width:'100%'}}>
       <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
         <Button style={{backgroundColor:"#00afb7",borderColor:"#00afb7", color:"#ffffff"}} type="primary" htmlType="submit">
           Enviar
         </Button>
       </Form.Item>
+      </div>
     </Form>
   )
 }
