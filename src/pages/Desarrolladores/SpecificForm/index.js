@@ -3,7 +3,7 @@ import { Form, Input, Select, Button } from 'antd';
 import axios from 'axios'
 import Swal from 'sweetalert2';
 import store from '../../../store/index'
-
+import ImageUpload from '../../../components/ImageUpload'
 const { Option } = Select;
 
 const layout = {
@@ -111,6 +111,9 @@ const SpecificForm = (props)=>{
     <Form {...layout} name="nest-messages" onFinish={onFinish} validateMessages={validateMessages}>
       <div style={{ display: 'flex', justifyContent: 'center', width:'1200px'}}>
       <div style={{display:'block', width:'50%'}}>
+
+      <ImageUpload/>
+        
       <Form.Item name={['user', 'name']} label="Nombre en español" rules={[{ required: true }]}>
         <Input />
       </Form.Item>
