@@ -142,6 +142,8 @@ const SpecificForm = (props) => {
 
   return (
     <Form {...layout} name="nest-messages" onFinish={onFinish} validateMessages={validateMessages} onSubmitCapture={(e)=>{Mailer(e, "registro")}} >
+      <div style={{ display: 'flex', justifyContent: 'center', width:'1200px'}}>
+      <div style={{display:'block', width:'50%'}}>
       <Form.Item name={["user", "type"]} label="Corporativos"
         rules={[{required: true,},]}>
         <Select placeholder="Select a option and change input text above" allowClear >
@@ -171,6 +173,9 @@ const SpecificForm = (props) => {
       <Form.Item name={["user", "name"]} label="Nombre" rules={[{ required: true }]}>
         <Input />
       </Form.Item>
+      
+      </div>
+      <div style={{display:'block', width:'50%'}}>
       <Form.Item name={["user", "lastName"]} label="Apellido" rules={[{ required: true }]}>
         <Input />
       </Form.Item>
@@ -180,12 +185,16 @@ const SpecificForm = (props) => {
       <Form.Item name={["user", "password"]} label="Contraseña" rules={[{ required: true }]}>
         <Input type="password" />
       </Form.Item>
+      </div>
+      </div>
+      <div style={{display:'flex', justifyContent:'center', width:'100%'}}>
       <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
         <br />
-        <Button type="primary" htmlType="submit" >
-          Submit
+        <Button style={{ backgroundColor: "#00afb7", borderColor: "#00afb7", color: "#ffffff" }} type="primary" htmlType="submit" >
+          Enviar
         </Button>
       </Form.Item>
+      </div>
     </Form>
   );
 };
