@@ -34,14 +34,15 @@ const Uploaded = () => {
                 // write your building UI
                 <div className="upload__image-wrapper">
                     <button
-                        style={isDragging ? { color: 'red' } : undefined}
+                        style={{backgroundColor:'#333333', border:'solid 1px #333333', color:'#ffffff', padding:'5px 10px'}}
+                        //style={isDragging ? { color: 'red' } : undefined}
                         onClick={onImageUpload}
                         {...dragProps}
                     >
-                        Click or Drop here
+                        Selecciona imagen
                     </button>
                     &nbsp;
-                    <button onClick={onImageRemoveAll}>Remove all images</button>
+                    <button style={{backgroundColor:'#ff4d4f', border:'solid 1px #ff4d4f', color:'#ffffff', padding:'5px 10px'}}  onClick={onImageRemoveAll}>Quitar todas las imagenes</button>
                     {imageList.map((image, index) => (
                         <div key={index} className="image-item">
                             <img src={image['data_url']} alt="" width="100" />

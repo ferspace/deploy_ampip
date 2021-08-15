@@ -118,7 +118,7 @@ export default function Header(props) {
   },[])
 
   return (
-    <AppBar position="fixed" className={classes.appBar}>
+    <AppBar position="fixed" className={classes.appBar} style={{padding:"4px"}}>
       <Toolbar className={classes.toolbar}>
         <IconButton
           color="inherit"
