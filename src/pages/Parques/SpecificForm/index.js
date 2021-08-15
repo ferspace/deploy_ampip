@@ -305,7 +305,7 @@ const SpecificForm = (props) => {
         <BasicMap
           googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=AIzaSyCFdQ7O0MIewEqbyXhW0k9XemMqnYx0aDQ"
           loadingElement={<div style={{ width: "inherit" }} />}
-          containerElement={<div style={{ height: "15em" }} />}
+          containerElement={<div style={{ height: "25em" }} />}
           mapElement={<div style={{ height: "100%" }} />}
           datas={{lat: latlng.lat, lng: latlng.lng}}
           onClick={()=>{console.log("clicked")}}
