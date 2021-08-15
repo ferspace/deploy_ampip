@@ -28,10 +28,24 @@ import ModaEdit from '../../components/ModalEdit'
 import EditForm from './EditForm'
 import store from '../../store/index'
 const data = JSON.parse(localStorage.getItem("data"));
+const permisos = JSON.parse(localStorage.getItem("permisos"));
 
 const Desarrolladores = (props) => {
   const [anchorEl, setAnchorEl] = React.useState(null)
   const [datatableData, setDatatableData] = useState([]) //descomentar al integrar apis
+  const [read, setRead] = useState(false);
+  const [write, setWrite] = useState(false)
+
+  const permissionsMap = () =>{
+    const permissionResult = permisos.filter((item)=>{
+      if (item.permiso === "sponsor") return item
+    })
+    setRead(permissionResult[0].read)
+    setWrite(permissionResult[0].write)
+    console.log("resultado", permissionResult[0])
+
+  }
+
   const handleClick = (e) => {
     setAnchorEl(e.currentTarget)
   }
@@ -46,6 +60,8 @@ const Desarrolladores = (props) => {
   var [activeTabId, setActiveTabId] = useState(0);
 
   useEffect(() => {    //aqui va la peticion al endpoint , se va aprocesar la informacion del tipo [[dato1,dato2]]
+    permissionsMap()
+
     axios.get(`${store.URL_PRODUCTION}/corporates?type=1`, {
       headers: { 
         'Authorization': data.authentication_token,
@@ -71,7 +87,6 @@ const Desarrolladores = (props) => {
       console.log(error); // poner alerta cuando tengamos tiempo
     });
   },[]);
-
 
   return (
     <>
@@ -101,7 +116,9 @@ const Desarrolladores = (props) => {
           <Tab label="Agregar" className={classes.menuspace} />
         </Tabs>
         {activeTabId === 0 && (
-          <Tables title={"Todos los Patrocinadores"} columns={["id","Name", "Nombre_en", "Direccion", {
+          <div style={{ padding: 20 }}>
+
+          {read && <Tables title={"Todos los Patrocinadores"} columns={["id","Name", "Nombre_en", "Direccion", {
             label: "Ver",
             options: {
               customBodyRender: (value, tableMeta, updateValue) => {
@@ -116,16 +133,17 @@ const Desarrolladores = (props) => {
             options: {
               customBodyRender: (value, tableMeta, updateValue) => {
                 return (
-                  <ModaEdit data={tableMeta.rowData[0]} children={<EditForm id={tableMeta.rowData[0]}/>}/>
+                  <ModaEdit data={tableMeta.rowData[0]} children={<EditForm id={tableMeta.rowData[0]}/>} write={write}/>
                 )
               }
             }
-          }]} tableData={datatableData} />
+          }]} tableData={datatableData} />}
+          </div>
         )}
 
         {activeTabId === 1 && (
           <div style={{display:'flex', justifyContent:'center'}}>
-          <SpecificForm/>
+            {write && <SpecificForm/>}
           </div>
         )}
       </Paper>

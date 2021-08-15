@@ -28,9 +28,23 @@ import ModaEdit from '../../components/ModalEdit'
 import store from '../../store/index'
 
 const data = JSON.parse(localStorage.getItem("data"));
+const permisos = JSON.parse(localStorage.getItem("permisos"));
+
 const Terrenos = (props) => {
   const [anchorEl, setAnchorEl] = React.useState(null)
   const [datatableData, setDatatableData] = useState([])
+  const [read, setRead] = useState(false);
+  const [write, setWrite] = useState(false)
+
+  const permissionsMap = () =>{
+    const permissionResult = permisos.filter((item)=>{
+      if (item.permiso === "ground") return item
+    })
+    setRead(permissionResult[0].read)
+    setWrite(permissionResult[0].write)
+    console.log("resultado", permissionResult[0])
+
+  }
 
   const handleClick = (e) => {
     setAnchorEl(e.currentTarget)
@@ -46,6 +60,8 @@ const Terrenos = (props) => {
   var [activeTabId, setActiveTabId] = useState(0);
 
   useEffect(() => {    //aqui va la peticion al endpoint , se va aprocesar la informacion del tipo [[dato1,dato2]]
+    permissionsMap()
+
     axios.get(`${store.URL_PRODUCTION}/propieties?type=2`, {
       headers: {
         'Authorization': data.authentication_token,
@@ -110,18 +126,19 @@ const Terrenos = (props) => {
       )} />
       <Paper className={classes.iconsContainer}>
         <Tabs
-          indicatorColor="#ffffff"
+          //indicatorColor="#00AFB7"
+          TabIndicatorProps={{style: {background:'#00AFB7'}}}
           textColor="#ffffff"
           value={activeTabId}
           onChange={(e, id) => setActiveTabId(id)}
           className={classes.iconsBar}
-        >
+          >
           <Tab label="Terrenos" className={classes.menuspace} />
           <Tab label="Agregar" className={classes.menuspace} />
         </Tabs>
         {activeTabId === 0 && (
           <div style={{ padding: 20 }}>
-            <Tables title={"Todos los Terrenos"}columns={["id", "Name", "Alta", {
+            {read && <Tables title={"Todos los Terrenos"}columns={["id", "Name", "Alta", {
               label: "Ver",
               options: {
                 customBodyRender: (value, tableMeta, updateValue) => {
@@ -136,17 +153,17 @@ const Terrenos = (props) => {
                 options: {
                   customBodyRender: (value, tableMeta, updateValue) => {
                     return (
-                      <ModaEdit data={tableMeta.rowData[0]} children={<EditForm id={tableMeta.rowData[0]} />} />
+                      <ModaEdit data={tableMeta.rowData[0]} children={<EditForm id={tableMeta.rowData[0]} />} write={write} />
                     )
                   }
                 }
-              }]} tableData={datatableData} />
+              }]} tableData={datatableData} />}
           </div>
         )}
 
         {activeTabId === 1 && (
           <div style={{ display: 'flex', justifyContent: 'center' }}>
-            <SpecificForm />
+            {write && <SpecificForm />}
           </div>
         )}
       </Paper>

@@ -31,6 +31,7 @@ const dataOpt = JSON.parse(localStorage.getItem("data"));
 const Desarrolladores = (props) => {
   const [anchorEl, setAnchorEl] = React.useState(null)
   const [datatableData, setDatatableData] = useState([]) //descomentar al integrar apis
+
   const handleClick = (e) => {
     setAnchorEl(e.currentTarget)
   }
@@ -119,7 +120,7 @@ const Desarrolladores = (props) => {
                 options: {
                   customBodyRender: (value, tableMeta, updateValue) => {
                     return (
-                      <ModaEdit data={tableMeta.rowData[0]} children={<EditForm id={tableMeta.rowData[0]} />} />
+                      <ModaEdit data={tableMeta.rowData[0]} children={<EditForm id={tableMeta.rowData[0]} write={true}/>} />
                     )
                   }
                 }
