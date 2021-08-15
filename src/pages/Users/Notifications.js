@@ -27,6 +27,7 @@ import Notification from "../../components/Notification";
 import store from '../../store/index'
 
 const data = JSON.parse(localStorage.getItem("data"));
+const permisos = JSON.parse(localStorage.getItem("permisos"));
 
 const positions = [
   toast.POSITION.TOP_LEFT,
@@ -41,6 +42,18 @@ export default function NotificationsPage(props) {
   var classes = useStyles();
 
   var [activeTabId, setActiveTabId] = useState(0);
+  const [read, setRead] = useState(false);
+  const [write, setWrite] = useState(false)
+
+  const permissionsMap = () =>{
+    const permissionResult = permisos.filter((item)=>{
+      if (item.permiso === "user") return item
+    })
+    setRead(permissionResult[0].read)
+    setWrite(permissionResult[0].write)
+    console.log("resultado", permissionResult[0])
+
+  }
   // local
   var [notificationsPosition, setNotificationPosition] = useState(2);
   var [errorToastId, setErrorToastId] = useState(null);
@@ -49,6 +62,7 @@ export default function NotificationsPage(props) {
 
 
   useEffect(() => {    //aqui va la peticion al endpoint , se va aprocesar la informacion del tipo [[dato1,dato2]]
+    permissionsMap()
     axios.get(`${store.URL_PRODUCTION}/user_informations`, {
       headers: {
         'Authorization': data.authentication_token,
@@ -92,13 +106,13 @@ export default function NotificationsPage(props) {
         </Tabs>
         {activeTabId === 0 && (
           <div style={{padding:20}}>
-          <Tables title={"Todos los Desarrolladores"} columns={["id","Nombre", "Apellido", "Direccion"]} tableData={datatableData} />
+          {read && <Tables title={"Todos los Desarrolladores"} columns={["id","Nombre", "Apellido", "Direccion"]} tableData={datatableData} />}
           </div>
         )}
 
         {activeTabId === 1 && (
           <div style={{display:'flex', justifyContent:'center'}}>
-          <SpecificForm/>
+          {write && <SpecificForm/>}
         </div>
         )}
       </Paper>

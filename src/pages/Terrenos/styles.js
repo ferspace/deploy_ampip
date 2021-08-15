@@ -27,6 +27,9 @@ export default makeStyles(theme => ({
     marginLeft: theme.spacing(2),
     fontSize: 14,
   },
+  indicator: {
+    backgroundColor: 'green',
+  },
   iconsContainer: {
     boxShadow: theme.customShadows.widget,
     overflow: "hidden",
