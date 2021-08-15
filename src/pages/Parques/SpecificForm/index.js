@@ -9,6 +9,7 @@ import {
   Marker,
 } from "react-google-maps";
 import store from '../../../store/index'
+import ImageUpload from '../../../components/ImageUpload'
 
 const { Option } = Select;
 
@@ -311,6 +312,8 @@ const SpecificForm = (props) => {
           clickeds={(e)=>{events(e)}}
         />
       </Form.Item>
+      
+      <ImageUpload/>
       </div>
       </div>
       <div style={{display:'flex', justifyContent:'center', width:'100%'}}>

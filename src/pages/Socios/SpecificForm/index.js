@@ -3,6 +3,7 @@ import { Form, Input, InputNumber, Button } from 'antd';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import store from '../../../store/index'
+import ImageUpload from '../../../components/ImageUpload'
 
 const DataOption = JSON.parse(localStorage.getItem("data"));
 const layout = {
@@ -137,9 +138,11 @@ const SpecificForm = (props)=>{
 
   return(
     <Form {...layout} name="nest-messages" onFinish={onFinish} validateMessages={validateMessages}>
-      <h1>Imagen</h1>
       <div style={{ display: 'flex', justifyContent: 'center', width:'1000px'}}>
       <div style={{display:'block', width:'50%'}}>
+
+      <ImageUpload/>
+
       <Form.Item name={['user', 'name']} label="Nombre en español" rules={[{ required: true }]}>
         <Input />
       </Form.Item>

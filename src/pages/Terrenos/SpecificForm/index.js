@@ -3,6 +3,7 @@ import { Form, Input, Button, Select,Switch } from 'antd';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import store from '../../../store/index'
+import ImageUpload from '../../../components/ImageUpload'
 
 const { Option } = Select;
 const DataOption = JSON.parse(localStorage.getItem("data"));
@@ -294,6 +295,8 @@ const SpecificForm = (props)=>{
       <Form.Item name={['user', 'municipality']} label="Municipio" rules={[{ required: true }]}>
         <Input/>
       </Form.Item>
+
+      <ImageUpload/>
       </div>
       </div>
       <div style={{display:'flex', justifyContent:'center', width:'100%'}}>
