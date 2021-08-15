@@ -65,10 +65,10 @@ const UserModal = (props) => {
     });
   
     var config = {
-      method: 'post',
-      url: 'http://localhost:3001/api/v1//user_informations',
+      method: 'put',
+      url: 'https://ampip-back-33cr9.ondigitalocean.app/api/v1/user_informations/'+JSON.parse(localStorage.getItem("data")).id,
       headers: { 
-        'Authorization': DataOption.authentication_token, 
+        'Authorization': JSON.parse(localStorage.getItem("data")).authentication_token,
         'Content-Type': 'application/json'
       },
       data : data
@@ -78,7 +78,7 @@ const UserModal = (props) => {
     .then(function (response) {
       Swal.fire({
         icon: 'success',
-        title: '¡Se agrego correctamente!',
+        title: '¡Usuario actualizado!',
         showConfirmButton: false,
         timer: 1500
       })
@@ -122,31 +122,31 @@ const UserModal = (props) => {
       <Modal title="Informacion Usuario" visible={isModalVisible} onCancel={handleCancel} onOk={handleOk} centered>
         <Form {...layout} name="nest-messages" onFinish={onFinish} validateMessages={validateMessages} initialValues={{ full_name: "Hello" }}>
           <Form.Item name={['dataOf', 'full_name']} label="Nombre" rules={[{ required: true }]} >
-            <Input />
+            <Input defaultValue="mysite" />
           </Form.Item>
           <Form.Item name={['dataOf', 'last_name']} label="Apellido" rules={[{ required: true }]}>
-            <Input />
+            <Input defaultValue="mysite" />
           </Form.Item>
           <Form.Item name={['dataOf', 'address']} label="Direccion" rules={[{ required: true }]} value="qwqw">
-            <Input />
+            <Input defaultValue="mysite" />
           </Form.Item>
           <Form.Item name={['dataOf', 'colony']} label="Colonia" rules={[{ required: true }]}>
-            <Input />
+            <Input defaultValue="mysite" />
           </Form.Item>
           <Form.Item name={['dataOf', 'state']} label="Estado" rules={[{ required: true }]}>
-            <Input />
+            <Input defaultValue="mysite" />
           </Form.Item>
           <Form.Item name={['dataOf', 'municipality']} label="Municipio" rules={[{ required: true }]}>
-            <Input />
+            <Input defaultValue="mysite" />
           </Form.Item>
           <Form.Item name={['dataOf', 'office_address']} label="Direccion de oficina" rules={[{ required: true }]}>
-            <Input />
+            <Input defaultValue="mysite" />
           </Form.Item>
           <Form.Item name={['dataOf', 'charge']} label="Cargo" rules={[{ required: true }]}>
-            <Input />
+            <Input defaultValue="mysite" />
           </Form.Item>
           <Form.Item name={['dataOf', 'phone_office']} label="Celular" rules={[{ required: true }]}>
-            <Input />
+            <Input defaultValue="mysite" />
           </Form.Item>
           <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
             <Button style={{ backgroundColor: "#00afb7", borderColor: "#00afb7", color: "#ffffff" }} type="primary" htmlType="submit">
