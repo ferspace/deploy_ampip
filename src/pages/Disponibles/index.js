@@ -27,10 +27,24 @@ import ModaEdit from '../../components/ModalEdit'
 import store from '../../store/index'
 
 const data = JSON.parse(localStorage.getItem("data"));
+const permisos = JSON.parse(localStorage.getItem("permisos"));
 
 const Disponibles = () => {
   const [anchorEl, setAnchorEl] = React.useState(null)
   const [datatableData, setDatatableData] = useState([]) //descomentar al integrar apis
+  const [read, setRead] = useState(false);
+  const [write, setWrite] = useState(false)
+
+  const permissionsMap = () =>{
+    const permissionResult = permisos.filter((item)=>{
+      if (item.permiso === "sponsor") return item
+    })
+    setRead(permissionResult[0].read)
+    setWrite(permissionResult[0].write)
+    console.log("resultado", permissionResult[0])
+
+  }
+
   const handleClick = (e) => {
     setAnchorEl(e.currentTarget)
   }
@@ -46,6 +60,7 @@ const Disponibles = () => {
   var [activeTabId, setActiveTabId] = useState(0);
 
   useEffect(() => {    //aqui va la peticion al endpoint , se va aprocesar la informacion del tipo [[dato1,dato2]]
+    permissionsMap()
     axios.get(`${store.URL_PRODUCTION}/propieties?type=2`, {
       headers: { 
         'Authorization': data.authentication_token,
@@ -124,24 +139,26 @@ const Disponibles = () => {
         </Tabs>
         {activeTabId === 0 && (
           <div style={{padding:20}}>
+           {read &&  <>
             <Maps /> 
-          <Tables title={"Todos los Espacios"} columns={["id","Name", "Nombre_en", "Direccion",{
-            label: "Ver",
-            options: {
-              customBodyRender: (value, tableMeta, updateValue) => {
-                return (
-                  <ModalInformation data={tableMeta.rowData[0]}/>
-                )
+            <Tables title={"Todos los Espacios"} columns={["id","Name", "Nombre_en", "Direccion",{
+              label: "Ver",
+              options: {
+                customBodyRender: (value, tableMeta, updateValue) => {
+                  return (
+                    <ModalInformation data={tableMeta.rowData[0]}/>
+                  )
+                }
               }
-            }
-          },
-          ]} tableData={datatableData} />
+            },
+            ]} tableData={datatableData} />
+            </>}
           </div>
         )}
 
         {activeTabId === 1 && (
           <div style={{display:'flex', justifyContent:'center'}}>
-          <SpecificForm/>
+            {write && <SpecificForm/>}
           </div>
         )}
       </Paper>

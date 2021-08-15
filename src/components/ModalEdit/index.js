@@ -13,12 +13,12 @@ const ModalEdit = (props) => {
   };
 
   //cargamos Corporativos desarrolladores
-  
+  console.log(props.write)
   return (
     <>
-      <Button style={{backgroundColor: '#02AFB7'}} onClick={showModal}>
+      {props.write && <Button style={{backgroundColor: '#02AFB7'}} onClick={showModal}>
         Editar
-      </Button>
+      </Button>}
       <Modal title="Editar" visible={isModalVisible} onCancel={handleCancel}>
         {props.children}
       </Modal>
