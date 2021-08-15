@@ -35,6 +35,8 @@ import Dot from "../../components/Sidebar/components/Dot";
 import Table from "./components/Table/Table";
 import BigStat from "./components/BigStat/BigStat";
 import FlatListErrors from "./components/FlatListErrors";
+import store from '../../store/index'
+
 const mainChartData = getMainChartData();
 const PieChartData = [
   { name: "Group A", value: 400, color: "primary" },
@@ -51,7 +53,7 @@ export default function Dashboard(props) {
   useEffect(() => {
     var config = {
       method: 'get',
-      url: 'https://ampip-back-33cr9.ondigitalocean.app/api/v1/dashboard',
+      url: `${store.URL_PRODUCTION}/dashboard`,
       headers: { 
         'Authorization': 'm8vTyPSMuh4CYM88QyUA'
       }

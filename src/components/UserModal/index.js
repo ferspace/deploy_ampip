@@ -3,7 +3,7 @@ import { Modal, Button, Input, Form, Select } from 'antd';
 import { Row, Col, Divider } from 'antd';
 import axios from 'axios';
 import Swal from "sweetalert2";
-
+import store from '../../store/index' //variables de entorno
 const style = { background: '#0092ff', padding: '8px 0' };
 
 
@@ -31,7 +31,7 @@ const UserModal = (props) => {
 
     var config = {
       method: 'get',
-      url: 'https://ampip-back-33cr9.ondigitalocean.app/api/v1/user_informations/' + JSON.parse(localStorage.getItem("data")).id,
+      url: `${store.URL_PRODUCTION}/user_informations/${JSON.parse(localStorage.getItem("data")).id}`,
       headers: {
         'Authorization': 'm8vTyPSMuh4CYM88QyUA'
       },
@@ -89,7 +89,7 @@ const UserModal = (props) => {
 
     var config = {
       method: 'put',
-      url: 'https://ampip-back-33cr9.ondigitalocean.app/api/v1/user_informations/' + JSON.parse(localStorage.getItem("data")).id,
+      url: `${store.URL_PRODUCTION}/user_informations/${JSON.parse(localStorage.getItem("data")).id}`,
       headers: {
         'Authorization': JSON.parse(localStorage.getItem("data")).authentication_token,
         'Content-Type': 'application/json'

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Form, Input, Select, Button } from 'antd';
 import axios from 'axios'
 import Swal from 'sweetalert2';
+import store from '../../../store/index'
 
 const { Option } = Select;
 
@@ -47,7 +48,7 @@ const SpecificForm = (props)=>{
     
     var config = {
       method: 'post',
-      url: 'https://ampip-back-33cr9.ondigitalocean.app/api/v1/corporates',
+      url: `${store.URL_PRODUCTION}/corporates`,
       headers: { 
         'Authorization': DataOption.authentication_token, 
         'Content-Type': 'application/json'
@@ -72,7 +73,7 @@ const SpecificForm = (props)=>{
         
         var config = {
           method: 'post',
-          url: 'https://ampip-back-33cr9.ondigitalocean.app/api/v1/corporate_informations',
+          url: `${store.URL_PRODUCTION}/corporate_informations`,
           headers: { 
             'Authorization': DataOption.authentication_token, 
             'Content-Type': 'application/json'

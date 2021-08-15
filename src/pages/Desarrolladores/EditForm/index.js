@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Form, Input, InputNumber, Button } from 'antd';
 import axios from 'axios'
 import Swal from 'sweetalert2';
+import store from '../../../store/index'
 
 const layout = {
   labelCol: { span: 8 },
@@ -46,7 +47,7 @@ const EditForm = (props)=>{
     
     var config = {
       method: 'put',
-      url: `https://ampip-back-33cr9.ondigitalocean.app/api/v1/corporates${props.id}`,
+      url: `${store.URL_PRODUCTION}/corporates${props.id}`,
       headers: { 
         'Authorization': DataOption.authentication_token,  
         'Content-Type': 'application/json'
@@ -71,7 +72,7 @@ const EditForm = (props)=>{
         
         var config = {
           method: 'put',
-          url: `https://ampip-back-33cr9.ondigitalocean.app/api/v1/corporate_informations${props.id}`,
+          url: `${store.URL_PRODUCTION}/corporate_informations${props.id}`,
           headers: { 
             'Authorization': DataOption.authentication_token, 
             'Content-Type': 'application/json'
