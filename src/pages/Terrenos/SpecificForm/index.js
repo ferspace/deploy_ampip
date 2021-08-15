@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Form, Input, Button, Select } from 'antd';
+import { Form, Input, Button, Select,Switch } from 'antd';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 
@@ -22,8 +22,9 @@ const validateMessages = {
 };
 
 const SpecificForm = (props)=>{
+  const [isapark, setIsapark] = useState(true);
 
-  const onFinish = (values) => {
+  const saveWhithProperty = (values)=>{
     var data = JSON.stringify({
       "propieties": {
         "corporate_id": values.user.type,
@@ -109,10 +110,78 @@ const SpecificForm = (props)=>{
     .catch(function (error) {
       console.log(error);
     });
+  }
+
+  const saveWhitouthProperty = (values)=>{
+    var data = JSON.stringify({
+      "property_information": {
+        "property_id": values.user.propertyId,
+        "name": values.user.name,
+        "superficie": "",
+        "address": values.user.address,
+        "english_name":"",
+        "park_property": "",
+        "region": "",
+        "market": "",
+        "industry": "",
+        "suprficie_total": "",
+        "superficie_urbanizada": "",
+        "superficie_disponible": "",
+        "inicio_de_operaciones": "",
+        "number_employe": "",
+        "practices_recognition": "",
+        "infrastructure": "",
+        "navy_number": "",
+        "message": "",
+        "postal_code": values.user.postal_code,
+        "colony": values.user.colony,
+        "municipality": values.user.municipality,
+        "state": values.user.state,
+        "status": 1,
+      }
+    });
+    
+    var config = {
+      method: 'post',
+      url: 'https://ampip-back-33cr9.ondigitalocean.app/api/v1/property_informations',
+      headers: { 
+        'Authorization': DataOption.authentication_token, 
+        'Content-Type': 'application/json'
+      },
+      data : data
+    };
+    
+    axios(config)
+    .then(function (response) {
+      Swal.fire({
+        icon: 'success',
+        title: '¡Se agrego correctamente!',
+        showConfirmButton: false,
+        timer: 1500
+      })
+      console.log(JSON.stringify(response.data));
+    })
+    .catch(function (error) {
+      Swal.fire({
+        icon: 'error',
+        title: '¡Error al agregar!',
+        showConfirmButton: false,
+        timer: 1500
+      })
+      console.log(error);
+    });
+  }
+
+  const onFinish = (values) => {
+    if(isapark){
+      saveWhithProperty(values);
+    }else{
+      saveWhitouthProperty(values);
+    }
   };
 
-
-  const [ corporates, setCorporates ] = useState([])
+  const [corporates, setCorporates] = useState([]);
+  const [park , setPark] = useState([])
 
   useEffect(() => {
     if(corporates.length === 0){
@@ -126,21 +195,39 @@ const SpecificForm = (props)=>{
     }
   },[]);
 
+  useEffect(() => {
+    if(park.length === 0){
+      axios.get('https://ampip-back-33cr9.ondigitalocean.app/api/v1/propieties?type=0', {
+        headers: {
+          'Authorization': DataOption.authentication_token,
+          'Content-Type': 'application/json'
+        },
+      }).then((response) => {
+        setPark(response.data)
+        //setPost(response.data);
+      });
+    }
+  }, []) // obtiene el parque
+
+  const onChange = () => {
+    setIsapark(!isapark);
+  }
+
   return(
-  
     <Form {...layout} name="nest-messages" onFinish={onFinish} validateMessages={validateMessages}>
       <Form.Item
         name={["user", "type"]}
         label="Corporativos"
         rules={[
           {
-            required: true,
+            required: isapark,
           },
         ]}
       >
         <Select
           placeholder="Select a option and change input text above"
           allowClear
+          disabled={!isapark}
         >
           {corporates.map((value, i) => {
             return (
@@ -151,20 +238,24 @@ const SpecificForm = (props)=>{
           })}
         </Select>
       </Form.Item>
+      <label>No Pertenece a un Parque</label>
+      <Switch defaultChecked onChange={onChange} label="Pertenece a un parque" style={{marginBottom:"1em"}}></Switch>
+
       <Form.Item
-        name={["user", "property"]}
-        label="Pertenece a "
+        name={["user", "propertyId"]}
+        label="Parque"
         rules={[
           {
-            required: false,
+            required: !isapark,
           },
         ]}
       >
         <Select
-          placeholder="Select a option and change input text above"
+          placeholder="Seleccione un  parque"
           allowClear
+          disabled={isapark}
         >
-          {corporates.map((value, i) => {
+          {park.map((value, i) => {
             return (
               <Option key={i} value={value.id}>
                 {value.name}
@@ -173,6 +264,7 @@ const SpecificForm = (props)=>{
           })}
         </Select>
       </Form.Item>
+
       <Form.Item name={['user', 'name']} label="Nombre" rules={[{ required: true }]}>
         <Input />
       </Form.Item>
