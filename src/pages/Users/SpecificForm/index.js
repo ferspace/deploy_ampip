@@ -4,6 +4,8 @@ import { Form, Input, Select, Button } from "antd";
 import axios from "axios";
 import Swal from "sweetalert2";
 import Mailer from "../../../components/Mailer"; // importamos el mailer
+import store from '../../../store/index'
+
 const { Option } = Select;
 
 const layout = {
@@ -26,7 +28,7 @@ const DataOption = JSON.parse(localStorage.getItem("data"));
 const SpecificForm = (props) => {
   useEffect(() => {
     axios
-      .get("https://ampip-back-33cr9.ondigitalocean.app/api/v1/user_rol", {
+      .get(`${store.URL_PRODUCTION}/user_rol`, {
         headers: {
           Authorization: DataOption.authentication_token,
           "Content-Type": "application/json",
@@ -39,7 +41,7 @@ const SpecificForm = (props) => {
 
       //corporativos
       if (corporates.length === 0) {
-        axios.get('https://ampip-back-33cr9.ondigitalocean.app/api/v1/corporates?type=0', {
+        axios.get(`${store.URL_PRODUCTION}/corporates?type=0`, {
           headers: {
             'Authorization': DataOption.authentication_token,
             'Content-Type': 'application/json'
@@ -65,7 +67,7 @@ const SpecificForm = (props) => {
 
     var config = {
       method: 'post',
-      url: 'https://ampip-back-33cr9.ondigitalocean.app/api/v1/sign_up',
+      url: `${store.URL_PRODUCTION}/sign_up`,
       headers: {
         Authorization: DataOption.authentication_token,
         "Content-Type": "application/json",
@@ -102,7 +104,7 @@ const SpecificForm = (props) => {
         
         var config = {
           method: 'post',
-          url: 'https://ampip-back-33cr9.ondigitalocean.app/api/v1/user_informations/',
+          url: `${store.URL_PRODUCTION}/user_informations/`,
           headers: { 
             'Authorization': DataOption.authentication_token , 
             'Content-Type': 'application/json'

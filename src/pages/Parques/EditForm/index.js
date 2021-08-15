@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Form, Input, Select, Button } from 'antd';
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import store from '../../../store/index'
 
 const { Option } = Select;
 
@@ -35,7 +36,7 @@ const EditForm = (props)=>{
     
     var config = {
       method: 'put',
-      url: `https://ampip-back-33cr9.ondigitalocean.app/api/v1/propieties${props.id}`,
+      url: `${store.URL_PRODUCTION}/propieties${props.id}`,
       headers: { 
         'Authorization': DataOption.authentication_token,  
         'Content-Type': 'application/json'
@@ -76,7 +77,7 @@ const EditForm = (props)=>{
         
         var config = {
           method: 'post',
-          url: 'https://ampip-back-33cr9.ondigitalocean.app/api/v1/property_informations',
+          url: `${store.URL_PRODUCTION}/property_informations`,
           headers: { 
             'Authorization': DataOption.authentication_token,  
             'Content-Type': 'application/json'
@@ -100,7 +101,7 @@ const EditForm = (props)=>{
 
   const [ corporates, setCorporates ] = useState([])
   useEffect(() => {
-    axios.get('https://ampip-back-33cr9.ondigitalocean.app/api/v1/corporates', {headers: { 
+    axios.get(`${store.URL_PRODUCTION}/corporates`, {headers: { 
       'Authorization': DataOption.authentication_token,  
       'Content-Type': 'application/json'
     },}).then((response) => {
