@@ -242,8 +242,9 @@ const SpecificForm = (props)=>{
           })}
         </Select>
       </Form.Item>
-      <label>No Pertenece a un Parque</label>
-      <Switch defaultChecked onChange={onChange} label="Pertenece a un parque" style={{marginBottom:"1em"}}></Switch>
+      <Form.Item label="No Pertenece a un Parque" rules={[{ required: true }]}>
+      <Switch defaultChecked onChange={onChange} label="Pertenece a un parque" style={{ paddingTop:"1em"}}></Switch>
+      </Form.Item>
 
       <Form.Item
         name={["user", "propertyId"]}
@@ -278,13 +279,12 @@ const SpecificForm = (props)=>{
       <Form.Item name={['user', 'type']} value={2} label="type" hidden={true} >
         <Input />
       </Form.Item>
-      <Form.Item name={['user', 'adress']} label="Dirección" rules={[{ required: true }]}>
-        <Input />
-      </Form.Item>
+      
+      
       </div>
       <div style={{display:'block', width:'50%'}}>
-      <Form.Item name={['user', 'postal_code']} label="Código Postal" rules={[{ required: true }]}>
-        <Input/>
+      <Form.Item name={['user', 'adress']} label="Dirección" rules={[{ required: true }]}>
+        <Input />
       </Form.Item>
       <Form.Item name={['user', 'colony']} label="Colonia" rules={[{ required: true }]}>
         <Input/>
@@ -295,9 +295,10 @@ const SpecificForm = (props)=>{
       <Form.Item name={['user', 'municipality']} label="Municipio" rules={[{ required: true }]}>
         <Input/>
       </Form.Item>
-
-      <ImageUpload/>
       </div>
+      </div>
+      <div style={{display:'flex', justifyContent:'center', width:'100%', padding:'20px'}}>
+        <ImageUpload/>
       </div>
       <div style={{display:'flex', justifyContent:'center', width:'100%'}}>
       <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>

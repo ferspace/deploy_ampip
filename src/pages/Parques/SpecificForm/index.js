@@ -249,11 +249,12 @@ const SpecificForm = (props) => {
           <Option value="Otros">Otros</Option>
         </Select>
       </Form.Item>
-      </div>
-      <div style={{display:'block', width:'50%'}}>
       <Form.Item name={['user', 'inicio_de_operaciones']} label="Inicio de Operaciones" rules={[{ required: true }]}>
         <Input />
       </Form.Item>
+     
+      </div>
+      <div style={{display:'block', width:'50%'}}>
       <Form.Item name={['user', 'number_employe']} label="Número de empleados" rules={[{ required: true }]}>
         <Input />
       </Form.Item>
@@ -312,9 +313,10 @@ const SpecificForm = (props) => {
           clickeds={(e)=>{events(e)}}
         />
       </Form.Item>
-      
-      <ImageUpload/>
       </div>
+      </div>
+      <div style={{display:'flex', justifyContent:'center', width:'100%', padding:'20px'}}>
+        <ImageUpload/>
       </div>
       <div style={{display:'flex', justifyContent:'center', width:'100%'}}>
       <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>

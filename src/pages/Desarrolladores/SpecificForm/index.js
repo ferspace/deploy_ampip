@@ -111,9 +111,7 @@ const SpecificForm = (props)=>{
     <Form {...layout} name="nest-messages" onFinish={onFinish} validateMessages={validateMessages}>
       <div style={{ display: 'flex', justifyContent: 'center', width:'1200px'}}>
       <div style={{display:'block', width:'50%'}}>
-
-      <ImageUpload/>
-        
+ 
       <Form.Item name={['user', 'name']} label="Nombre en español" rules={[{ required: true }]}>
         <Input />
       </Form.Item>
@@ -189,6 +187,9 @@ const SpecificForm = (props)=>{
       <Form.Item name={['user', 'social_media_web']} label="web" >
         <Input />
       </Form.Item>
+      <div style={{display:'flex', justifyContent:'center', width:'100%', padding:'20px'}}>
+        <ImageUpload/>
+      </div>
       </div>
       </div>
       <div style={{display:'flex', justifyContent:'center', width:'100%'}}>
