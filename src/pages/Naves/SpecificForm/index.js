@@ -287,9 +287,7 @@ const SpecificForm = (props) => {
       <Form.Item name={['user', 'name_en']} label="Nombre en ingles" rules={[{ required: true }]}>
         <Input />
       </Form.Item>
-      <Form.Item name={['user', 'adress']} label="Dirección" rules={[{ required: true }]}>
-        <Input />
-      </Form.Item>
+
       </div>
       <div style={{display:'block', width:'50%'}}>
       <Form.Item name={['user', 'adress']} label="Calle y Número" rules={[{ required: true }]}>
