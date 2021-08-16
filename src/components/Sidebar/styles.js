@@ -13,10 +13,11 @@ export default makeStyles(theme => ({
   drawer: {
     width: drawerWidth,
     flexShrink: 0,
-    whiteSpace: "nowrap",
+    //whiteSpace: "nowrap",
   },
   drawerOpen: {
     width: drawerWidth,
+    width:"300px",
     transition: theme.transitions.create("width", {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.enteringScreen,
