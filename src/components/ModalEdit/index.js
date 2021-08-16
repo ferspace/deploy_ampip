@@ -20,6 +20,7 @@ const ModalEdit = (props) =>  {
         Editar
       </Button>
       <Modal title="Editar" visible={isModalVisible} onCancel={handleCancel} centered width={1400} >
+
         {props.children}
       </Modal>
     </>
