@@ -3,8 +3,11 @@ import { Drawer, IconButton, List } from "@material-ui/core";
 import {
   Home as HomeIcon,
   NotificationsNone as NotificationsIcon,
-  Person as AccountIcon,
-  FormatSize as TypographyIcon,
+  SupervisedUserCircle as AccountIconPerson,
+  AssignmentTurnedIn as AccountIcon,
+  EmojiEvents as TypographyIcon,
+  ContactPhone as TypographyIconDe,
+  Apartment as TypographyIconPro,
   FilterNone as UIElementsIcon,
   BorderAll as TableIcon,
   QuestionAnswer as SupportIcon,
@@ -47,13 +50,13 @@ const admin_ampip = [
     id: 2,
     label: "Desarrolladores",
     link: "/app/ui/desarrolladores",
-    icon: <TypographyIcon />
+    icon: <TypographyIconDe />
   },
   {
     id: 3,
     label: "Propiedades",
     link: "/app/propiedades",
-    icon: <TableIcon />,
+    icon: <TypographyIconPro />,
     children: [
       { label: "Parques", link: "/app/ui/parques" },
       { label: "Naves", link: "/app/ui/naves" },
@@ -66,7 +69,7 @@ const admin_ampip = [
     id: 4,
     label: "Usuarios",
     link: "/app/usuarios",
-    icon: <AccountIcon />,
+    icon: <AccountIconPerson />,
   }
 ];
 

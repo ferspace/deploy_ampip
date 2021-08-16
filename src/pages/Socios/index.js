@@ -91,7 +91,7 @@ const Desarrolladores = (props) => {
       )} />
       <Paper className={classes.iconsContainer}>
         <Tabs
-          indicatorColor="#fffff"
+          TabIndicatorProps={{style: {background:'#00AFB7'}}}
           textColor="#fffff"
           value={activeTabId}
           onChange={(e, id) => setActiveTabId(id)}

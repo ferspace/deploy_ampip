@@ -72,7 +72,7 @@ const Arendatario = (props) => {
 
   return (
     <>
-      <PageTitle title="Arendatarios" button={(
+      <PageTitle title="Arrendatarios" button={(
         <>
 
           <Menu
@@ -89,18 +89,18 @@ const Arendatario = (props) => {
       )} />
       <Paper className={classes.iconsContainer}>
         <Tabs
-          indicatorColor="#ffffff"
+          TabIndicatorProps={{style: {background:'#00AFB7'}}}
           textColor="#ffffff"
           value={activeTabId}
           onChange={(e, id) => setActiveTabId(id)}
           className={classes.iconsBar}
         >
-          <Tab label="Arendatarios" className={classes.menuspace} />
+          <Tab label="Arrendatarios" className={classes.menuspace} />
           <Tab label="Agregar" className={classes.menuspace} />
         </Tabs>
         {activeTabId === 0 && (
           <div style={{ padding: 20 }}>
-            <Tables title={"Todos los Arendatarios"} columns={["id", "Name", "Alta", {
+            <Tables title={"Todos los Arrendatarios"} columns={["id", "Name", "Alta", {
               label: "Ver",
               options: {
                 customBodyRender: (value, tableMeta, updateValue) => {
