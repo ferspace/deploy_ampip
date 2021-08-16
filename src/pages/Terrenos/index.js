@@ -20,7 +20,7 @@ import SpecificForm from './SpecificForm'
 import axios from 'axios';
 import Tables from '../Tables'
 import EditForm from './EditForm'
-import ShowInformation from './ShowInformation'
+import ShowInformation from '../Terrenos/ShowInformation'
 
 // icons sets
 import "font-awesome/css/font-awesome.min.css";
