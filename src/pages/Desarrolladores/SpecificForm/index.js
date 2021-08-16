@@ -24,6 +24,11 @@ const validateMessages = {
 };
 
 const SpecificForm = (props)=>{
+  const [form] = Form.useForm();
+
+  const onReset = () => {
+    form.resetFields();
+  };
 
   const onFinish = (values) => {
     var data = JSON.stringify({
@@ -92,6 +97,7 @@ const SpecificForm = (props)=>{
             timer: 1500
           })
           console.log(JSON.stringify(response.data));
+          onReset();
         })
         .catch(function (error) {
           Swal.fire({
@@ -112,7 +118,7 @@ const SpecificForm = (props)=>{
   return(
     <Form {...layout} name="nest-messages" onFinish={onFinish} validateMessages={validateMessages}>
       <div style={{ display: 'flex', justifyContent: 'center', width:'1200px'}}>
-      <div style={{display:'block', width:'50%'}}>
+      <div style={{display:'block', width:'50%'}} form={form}>
  
       <div style={{display:'flex', justifyContent:'center', width:'100%', padding:'20px'}}>
         <ImageUpload/>
