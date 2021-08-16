@@ -21,6 +21,7 @@ import axios from 'axios';
 import Tables from '../Tables'
 import EditForm from './EditForm'
 import store from '../../store/index'
+import ShowInformation from '../Arrendatario/ShowInformation'
 // icons sets
 import "font-awesome/css/font-awesome.min.css";
 import ModalInformation from '../../components/ModalInformation'
@@ -121,7 +122,7 @@ const Arendatario = (props) => {
               options: {
                 customBodyRender: (value, tableMeta, updateValue) => {
                   return (
-                    <ModalInformation data={tableMeta.rowData[0]} />
+                    <ModalInformation data={tableMeta.rowData[0]} children={<ShowInformation id={tableMeta.rowData[0]}/>}/>
                   )
                 }
               }
