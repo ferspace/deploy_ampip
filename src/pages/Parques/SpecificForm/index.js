@@ -278,10 +278,6 @@ const SpecificForm = (props) => {
           <Option value="OEA">OEA</Option>
         </Select>
       </Form.Item>
-      <Form.Item name={['user', 'superficie']} label="Superficie" rules={[{ required: true }]}>
-        <Input />
-      </Form.Item>
-
       <Form.Item name={['user', 'superficie_total']} label="Superficie Total" rules={[{ required: true }]}>
         <Input />
       </Form.Item>
@@ -302,6 +298,7 @@ const SpecificForm = (props) => {
           <Option value="M2">M2</Option>
           <Option value="Km2">Km2</Option>
           <Option value="Ha">Ha</Option>
+          <Option value="Ft2">Ft2</Option>
         </Select>
       </Form.Item>
       <Form.Item name={['user', 'map']} value={latlng} style={{display:'flex', justifyContent:'center', width:'100%', marginTop:'30px'}}>

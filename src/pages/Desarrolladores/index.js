@@ -105,7 +105,7 @@ const Desarrolladores = (props) => {
         </Tabs>
         {activeTabId === 0 && (
           <div style={{ padding: 20 }}>
-            <Tables title={"Todos los Desarrolladores"} columns={["id", "Name", "Nombre_en", "Direccion",
+            <Tables title={"Todos los Socios"} columns={["id", "Name", "Nombre_en", "Direccion",
               {
                 label: "Ver",
                 options: {

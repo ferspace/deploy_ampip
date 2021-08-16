@@ -41,16 +41,16 @@ const admin_ampip = [
     icon: <AccountIcon />,
   },
   {
-    id: 1,
-    label: "Patrocinadores AMPIP",
-    link: "/app/ui/socios",
-    icon: <TypographyIcon />
-  },
-  {
     id: 2,
     label: "Socio AMPIP",
     link: "/app/ui/desarrolladores",
     icon: <TypographyIconDe />
+  },
+  {
+    id: 1,
+    label: "Patrocinadores AMPIP",
+    link: "/app/ui/socios",
+    icon: <TypographyIcon />
   },
   {
     id: 3,
@@ -82,14 +82,14 @@ const user_ampip = [
   },
   {
     id: 1,
-    label: "Patrocinadores AMPIP",
-    link: "/app/ui/socios",
+    label: "Socio AMPIP",
+    link: "/app/ui/desarrolladores",
     icon: <TypographyIcon />
   },
   {
     id: 1,
-    label: "Socio AMPIP",
-    link: "/app/ui/desarrolladores",
+    label: "Patrocinadores AMPIP",
+    link: "/app/ui/socios",
     icon: <TypographyIcon />
   },
   {
