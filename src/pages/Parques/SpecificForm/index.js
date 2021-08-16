@@ -226,7 +226,7 @@ const SpecificForm = (props) => {
   }, []);
 
   return (
-    <Form {...layout} name="nest-messages" onFinish={onFinish} validateMessages={validateMessages} style={{ height: "1700px" }}>
+    <Form {...layout} name="nest-messages" onFinish={onFinish} validateMessages={validateMessages} style={{ height: "950px" }}>
       <div style={{ display: 'flex', justifyContent: 'center', width: '1200px' }}>
         <div style={{ display: 'block', width: '50%' }}>
           <div style={{ display: 'flex', justifyContent: 'center', width: '100%', padding: '20px' }}>
