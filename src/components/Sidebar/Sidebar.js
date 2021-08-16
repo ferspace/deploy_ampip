@@ -88,9 +88,9 @@ const user_ampip = [
   },
   {
     id: 1,
-    label: "Socio AMPIP",
-    link: "/app/ui/desarrolladores",
-    icon: <TypographyIconDe />
+    label: "Patrocinadores AMPIP",
+    link: "/app/ui/socios",
+    icon: <TypographyIcon />
   },
   {
     id: 2,

@@ -211,7 +211,7 @@ const SpecificForm = (props) => {
           <Option value="Norte">Norte</Option>
           <Option value="Oeste">Oeste</Option>
           <Option value="Poniente">Poniente</Option>
-          <Option value="Sur">Sur</Option>
+          <Option value="Sur"></Option>
         </Select>
       </Form.Item>
       <Form.Item name={['user', 'park_property']} label="Propietario" rules={[{ required: true }]}>
@@ -312,10 +312,10 @@ const SpecificForm = (props) => {
           placeholder="Selecciona la unidad de medida"
           allowClear
         >
-          <Option value="M2">M2</Option>
-          <Option value="Km2">Km2</Option>
+          <Option value="M2">m²</Option>
+          <Option value="Km2">km²</Option>
           <Option value="Ha">Ha</Option>
-          <Option value="Ft2">Ft2</Option>
+          <Option value="Ft2">ft²</Option>
         </Select>
       </Form.Item>
       <Form.Item name={['user', 'map']} value={latlng} style={{display:'flex', justifyContent:'center', width:'100%', marginTop:'30px'}}>
