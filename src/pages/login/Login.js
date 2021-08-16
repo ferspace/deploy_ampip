@@ -22,6 +22,7 @@ import imgampip from "../../images/imagen-ampip.jpg";
 // context
 import { useUserDispatch, loginUser } from "../../context/UserContext";
 import axios from "axios";
+import { FormatAlignJustifyTwoTone } from "@material-ui/icons";
 
 
 function Login(props) {
@@ -61,6 +62,8 @@ function Login(props) {
     axios(config)
       .then(function (response) {
         if (response.data.messages === "Signed In Successfully") {
+          localStorage.setItem('permisos',JSON.stringify(response.data.data.permissions))
+          localStorage.setItem('data', JSON.stringify(response.data.data.user))
           loginUser(
             userDispatch,
             loginValue,
@@ -68,24 +71,6 @@ function Login(props) {
             props.history,
             setIsLoading,
             setError)
-          localStorage.setItem('data', JSON.stringify(response.data.data.user))
-          var config = {
-            method: 'get',
-            url: `${store.URL_PRODUCTION}/dashboard`,
-            headers: { 
-              'Authorization': JSON.parse(localStorage.getItem('data')).authentication_token
-            }
-          };
-          
-          axios(config)
-          .then(function (response) {
-            localStorage.setItem('permisos', JSON.stringify(response.data.message.permissions))
-          })
-          .catch(function (error) {
-            console.log(error);
-          });
-          
-
         } else {
           alert("Usuario no autorizado")
         }
