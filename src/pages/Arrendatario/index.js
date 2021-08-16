@@ -72,7 +72,7 @@ const Arendatario = (props) => {
 
   return (
     <>
-      <PageTitle title="Arrendatarios" button={(
+      <PageTitle title="Inquilinos" button={(
         <>
 
           <Menu
@@ -95,12 +95,12 @@ const Arendatario = (props) => {
           onChange={(e, id) => setActiveTabId(id)}
           className={classes.iconsBar}
         >
-          <Tab label="Arrendatarios" className={classes.menuspace} />
+          <Tab label="Inquilinos" className={classes.menuspace} />
           <Tab label="Agregar" className={classes.menuspace} />
         </Tabs>
         {activeTabId === 0 && (
           <div style={{ padding: 20 }}>
-            <Tables title={"Todos los Arrendatarios"} columns={["id", "Name", "Alta", {
+            <Tables title={"Todos los Inquilinos"} columns={["id", "Name", "Alta", {
               label: "Ver",
               options: {
                 customBodyRender: (value, tableMeta, updateValue) => {
