@@ -78,7 +78,7 @@ const SpecificForm = (props) => {
             "colony": values.user.colony,
             "municipality": values.user.municipality,
             "state": values.user.state,
-            "status": 1,
+            "status": 0,
           }
         });
         
@@ -143,7 +143,7 @@ const SpecificForm = (props) => {
         "colony": values.user.colony,
         "municipality": values.user.municipality,
         "state": values.user.state,
-        "status": 1,
+        "status": 0,
       }
     });
     
@@ -205,14 +205,14 @@ const SpecificForm = (props) => {
 
   useEffect(() => {
     if(park.length === 0){
-      axios.get(`${store.URL_PRODUCTION}/propieties?type=0`, {
+      axios.get(`${store.URL_PRODUCTION}/dashboard`, {
         headers: {
           'Authorization': DataOption.authentication_token,
           'Content-Type': 'application/json'
         },
       }).then((response) => {
-        setPark(response.data)
-        console.log(response.data);
+        setPark(response.data.message.rescueParks)
+        //console.log();
         //setPost(response.data);
       });
     }
@@ -277,7 +277,7 @@ const SpecificForm = (props) => {
           {park.map((value, i) => {
             return (
               <Option key={i} value={value.name}>
-                {value.corporate_id}
+                {value.name}
               </Option>
             );
           })}

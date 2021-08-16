@@ -52,8 +52,8 @@ const EditForm = (props)=>{
   });
   
   var config = {
-    method: 'post',
-    url: `${store.URL_PRODUCTION}/corporates`,
+    method: 'put',
+    url: `${store.URL_PRODUCTION}/corporates/${props.id}`,
     headers: { 
       'Authorization': DataOption.authentication_token,
       'Content-Type': 'application/json'
@@ -77,8 +77,8 @@ const EditForm = (props)=>{
       });
       
       var config = {
-        method: 'post',
-        url: `${store.URL_PRODUCTION}/corporate_informations`,
+        method: 'put',
+        url: `${store.URL_PRODUCTION}/corporate_informations/${props.id}`,
         headers: { 
           'Authorization': DataOption.authentication_token, 
           'Content-Type': 'application/json'
