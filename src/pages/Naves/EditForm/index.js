@@ -38,15 +38,15 @@ const EditForm = (props) => {
         "nombre": values.user.name,
       }
     });
-    
+
     var config = {
-      method: 'post',
-      url: `${store.URL_PRODUCTION}/propieties`,
+      method: 'put',
+      url: `${store.URL_PRODUCTION}/propieties/${props.id}`,
       headers: { 
         'Authorization': DataOption.authentication_token, 
         'Content-Type': 'application/json'
       },
-      data : data
+      data: data
     };
     
     axios(config)
@@ -81,17 +81,17 @@ const EditForm = (props) => {
             "status": 1,
           }
         });
-        
+
         var config = {
-          method: 'post',
-          url: `${store.URL_PRODUCTION}/property_informations`,
-          headers: { 
+          method: 'put',
+          url: `${store.URL_PRODUCTION}/property_informations/${props.id}`,
+          headers: {
             'Authorization': DataOption.authentication_token, 
             'Content-Type': 'application/json'
           },
-          data : data
+          data: data
         };
-        
+
         axios(config)
         .then(function (response) {
           Swal.fire({

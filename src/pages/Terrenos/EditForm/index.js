@@ -36,8 +36,8 @@ const EditForm = (props)=>{
     });
     
     var config = {
-      method: 'post',
-      url: `${store.URL_PRODUCTION}/propieties`,
+      method: 'put',
+      url: `${store.URL_PRODUCTION}/propieties/${props.id}`,
       headers: { 
         'Authorization': DataOption.authentication_token, 
         'Content-Type': 'application/json'
@@ -79,8 +79,8 @@ const EditForm = (props)=>{
         });
         
         var config = {
-          method: 'post',
-          url: `${store.URL_PRODUCTION}/property_informations`,
+          method: 'put',
+          url: `${store.URL_PRODUCTION}/property_informations/${props.id}`,
           headers: { 
             'Authorization': DataOption.authentication_token, 
             'Content-Type': 'application/json'
@@ -144,8 +144,8 @@ const EditForm = (props)=>{
     });
     
     var config = {
-      method: 'post',
-      url: `${store.URL_PRODUCTION}/property_informations`,
+      method: 'put',
+      url: `${store.URL_PRODUCTION}/property_informations/${props.id}`,
       headers: { 
         'Authorization': DataOption.authentication_token, 
         'Content-Type': 'application/json'
