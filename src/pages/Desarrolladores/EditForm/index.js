@@ -123,9 +123,6 @@ const EditForm = (props)=>{
       {/* <Form.Item name={['user', 'RFC']} label="RFC" rules={[{ required: true }]}>
         <Input />
       </Form.Item> */}
-      <Form.Item name={['user', 'address']} label="Dirección" rules={[{ required: true }]}> 
-        <Input />
-      </Form.Item>
       <Form.Item name={['user', 'address']} label="Calle y número" rules={[{ required: true }]}> 
         <Input />
       </Form.Item>
