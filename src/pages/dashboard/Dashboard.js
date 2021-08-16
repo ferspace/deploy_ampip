@@ -77,7 +77,7 @@ export default function Dashboard(props) {
     <>
     
       <PageTitle style={{ backgroundColor: "#00afb7", borderColor: "#00afb7", color: "#ffffff" }}
-        title="Bienvenidos Dashboard"
+        title="Bienvenidos"
       />
       <Grid container spacing={2}>
       {mock.bigStat.map((stat) => (
