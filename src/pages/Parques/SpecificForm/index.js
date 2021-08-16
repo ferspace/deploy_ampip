@@ -150,14 +150,15 @@ const SpecificForm = (props) => {
 
   const [corporates, setCorporates] = useState([])
   useEffect(() => {
-    axios.get(`${store.URL_PRODUCTION}/corporates?type=0`, {
+    axios.get(`${store.URL_PRODUCTION}/dashboard`, {
       headers: {
         'Authorization': DataOption.authentication_token,
         'Content-Type': 'application/json'
       },
     }).then((response) => {
-      if (response.data.massage !== "Sin datos para mostrar") setCorporates(response.data)
-      //setPost(response.data);
+      if (response.data.message.widgets[0].developers) {
+        setCorporates(response.data.message.widgets[0].developers)
+      }
     });
   }, []);
 
