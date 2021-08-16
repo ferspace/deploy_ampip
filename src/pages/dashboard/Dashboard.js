@@ -37,6 +37,8 @@ import BigStat from "./components/BigStat/BigStat";
 import FlatListErrors from "./components/FlatListErrors";
 import store from '../../store/index'
 import Tables from '../Tables'
+import ModalInformation from "../../components/ModalInformation";
+import ShowInformation from "./ShowInformation";
 
 const mainChartData = getMainChartData();
 const PieChartData = [
@@ -52,8 +54,8 @@ export default function Dashboard(props) {
 
   const [widgets, setWidgets] = useState({ developers: [], sponsors: [] });
   const [allusers, setAllusers] = useState({ all_user: [] })
-  const [allChanges, setAllChanges] = useState({ all_changes: [] })
-  const [allproperties, setAllproperties] = useState({ parks:[], nav: [], other: [] })
+  const [allChanges, setAllChanges] = useState([])
+  const [allproperties, setAllproperties] = useState({ parks: [], nav: [], other: [] })
 
   useEffect(() => {
     var config = {
@@ -73,18 +75,28 @@ export default function Dashboard(props) {
         }
         if (response.data.message.allUser) {
           setAllusers({ all_user: response.data.message.allUser });
-        } 
+        }
 
         if (response.data.message.allChanges) {
           console.log(response.data.message.allChanges);
-          setAllChanges({ all_changes: response.data.message.allChanges });
+          //setAllChanges({ all_changes: response.data.message.allChanges });
+          var corporatesAdd = [];
+          response.data.message.allChanges.map((i) => {
+            var corporates = [];
+            corporates.push(i.id);
+            corporates.push(i.name)
+            corporatesAdd.push(corporates);
+          });
+
+          setAllChanges([...corporatesAdd]);
+          console.log(allChanges);
         }
 
         if (response.data.message.allProperties) {
           setAllproperties({ parks: response.data.message.allProperties.parques, nav: response.data.message.allProperties.naves, other: response.data.message.allProperties.terrenos });
         }
 
-        
+
       })
       .catch(function (error) {
         console.log(error);
@@ -167,7 +179,7 @@ export default function Dashboard(props) {
             noBodyPadding
             bodyClass={classes.tableWidget}
           >
-            <Tables title={"Todos los Usuarios"} columns={["id","full_name"]} tableData={allusers.all_user} />
+            <Tables title={"Todos los Usuarios"} columns={["id", "full_name"]} tableData={allusers.all_user} />
           </Widget>
         </Grid>
 
@@ -178,7 +190,16 @@ export default function Dashboard(props) {
             noBodyPadding
             bodyClass={classes.tableWidget}
           >
-            <Tables title={"Cambios sin aprobar"} columns={["id","name"]} tableData={allChanges.all_changes} />
+            <Tables title={"Cambios sin aprobar"} columns={["id", "name", {
+            label: "Ver",
+            options: {
+              customBodyRender: (value, tableMeta, updateValue) => {
+                return (
+                  <ModalInformation data={tableMeta.rowData[0]} children={<ShowInformation id={tableMeta.rowData[0]}/>}/>
+                )
+              }
+            }
+          }]} tableData={allChanges} />
           </Widget>
         </Grid>
       </Grid>

@@ -74,7 +74,7 @@ const SpecificForm = (props)=>{
             "colony": values.user.colony,
             "municipality": values.user.municipality,
             "state": values.user.state,
-            "status": 1,
+            "status": 0,
           }
         });
         
@@ -139,7 +139,7 @@ const SpecificForm = (props)=>{
         "colony": values.user.colony,
         "municipality": values.user.municipality,
         "state": values.user.state,
-        "status": 1,
+        "status": 0,
       }
     });
     
@@ -188,26 +188,28 @@ const SpecificForm = (props)=>{
   const [park , setPark] = useState([])
 
   useEffect(() => {
-    if(corporates.length === 0){
-      axios.get(`${store.URL_PRODUCTION}/corporates?type=0`, {headers: { 
-      'Authorization': DataOption.authentication_token,  
-      'Content-Type': 'application/json'
-    },}).then((response) => {
-       setCorporates(response.data)
-      //setPost(response.data);
-    });
-    }
-  },[]);
-
-  useEffect(() => {
-    if(park.length === 0){
-      axios.get(`${store.URL_PRODUCTION}/propieties?type=0`, {
+    if (corporates.length === 0) {
+      axios.get(`${store.URL_PRODUCTION}/dashboard`, {
         headers: {
           'Authorization': DataOption.authentication_token,
           'Content-Type': 'application/json'
         },
       }).then((response) => {
-        setPark(response.data)
+        setCorporates(response.data.message.widgets[0].developers)
+        //setPost(response.data);
+      });
+    }
+  }, []);// obtiene el corporativo
+
+  useEffect(() => {
+    if(park.length === 0){
+      axios.get(`${store.URL_PRODUCTION}/dashboard`, {
+        headers: {
+          'Authorization': DataOption.authentication_token,
+          'Content-Type': 'application/json'
+        },
+      }).then((response) => {
+        setPark(response.data.message.rescueParks)
         //setPost(response.data);
       });
     }
