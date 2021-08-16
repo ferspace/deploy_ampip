@@ -128,7 +128,7 @@ return (
     )} />
     <Paper className={classes.iconsContainer}>
       <Tabs
-        indicatorColor="#ffffff"
+        TabIndicatorProps={{style: {background:'#00AFB7'}}}
         textColor="#ffffff"
         value={activeTabId}
         onChange={(e, id) => setActiveTabId(id)}

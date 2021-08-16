@@ -126,7 +126,6 @@ const Terrenos = (props) => {
       )} />
       <Paper className={classes.iconsContainer}>
         <Tabs
-          //indicatorColor="#00AFB7"
           TabIndicatorProps={{style: {background:'#00AFB7'}}}
           textColor="#ffffff"
           value={activeTabId}

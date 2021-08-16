@@ -144,7 +144,7 @@ const UserModal = (props) => {
         Mi Perfil
       </Button>
 
-      <Modal title="Informacion Usuario" visible={isModalVisible} onCancel={handleCancel} onOk={handleOk} centered>
+      <Modal title="Información del Usuario" visible={isModalVisible} onCancel={handleCancel} onOk={handleOk} centered>
         <Form {...layout} name="nest-messages" onFinish={onFinish} validateMessages={validateMessages} initialValues={{ dataOf: initialValue }}>
           <Form.Item name={['dataOf', 'full_name']} label="Nombre" rules={[{ required: true }]}>
             <Input />
@@ -152,7 +152,7 @@ const UserModal = (props) => {
           <Form.Item name={['dataOf', 'last_name']} label="Apellido" rules={[{ required: true }]}>
             <Input defaultValue="mysite" />
           </Form.Item>
-          <Form.Item name={['dataOf', 'address']} label="Direccion" rules={[{ required: true }]}>
+          <Form.Item name={['dataOf', 'address']} label="Dirección" rules={[{ required: true }]}>
             <Input defaultValue="mysite" />
           </Form.Item>
           <Form.Item name={['dataOf', 'colony']} label="Colonia" rules={[{ required: true }]}>
@@ -164,19 +164,19 @@ const UserModal = (props) => {
           <Form.Item name={['dataOf', 'municipality']} label="Municipio" rules={[{ required: true }]}>
             <Input defaultValue="mysite" />
           </Form.Item>
-          <Form.Item name={['dataOf', 'office_address']} label="Direccion de oficina" rules={[{ required: true }]}>
+          <Form.Item name={['dataOf', 'office_address']} label="Dirección de oficina" rules={[{ required: true }]}>
             <Input defaultValue="mysite" />
           </Form.Item>
           <Form.Item name={['dataOf', 'charge']} label="Cargo" rules={[{ required: true }]}>
             <Input defaultValue="mysite" />
           </Form.Item>
           <Form.Item name={['dataOf', 'phone_office_lada']} label="Lada" rules={[{ required: true }]}>
-            <Input defaultValue="mysite" />
+            <Input style={{width:"100px"}} defaultValue="mysite" />
           </Form.Item>
-          <Form.Item name={['dataOf', 'phone_office_code']} label="Codigo de pais" rules={[{ required: true }]}>
-            <Input defaultValue="mysite" />
+          <Form.Item name={['dataOf', 'phone_office_code']} label="Código de país" rules={[{ required: true }]}>
+            <Input style={{width:"100px"}} defaultValue="mysite" />
           </Form.Item>
-          <Form.Item name={['dataOf', 'phone_office']} label="Telefono" rules={[{ required: true }]}>
+          <Form.Item name={['dataOf', 'phone_office']} label="Teléfono" rules={[{ required: true }]}>
             <Input defaultValue="mysite" />
           </Form.Item>
           <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>

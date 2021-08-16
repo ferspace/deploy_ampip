@@ -105,7 +105,7 @@ const Arendatario = (props) => {
       )} />
       <Paper className={classes.iconsContainer}>
         <Tabs
-          indicatorColor="#ffffff"
+          TabIndicatorProps={{style: {background:'#00AFB7'}}}
           textColor="#ffffff"
           value={activeTabId}
           onChange={(e, id) => setActiveTabId(id)}
@@ -116,7 +116,7 @@ const Arendatario = (props) => {
         </Tabs>
         {activeTabId === 0 && (
           <div style={{ padding: 20 }}>
-            {read && <Tables title={"Todos los Arendatarios"} columns={["id", "Name", "Alta", {
+            <Tables title={"Todos los Inquilinos"} columns={["id", "Name", "Alta", {
               label: "Ver",
               options: {
                 customBodyRender: (value, tableMeta, updateValue) => {
