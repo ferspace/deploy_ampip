@@ -35,7 +35,8 @@ const SpecificForm = (props) => {
         },
       })
       .then((response) => {
-        setPermissions(response.data);
+        //setPermissions(response.data);
+        console.log(response.data);
         //setPost(response.data);
       });
 
@@ -139,7 +140,13 @@ const SpecificForm = (props) => {
 
   };
 
-  const [permissions, setPermissions] = useState([]);
+  const [permissions, setPermissions] = useState([ {id: 1, name: "Administrador AMPIP", created_at: "2021-08-16T00:21:50.519Z", updated_at: "2021-08-16T00:21:50.519Z"},
+  {id: 2, name: "Usuario AMPIP", created_at: "2021-08-16T00:22:20.904Z", updated_at: "2021-08-16T00:22:20.904Z"},
+  {id: 3, name: "Administrador Socio", created_at: "2021-08-16T00:22:50.693Z", updated_at: "2021-08-16T00:22:50.693Z"},
+  {id: 4, name: "Usuario Socio", created_at: "2021-08-16T00:23:00.855Z", updated_at: "2021-08-16T00:23:00.855Z"},
+  {id: 5, name: "Administrador Propiedades", created_at: "2021-08-16T00:23:10.436Z", updated_at: "2021-08-16T00:23:10.436Z"},
+  {id: 6, name: "Patrocinador", created_at: "2021-08-16T00:23:22.168Z", updated_at: "2021-08-16T00:23:22.168Z"}
+ ]);
   const [corporates, setCorporates] = useState([]);
 
   return (

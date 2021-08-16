@@ -3,8 +3,11 @@ import { Drawer, IconButton, List } from "@material-ui/core";
 import {
   Home as HomeIcon,
   NotificationsNone as NotificationsIcon,
-  Person as AccountIcon,
-  FormatSize as TypographyIcon,
+  SupervisedUserCircle as AccountIconPerson,
+  AssignmentTurnedIn as AccountIcon,
+  EmojiEvents as TypographyIcon,
+  ContactPhone as TypographyIconDe,
+  Apartment as TypographyIconPro,
   FilterNone as UIElementsIcon,
   BorderAll as TableIcon,
   QuestionAnswer as SupportIcon,
@@ -33,72 +36,72 @@ import {
 const admin_ampip = [
   {
     id: 0,
-    label: "Dashboard",
+    label: "Información",
     link: "/app/dashboard",
     icon: <AccountIcon />,
   },
   {
     id: 1,
-    label: "Patrocinadores",
+    label: "Patrocinadores AMPIP",
     link: "/app/ui/socios",
     icon: <TypographyIcon />
   },
   {
     id: 2,
-    label: "Desarrolladores",
+    label: "Socio AMPIP",
     link: "/app/ui/desarrolladores",
-    icon: <TypographyIcon />
+    icon: <TypographyIconDe />
   },
   {
     id: 3,
-    label: "Propiedades",
+    label: "Ver Propiedades",
     link: "/app/propiedades",
-    icon: <TableIcon />,
+    icon: <TypographyIconPro />,
     children: [
-      { label: "Parques", link: "/app/ui/parques" },
-      { label: "Naves", link: "/app/ui/naves" },
+      { label: "Parques Industriales", link: "/app/ui/parques" },
+      { label: "Naves Industriales", link: "/app/ui/naves" },
       { label: "Terrenos", link: "/app/ui/terrenos" },
-      { label: "Disponibles", link: "/app/ui/disponibles" },
-      { label: "Arrendatarios", link: "/app/ui/arrendatarios" },
+      { label: "Propiedades Disponibles", link: "/app/ui/disponibles" },
+      { label: "Inquilinos", link: "/app/ui/arrendatarios" },
     ],
   },
   {
     id: 4,
     label: "Usuarios",
     link: "/app/usuarios",
-    icon: <AccountIcon />,
+    icon: <AccountIconPerson />,
   }
 ];
 
 const user_ampip = [
   {
     id: 0,
-    label: "Dashboard",
+    label: "Información",
     link: "/app/dashboard",
     icon: <AccountIcon />,
   },
   {
     id: 1,
-    label: "Patrocinadores",
+    label: "Patrocinadores AMPIP",
     link: "/app/ui/socios",
     icon: <TypographyIcon />
   },
   {
     id: 1,
-    label: "Desarrolladores",
+    label: "Socio AMPIP",
     link: "/app/ui/desarrolladores",
     icon: <TypographyIcon />
   },
   {
     id: 2,
-    label: "Propiedades",
+    label: "Ver Propiedades",
     link: "/app/propiedades",
     icon: <TableIcon />,
     children: [
-      { label: "Parques", link: "/app/ui/parques" },
-      { label: "Naves", link: "/app/ui/naves" },
+      { label: "Parques Industriales", link: "/app/ui/parques" },
+      { label: "Naves Industriales", link: "/app/ui/naves" },
       { label: "Terrenos", link: "/app/ui/terrenos" },
-      { label: "Disponibles", link: "/app/ui/disponibles" },
+      { label: "Propiedades Disponibles", link: "/app/ui/disponibles" },
     ],
   },
   {
@@ -113,14 +116,14 @@ const admin_society = [
   
   {
     id: 2,
-    label: "Propiedades",
+    label: "Ver Propiedades",
     link: "/app/propiedades",
     icon: <TableIcon />,
     children: [
-      { label: "Parques", link: "/app/ui/parques" },
-      { label: "Naves", link: "/app/ui/naves" },
+      { label: "Parques Industriales", link: "/app/ui/parques" },
+      { label: "Naves Industriales", link: "/app/ui/naves" },
       { label: "Terrenos", link: "/app/ui/terrenos" },
-      { label: "Disponibles", link: "/app/ui/disponibles" },
+      { label: "Propiedades Disponibles", link: "/app/ui/disponibles" },
     ],
   }
 ];
@@ -128,14 +131,14 @@ const admin_society = [
 const user_society = [
   {
     id: 2,
-    label: "Propiedades",
+    label: "Ver Propiedades",
     link: "/app/propiedades",
     icon: <TableIcon />,
     children: [
-      { label: "Parques", link: "/app/ui/parques" },
-      { label: "Naves", link: "/app/ui/naves" },
+      { label: "Parques Industriales", link: "/app/ui/parques" },
+      { label: "Naves Industriales", link: "/app/ui/naves" },
       { label: "Terrenos", link: "/app/ui/terrenos" },
-      { label: "Disponibles", link: "/app/ui/disponibles" },
+      { label: "Propiedades Disponibles", link: "/app/ui/disponibles" },
     ],
   },
   {
@@ -149,14 +152,14 @@ const user_society = [
 const admin_propiety = [
   {
     id: 2,
-    label: "Propiedades",
+    label: "Ver Propiedades",
     link: "/app/propiedades",
     icon: <TableIcon />,
     children: [
-      { label: "Parques", link: "/app/ui/parques" },
-      { label: "Naves", link: "/app/ui/naves" },
+      { label: "Parques Industriales", link: "/app/ui/parques" },
+      { label: "Naves Industriales", link: "/app/ui/naves" },
       { label: "Terrenos", link: "/app/ui/terrenos" },
-      { label: "Disponibles", link: "/app/ui/disponibles" },
+      { label: "Propiedades Disponibles", link: "/app/ui/disponibles" },
     ],
   }
 ];
@@ -170,14 +173,14 @@ const user_propiety = [
   },
   {
     id: 2,
-    label: "Propiedades",
+    label: "Ver Propiedades",
     link: "/app/propiedades",
     icon: <TableIcon />,
     children: [
-      { label: "Parques", link: "/app/ui/parques" },
-      { label: "Naves", link: "/app/ui/naves" },
+      { label: "Parques Industriales", link: "/app/ui/parques" },
+      { label: "Naves Industriales", link: "/app/ui/naves" },
       { label: "Terrenos", link: "/app/ui/terrenos" },
-      { label: "Disponibles", link: "/app/ui/disponibles" },
+      { label: "Propiedades Disponibles", link: "/app/ui/disponibles" },
     ],
   }
 ];

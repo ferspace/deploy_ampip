@@ -113,7 +113,7 @@ const Disponibles = () => {
 
   return (
     <>
-      <PageTitle title="Espacio Disponible" button={(
+      <PageTitle title="Propiedades Disponibles" button={(
         <>
           <Menu
             id="simple-menu"
