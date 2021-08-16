@@ -297,7 +297,7 @@ const EditForm = (props) => {
           allowClear
         >
           <Option value="M2">M2</Option>
-          <Option value="Km2">Km2</Option>
+          <Option value="Km2">FT2</Option>
           <Option value="Ha">Ha</Option>
         </Select>
       </Form.Item>
