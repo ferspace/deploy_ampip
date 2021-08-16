@@ -190,7 +190,7 @@ const SpecificForm = (props) => {
         <Input />
       </Form.Item>
       <Form.Item name={['user', 'postal_code']} label="Código Postal" rules={[{ required: true }]}>
-        <Input />
+        <Input style={{width:"100px"}} />
       </Form.Item>
       <Form.Item name={['user', 'colony']} label="Colonia" rules={[{ required: true }]}>
         <Input />

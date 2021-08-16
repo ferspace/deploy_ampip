@@ -135,7 +135,7 @@ const Arendatario = (props) => {
                     )
                   }
                 }
-              }]} tableData={datatableData} />}
+              }]} tableData={datatableData} />
           </div>
 
         )}
