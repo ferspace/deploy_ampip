@@ -42,6 +42,7 @@ const SpecificForm = (props) => {
   const [corporates, setCorporates] = useState([]);
 
   const onFinish = (values) => {
+
     var data = JSON.stringify({
       "tenant_user": {
         "property": values.user.propertyId,
@@ -87,6 +88,8 @@ const SpecificForm = (props) => {
           axios(config)
           .then(function (response) {
             Swal.fire({text: response.data.message})
+            props.functionFetch()
+
           })
           .catch(function (error) {
             console.log(error);

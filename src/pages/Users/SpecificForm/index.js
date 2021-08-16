@@ -122,7 +122,8 @@ const SpecificForm = (props) => {
             timer: 1500
           })
           
-          
+          props.functionFetch()
+
         })
         .catch(function (error) {
           Swal.fire({

@@ -51,6 +51,9 @@ const validateMessages = {
 const EditForm = (props) => {
 
   const [latlng, setLatlng] = useState({lat: 19.00, lng: -99.644})
+  const [corporates, setCorporates] = useState([])
+  const [parkById, setParkById] = useState([])
+
   const events = (e) => {
     setLatlng({lat:e.latLng.lat(), lng:e.latLng.lng()})
   }
@@ -127,6 +130,8 @@ const EditForm = (props) => {
                 showConfirmButton: false,
                 timer: 1500
               })
+              props.functionFetch()
+
               console.log(JSON.stringify(response.data));
             })
             .catch(function (error) {
@@ -146,7 +151,6 @@ const EditForm = (props) => {
 
   };
 
-  const [corporates, setCorporates] = useState([])
   useEffect(() => {
     axios.get(`${store.URL_PRODUCTION}/corporates?type=0`, {
       headers: {
@@ -155,6 +159,18 @@ const EditForm = (props) => {
       },
     }).then((response) => {
       if (response.data.massage !== "Sin datos para mostrar") setCorporates(response.data)
+      //setPost(response.data);
+    });
+  }, []);
+
+  useEffect(() => {
+    axios.get(`${store.URL_PRODUCTION}/propieties/${props.id}`, {
+      headers: {
+        'Authorization': DataOption.authentication_token,
+        'Content-Type': 'application/json'
+      },
+    }).then((response) => {
+      setParkById(response.data)
       //setPost(response.data);
     });
   }, []);
