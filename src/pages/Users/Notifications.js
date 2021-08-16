@@ -25,6 +25,10 @@ import Widget from "../../components/Widget/Widget";
 import PageTitle from "../../components/PageTitle/PageTitle";
 import Notification from "../../components/Notification";
 import store from '../../store/index'
+import ShowInformation from '../Users/ShowInformation'
+import ModalInformation from '../../components/ModalInformation'
+import ModaEdit from '../../components/ModalEdit'
+import EditForm from './EditForm'
 
 const data = JSON.parse(localStorage.getItem("data"));
 const permisos = JSON.parse(localStorage.getItem("permisos"));
@@ -60,9 +64,7 @@ export default function NotificationsPage(props) {
 
   const [datatableData, setDatatableData] = useState([]) //descomentar al integrar apis
 
-
-  useEffect(() => {    //aqui va la peticion al endpoint , se va aprocesar la informacion del tipo [[dato1,dato2]]
-    permissionsMap()
+  const seviceGet =()=>{
     axios.get(`${store.URL_PRODUCTION}/user_informations`, {
       headers: {
         'Authorization': data.authentication_token,
@@ -88,6 +90,11 @@ export default function NotificationsPage(props) {
     }).catch(error => {
       console.log(error); // poner alerta cuando tengamos tiempo
     });
+  }
+
+  useEffect(() => {    //aqui va la peticion al endpoint , se va aprocesar la informacion del tipo [[dato1,dato2]]
+    permissionsMap()
+    seviceGet()
   }, []);
 
   return (
@@ -106,13 +113,33 @@ export default function NotificationsPage(props) {
         </Tabs>
         {activeTabId === 0 && (
           <div style={{padding:20}}>
-          {read && <Tables title={"Todos los Usuarios"} columns={["id","Nombre", "Apellido", "Direccion"]} tableData={datatableData} />}
+          {read && <Tables title={"Todos los Usuarios"} columns={["id","Nombre", "Apellido", "Direccion", {
+            label: "Ver",
+            options: {
+              customBodyRender: (values, tableMeta, updateValue) => {
+                return (
+                  <ModalInformation data={tableMeta.rowData[0]} children={<ShowInformation id={tableMeta.rowData[0]}/>}/>
+                )
+                
+              }
+            }
+          },
+          {
+            label: "Editar",
+            options:{
+              customBodyRender: (value, tableMeta, updateValue) => {
+                return (
+                  <ModaEdit data={tableMeta.rowData[0]} children={<EditForm id={tableMeta.rowData[0]}/>} write={write}/>
+                )
+              }
+            }
+          }]} tableData={datatableData} />}
           </div>
         )}
 
         {activeTabId === 1 && (
           <div style={{display:'flex', justifyContent:'center'}}>
-          {write && <SpecificForm/>}
+          {write && <SpecificForm functionFetch={()=>seviceGet()}/>}
         </div>
         )}
       </Paper>

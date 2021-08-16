@@ -60,7 +60,7 @@ const SpecificForm = (props)=>{
         'Authorization': DataOption.authentication_token, 
         'Content-Type': 'application/json'
       },
-      data : data
+      data: data
     };
     
     axios(config)
@@ -85,7 +85,7 @@ const SpecificForm = (props)=>{
             'Authorization': DataOption.authentication_token, 
             'Content-Type': 'application/json'
           },
-          data : data
+          data: data
         };
         
         axios(config)
@@ -113,6 +113,9 @@ const SpecificForm = (props)=>{
     .catch(function (error) {
       console.log(error);
     });
+
+    props.functionFetch()
+
   };
 
   return(

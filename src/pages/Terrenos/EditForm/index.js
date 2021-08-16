@@ -180,6 +180,8 @@ const EditForm = (props)=>{
     }else{
       saveWhitouthProperty(values);
     }
+    props.functionFetch()
+
   };
 
   const [corporates, setCorporates] = useState([]);

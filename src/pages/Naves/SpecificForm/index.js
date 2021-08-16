@@ -184,6 +184,8 @@ const SpecificForm = (props) => {
     }else{
       saveWhitouthProperty(values);
     }
+    props.functionFetch()
+
   };
 
 

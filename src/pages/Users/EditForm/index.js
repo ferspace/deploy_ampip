@@ -25,7 +25,7 @@ const validateMessages = {
 };
 const DataOption = JSON.parse(localStorage.getItem("data"));
 
-const SpecificForm = (props) => {
+const EditForm = (props) => {
   useEffect(() => {
     axios
       .get(`${store.URL_PRODUCTION}/user_rol`, {
@@ -137,7 +137,7 @@ const SpecificForm = (props) => {
       .catch(function (error) {
         console.log(error);
       });
-      props.functionFetch()
+
   };
 
   const [permissions, setPermissions] = useState([ {id: 1, name: "Administrador AMPIP", created_at: "2021-08-16T00:21:50.519Z", updated_at: "2021-08-16T00:21:50.519Z"},
@@ -207,4 +207,4 @@ const SpecificForm = (props) => {
     </Form>
   );
 };
-export default SpecificForm;
+export default EditForm;

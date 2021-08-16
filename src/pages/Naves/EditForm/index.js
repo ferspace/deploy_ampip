@@ -184,6 +184,7 @@ const EditForm = (props) => {
     }else{
       saveWhitouthProperty(values);
     }
+    props.functionFetch()
   };
 
 

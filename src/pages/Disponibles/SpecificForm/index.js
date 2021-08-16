@@ -21,6 +21,7 @@ const SpecificForm = (props)=>{
 
   const onFinish = (values) => {
     console.log(values);
+    props.functionFetch() // esta funcion va al final de todas
   };
 
   return(
