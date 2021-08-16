@@ -77,80 +77,12 @@ export default function Dashboard(props) {
     <>
     
       <PageTitle style={{ backgroundColor: "#00afb7", borderColor: "#00afb7", color: "#ffffff" }}
-        title="Bienvenidos"
+        title="Bienvenido/a "
       />
       <Grid container spacing={2}>
-      {mock.bigStat.map((stat) => (
-          <Grid item md={4} sm={6} xs={12} key={stat.product}>
-            <BigStat {...stat} />
-          </Grid>
-        ))}
-        <Grid item lg={3} md={4} sm={6} xs={12}>
-          <Widget
-            title="Visits Today"
-            upperTitle
-            bodyClass={classes.fullHeightBody}
-            className={classes.card}
-          >
-            <div className={classes.visitsNumberContainer}>
-              <Grid container item alignItems={"center"}>
-                <Grid item xs={6}>
-                  <Typography size="xl" weight="medium" noWrap>
-                    12, 678
-                  </Typography>
-                </Grid>
-                <Grid item xs={6}>
-                  <LineChart
-                    width={100}
-                    height={30}
-                    data={[
-                      { value: 10 },
-                      { value: 15 },
-                      { value: 10 },
-                      { value: 17 },
-                      { value: 18 },
-                    ]}
-                  >
-                    <Line
-                      type="natural"
-                      dataKey="value"
-                      stroke={theme.palette.success.main}
-                      strokeWidth={2}
-                      dot={false}
-                    />
-                  </LineChart>
-                </Grid>
-              </Grid>
-            </div>
-            <Grid
-              container
-              direction="row"
-              justify="space-between"
-              alignItems="center"
-            >
-              <Grid item xs={4}>
-                <Typography color="text" colorBrightness="secondary" noWrap>
-                  Registrations
-                </Typography>
-                <Typography size="md">860</Typography>
-              </Grid>
-              <Grid item xs={4}>
-                <Typography color="text" colorBrightness="secondary" noWrap>
-                  Sign Out
-                </Typography>
-                <Typography size="md">32</Typography>
-              </Grid>
-              <Grid item xs={4}>
-                <Typography color="text" colorBrightness="secondary" noWrap>
-                  Rate
-                </Typography>
-                <Typography size="md">3.25%</Typography>
-              </Grid>
-            </Grid>
-          </Widget>
-        </Grid>
         
-        <Grid item lg={3} md={8} sm={6} xs={12}>
+        
+        <Grid item lg={4} xs={12}>
           <Widget
             title="Parques"
             upperTitle
@@ -231,7 +163,7 @@ export default function Dashboard(props) {
             </div>
           </Widget>
         </Grid>
-        <Grid item lg={3} md={4} sm={6} xs={12}>
+        <Grid item lg={4} xs={12}>
           <Widget title="Naves" upperTitle className={classes.card}>
             <Grid container spacing={2}>
               <Grid item xs={6}>
@@ -273,9 +205,9 @@ export default function Dashboard(props) {
             </Grid>
           </Widget>
         </Grid>
-        <Grid item lg={3} md={8} sm={6} xs={12}>
+        <Grid item lg={4} xs={12}>
             <Widget
-              title="Errores"
+              title="Terrenos"
               upperTitle
               className={classes.card}
               bodyClass={classes.fullHeightBody}
@@ -283,6 +215,8 @@ export default function Dashboard(props) {
               <FlatListErrors/>
             </Widget>
         </Grid>
+        
+        {/* Patrocinadores y  Desarrolladores */}
         <Grid item md={6} xs={12}>
           <Widget
             title="Usuarios pendientes de activar"

@@ -29,16 +29,14 @@ const mock = {
     {
       product: "Total de Corporativos",
       total: {
-        monthly: 4232,
-        weekly: 1465,
-        daily: 199,
+        daily: 1000,
         percent: { value: 3.7, profit: false }
       },
       color: "primary",
       registrations: {
-        monthly: { value: 830, profit: false },
-        weekly: { value: 215, profit: true },
-        daily: { value: 33, profit: true }
+        monthly: { value: null, profit: false },
+        weekly: { value: 215, profit: false },
+        daily: { value: 33, profit: false }
       },
       bounce: {
         monthly: { value: 4.5, profit: false },
