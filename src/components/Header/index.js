@@ -196,7 +196,6 @@ export default function Header(props) {
             </Typography>
             
           </div>
-
           <div className={classes.profileMenuUser}>
             <Typography
               className={classes.profileMenuLink}
@@ -208,6 +207,7 @@ export default function Header(props) {
           </div>
         </Menu>
         <UserModal  />
+
       </Toolbar>
     </AppBar>
   );
