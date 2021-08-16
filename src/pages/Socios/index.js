@@ -90,7 +90,7 @@ const Desarrolladores = (props) => {
 
   return (
     <>
-      <PageTitle title="Patrocinadores" button={(
+      <PageTitle title="Patrocinadores AMPIP" button={(
         <>
           <Menu
             id="simple-menu"

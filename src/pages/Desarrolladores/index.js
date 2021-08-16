@@ -77,7 +77,7 @@ const Desarrolladores = (props) => {
 
   return (
     <>
-      <PageTitle style={{color:"red"}} title="Desarrolladores" button={(
+      <PageTitle style={{color:"red"}} title="Socios AMPIP" button={(
         <>
           <Menu
             id="simple-menu"
