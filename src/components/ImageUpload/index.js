@@ -32,7 +32,7 @@ const Uploaded = () => {
                 dragProps,
             }) => (
                 // write your building UI
-                <div className="upload__image-wrapper">
+                <div style={{margin:'15px 5px', textAlign:'center'}} className="upload__image-wrapper">
                     <button
                         style={{backgroundColor:'#333333', border:'solid 1px #333333', color:'#ffffff', padding:'5px 10px', cursor:'pointer'}}
                         //style={isDragging ? { color: 'red' } : undefined}
