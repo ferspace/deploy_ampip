@@ -89,7 +89,7 @@ const Naves = (props) => {
 
   return (
     <>
-      <PageTitle title="Naves" button={(
+      <PageTitle title="Naves Industriales" button={(
         <>
 
           <Menu

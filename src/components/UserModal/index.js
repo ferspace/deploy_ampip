@@ -141,7 +141,7 @@ const UserModal = (props) => {
     <>
 
       <Button style={{ backgroundColor: "#00afb7", borderColor: "#00afb7", color: "#ffffff" }} type="primary" onClick={showModal}>
-        Perfil
+        Mi Perfil
       </Button>
 
       <Modal title="Informacion Usuario" visible={isModalVisible} onCancel={handleCancel} onOk={handleOk} centered>

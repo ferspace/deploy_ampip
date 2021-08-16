@@ -88,7 +88,7 @@ const Arendatario = (props) => {
 
   return (
     <>
-      <PageTitle title="Arendatarios" button={(
+      <PageTitle title="Inquilinos" button={(
         <>
 
           <Menu
@@ -111,7 +111,7 @@ const Arendatario = (props) => {
           onChange={(e, id) => setActiveTabId(id)}
           className={classes.iconsBar}
         >
-          <Tab label="Arendatarios" className={classes.menuspace} />
+          <Tab label="Inquilinos" className={classes.menuspace} />
           <Tab label="Agregar" className={classes.menuspace} />
         </Tabs>
         {activeTabId === 0 && (

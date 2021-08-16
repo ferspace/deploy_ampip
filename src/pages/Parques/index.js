@@ -111,7 +111,7 @@ const Parques = (props) => {
 
 return (
   <>
-    <PageTitle title="Parques" button={(
+    <PageTitle title="Parques Industriales" button={(
       <>
 
         <Menu
