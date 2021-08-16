@@ -45,11 +45,9 @@ export default function SimpleModal(props) {
       <Button style={{backgroundColor: '#333333', color: "#ffffff", border:"none"}} type="primary" onClick={showModal}>
           ver
       </Button>
-<<<<<<< HEAD
-      <Modal title="Editar" visible={isModalVisible} onCancel={handleCancel} centered>
-=======
+
       <Modal title="Detalles" visible={isModalVisible} onCancel={handleCancel}>
->>>>>>> ee92ed2a688d9ce3e0f2654497bdf350f33d6bb7
+
         {props.children}
       </Modal>
     </>
