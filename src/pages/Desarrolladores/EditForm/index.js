@@ -26,6 +26,7 @@ const validateMessages = {
 const EditForm = (props)=>{
 
   const onFinish = (values) => {
+
     var data = JSON.stringify({
         "corporate": {
         "name": values.user.name,
@@ -140,10 +141,10 @@ const EditForm = (props)=>{
       <Form.Item name={['user', 'municipality']} label="Municipio" rules={[{ required: true }]}>
         <Input />
       </Form.Item>
-      <Form.Item name={['user', 'cel']} label="Código de país" rules={[{ required: true }]}>
+      <Form.Item name={['user', 'cel_code']} label="Código de país" rules={[{ required: true }]}>
         <Input />
       </Form.Item>
-      <Form.Item name={['user', 'cel']} label="Lada" rules={[{ required: true }]}>
+      <Form.Item name={['user', 'cel_lada']} label="Lada" rules={[{ required: true }]}>
         <Input />
       </Form.Item>
       <Form.Item name={['user', 'cel']} label="Número Local" rules={[{ required: true }]}>

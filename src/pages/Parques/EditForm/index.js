@@ -160,7 +160,7 @@ const EditForm = (props) => {
   }, []);
 
   return (
-    <Form {...layout} name="nest-messages" onFinish={onFinish} validateMessages={validateMessages} style={{ height: "1700px" }}>
+    <Form {...layout} name="nest-messages" onFinish={onFinish} validateMessages={validateMessages} style={{ height: "950px" }}>
       <div style={{ display: 'flex', justifyContent: 'center', width:'1200px'}}>
       <div style={{display:'block', width:'50%'}}>
       <Form.Item name={["user", "corpoate_id"]} label="Corporativos" rules={[{ required: true }]}>
@@ -200,7 +200,15 @@ const EditForm = (props) => {
         <Input />
       </Form.Item>
       <Form.Item name={['user', 'region']} label="Región" rules={[{ required: true }]}>
-        <Input />
+         <Select
+            placeholder="Selecciona la unidad de medida"
+            allowClear
+          >
+            <Option value="Norte">Norte</Option>
+            <Option value="Oeste">Oeste</Option>
+            <Option value="Poniente">Poniente</Option>
+            <Option value="Sur"></Option>
+          </Select>
       </Form.Item>
       <Form.Item name={['user', 'park_property']} label="Propietario" rules={[{ required: true }]}>
         <Input />
@@ -209,7 +217,14 @@ const EditForm = (props) => {
         <Input />
       </Form.Item>
       <Form.Item name={['user', 'industry']} label="Industria" rules={[{ required: true }]}>
-        <Input />
+      <Select
+              placeholder="Selecciona la unidad de medida"
+              allowClear
+            >
+              <Option value="Ligera">Ligera</Option>
+              <Option value="Pesada">Pesada</Option>
+              <Option value="Mixta">Mixta</Option>
+            </Select>
       </Form.Item>
       <Form.Item name={['user', 'infrastructure']} label="Infraestructura Disponible" rules={[{ required: true }]}>
         <Select
@@ -296,9 +311,10 @@ const EditForm = (props) => {
           placeholder="Selecciona la unidad de medida"
           allowClear
         >
-          <Option value="M2">M2</Option>
-          <Option value="Km2">Km2</Option>
+          <Option value="M2">m²</Option>
+          <Option value="Km2">km²</Option>
           <Option value="Ha">Ha</Option>
+          <Option value="Ft2">ft²</Option>
         </Select>
       </Form.Item>
       <Form.Item name={['user', 'map']} value={latlng} style={{display:'flex', justifyContent:'center', width:'100%', marginTop:'30px'}}>
