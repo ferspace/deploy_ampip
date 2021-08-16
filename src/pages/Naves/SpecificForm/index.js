@@ -34,7 +34,7 @@ const SpecificForm = (props) => {
     var data = JSON.stringify({
       "propieties": {
         "corporate_id": values.user.type,
-        "tipo": 2,
+        "tipo": 1,
         "nombre": values.user.name,
       }
     });
@@ -46,7 +46,7 @@ const SpecificForm = (props) => {
         'Authorization': DataOption.authentication_token, 
         'Content-Type': 'application/json'
       },
-      data : data
+      data:data
     };
     
     axios(config)
@@ -100,6 +100,8 @@ const SpecificForm = (props) => {
             showConfirmButton: false,
             timer: 1500
           })
+          props.functionFetch()
+
           console.log(JSON.stringify(response.data));
         })
         .catch(function (error) {
@@ -165,6 +167,9 @@ const SpecificForm = (props) => {
         showConfirmButton: false,
         timer: 1500
       })
+
+      props.functionFetch()
+
       console.log(JSON.stringify(response.data));
     })
     .catch(function (error) {
@@ -184,8 +189,6 @@ const SpecificForm = (props) => {
     }else{
       saveWhitouthProperty(values);
     }
-    props.functionFetch()
-
   };
 
 
