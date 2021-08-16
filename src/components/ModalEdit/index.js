@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Modal, Button } from 'antd';
 
-const ModalEdit = (props) => {
+const ModalEdit = (props) =>  {
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   const showModal = () => {
@@ -19,7 +19,8 @@ const ModalEdit = (props) => {
       <Button style={{backgroundColor: '#02AFB7', color: "#ffffff"}} onClick={showModal}>
         Editar
       </Button>
-      <Modal title="Editar" visible={isModalVisible} onCancel={handleCancel}>
+      <Modal title="Editar" visible={isModalVisible} onCancel={handleCancel} centered width={1400} >
+
         {props.children}
       </Modal>
     </>

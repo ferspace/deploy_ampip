@@ -72,6 +72,7 @@ export default makeStyles(theme => ({
   serverOverviewElementText: {
     minWidth: 145,
     paddingRight: theme.spacing(2),
+    fontSize: "100em",
   },
   serverOverviewElementChartWrapper: {
     width: "100%",

@@ -90,13 +90,13 @@ const user_ampip = [
     id: 1,
     label: "Socio AMPIP",
     link: "/app/ui/desarrolladores",
-    icon: <TypographyIcon />
+    icon: <TypographyIconDe />
   },
   {
     id: 2,
     label: "Ver Propiedades",
     link: "/app/propiedades",
-    icon: <TableIcon />,
+    icon: <TypographyIconPro  />,
     children: [
       { label: "Parques Industriales", link: "/app/ui/parques" },
       { label: "Naves Industriales", link: "/app/ui/naves" },
@@ -108,7 +108,7 @@ const user_ampip = [
     id: 3,
     label: "Usuarios",
     link: "/app/usuarios",
-    icon: <AccountIcon />,
+    icon: <AccountIconPerson />,
   }
 ];
 
@@ -118,7 +118,7 @@ const admin_society = [
     id: 2,
     label: "Ver Propiedades",
     link: "/app/propiedades",
-    icon: <TableIcon />,
+    icon: <TypographyIconPro  />,
     children: [
       { label: "Parques Industriales", link: "/app/ui/parques" },
       { label: "Naves Industriales", link: "/app/ui/naves" },
@@ -133,7 +133,7 @@ const user_society = [
     id: 2,
     label: "Ver Propiedades",
     link: "/app/propiedades",
-    icon: <TableIcon />,
+    icon: <TypographyIconPro  />,
     children: [
       { label: "Parques Industriales", link: "/app/ui/parques" },
       { label: "Naves Industriales", link: "/app/ui/naves" },
@@ -145,7 +145,7 @@ const user_society = [
     id: 3,
     label: "Usuarios",
     link: "/app/usuarios",
-    icon: <AccountIcon />,
+    icon: <AccountIconPerson />,
   }
 ];
 
@@ -154,7 +154,7 @@ const admin_propiety = [
     id: 2,
     label: "Ver Propiedades",
     link: "/app/propiedades",
-    icon: <TableIcon />,
+    icon: <TypographyIconPro  />,
     children: [
       { label: "Parques Industriales", link: "/app/ui/parques" },
       { label: "Naves Industriales", link: "/app/ui/naves" },
@@ -169,13 +169,13 @@ const user_propiety = [
     id: 3,
     label: "Usuarios",
     link: "/app/usuarios",
-    icon: <AccountIcon />,
+    icon: <AccountIconPerson />,
   },
   {
     id: 2,
     label: "Ver Propiedades",
     link: "/app/propiedades",
-    icon: <TableIcon />,
+    icon: <TypographyIconPro  />,
     children: [
       { label: "Parques Industriales", link: "/app/ui/parques" },
       { label: "Naves Industriales", link: "/app/ui/naves" },

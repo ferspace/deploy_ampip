@@ -36,6 +36,7 @@ import Table from "./components/Table/Table";
 import BigStat from "./components/BigStat/BigStat";
 import FlatListErrors from "./components/FlatListErrors";
 import store from '../../store/index'
+import Tables from '../Tables'
 
 const mainChartData = getMainChartData();
 const PieChartData = [
@@ -44,28 +45,50 @@ const PieChartData = [
   { name: "Group C", value: 300, color: "warning" },
   { name: "Group D", value: 200, color: "success" },
 ];
-const ulistyles={
-  btnColor:{backgoundColor:"#333 !important"},
+const ulistyles = {
+  btnColor: { backgoundColor: "#333 !important" },
 }
 export default function Dashboard(props) {
 
-  const [widgets, setWidgets] = useState({developers: [], sponsors: []});
+  const [widgets, setWidgets] = useState({ developers: [], sponsors: [] });
+  const [allusers, setAllusers] = useState({ all_user: [] })
+  const [allChanges, setAllChanges] = useState({ all_changes: [] })
+  const [allproperties, setAllproperties] = useState({ parks:[], nav: [], other: [] })
+
   useEffect(() => {
     var config = {
       method: 'get',
       url: `${store.URL_PRODUCTION}/dashboard`,
-      headers: { 
+      headers: {
         'Authorization': JSON.parse(localStorage.getItem('data')).authentication_token
+
       }
     };
-    
+
     axios(config)
-    .then(function (response) {
-      setWidgets({developers:response.data.message.widgets[0].developers,sponsors:response.data.message.widgets[0].sponsors});
-    })
-    .catch(function (error) {
-      console.log(error);
-    }); 
+      .then(function (response) {
+        if (response.data.message.widgets[0]) {
+          console.log(response.data.message.widgets[0]);
+          setWidgets({ developers: response.data.message.widgets[0].developers, sponsors: response.data.message.widgets[0].sponsors });
+        }
+        if (response.data.message.allUser) {
+          setAllusers({ all_user: response.data.message.allUser });
+        } 
+
+        if (response.data.message.allChanges) {
+          console.log(response.data.message.allChanges);
+          setAllChanges({ all_changes: response.data.message.allChanges });
+        }
+
+        if (response.data.message.allProperties) {
+          setAllproperties({ parks: response.data.message.allProperties.parques, nav: response.data.message.allProperties.naves, other: response.data.message.allProperties.terrenos });
+        }
+
+        
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   }, []);
 
   var classes = useStyles();
@@ -75,224 +98,79 @@ export default function Dashboard(props) {
 
   return (
     <>
-    
+
       <PageTitle style={{ backgroundColor: "#00afb7", borderColor: "#00afb7", color: "#ffffff" }}
-        title="Bienvenidos"
+        title="Bienvenido/a "
       />
       <Grid container spacing={2}>
-      {mock.bigStat.map((stat) => (
-          <Grid item md={4} sm={6} xs={12} key={stat.product}>
-            <BigStat {...stat} />
-          </Grid>
-        ))}
-        <Grid item lg={3} md={4} sm={6} xs={12}>
-          <Widget
-            title="Visits Today"
-            upperTitle
-            bodyClass={classes.fullHeightBody}
-            className={classes.card}
-          >
-            <div className={classes.visitsNumberContainer}>
-              <Grid container item alignItems={"center"}>
-                <Grid item xs={6}>
-                  <Typography size="xl" weight="medium" noWrap>
-                    12, 678
-                  </Typography>
-                </Grid>
-                <Grid item xs={6}>
-                  <LineChart
-                    width={100}
-                    height={30}
-                    data={[
-                      { value: 10 },
-                      { value: 15 },
-                      { value: 10 },
-                      { value: 17 },
-                      { value: 18 },
-                    ]}
-                  >
-                    <Line
-                      type="natural"
-                      dataKey="value"
-                      stroke={theme.palette.success.main}
-                      strokeWidth={2}
-                      dot={false}
-                    />
-                  </LineChart>
-                </Grid>
-              </Grid>
-            </div>
-            <Grid
-              container
-              direction="row"
-              justify="space-between"
-              alignItems="center"
-            >
-              <Grid item xs={4}>
-                <Typography color="text" colorBrightness="secondary" noWrap>
-                  Registrations
-                </Typography>
-                <Typography size="md">860</Typography>
-              </Grid>
-              <Grid item xs={4}>
-                <Typography color="text" colorBrightness="secondary" noWrap>
-                  Sign Out
-                </Typography>
-                <Typography size="md">32</Typography>
-              </Grid>
-              <Grid item xs={4}>
-                <Typography color="text" colorBrightness="secondary" noWrap>
-                  Rate
-                </Typography>
-                <Typography size="md">3.25%</Typography>
-              </Grid>
-            </Grid>
-          </Widget>
-        </Grid>
-        
-        <Grid item lg={3} md={8} sm={6} xs={12}>
+        <Grid item lg={4} xs={12}>
           <Widget
             title="Parques"
             upperTitle
             className={classes.card}
             bodyClass={classes.fullHeightBody}
           >
-            <div className={classes.serverOverviewElement}>
-              <Typography
-                color="text"
-                colorBrightness="secondary"
-                className={classes.serverOverviewElementText}
-                noWrap
-              >
-                60% / 37°С / 3.3 Ghz
-              </Typography>
-              <div className={classes.serverOverviewElementChartWrapper}>
-                <ResponsiveContainer height={50} width="99%">
-                  <AreaChart data={getRandomData(10)}>
-                    <Area
-                      type="natural"
-                      dataKey="value"
-                      stroke={theme.palette.secondary.main}
-                      fill={theme.palette.secondary.light}
-                      strokeWidth={2}
-                      fillOpacity="0.25"
-                    />
-                  </AreaChart>
-                </ResponsiveContainer>
-              </div>
-            </div>
-            <div className={classes.serverOverviewElement}>
-              <Typography
-                color="text"
-                colorBrightness="secondary"
-                className={classes.serverOverviewElementText}
-                noWrap
-              >
-                54% / 31°С / 3.3 Ghz
-              </Typography>
-              <div className={classes.serverOverviewElementChartWrapper}>
-                <ResponsiveContainer height={50} width="99%">
-                  <AreaChart data={getRandomData(10)}>
-                    <Area
-                      type="natural"
-                      dataKey="value"
-                      stroke={theme.palette.primary.main}
-                      fill={theme.palette.primary.light}
-                      strokeWidth={2}
-                      fillOpacity="0.25"
-                    />
-                  </AreaChart>
-                </ResponsiveContainer>
-              </div>
-            </div>
-            <div className={classes.serverOverviewElement}>
-              <Typography
-                color="text"
-                colorBrightness="secondary"
-                className={classes.serverOverviewElementText}
-                noWrap
-              >
-                57% / 21°С / 3.3 Ghz
-              </Typography>
-              <div className={classes.serverOverviewElementChartWrapper}>
-                <ResponsiveContainer height={50} width="99%">
-                  <AreaChart data={getRandomData(10)}>
-                    <Area
-                      type="natural"
-                      dataKey="value"
-                      stroke={theme.palette.warning.main}
-                      fill={theme.palette.warning.light}
-                      strokeWidth={2}
-                      fillOpacity="0.25"
-                    />
-                  </AreaChart>
-                </ResponsiveContainer>
-              </div>
-            </div>
-          </Widget>
-        </Grid>
-        <Grid item lg={3} md={4} sm={6} xs={12}>
-          <Widget title="Naves" upperTitle className={classes.card}>
-            <Grid container spacing={2}>
-              <Grid item xs={6}>
-                <ResponsiveContainer width="100%" height={144}>
-                  <PieChart>
-                    <Pie
-                      data={PieChartData}
-                      innerRadius={30}
-                      outerRadius={40}
-                      dataKey="value"
-                    >
-                      {PieChartData.map((entry, index) => (
-                        <Cell
-                          key={`cell-${index}`}
-                          fill={theme.palette[entry.color].main}
-                        />
-                      ))}
-                    </Pie>
-                  </PieChart>
-                </ResponsiveContainer>
-              </Grid>
-              <Grid item xs={6}>
-                <div className={classes.pieChartLegendWrapper}>
-                  {PieChartData.map(({ name, value, color }, index) => (
-                    <div key={color} className={classes.legendItemContainer}>
-                      <Dot color={color} />
-                      <Typography
-                        style={{ whiteSpace: "nowrap", fontSize: 12 }}
-                      >
-                        &nbsp;{name}&nbsp;
-                      </Typography>
-                      <Typography color="text" colorBrightness="secondary">
-                        &nbsp;{value}
-                      </Typography>
-                    </div>
-                  ))}
-                </div>
-              </Grid>
-            </Grid>
-          </Widget>
-        </Grid>
-        <Grid item lg={3} md={8} sm={6} xs={12}>
-            <Widget
-              title="Errores"
-              upperTitle
-              className={classes.card}
-              bodyClass={classes.fullHeightBody}
+            <Typography
+              color="text"
+              colorBrightness="secondary"
+              className={classes.serverOverviewElementText}
+              style={{ fontSize: "10em !important" }}
+              noWrap
             >
-              <FlatListErrors/>
-            </Widget>
+              {allproperties.parks.length}
+            </Typography>
+          </Widget>
         </Grid>
+        <Grid item lg={4} xs={12}>
+          <Widget
+            title="Naves"
+            upperTitle
+            className={classes.card}
+            bodyClass={classes.fullHeightBody}
+          >
+            <Typography
+              color="text"
+              colorBrightness="secondary"
+              className={classes.serverOverviewElementText}
+              style={{ fontSize: "10em !important" }}
+              noWrap
+            >
+              {allproperties.nav.length}
+            </Typography>
+          </Widget>
+        </Grid>
+        <Grid item lg={4} xs={12}>
+          <Widget
+            title="Terrenos"
+            upperTitle
+            className={classes.card}
+            bodyClass={classes.fullHeightBody}
+          >
+            <Typography
+              color="text"
+              colorBrightness="secondary"
+              className={classes.serverOverviewElementText}
+              style={{ fontSize: "10em !important" }}
+              noWrap
+            >
+              {allproperties.other.length}
+            </Typography>
+          </Widget>
+        </Grid>
+      </Grid>
+      <Grid container spacing={2}>
+        {/* Patrocinadores y  Desarrolladores */}
         <Grid item md={6} xs={12}>
           <Widget
-            title="Usuarios pendientes de activar"
+            title="Todos los Usuarios"
             upperTitle
             noBodyPadding
             bodyClass={classes.tableWidget}
           >
-            <Table data={mock.table} />
+            <Tables title={"Todos los Usuarios"} columns={["id","full_name"]} tableData={allusers.all_user} />
           </Widget>
         </Grid>
+
         <Grid item md={6} xs={12}>
           <Widget
             title="Solicitud de cambios"
@@ -300,7 +178,7 @@ export default function Dashboard(props) {
             noBodyPadding
             bodyClass={classes.tableWidget}
           >
-            <Table data={mock.table} />
+            <Tables title={"Cambios sin aprobar"} columns={["id","name"]} tableData={allChanges.all_changes} />
           </Widget>
         </Grid>
       </Grid>
