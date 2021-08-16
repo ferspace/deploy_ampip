@@ -48,7 +48,7 @@ const Arendatario = (props) => {
 
 
   const seviceGet=()=>{
-    axios.get(`${store.URL_PRODUCTION}/propieties?type=1`,{
+    axios.get(`${store.URL_PRODUCTION}/propieties?type=1`,{ // modificar por que debe traer  arrendatarios
       headers: {
         'Authorization': data.authentication_token,
       }

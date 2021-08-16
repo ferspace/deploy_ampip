@@ -34,7 +34,7 @@ const EditForm = (props) => {
     var data = JSON.stringify({
       "propieties": {
         "corporate_id": values.user.type,
-        "tipo": 2,
+        "tipo": 1,
         "nombre": values.user.name,
       }
     });

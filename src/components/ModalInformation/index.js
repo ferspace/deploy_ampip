@@ -46,8 +46,7 @@ export default function SimpleModal(props) {
           ver
       </Button>
 
-      <Modal title="Detalles" visible={isModalVisible} onCancel={handleCancel}>
-
+      <Modal title="Detalles" visible={isModalVisible} onCancel={handleCancel} footer={null}>
         {props.children}
       </Modal>
     </>

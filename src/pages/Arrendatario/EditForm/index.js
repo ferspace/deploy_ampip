@@ -110,6 +110,8 @@ const EditForm = (props) => {
                 showConfirmButton: false,
                 timer: 1500
               })
+
+              props.functionFetch()
               console.log(JSON.stringify(response.data));
             })
             .catch(function (error) {
@@ -126,7 +128,6 @@ const EditForm = (props) => {
       .catch(function (error) {
         console.log(error);
       });
-      props.functionFetch()
 
   };
 
