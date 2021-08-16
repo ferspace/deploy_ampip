@@ -153,7 +153,7 @@ const SpecificForm = (props) => {
     <Form {...layout} name="nest-messages" onFinish={onFinish} validateMessages={validateMessages} onSubmitCapture={(e)=>{Mailer(e, "registro")}} >
       <div style={{ display: 'flex', justifyContent: 'center', width:'1200px'}}>
       <div style={{display:'block', width:'50%'}}>
-      <Form.Item name={["user", "corporate"]} label="Corporativos"
+      <Form.Item name={["user", "corporate"]} label="Socio/Patrocinador"
         rules={[{required: true,},]}>
         <Select placeholder="Select a option and change input text above" allowClear >
           {corporates.map((value, i) => {
@@ -165,7 +165,7 @@ const SpecificForm = (props) => {
           })}
         </Select>
       </Form.Item>
-      <Form.Item name={["user", "user_type"]} label="Rol" rules={[{required: true}]}>
+      <Form.Item name={["user", "user_type"]} label="Permisos" rules={[{required: true}]}>
         <Select
           placeholder="Select a option and change input text above"
           allowClear
@@ -182,6 +182,9 @@ const SpecificForm = (props) => {
       <Form.Item name={["user", "name"]} label="Nombre" rules={[{ required: true }]}>
         <Input />
       </Form.Item>
+      <Form.Item name={['dataOf', 'charge']} label="Puesto" rules={[{ required: true }]}>
+        <Input />
+      </Form.Item>
       
       </div>
       <div style={{display:'block', width:'50%'}}>
@@ -192,6 +195,9 @@ const SpecificForm = (props) => {
         <Input />
       </Form.Item>
       <Form.Item name={["user", "password"]} label="Contraseña" rules={[{ required: true }]}>
+        <Input type="password" />
+      </Form.Item>
+      <Form.Item name={["user", "password"]} label="Confirmar Contraseña" rules={[{ required: true }]}>
         <Input type="password" />
       </Form.Item>
       </div>

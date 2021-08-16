@@ -130,7 +130,7 @@ const SpecificForm = (props)=>{
       <Form.Item name={['user', 'name']} label="Nombre en español" rules={[{ required: true }]}>
         <Input />
       </Form.Item>
-      <Form.Item name={['user', 'name_en']} label="Nombre en ingles" rules={[{ required: true }]}>
+      <Form.Item name={['user', 'name_en']} label="Nombre en inglés" rules={[{ required: true }]}>
         <Input />
       </Form.Item>
       {/* <Form.Item name={['user', 'RFC']} label="RFC" rules={[{ required: true }]}>
@@ -148,7 +148,7 @@ const SpecificForm = (props)=>{
       <Form.Item name={['user', 'state']} label="Estado" rules={[{ required: true }]}>
         <Input />
       </Form.Item>
-      <Form.Item name={['user', 'municipality']} label="Municipio" rules={[{ required: true }]}>
+      <Form.Item name={['user', 'municipality']} label="Municipio/Alcaldía" rules={[{ required: true }]}>
         <Input />
       </Form.Item>
       <Form.Item name={['user', 'cel_code']} label="Código de país" rules={[{ required: true }]}>
@@ -162,16 +162,16 @@ const SpecificForm = (props)=>{
       </Form.Item>
       </div>
       <div style={{display:'block', width:'50%'}}>
-        <Form.Item name={['user', 'inv_anu_on']} label="Inversión anual" placeholder="(Pipeline año en curso)" >
+        <Form.Item name={['user', 'inv_anu_on']} label="Inversión Anual Año en Curso" placeholder="(Pipeline año en curso)" >
         <Input />
       </Form.Item>
-      <Form.Item name={['user', 'inv_anu_next']} label="Inversión anual" placeholder="(Pipeline año siguiente)">
+      <Form.Item name={['user', 'inv_anu_next']} label="Inversión Anual Programada" placeholder="(Pipeline año siguiente)">
         <Input />
       </Form.Item>
-      <Form.Item name={['user', 'inv_anu_last']} label="Inversión anual" placeholder="(Pipeline año anterior)">
+      <Form.Item name={['user', 'inv_anu_last']} label="Inversión Anual Año Anterior" placeholder="(Pipeline año anterior)">
         <Input />
       </Form.Item>
-      <Form.Item name={['user', 'corporate_type']} label="Tipo de Socio" rules={[{ required: true }]}>
+      <Form.Item name={['user', 'corporate_type']} label="Clasificación de Socio" rules={[{ required: true }]}>
       <Select
             placeholder="Select a option and change input text above"
             allowClear
@@ -196,7 +196,7 @@ const SpecificForm = (props)=>{
       <Form.Item name={['user', 'social_media_link']} label="LinkedIn" >
         <Input />
       </Form.Item>
-      <Form.Item name={['user', 'social_media_web']} label="web" >
+      <Form.Item name={['user', 'social_media_web']} label="Sitio Web" >
         <Input />
       </Form.Item>
       <div style={{display:'flex', justifyContent:'center', width:'100%', padding:'20px'}}>
