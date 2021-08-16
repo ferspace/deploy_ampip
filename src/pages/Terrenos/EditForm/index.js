@@ -26,6 +26,10 @@ const validateMessages = {
 const EditForm = (props)=>{
   const [isapark, setIsapark] = useState(true);
 
+  const [corporates, setCorporates] = useState([]);
+  const [park , setPark] = useState([])
+  const [parkById , setParkById] = useState([])
+
   const saveWhithProperty = (values)=>{
     var data = JSON.stringify({
       "propieties": {
@@ -42,7 +46,7 @@ const EditForm = (props)=>{
         'Authorization': DataOption.authentication_token, 
         'Content-Type': 'application/json'
       },
-      data : data
+      data: data
     };
     
     axios(config)
@@ -184,9 +188,6 @@ const EditForm = (props)=>{
 
   };
 
-  const [corporates, setCorporates] = useState([]);
-  const [park , setPark] = useState([])
-
   useEffect(() => {
     if(corporates.length === 0){
       axios.get(`${store.URL_PRODUCTION}/corporates?type=0`, {headers: { 
@@ -212,6 +213,23 @@ const EditForm = (props)=>{
       });
     }
   }, []) // obtiene el parque
+
+
+  useEffect(() => {
+    if(park.length === 0){
+      axios.get(`${store.URL_PRODUCTION}/propieties/${props.id}`, {
+        headers: {
+          'Authorization': DataOption.authentication_token,
+          'Content-Type': 'application/json'
+        },
+      }).then((response) => {
+        setParkById(response.data)
+        //setPost(response.data);
+      });
+    }
+  }, []) // obtiene el parque
+
+  console.log(parkById, "informacion a editar")
 
   const onChange = () => {
     setIsapark(!isapark);

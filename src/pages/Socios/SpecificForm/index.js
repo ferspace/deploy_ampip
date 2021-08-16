@@ -85,7 +85,7 @@ const SpecificForm = (props)=>{
           'Authorization': DataOption.authentication_token, 
           'Content-Type': 'application/json'
         },
-        data : data
+        data: data
       };
       
       axios(config)
