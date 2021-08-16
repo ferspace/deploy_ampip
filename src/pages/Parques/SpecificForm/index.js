@@ -144,6 +144,8 @@ const SpecificForm = (props) => {
       .catch(function (error) {
         console.log(error);
       });
+      props.functionFetch()
+
   };
 
   const [corporates, setCorporates] = useState([])

@@ -59,9 +59,7 @@ const Terrenos = (props) => {
   // local
   var [activeTabId, setActiveTabId] = useState(0);
 
-  useEffect(() => {    //aqui va la peticion al endpoint , se va aprocesar la informacion del tipo [[dato1,dato2]]
-    permissionsMap()
-
+  const seviceGet=()=>{
     axios.get(`${store.URL_PRODUCTION}/propieties?type=2`, {
       headers: {
         'Authorization': data.authentication_token,
@@ -86,27 +84,12 @@ const Terrenos = (props) => {
     }).catch(error => {
       console.log(error); // poner alerta cuando tengamos tiempo
     });
-  },[]);
+  }
 
-  /*    const datatableData = [ // esto viene de axios
-       [2,"fer vargas", "Example Inc.", "Yonkers", "NY"],
-       [1,"John Walsh", "Example Inc.", "Hartford", "CT"],
-       [4,"Bob Herm", "Example Inc.", "Tampa", "FL"],
-       [5,"James Houston", "Example Inc.", "Dallas", "TX"],
-       [6,"Prabhakar Linwood", "Example Inc.", "Hartford", "CT"],
-       [7,"Kaui Ignace", "Example Inc.", "Yonkers", "NY"],
-       [8,"Esperanza Susanne", "Example Inc.", "Hartford", "CT"],
-       [9,"Christian Birgitte", "Example Inc.", "Tampa", "FL"],
-       [10,"Meral Elias", "Example Inc.", "Hartford", "CT"],
-       [11,"Deep Pau", "Example Inc.", "Yonkers", "NY"],
-       [12,"Sebastiana Hani", "Example Inc.", "Dallas", "TX"],
-       [13,"Marciano Oihana", "Example Inc.", "Yonkers", "NY"],
-       [15,"Brigid Ankur", "Example Inc.", "Dallas", "TX"],
-       [17,"Anna Siranush", "Example Inc.", "Yonkers", "NY"],
-       [18,"Avram Sylva", "Example Inc.", "Hartford", "CT"],
-       [20,"Serafima Babatunde", "Example Inc.", "Tampa", "FL"],
-       [21,"Gaston Festus", "Example Inc.", "Tampa", "FL"],
-     ]; */
+  useEffect(() => {    //aqui va la peticion al endpoint , se va aprocesar la informacion del tipo [[dato1,dato2]]
+    permissionsMap()
+    seviceGet()
+  },[]);
 
   return (
     <>
@@ -152,7 +135,7 @@ const Terrenos = (props) => {
                 options: {
                   customBodyRender: (value, tableMeta, updateValue) => {
                     return (
-                      <ModaEdit data={tableMeta.rowData[0]} children={<EditForm id={tableMeta.rowData[0]} />} write={write} />
+                      <ModaEdit data={tableMeta.rowData[0]} children={<EditForm id={tableMeta.rowData[0]} functionFetch={()=>seviceGet()}/>} write={write} />
                     )
                   }
                 }
@@ -162,7 +145,7 @@ const Terrenos = (props) => {
 
         {activeTabId === 1 && (
           <div style={{ display: 'flex', justifyContent: 'center' }}>
-            {write && <SpecificForm />}
+            {write && <SpecificForm functionFetch={()=>seviceGet()}/>}
           </div>
         )}
       </Paper>

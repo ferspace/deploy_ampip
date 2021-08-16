@@ -45,21 +45,8 @@ const Arendatario = (props) => {
 
   }
 
-  const handleClick = (e) => {
-    setAnchorEl(e.currentTarget)
-  }
 
-  const handleClose = () => {
-    setAnchorEl(null)
-  }
-
-  var classes = useStyles();
-
-  // local
-  var [activeTabId, setActiveTabId] = useState(0);
-  useEffect(() => {    //
-    permissionsMap()
-
+  const seviceGet=()=>{
     axios.get(`${store.URL_PRODUCTION}/propieties?type=1`,{
       headers: {
         'Authorization': data.authentication_token,
@@ -84,6 +71,19 @@ const Arendatario = (props) => {
     }).catch(error => {
       console.log(error); // poner alerta cuando tengamos tiempo
     });
+  }
+
+  const handleClose = () => {
+    setAnchorEl(null)
+  }
+
+  var classes = useStyles();
+
+  // local
+  var [activeTabId, setActiveTabId] = useState(0);
+  useEffect(() => {    //
+    permissionsMap()
+    seviceGet()
   },[]);
 
   return (
@@ -131,7 +131,7 @@ const Arendatario = (props) => {
                 options: {
                   customBodyRender: (value, tableMeta, updateValue) => {
                     return (
-                      <ModaEdit data={tableMeta.rowData[0]} children={<EditForm id={tableMeta.rowData[0]} write={write} />} />
+                      <ModaEdit data={tableMeta.rowData[0]} children={<EditForm functionFetch={()=>seviceGet()} id={tableMeta.rowData[0]} write={write} />} />
                     )
                   }
                 }
@@ -142,7 +142,7 @@ const Arendatario = (props) => {
 
         {activeTabId === 1 && (
           <div style={{ display: 'flex', justifyContent: 'center' }}>
-            {write && <SpecificForm />}
+            {write && <SpecificForm functionFetch={()=>seviceGet()}/>}
           </div>
         )}
       </Paper>

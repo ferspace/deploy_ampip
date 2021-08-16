@@ -40,7 +40,7 @@ const SpecificForm = (props) => {
 
   const [corporates, setCorporates] = useState([]);
 
-  const onFinish = (values) => {
+  const onFinish = (values) => {    
     var data = JSON.stringify({
       "propieties": {
         "corporate_id": values.user.type,
@@ -126,6 +126,8 @@ const SpecificForm = (props) => {
       .catch(function (error) {
         console.log(error);
       });
+      props.functionFetch()
+
   };
 
 
