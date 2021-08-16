@@ -121,7 +121,7 @@ const SpecificForm = (props) => {
             showConfirmButton: false,
             timer: 1500
           })
-          
+
           props.functionFetch()
 
         })
