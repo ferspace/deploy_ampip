@@ -195,7 +195,7 @@ const UserModal=(props)=>{
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="primary">
-            Cancel
+            Cancelar
           </Button>
         </DialogActions>
       </Dialog>
