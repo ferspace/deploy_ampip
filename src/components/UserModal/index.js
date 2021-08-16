@@ -174,7 +174,7 @@ const UserModal=(props)=>{
             <Form.Item name={['dataOf', 'office_address']} label="Dirección de oficina" rules={[{ required: true }]}>
               <Input defaultValue="mysite" />
             </Form.Item>
-            <Form.Item name={['dataOf', 'charge']} label="Cargo" rules={[{ required: true }]}>
+            <Form.Item name={['dataOf', 'charge']} label="Puesto" rules={[{ required: true }]}>
               <Input defaultValue="mysite" />
             </Form.Item>
             <Form.Item name={['dataOf', 'phone_office_lada']} label="Lada" rules={[{ required: true }]}>
