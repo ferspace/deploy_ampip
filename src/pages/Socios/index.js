@@ -19,6 +19,7 @@ import PageTitle from "../../components/PageTitle/PageTitle";
 import SpecificForm from './SpecificForm'
 import axios from 'axios';
 import Tables from '../Tables'
+import ShowInformation from '../Socios/ShowInformation'
 
 
 // icons sets
@@ -122,7 +123,7 @@ const Desarrolladores = (props) => {
             options: {
               customBodyRender: (value, tableMeta, updateValue) => {
                 return (
-                  <ModalInformation data={tableMeta.rowData[0]}/>
+                  <ModalInformation data={tableMeta.rowData[0]} children={<ShowInformation id={tableMeta.rowData[0]}/>}/>
                 )
               }
             }

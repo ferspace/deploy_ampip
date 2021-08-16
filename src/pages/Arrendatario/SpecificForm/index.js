@@ -174,7 +174,7 @@ const SpecificForm = (props) => {
       <Form.Item name={['user', 'IDDENUE']} label="ID DENUE" rules={[{ required: true }]}>
         <Input/>
       </Form.Item>
-      <Form.Item name={['user', 'antiquity']} label="Antiquity" rules={[{ required: true }]}>
+      <Form.Item name={['user', 'antiquity']} label="Antigüedad" rules={[{ required: true }]}>
         <Input/>
       </Form.Item>
       <Form.Item name={['user', 'siperficie']} label="Superficie" rules={[{ required: true }]}>

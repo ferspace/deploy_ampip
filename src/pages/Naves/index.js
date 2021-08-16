@@ -20,6 +20,7 @@ import SpecificForm from './SpecificForm'
 import axios from 'axios';
 import Tables from '../Tables'
 import EditForm from './EditForm'
+import ShowInformation from "./ShowInformation"
 
 // icons sets
 import "font-awesome/css/font-awesome.min.css";
@@ -122,8 +123,7 @@ const Naves = (props) => {
               options: {
                 customBodyRender: (value, tableMeta, updateValue) => {
                   return (
-                    <ModalInformation data={tableMeta.rowData[0]} />
-                  )
+                <ModalInformation data={tableMeta.rowData[0]} children={<ShowInformation id={tableMeta.rowData[0]}/>}/>                  )
                 }
               }
             },
