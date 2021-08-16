@@ -25,6 +25,10 @@ import Widget from "../../components/Widget/Widget";
 import PageTitle from "../../components/PageTitle/PageTitle";
 import Notification from "../../components/Notification";
 import store from '../../store/index'
+import ShowInformation from '../Users/ShowInformation'
+import ModalInformation from '../../components/ModalInformation'
+import ModaEdit from '../../components/ModalEdit'
+import EditForm from './EditForm'
 
 const data = JSON.parse(localStorage.getItem("data"));
 const permisos = JSON.parse(localStorage.getItem("permisos"));
@@ -109,7 +113,27 @@ export default function NotificationsPage(props) {
         </Tabs>
         {activeTabId === 0 && (
           <div style={{padding:20}}>
-          {read && <Tables title={"Todos los Usuarios"} columns={["id","Nombre", "Apellido", "Direccion"]} tableData={datatableData} />}
+          {read && <Tables title={"Todos los Usuarios"} columns={["id","Nombre", "Apellido", "Direccion", {
+            label: "Ver",
+            options: {
+              customBodyRender: (values, tableMeta, updateValue) => {
+                return (
+                  <ModalInformation data={tableMeta.rowData[0]} children={<ShowInformation id={tableMeta.rowData[0]}/>}/>
+                )
+                
+              }
+            }
+          },
+          {
+            label: "Editar",
+            options:{
+              customBodyRender: (value, tableMeta, updateValue) => {
+                return (
+                  <ModaEdit data={tableMeta.rowData[0]} children={<EditForm id={tableMeta.rowData[0]}/>} write={write}/>
+                )
+              }
+            }
+          }]} tableData={datatableData} />}
           </div>
         )}
 
