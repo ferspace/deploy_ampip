@@ -137,7 +137,7 @@ const SpecificForm = (props) => {
       .catch(function (error) {
         console.log(error);
       });
-
+      props.functionFetch()
   };
 
   const [permissions, setPermissions] = useState([ {id: 1, name: "Administrador AMPIP", created_at: "2021-08-16T00:21:50.519Z", updated_at: "2021-08-16T00:21:50.519Z"},

@@ -144,6 +144,8 @@ const SpecificForm = (props) => {
       .catch(function (error) {
         console.log(error);
       });
+      props.functionFetch()
+
   };
 
   const [corporates, setCorporates] = useState([])
@@ -190,7 +192,7 @@ const SpecificForm = (props) => {
         <Input />
       </Form.Item>
       <Form.Item name={['user', 'postal_code']} label="Código Postal" rules={[{ required: true }]}>
-        <Input />
+        <Input style={{width:"100px"}} />
       </Form.Item>
       <Form.Item name={['user', 'colony']} label="Colonia" rules={[{ required: true }]}>
         <Input />
@@ -202,7 +204,15 @@ const SpecificForm = (props) => {
         <Input />
       </Form.Item>
       <Form.Item name={['user', 'region']} label="Región" rules={[{ required: true }]}>
-        <Input />
+      <Select
+          placeholder="Selecciona la unidad de medida"
+          allowClear
+        >
+          <Option value="Norte">Norte</Option>
+          <Option value="Oeste">Oeste</Option>
+          <Option value="Poniente">Poniente</Option>
+          <Option value="Sur">Sur</Option>
+        </Select>
       </Form.Item>
       <Form.Item name={['user', 'park_property']} label="Propietario" rules={[{ required: true }]}>
         <Input />
@@ -211,7 +221,14 @@ const SpecificForm = (props) => {
         <Input />
       </Form.Item>
       <Form.Item name={['user', 'industry']} label="Industria" rules={[{ required: true }]}>
-        <Input />
+      <Select
+          placeholder="Selecciona la unidad de medida"
+          allowClear
+        >
+          <Option value="Ligera">Ligera</Option>
+          <Option value="Pesada">Pesada</Option>
+          <Option value="Mixta">Mixta</Option>
+        </Select>
       </Form.Item>
       <Form.Item name={['user', 'infrastructure']} label="Infraestructura Disponible" rules={[{ required: true }]}>
         <Select

@@ -60,7 +60,7 @@ const SpecificForm = (props)=>{
         'Authorization': DataOption.authentication_token, 
         'Content-Type': 'application/json'
       },
-      data : data
+      data: data
     };
     
     axios(config)
@@ -85,7 +85,7 @@ const SpecificForm = (props)=>{
             'Authorization': DataOption.authentication_token, 
             'Content-Type': 'application/json'
           },
-          data : data
+          data: data
         };
         
         axios(config)
@@ -113,6 +113,9 @@ const SpecificForm = (props)=>{
     .catch(function (error) {
       console.log(error);
     });
+
+    props.functionFetch()
+
   };
 
   return(
@@ -149,10 +152,10 @@ const SpecificForm = (props)=>{
         <Input />
       </Form.Item>
       <Form.Item name={['user', 'cel_code']} label="Código de país" rules={[{ required: true }]}>
-        <Input />
+        <Input style={{width:"100px"}} />
       </Form.Item>
       <Form.Item name={['user', 'cel_lada']} label="Lada" rules={[{ required: true }]}>
-        <Input />
+        <Input style={{width:"100px"}} />
       </Form.Item>
       <Form.Item name={['user', 'cel']} label="Número Local" rules={[{ required: true }]}>
         <Input />

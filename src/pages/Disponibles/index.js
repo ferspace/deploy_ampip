@@ -46,22 +46,7 @@ const Disponibles = () => {
 
   }
 
-  const handleClick = (e) => {
-    setAnchorEl(e.currentTarget)
-  }
-
-  const handleClose = () => {
-    setAnchorEl(null)
-  }
-  
-  console.log(data)
-  var classes = useStyles();
-
-  // local
-  var [activeTabId, setActiveTabId] = useState(0);
-
-  useEffect(() => {    //aqui va la peticion al endpoint , se va aprocesar la informacion del tipo [[dato1,dato2]]
-    permissionsMap()
+  const seviceGet = () => {
     axios.get(`${store.URL_PRODUCTION}/propieties?type=2`, {
       headers: { 
         'Authorization': data.authentication_token,
@@ -108,6 +93,21 @@ const Disponibles = () => {
     }).catch(error => {
       console.log(error); // poner alerta cuando tengamos tiempo
     });
+  }
+
+  const handleClose = () => {
+    setAnchorEl(null)
+  }
+  
+  console.log(data)
+  var classes = useStyles();
+
+  // local
+  var [activeTabId, setActiveTabId] = useState(0);
+
+  useEffect(() => {    //aqui va la peticion al endpoint , se va aprocesar la informacion del tipo [[dato1,dato2]]
+    permissionsMap()
+    seviceGet()
     
   }, []);
 
@@ -160,7 +160,7 @@ const Disponibles = () => {
 
         {activeTabId === 1 && (
           <div style={{display:'flex', justifyContent:'center'}}>
-            {write && <SpecificForm/>}
+            {write && <SpecificForm functionFetch={()=>seviceGet()}/>}
           </div>
         )}
       </Paper>

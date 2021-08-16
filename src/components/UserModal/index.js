@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { Modal, Button, Input, Form, Select } from 'antd';
-import { Row, Col, Divider } from 'antd';
+import React,{useState, useEffect} from 'react';
+import {Button, Dialog, DialogActions, DialogContent, DialogTitle} from '@material-ui/core';
+import { Input, Form } from 'antd';
 import axios from 'axios';
 import Swal from "sweetalert2";
 import store from '../../store/index' //variables de entorno
@@ -23,7 +23,9 @@ const validateMessages = {
 };
 const DataOption = JSON.parse(localStorage.getItem("data"));
 
-const UserModal = (props) => {
+const UserModal=(props)=>{
+  const [open, setOpen] = useState(false);
+  const [scroll, setScroll] = useState('paper');
   const [initialValue, setInitialValue] = useState(props.value);
   useEffect(() => {
     var axios = require('axios');
@@ -119,75 +121,85 @@ const UserModal = (props) => {
       });
   }
 
-
-
-
-  const [isModalVisible, setIsModalVisible] = useState(false);
-
-  const showModal = () => {
-    setIsModalVisible(true);
+  const handleClickOpen = (scrollType) => () => {
+    setOpen(true);
+    setScroll(scrollType);
   };
 
-  const handleOk = () => {
-    setIsModalVisible(false);
+  const handleClose = () => {
+    setOpen(false);
   };
 
-  const handleCancel = () => {
-    setIsModalVisible(false);
-  };
-
+  const descriptionElementRef = React.useRef(null);
+  React.useEffect(() => {
+    if (open) {
+      const { current: descriptionElement } = descriptionElementRef;
+      if (descriptionElement !== null) {
+        descriptionElement.focus();
+      }
+    }
+  }, [open]);
 
   return (
-    <>
-
-      <Button style={{ backgroundColor: "#00afb7", borderColor: "#00afb7", color: "#ffffff" }} type="primary" onClick={showModal}>
-        Mi Perfil
-      </Button>
-
-      <Modal title="Información del Usuario" visible={isModalVisible} onCancel={handleCancel} onOk={handleOk} centered>
-        <Form {...layout} name="nest-messages" onFinish={onFinish} validateMessages={validateMessages} initialValues={{ dataOf: initialValue }}>
-          <Form.Item name={['dataOf', 'full_name']} label="Nombre" rules={[{ required: true }]}>
-            <Input />
-          </Form.Item>
-          <Form.Item name={['dataOf', 'last_name']} label="Apellido" rules={[{ required: true }]}>
-            <Input defaultValue="mysite" />
-          </Form.Item>
-          <Form.Item name={['dataOf', 'address']} label="Dirección" rules={[{ required: true }]}>
-            <Input defaultValue="mysite" />
-          </Form.Item>
-          <Form.Item name={['dataOf', 'colony']} label="Colonia" rules={[{ required: true }]}>
-            <Input defaultValue="mysite" />
-          </Form.Item>
-          <Form.Item name={['dataOf', 'state']} label="Estado" rules={[{ required: true }]}>
-            <Input defaultValue="mysite" />
-          </Form.Item>
-          <Form.Item name={['dataOf', 'municipality']} label="Municipio" rules={[{ required: true }]}>
-            <Input defaultValue="mysite" />
-          </Form.Item>
-          <Form.Item name={['dataOf', 'office_address']} label="Dirección de oficina" rules={[{ required: true }]}>
-            <Input defaultValue="mysite" />
-          </Form.Item>
-          <Form.Item name={['dataOf', 'charge']} label="Cargo" rules={[{ required: true }]}>
-            <Input defaultValue="mysite" />
-          </Form.Item>
-          <Form.Item name={['dataOf', 'phone_office_lada']} label="Lada" rules={[{ required: true }]}>
-            <Input style={{width:"100px"}} defaultValue="mysite" />
-          </Form.Item>
-          <Form.Item name={['dataOf', 'phone_office_code']} label="Código de país" rules={[{ required: true }]}>
-            <Input style={{width:"100px"}} defaultValue="mysite" />
-          </Form.Item>
-          <Form.Item name={['dataOf', 'phone_office']} label="Teléfono" rules={[{ required: true }]}>
-            <Input defaultValue="mysite" />
-          </Form.Item>
-          <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
-            <Button style={{ backgroundColor: "#00afb7", borderColor: "#00afb7", color: "#ffffff" }} type="primary" htmlType="submit">
-              Enviar
-            </Button>
-          </Form.Item>
-        </Form>
-      </Modal>
-    </>
+    <div>
+      <Button onClick={handleClickOpen('paper')} style={{color:'white'}}>Perfil</Button>
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        scroll={scroll}
+        aria-labelledby="scroll-dialog-title"
+        aria-describedby="scroll-dialog-description"
+      >
+        <DialogTitle id="scroll-dialog-title">Perfil</DialogTitle>
+        <DialogContent dividers={scroll === 'paper'}>
+          <Form {...layout} name="nest-messages" onFinish={onFinish} validateMessages={validateMessages} initialValues={{ dataOf: initialValue }}>
+            <Form.Item name={['dataOf', 'full_name']} label="Nombre" rules={[{ required: true }]}>
+              <Input />
+            </Form.Item>
+            <Form.Item name={['dataOf', 'last_name']} label="Apellido" rules={[{ required: true }]}>
+              <Input defaultValue="mysite" />
+            </Form.Item>
+            <Form.Item name={['dataOf', 'address']} label="Dirección" rules={[{ required: true }]}>
+              <Input defaultValue="mysite" />
+            </Form.Item>
+            <Form.Item name={['dataOf', 'colony']} label="Colonia" rules={[{ required: true }]}>
+              <Input defaultValue="mysite" />
+            </Form.Item>
+            <Form.Item name={['dataOf', 'state']} label="Estado" rules={[{ required: true }]}>
+              <Input defaultValue="mysite" />
+            </Form.Item>
+            <Form.Item name={['dataOf', 'municipality']} label="Municipio" rules={[{ required: true }]}>
+              <Input defaultValue="mysite" />
+            </Form.Item>
+            <Form.Item name={['dataOf', 'office_address']} label="Dirección de oficina" rules={[{ required: true }]}>
+              <Input defaultValue="mysite" />
+            </Form.Item>
+            <Form.Item name={['dataOf', 'charge']} label="Cargo" rules={[{ required: true }]}>
+              <Input defaultValue="mysite" />
+            </Form.Item>
+            <Form.Item name={['dataOf', 'phone_office_lada']} label="Lada" rules={[{ required: true }]}>
+              <Input style={{width:"100px"}} defaultValue="mysite" />
+            </Form.Item>
+            <Form.Item name={['dataOf', 'phone_office_code']} label="Código de país" rules={[{ required: true }]}>
+              <Input style={{width:"100px"}} defaultValue="mysite" />
+            </Form.Item>
+            <Form.Item name={['dataOf', 'phone_office']} label="Teléfono" rules={[{ required: true }]}>
+              <Input defaultValue="mysite" />
+            </Form.Item>
+            <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
+              <Button style={{ backgroundColor: "#00afb7", borderColor: "#00afb7", color: "#ffffff" }} type="primary" htmlType="submit">
+                Enviar
+              </Button>
+            </Form.Item>
+          </Form>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose} color="primary">
+            Cancelar
+          </Button>
+        </DialogActions>
+      </Dialog>
+    </div>
   );
-};
-
-export default UserModal;
+}
+export default UserModal

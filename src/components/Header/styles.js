@@ -20,6 +20,7 @@ export default makeStyles(theme => ({
     backgroundColor:"#00afb7 !important",
     width: "100vw",
     zIndex: theme.zIndex.drawer + 1,
+    zIndex:"99 !important",
     transition: theme.transitions.create(["margin"], {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,

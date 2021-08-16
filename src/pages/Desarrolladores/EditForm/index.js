@@ -105,6 +105,8 @@ const EditForm = (props)=>{
     .catch(function (error) {
       console.log(error);
     });
+    props.functionFetch()
+
   };
 
   return(

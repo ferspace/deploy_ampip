@@ -184,18 +184,20 @@ const SpecificForm = (props) => {
     }else{
       saveWhitouthProperty(values);
     }
+    props.functionFetch()
+
   };
 
 
   useEffect(() => {
     if (corporates.length === 0) {
-      axios.get(`${store.URL_PRODUCTION}/corporates?type=0`, {
+      axios.get(`${store.URL_PRODUCTION}/dashboard`, {
         headers: {
           'Authorization': DataOption.authentication_token,
           'Content-Type': 'application/json'
         },
       }).then((response) => {
-        setCorporates(response.data)
+        setCorporates(response.data.message.widgets[0].developers)
         //setPost(response.data);
       });
     }
@@ -210,6 +212,7 @@ const SpecificForm = (props) => {
         },
       }).then((response) => {
         setPark(response.data)
+        console.log(response.data);
         //setPost(response.data);
       });
     }
@@ -273,8 +276,8 @@ const SpecificForm = (props) => {
         >
           {park.map((value, i) => {
             return (
-              <Option key={i} value={value.id}>
-                {value.name}
+              <Option key={i} value={value.name}>
+                {value.corporate_id}
               </Option>
             );
           })}
@@ -294,7 +297,7 @@ const SpecificForm = (props) => {
         <Input />
       </Form.Item>
       <Form.Item name={['user', 'postal_code']} label="Código Postal" rules={[{ required: true }]}>
-        <Input/>
+        <Input style={{width:"100px"}}/>
       </Form.Item>
       <Form.Item name={['user', 'colony']} label="Colonia" rules={[{ required: true }]}>
         <Input/>
