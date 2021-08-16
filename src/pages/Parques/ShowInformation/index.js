@@ -15,7 +15,7 @@ const ShowInformation = (props) =>{
       }
     }).then((response) => {
       //setDatatableData(response.data);
-      console.log(response, "show data")
+      console.log(response, "show data naves")
       setInfo(response.data)
     }).catch(error => {
       console.log(error); // poner alerta cuando tengamos tiempo
