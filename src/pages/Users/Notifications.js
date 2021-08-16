@@ -106,7 +106,7 @@ export default function NotificationsPage(props) {
         </Tabs>
         {activeTabId === 0 && (
           <div style={{padding:20}}>
-          {read && <Tables title={"Todos los Desarrolladores"} columns={["id","Nombre", "Apellido", "Direccion"]} tableData={datatableData} />}
+          {read && <Tables title={"Todos los Usuarios"} columns={["id","Nombre", "Apellido", "Direccion"]} tableData={datatableData} />}
           </div>
         )}
 
