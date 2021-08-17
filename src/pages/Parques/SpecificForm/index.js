@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Form, Input, Select, Button } from 'antd';
+import { Form, Input, Select, Button, DatePicker } from 'antd';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import {
@@ -158,7 +158,7 @@ const SpecificForm = (props) => {
                 "suprficie_total": values.user.suprficie_total,
                 "superficie_urbanizada": values.user.superficie_urbanizada,
                 "superficie_disponible": values.user.superficie_disponible,
-                "inicio_de_operaciones": values.user.inicio_de_operaciones,
+                "inicio_de_operaciones": values.user.inicio_de_operaciones.format('YYYY-MM-DD'),
                 "number_employe": values.user.number_employe,
                 "practices_recognition": values.user.practices_recognition,
                 "infrastructure": values.user.infrastructure,
@@ -337,7 +337,7 @@ const SpecificForm = (props) => {
             </Select>
           </Form.Item>
           <Form.Item name={['user', 'inicio_de_operaciones']} label="Inicio de Operaciones" rules={[{ required: true }]}>
-            <Input />
+            <DatePicker />
           </Form.Item>
 
         </div>
