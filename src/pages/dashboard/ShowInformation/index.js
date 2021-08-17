@@ -32,7 +32,7 @@ const ShowInformation = (props) =>{
     
     var config = {
       method: 'put',
-      url: 'https://ampip-back-44yib.ondigitalocean.app/api/v1/property_informations/' + props.id,
+      url: `${store.URL_PRODUCTION}/property_informations/` + props.id,
       headers: { 
         'Authorization': JSON.parse(localStorage.getItem('data')).authentication_token, 
         'Content-Type': 'application/json'

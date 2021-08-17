@@ -241,7 +241,7 @@ const SpecificForm = (props) => {
   console.log(latlng, "coordenadas")
 
   return (
-    <Form {...layout} name="nest-messages" onFinish={onFinish} validateMessages={validateMessages} style={{ height: "1100px" }}>
+    <Form {...layout} name="nest-messages" onFinish={onFinish} validateMessages={validateMessages} style={{ height: "1100px" }} >
       <div style={{ display: 'flex', justifyContent: 'center', width: '1200px' }}>
         <div style={{ display: 'block', width: '50%' }}>
           <div style={{ display: 'flex', justifyContent: 'center', width: '100%', padding: '20px' }}>

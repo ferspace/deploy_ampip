@@ -67,8 +67,15 @@ const Naves = (props) => {
           corporates.push(i.updated_at)
           corporatesAdd.push(corporates);
         });
-
-        setDatatableData([...corporatesAdd]);
+        var corpoatesPlus = []
+        response.data.message.allProperties.nav.map((i)=>{
+          var corporates = [];
+          corporates.push(i.id);
+          corporates.push(i.name)
+          corporates.push(i.updated_at)
+          corpoatesPlus.push(corporates);
+        });
+        setDatatableData([...corporatesAdd, ...corpoatesPlus]);
       }
     }).catch(error => {
       console.log(error); // poner alerta cuando tengamos tiempo
