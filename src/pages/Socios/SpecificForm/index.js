@@ -50,7 +50,7 @@ const SpecificForm = (props)=>{
       "next_anual_inv": "",
       "downt_date": null,
       "corporate_type": "",
-      "status": true,
+      "status": 1,
       "cel_lada":values.user.cel_lada,
       "cel_code":values.user.cel_code
     }
