@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Form, Input, Select, Button } from "antd";
 import axios from "axios";
 import Swal from "sweetalert2";
-import Mailer from "../../../components/Mailer"; // importamos el mailer
+//import Mailer from "../../../components/Mailer"; // importamos el mailer
 import store from '../../../store/index'
 
 const { Option } = Select;
@@ -151,7 +151,7 @@ const SpecificForm = (props) => {
   const [corporates, setCorporates] = useState([]);
 
   return (
-    <Form {...layout} name="nest-messages" onFinish={onFinish} validateMessages={validateMessages} onSubmitCapture={(e)=>{Mailer(e, "registro")}} >
+    <Form {...layout} name="nest-messages" onFinish={onFinish} validateMessages={validateMessages}  >
       <div style={{ display: 'flex', justifyContent: 'center', width:'1200px'}}>
       <div style={{display:'block', width:'50%'}}>
       <Form.Item name={["user", "corporate"]} label="Socio/Patrocinador"
