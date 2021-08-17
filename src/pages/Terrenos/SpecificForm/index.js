@@ -101,7 +101,8 @@ const SpecificForm = (props)=>{
             "colony": values.user.colony,
             "municipality": values.user.municipality,
             "state": values.user.state,
-            "status": 0
+            "status": 0,
+            "tipo": 2,
           }
         });
         
