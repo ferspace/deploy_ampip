@@ -229,6 +229,17 @@ const SpecificForm = (props) => {
     });
   }, []);
 
+
+  const setCoordenadas=(e, type)=>{
+    console.log(e, "coordenadas")
+    if(type === "lat"){
+      setLatlng({ lat: e.target.value, lng: latlng.lng })
+    }else{
+      setLatlng({ lat: latlng.lat , lng: e.target.value})
+    }
+  }
+  console.log(latlng, "coordenadas")
+
   return (
     <Form {...layout} name="nest-messages" onFinish={onFinish} validateMessages={validateMessages} style={{ height: "1100px" }}>
       <div style={{ display: 'flex', justifyContent: 'center', width: '1200px' }}>
@@ -409,10 +420,10 @@ const SpecificForm = (props) => {
             </Select>
           </Form.Item>
           <Form.Item name={['user', 'lat']} label="Latitud">
-            <Input />
+            <Input type={"number"} onChange={(e)=>setCoordenadas(e, "lat")}/>
           </Form.Item>
           <Form.Item name={['user', 'lng']} label="Longitud">
-            <Input />
+            <Input type={"number"} onChange={(e)=>setCoordenadas(e, "lng")}/>
           </Form.Item>
           <Form.Item  value={latlng} style={{ display: 'flex', justifyContent: 'center', width: '100%', marginTop: '30px' }}>
             <BasicMap
@@ -420,7 +431,7 @@ const SpecificForm = (props) => {
               loadingElement={<div style={{ width: "inherit" }} />}
               containerElement={<div style={{ height: "25em" }} />}
               mapElement={<div style={{ height: "100%" }} />}
-              datas={{ lat: latlng.lat, lng: latlng.lng }}
+              datas={{ lat: parseFloat(latlng.lat), lng: parseFloat(latlng.lng) }}
               onClick={() => { console.log("clicked") }}
               clickeds={(e) => { events(e) }}
             />
