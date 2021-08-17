@@ -82,7 +82,16 @@ const Terrenos = (props) => {
           corporatesAdd.push(corporates);
         });
 
-        setDatatableData([...corporatesAdd]);
+        var corpoatesPlus = []
+        response.data.message.allProperties.ter.map((i)=>{
+          var corporates = [];
+          corporates.push(i.id);
+          corporates.push(i.name)
+          corporates.push(i.updated_at)
+          corpoatesPlus.push(corporates);
+        });
+
+        setDatatableData([...corporatesAdd , ...corpoatesPlus]);
       }
     }).catch(error => {
       console.log(error); // poner alerta cuando tengamos tiempo
