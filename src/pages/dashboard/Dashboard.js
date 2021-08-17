@@ -58,7 +58,8 @@ export default function Dashboard(props) {
   const [allproperties, setAllproperties] = useState({ parks: [], nav: [], other: [] })
 
   useEffect(() => {
-    var config = {
+    if(JSON.parse(localStorage.getItem('data')) !== null)
+    {var config = {
       method: 'get',
       url: `${store.URL_PRODUCTION}/dashboard`,
       headers: {
@@ -101,6 +102,7 @@ export default function Dashboard(props) {
       .catch(function (error) {
         console.log(error);
       });
+    }
   }, []);
 
   var classes = useStyles();

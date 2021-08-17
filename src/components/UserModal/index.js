@@ -28,26 +28,28 @@ const UserModal=(props)=>{
   const [scroll, setScroll] = useState('paper');
   const [initialValue, setInitialValue] = useState(props.value);
   useEffect(() => {
-    var axios = require('axios');
-    var data = '';
+    if(DataOption !== null){
+      var axios = require('axios');
+      var data = '';
 
-    var config = {
-      method: 'get',
-      url: `${store.URL_PRODUCTION}/user_informations/${JSON.parse(localStorage.getItem("data")).id}`,
-      headers: {
-        'Authorization': JSON.parse(localStorage.getItem("data")).authentication_token
-      },
-      data: data
-    };
+      var config = {
+        method: 'get',
+        url: `${store.URL_PRODUCTION}/user_informations/${DataOption.id}`,
+        headers: {
+          'Authorization': DataOption.authentication_token
+        },
+        data: data
+      };
 
-    axios(config)
-      .then(function (response) {
-        setInitialValue(response.data);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+      axios(config)
+        .then(function (response) {
+          setInitialValue(response.data);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
 
+      }
 
   }, []);
 
