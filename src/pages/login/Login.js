@@ -61,9 +61,11 @@ function Login(props) {
     };
     axios(config)
       .then(function (response) {
-        if (response.data.messages === "Signed In Successfully") {
+        localStorage.setItem('data', JSON.stringify(response.data.data.user))
           localStorage.setItem('permisos',JSON.stringify(response.data.data.permissions))
-          localStorage.setItem('data', JSON.stringify(response.data.data.user))
+        if (response.data.messages === "Signed In Successfully") {
+          
+          
           loginUser(
             userDispatch,
             loginValue,
