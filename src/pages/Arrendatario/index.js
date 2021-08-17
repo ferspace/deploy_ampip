@@ -67,7 +67,7 @@ const Arendatario = (props) => {
           corporatesAdd.push(corporates);
         });
 
-        setDatatableData([...corporatesAdd]);
+        // setDatatableData([...corporatesAdd]);
       }
     }).catch(error => {
       console.log(error); // poner alerta cuando tengamos tiempo
