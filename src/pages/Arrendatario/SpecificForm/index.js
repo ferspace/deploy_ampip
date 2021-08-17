@@ -151,7 +151,17 @@ const SpecificForm = (props) => {
             <Input />
           </Form.Item>
           <Form.Item name={['user', 'siperficie']} label="Superficie" rules={[{ required: true }]}>
-            <Input />
+            <Input type={"number"} min="1" />
+          </Form.Item>
+          <Form.Item name={['user', 'unity']} label="Unidad De Medida" rules={[{ required: true }]}>
+            <Select
+              placeholder="Selecciona la unidad de medida"
+              allowClear
+            >
+              <Option value="M2">m²</Option>
+              <Option value="Ha">Ha</Option>
+              <Option value="Ft2">ft²</Option>
+            </Select>
           </Form.Item>
         </div>
       </div>
