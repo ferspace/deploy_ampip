@@ -225,6 +225,22 @@ const SpecificForm = (props) => {
     setIsapark(!isapark);
   }
 
+  const [getAddress, setGetAddress]= useState([])
+
+  const getAddessFunction = (e)=>{
+    if(e.target.value.length === 5){
+      axios.get(`${store.ADDRESS}/zip_codes?zip_code=${e.target.value}`, {
+        headers: {
+          'Authorization': DataOption.authentication_token,
+          'Content-Type': 'application/json'
+        },
+      }).then((response) => {
+        setGetAddress(response.data.zip_codes)
+      }).catch((err)=>{
+        console.log("no se encontro direccion")
+      })
+    }
+  }
 
   return (
     <Form {...layout} name="nest-messages" onFinish={onFinish} validateMessages={validateMessages}>
@@ -300,16 +316,49 @@ const SpecificForm = (props) => {
         <Input />
       </Form.Item>
       <Form.Item name={['user', 'postal_code']} label="Código Postal" rules={[{ required: true }]}>
-        <Input style={{width:"100px"}}/>
+        <Input style={{width:"100px"}} onChange={(e)=>getAddessFunction(e)}/>
       </Form.Item>
       <Form.Item name={['user', 'colony']} label="Colonia" rules={[{ required: true }]}>
-        <Input/>
+        <Select
+            placeholder="Selecione"
+            allowClear
+          >
+            {getAddress.map((value, i) => {
+              return (
+                <Option key={i} value={value.d_asenta}>
+                  {value.d_asenta}
+                </Option>
+              );
+            })}
+        </Select>
       </Form.Item>
       <Form.Item name={['user', 'state']} label="Estado" rules={[{ required: true }]}>
-        <Input/>
+        <Select
+            placeholder="Selecione"
+            allowClear
+          >
+            {getAddress.map((value, i) => {
+              return (
+                <Option key={i} value={value.d_estado}>
+                  {value.d_estado}
+                </Option>
+              );
+            })}
+        </Select>
       </Form.Item>
       <Form.Item name={['user', 'municipality']} label="Municipio" rules={[{ required: true }]}>
-        <Input/>
+        <Select
+              placeholder="Selecione"
+              allowClear
+            >
+              {getAddress.map((value, i) => {
+                return (
+                  <Option key={i} value={value.d_mnpio}>
+                    {value.d_mnpio}
+                  </Option>
+                );
+              })}
+        </Select>
       </Form.Item>
       </div>
       </div>
