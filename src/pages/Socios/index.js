@@ -105,6 +105,7 @@ const Desarrolladores = (props) => {
       console.log(error); // poner alerta cuando tengamos tiempo
     }); 
   }, []);
+
   return (
     <>
       <PageTitle title="Patrocinadores AMPIP" button={(
