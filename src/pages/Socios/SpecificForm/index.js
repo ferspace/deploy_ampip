@@ -1,9 +1,12 @@
 import React, { useState } from "react";
-import { Form, Input, InputNumber, Button } from 'antd';
+import { Form, Input, Select, Button } from 'antd';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import store from '../../../store/index'
 import ImageUpload from '../../../components/ImageUpload'
+
+
+const { Option } = Select;
 
 const DataOption = JSON.parse(localStorage.getItem("data"));
 const layout = {
@@ -173,13 +176,20 @@ const SpecificForm = (props)=>{
         <Input />
       </Form.Item>     
       <Form.Item name={['user', 'cel_code']} label="Código de país" rules={[{ required: true }]}>
-        <Input style={{width:"100px"}} />
+          <Select
+            placeholder="Select"
+            allowClear
+            style={{width:"100px"}}
+          >
+            <Option value="52">52</Option>
+            <Option value="1">1</Option>
+          </Select>
       </Form.Item>
       <Form.Item name={['user', 'cel_lada']} label="Lada" rules={[{ required: true }]}>
-        <Input style={{width:"100px"}} />
+        <Input style={{width:"100px"}} maxLength={3}/>
       </Form.Item>
       <Form.Item name={['user', 'cel']} label="Número Local" rules={[{ required: true }]}>
-        <Input />
+        <Input maxLength={8}/>
       </Form.Item>
 
       <Form.Item name={['user', 'social_media_tw']} label="Clasificación" rules={[{ required: true }]}>
