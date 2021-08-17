@@ -119,29 +119,22 @@ const SpecificForm = (props)=>{
 
   };
 
-  const findAddress = (e) =>{
-    
-    if (e.target.value.length === 5 ){
-      console.log(e.target.value)
-      setAddress({
-        municipio: 'municipio',
-        estado: 'estado',
-        colonia: 'colonia'
-      });
+  const [getAddress, setGetAddress]= useState([])
 
-      // descomentar al implementar api
-
-      /* axios.get(`https://localhost:3000/api/v1/zip_codes?zip_code=${e.target.value}`).then((response) => {
-        setAddress({
-          municipio: 'municipio',
-          estado: 'estado',
-          colonia: 'colonia'
-        });
-      }); */
+  const getAddessFunction = (e)=>{
+    if(e.target.value.length === 5){
+      axios.get(`${store.ADDRESS}/zip_codes?zip_code=${e.target.value}`, {
+        headers: {
+          'Authorization': DataOption.authentication_token,
+          'Content-Type': 'application/json'
+        },
+      }).then((response) => {
+        setGetAddress(response.data.zip_codes)
+      }).catch((err)=>{
+        console.log("no se encontro direccion")
+      })
     }
   }
-
-  console.log(address)
 
   return(
     <Form {...layout} name="nest-messages" onFinish={onFinish} validateMessages={validateMessages}>
@@ -161,20 +154,53 @@ const SpecificForm = (props)=>{
       <Form.Item name={['user', 'address']} label="Calle y número" rules={[{ required: true }]}>
         <Input />
       </Form.Item>
+
       <Form.Item name={['user', 'cp']} label="Código Postal" rules={[{ required: true }]}>
-        <Input />
+        <Input style={{width:"100px"}} onChange={(e)=>getAddessFunction(e)}/>
       </Form.Item>
       <Form.Item name={['user', 'colony']} label="Colonia" rules={[{ required: true }]}>
-        <Input />
+        <Select
+            placeholder="Selecione"
+            allowClear
+          >
+            {getAddress.map((value, i) => {
+              return (
+                <Option key={i} value={value.d_asenta}>
+                  {value.d_asenta}
+                </Option>
+              );
+            })}
+        </Select>
       </Form.Item>
-      </div>
-      <div style={{display:'block', width:'50%'}}>
       <Form.Item name={['user', 'state']} label="Estado" rules={[{ required: true }]}>
-        <Input />
+        <Select
+            placeholder="Selecione"
+            allowClear
+          >
+            {getAddress.map((value, i) => {
+              return (
+                <Option key={i} value={value.d_estado}>
+                  {value.d_estado}
+                </Option>
+              );
+            })}
+        </Select>
       </Form.Item>
       <Form.Item name={['user', 'municipality']} label="Municipio" rules={[{ required: true }]}>
-        <Input />
-      </Form.Item>     
+        <Select
+              placeholder="Selecione"
+              allowClear
+            >
+              {getAddress.map((value, i) => {
+                return (
+                  <Option key={i} value={value.d_mnpio}>
+                    {value.d_mnpio}
+                  </Option>
+                );
+              })}
+        </Select>
+      </Form.Item>
+ 
       <Form.Item name={['user', 'cel_code']} label="Código de país" rules={[{ required: true }]}>
           <Select
             placeholder="Select"
