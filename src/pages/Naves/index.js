@@ -49,7 +49,7 @@ const Naves = (props) => {
   }
 
   const seviceGet = () => {
-    axios.get(`${store.URL_PRODUCTION}/propieties?type=1`,{
+    axios.get(`${store.URL_PRODUCTION}/dashboard`,{
       headers: {
         'Authorization': data.authentication_token,
       }
@@ -60,10 +60,10 @@ const Naves = (props) => {
         setDatatableData([["s", "s", "s"]]);
       } else {
         var corporatesAdd = [];
-        response.data.map((i) => {
+        response.data.message.allProperties.naves.map((i) => {
           var corporates = [];
           corporates.push(i.id);
-          corporates.push(i.nombre)
+          corporates.push(i.name)
           corporates.push(i.updated_at)
           corporatesAdd.push(corporates);
         });
