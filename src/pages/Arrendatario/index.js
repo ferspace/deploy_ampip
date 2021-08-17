@@ -35,17 +35,18 @@ const Arendatario = (props) => {
   const [datatableData, setDatatableData] = useState([])
   const [read, setRead] = useState(false);
   const [write, setWrite] = useState(false)
+  const [permisos, setPermisos] = useState([])
 
   const permissionsMap = () =>{
-    const permissionResult = permisos.filter((item)=>{
-      if (item.permiso === "tenant") return item
+    permisos.map((item)=>{
+      if (item.permiso === "sponsor"){
+        setRead(item.read)
+        setWrite(item.write)
+        console.log(item)
+      } 
     })
-    setRead(permissionResult[0].read)
-    setWrite(permissionResult[0].write)
-    console.log("resultado", permissionResult[0])
 
   }
-
 
   const seviceGet=()=>{
     axios.get(`${store.URL_PRODUCTION}/propieties?type=1`,{ // modificar por que debe traer  arrendatarios
@@ -88,7 +89,21 @@ const Arendatario = (props) => {
 
   useEffect(() => { 
     permissionsMap()
-  });
+  },[permisos]);
+
+  useEffect(() => { 
+    axios.get(`${store.URL_PRODUCTION}/dashboard`,{
+      headers: {
+        'Authorization': data.authentication_token,
+        'Content-Type': 'application/json'
+      }
+    }).then((response) => {
+      setPermisos(response.data.message.permissions)
+    }).catch(error => {
+      console.log(error); // poner alerta cuando tengamos tiempo
+    }); 
+  }, []);
+
   return (
     <>
       <PageTitle title="Inquilinos" button={(

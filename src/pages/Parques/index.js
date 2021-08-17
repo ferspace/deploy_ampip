@@ -28,21 +28,22 @@ import ModaEdit from '../../components/ModalEdit'
 import EditForm from "./EditForm";
 import store from '../../store/index'
 const data = JSON.parse(localStorage.getItem("data"));
-const permisos = JSON.parse(localStorage.getItem("permisos"));
 
 const Parques = (props) => {
   const [anchorEl, setAnchorEl] = React.useState(null)
   const [datatableData, setDatatableData] = useState([])
   const [read, setRead] = useState(false);
   const [write, setWrite] = useState(false)
+  const [permisos, setPermisos] = useState([])
 
   const permissionsMap = () =>{
-    const permissionResult = permisos.filter((item)=>{
-      if (item.permiso === "park") return item
+    permisos.map((item)=>{
+      if (item.permiso === "park"){
+        setRead(item.read)
+        setWrite(item.write)
+        console.log(item)
+      } 
     })
-    setRead(permissionResult[0].read)
-    setWrite(permissionResult[0].write)
-    console.log("resultado", permissionResult[0])
 
   }
 
@@ -89,7 +90,20 @@ const Parques = (props) => {
 
   useEffect(() => { 
     permissionsMap()
-  });
+  },[permisos]);
+
+  useEffect(() => { 
+    axios.get(`${store.URL_PRODUCTION}/dashboard`,{
+      headers: {
+        'Authorization': data.authentication_token,
+        'Content-Type': 'application/json'
+      }
+    }).then((response) => {
+      setPermisos(response.data.message.permissions)
+    }).catch(error => {
+      console.log(error); // poner alerta cuando tengamos tiempo
+    }); 
+  }, []);
 
 return (
   <>

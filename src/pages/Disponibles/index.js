@@ -28,7 +28,6 @@ import ModaEdit from '../../components/ModalEdit'
 import store from '../../store/index'
 
 const data = JSON.parse(localStorage.getItem("data"));
-const permisos = JSON.parse(localStorage.getItem("permisos"));
 
 const Disponibles = () => {
   const [anchorEl, setAnchorEl] = React.useState(null)
@@ -36,15 +35,6 @@ const Disponibles = () => {
   const [read, setRead] = useState(false);
   const [write, setWrite] = useState(false)
 
-  const permissionsMap = () =>{
-    const permissionResult = permisos.filter((item)=>{
-      if (item.permiso === "sponsor") return item
-    })
-    setRead(permissionResult[0].read)
-    setWrite(permissionResult[0].write)
-    console.log("resultado", permissionResult[0])
-
-  }
 
   const seviceGet = () => {
     axios.get(`${store.URL_PRODUCTION}/propieties?type=2`, {
@@ -110,9 +100,7 @@ const Disponibles = () => {
     
   }, []);
 
-  useEffect(() => { 
-    permissionsMap()
-  });
+
   return (
     <>
       <PageTitle title="Propiedades Disponibles" button={(
@@ -142,7 +130,7 @@ const Disponibles = () => {
         </Tabs>
         {activeTabId === 0 && (
           <div style={{padding:20}}>
-           {read &&  <>
+          <>
             <Maps /> 
             <Tables title={"Todos los Espacios"} columns={["id","Name", "Nombre_en", "Direccion",{
               label: "Ver",
@@ -155,13 +143,13 @@ const Disponibles = () => {
               }
             },
             ]} tableData={datatableData} />
-            </>}
+            </>
           </div>
         )}
 
         {activeTabId === 1 && (
           <div style={{display:'flex', justifyContent:'center'}}>
-            {write && <SpecificForm functionFetch={()=>seviceGet()}/>}
+            <SpecificForm functionFetch={()=>seviceGet()}/>
           </div>
         )}
       </Paper>
