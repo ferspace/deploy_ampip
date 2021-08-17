@@ -230,13 +230,13 @@ const SpecificForm = (props) => {
   }, []);
 
   return (
-    <Form {...layout} name="nest-messages" onFinish={onFinish} validateMessages={validateMessages} style={{ height: "950px" }}>
+    <Form {...layout} name="nest-messages" onFinish={onFinish} validateMessages={validateMessages} style={{ height: "1100px" }}>
       <div style={{ display: 'flex', justifyContent: 'center', width: '1200px' }}>
         <div style={{ display: 'block', width: '50%' }}>
           <div style={{ display: 'flex', justifyContent: 'center', width: '100%', padding: '20px' }}>
             <ImageUpload />
           </div>
-          <Form.Item name={["user", "corpoate_id"]} label="Corporativos" rules={[{ required: true }]}>
+          <Form.Item name={["user", "corpoate_id"]} label="Socio AMPIP" rules={[{ required: true }]}>
             <Select
               placeholder="Select a option and change input text above"
               allowClear
@@ -250,10 +250,10 @@ const SpecificForm = (props) => {
               })}
             </Select>
           </Form.Item>
-          <Form.Item name={['user', 'name']} label="Nombre" rules={[{ required: true }]}>
+          <Form.Item name={['user', 'name']} label="Nombre en español" rules={[{ required: true }]}>
             <Input />
           </Form.Item>
-          <Form.Item name={['user', 'name_en']} label="Nombre en ingles" rules={[{ required: true }]}>
+          <Form.Item name={['user', 'name_en']} label="Nombre en inglés" rules={[{ required: true }]}>
             <Input />
           </Form.Item>
           <Form.Item name={['user', 'adress']} label="Calle y número" rules={[{ required: true }]}>
@@ -268,7 +268,7 @@ const SpecificForm = (props) => {
           <Form.Item name={['user', 'state']} label="Estado" rules={[{ required: true }]}>
             <Input />
           </Form.Item>
-          <Form.Item name={['user', 'municipality']} label="Municipio" rules={[{ required: true }]}>
+          <Form.Item name={['user', 'municipality']} label="Municipio/Alcaldía" rules={[{ required: true }]}>
             <Input />
           </Form.Item>
           <Form.Item name={['user', 'region']} label="Región" rules={[{ required: true }]}>
@@ -282,13 +282,39 @@ const SpecificForm = (props) => {
               <Option value="Sur"></Option>
             </Select>
           </Form.Item>
-          <Form.Item name={['user', 'park_property']} label="Propietario" rules={[{ required: true }]}>
-            <Input />
+          <Form.Item name={['user', 'park_property']} label="Propietario/Administrador" rules={[{ required: true }]}>
+            <Select
+              placeholder="Selecciona la unidad de medida"
+              allowClear
+            >
+              <Option value="Propietario">Propietario</Option>
+              <Option value="Administrador">Administrador</Option>
+              </Select>
           </Form.Item>
           <Form.Item name={['user', 'market']} label="Mercado" rules={[{ required: true }]}>
             <Input />
           </Form.Item>
-          <Form.Item name={['user', 'industry']} label="Industria" rules={[{ required: true }]}>
+          <Form.Item name={['user', 'cel_code']} label="Código de país" rules={[{ required: true }]}>
+          <Select
+            placeholder="Select"
+            allowClear
+            style={{width:"100px"}}
+          >
+            <Option value="52">52</Option>
+            <Option value="1">1</Option>
+          </Select>
+          </Form.Item>
+          <Form.Item name={['user', 'cel_lada']} label="Lada" rules={[{ required: true }]}>
+            <Input style={{width:"100px"}} maxLength={3} />
+          </Form.Item>
+          <Form.Item name={['user', 'cel']} label="Número Local" rules={[{ required: true }]}>
+            <Input maxLength={8}/>
+          </Form.Item>
+          
+
+        </div>
+        <div style={{ display: 'block', width: '50%' }}>
+        <Form.Item name={['user', 'industry']} label="Industria" rules={[{ required: true }]}>
             <Select
               placeholder="Selecciona la unidad de medida"
               allowClear
@@ -339,16 +365,13 @@ const SpecificForm = (props) => {
           <Form.Item name={['user', 'inicio_de_operaciones']} label="Inicio de Operaciones" rules={[{ required: true }]}>
             <Input />
           </Form.Item>
-
-        </div>
-        <div style={{ display: 'block', width: '50%' }}>
           <Form.Item name={['user', 'number_employe']} label="Número de empleados" rules={[{ required: true }]}>
             <Input />
           </Form.Item>
           {/* <Form.Item name={['user', 'message']} label="Mensaje" rules={[{ required: true }]}>
         <Input />
       </Form.Item> */}
-          <Form.Item name={['user', 'practices_recognition']} label="Reconocimientos mejores Prácticas" rules={[{ required: true }]}>
+          <Form.Item name={['user', 'practices_recognition']} label="Reconocimientos" rules={[{ required: true }]}>
             <Select
               placeholder="Select a option and change input text above"
               allowClear
@@ -381,16 +404,15 @@ const SpecificForm = (props) => {
               allowClear
             >
               <Option value="M2">m²</Option>
-              <Option value="Km2">km²</Option>
               <Option value="Ha">Ha</Option>
               <Option value="Ft2">ft²</Option>
             </Select>
           </Form.Item>
           <Form.Item name={['user', 'lat']} label="Latitud">
-            <Input type="number"/>
+            <Input />
           </Form.Item>
           <Form.Item name={['user', 'lng']} label="Longitud">
-            <Input type="number"/>
+            <Input />
           </Form.Item>
           <Form.Item  value={latlng} style={{ display: 'flex', justifyContent: 'center', width: '100%', marginTop: '30px' }}>
             <BasicMap
