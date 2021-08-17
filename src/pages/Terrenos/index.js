@@ -92,6 +92,10 @@ const Terrenos = (props) => {
     seviceGet()
   },[]);
 
+  useEffect(() => { 
+    permissionsMap()
+  });
+
   return (
     <>
       <PageTitle title="Terrenos" button={(

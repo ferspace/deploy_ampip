@@ -83,11 +83,13 @@ const Naves = (props) => {
   // local
   var [activeTabId, setActiveTabId] = useState(0);
   useEffect(() => {    //aqui va la peticion al endpoint , se va aprocesar la informacion del tipo [[dato1,dato2]]
-    permissionsMap()
     seviceGet()
     
   },[]);
 
+  useEffect(() => { 
+    permissionsMap()
+  });
   return (
     <>
       <PageTitle title="Naves Industriales" button={(

@@ -94,10 +94,12 @@ export default function NotificationsPage(props) {
   }
 
   useEffect(() => {    //aqui va la peticion al endpoint , se va aprocesar la informacion del tipo [[dato1,dato2]]
-    permissionsMap()
     seviceGet()
   }, []);
 
+  useEffect(() => { 
+    permissionsMap()
+  });
   return (
     <>
       <PageTitle title="Usuarios" />

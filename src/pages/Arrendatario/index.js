@@ -83,10 +83,12 @@ const Arendatario = (props) => {
   // local
   var [activeTabId, setActiveTabId] = useState(0);
   useEffect(() => {    //
-    permissionsMap()
     seviceGet()
   },[]);
 
+  useEffect(() => { 
+    permissionsMap()
+  });
   return (
     <>
       <PageTitle title="Inquilinos" button={(
