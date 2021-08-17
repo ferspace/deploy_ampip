@@ -171,10 +171,10 @@ const Mailer = (e, mailType) => {
           );
         })}
       </Select>
-      <input type="text" name="name" placeholder="Nombre" onChange={(e)=>{  setName(e.target.value) }}/>
+      <input type="text" name="user_name" placeholder="Nombre" onChange={(e)=>{  setName(e.target.value) }}/>
       <input type="text" name="last_name" placeholder="Apellido" onChange={(e)=>{ setLastName(e.target.value) }}/>
       <input type="text" name="email" placeholder="Correo" onChange={(e)=>{ setEmail(e.target.value) }}/>
-      <input type="text" name="password" placeholder="Contraseña" onChange={(e)=>{ setPassword(e.target.value) }}/>
+      <input type="text" name="password_temporal" placeholder="Contraseña" onChange={(e)=>{ setPassword(e.target.value) }}/>
       <input type="submit" value="Enviar" />
     </form>
   );
