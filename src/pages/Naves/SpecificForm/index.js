@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Form, Input, Select, Button, Switch } from 'antd';
+import { Form, Input, Select, Button, Switch, DatePicker } from 'antd';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import {
@@ -254,6 +254,16 @@ const SpecificForm = (props) => {
     setIsapark(!isapark);
   }
 
+  const setCoordenadas=(e, type)=>{
+    console.log(e, "coordenadas")
+    if(type === "lat"){
+      setLatlng({ lat: e.target.value, lng: latlng.lng })
+    }else{
+      setLatlng({ lat: latlng.lat , lng: e.target.value})
+    }
+  }
+  console.log(latlng, "coordenadas")
+
   const [getAddress, setGetAddress]= useState([])
 
   const getAddessFunction = (e)=>{
@@ -270,6 +280,7 @@ const SpecificForm = (props) => {
       })
     }
   }
+
 
   return (
     <Form {...layout} name="nest-messages" onFinish={onFinish} validateMessages={validateMessages}>
@@ -302,7 +313,7 @@ const SpecificForm = (props) => {
           })}
         </Select>
       </Form.Item>
-      <Form.Item label="No Pertenece a un Parque" rules={[{ required: true }]}>
+      <Form.Item label="Pertenece a un Parque" rules={[{ required: true }]}>
       <Switch defaultChecked onChange={onChange} label="Pertenece a un parque" style={{ paddingTop:"1em"}}></Switch>
       </Form.Item>
 
@@ -482,10 +493,10 @@ const SpecificForm = (props) => {
             </Select>
           </Form.Item>
           <Form.Item name={['user', 'inicio_de_operaciones']} label="Inicio de Operaciones" rules={[{required: !isapark,},]}>
-            <Input disabled={isapark}/>
+          <DatePicker disabled={isapark}/>
           </Form.Item>
           <Form.Item name={['user', 'number_employe']} label="Número de empleados" rules={[{required: !isapark,},]}>
-            <Input disabled={isapark}/>
+            <Input type={"number"} min="1" maxLength={8} disabled={isapark}/>
           </Form.Item>
           {/* <Form.Item name={['user', 'message']} label="Mensaje" rules={[{ required: true }]}>
         <Input />
@@ -507,16 +518,16 @@ const SpecificForm = (props) => {
             </Select>
           </Form.Item>
           <Form.Item name={['user', 'superficie_total']} label="Superficie Total" rules={[{required: !isapark,},]}>
-            <Input disabled={isapark}/>
+            <Input type={"number"} min="1"  disabled={isapark}/>
           </Form.Item>
           <Form.Item name={['user', 'superficie']} label="Superficie Ocupada" rules={[{required: !isapark,},]}>
-            <Input disabled={isapark}/>
+            <Input type={"number"} min="1" disabled={isapark}/>
           </Form.Item>
           <Form.Item name={['user', 'superficie_urbanizada']} label="Superficie Urbanizada" rules={[{required: !isapark,},]}>
-            <Input disabled={isapark}/>
+            <Input type={"number"} min="1" disabled={isapark}/>
           </Form.Item>
           <Form.Item name={['user', 'superficie_disponible']} label="Superficie Disponible" rules={[{required: !isapark,},]}>
-            <Input disabled={isapark}/>
+            <Input type={"number"} min="1" disabled={isapark}/>
           </Form.Item>
           <Form.Item name={['user', 'unity']} label="Unidad De Medida" rules={[{required: !isapark,},]}>
             <Select
@@ -530,10 +541,10 @@ const SpecificForm = (props) => {
             </Select>
           </Form.Item>
           <Form.Item name={['user', 'lat']} label="Latitud" rules={[{required: !isapark,},]}>
-            <Input disabled={isapark}/>
+            <Input type={"number"} onChange={(e)=>setCoordenadas(e, "lat")} disabled={isapark}/>
           </Form.Item>
           <Form.Item name={['user', 'lng']} label="Longitud" rules={[{required: !isapark,},]}>
-            <Input disabled={isapark}/>
+            <Input type={"number"} onChange={(e)=>setCoordenadas(e, "lng")} disabled={isapark}/>
           </Form.Item>
           <Form.Item  value={latlng} style={{ display: 'flex', justifyContent: 'center', width: '100%', marginTop: '30px' }}>
             <BasicMap
