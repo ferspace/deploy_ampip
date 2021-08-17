@@ -218,8 +218,20 @@ const SpecificForm = (props) => {
             <Input maxLength={8} />
           </Form.Item>
 
-          <Form.Item name={['user', 'social_media_tw']} label="Clasificación" rules={[{ required: true }]}>
-            <Input />
+          <Form.Item name={['user', 'social_media_tw']} label="Clasificación de Socio" rules={[{ required: true }]}>
+            <Select
+              placeholder="Select"
+              allowClear
+            >
+              <Option value="Consultoría">Consultoría</Option>
+              <Option value="Construcción">Construcción</Option>
+              <Option value="Energía">Energía</Option>
+              <Option value="Financiero">Financiero</Option>
+              <Option value="Inmobiliario">Inmobiliario</Option>
+              <Option value="Telecomunicaciones">Telecomunicaciones</Option>
+              <Option value="Transporte">Transporte</Option>
+              <Option value="Otros">Otros</Option>
+            </Select>
           </Form.Item>
 
         </div>
