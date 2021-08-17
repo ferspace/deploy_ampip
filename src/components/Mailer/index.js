@@ -17,7 +17,13 @@ const Mailer = (e, mailType) => {
   { id: 5, name: "Administrador Propiedades", created_at: "2021-08-16T00:23:10.436Z", updated_at: "2021-08-16T00:23:10.436Z" },
   { id: 6, name: "Patrocinador", created_at: "2021-08-16T00:23:22.168Z", updated_at: "2021-08-16T00:23:22.168Z" }
   ]);
-  const [data, setData] = useState({email: "", name: "",lastName:"", password: "",  user_type: ""});
+ 
+  const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [password, setPassword] = useState("");
+  const [user_type, setUser_type] = useState("");
+  const [corporate_id, setCorporate_id] = useState("");
 
   useEffect(() => {
     axios
@@ -54,10 +60,10 @@ const Mailer = (e, mailType) => {
 
     var data = JSON.stringify({
       "user": {
-        "email": data.email,
-        "password": data.password,
-        "password_confirmation": data.password,
-        "user_type": data.user_type,
+        "email": email,
+        "password": password,
+        "password_confirmation": password,
+        "user_type": user_type,
       }
     });
 
@@ -77,8 +83,8 @@ const Mailer = (e, mailType) => {
         var data = JSON.stringify({
           "information": {
             "user_id": user_id,
-            "full_name": data.name,
-            "last_name": data.lastName,
+            "full_name":   name,
+            "last_name": lastName,
             "address": "",
             "state": "",
             "office_address": "",
@@ -86,12 +92,12 @@ const Mailer = (e, mailType) => {
             "date_of_birth": "",
             "phone_office": "",
             "cel": "",
-            "corporate_id": data.corporate,
+            "corporate_id": corporate_id,
             "status": "",
             "municipality": "",
             "colony": "",
             "postal_code_number": "",
-            "user_rols_id": data.user_type,
+            "user_rols_id": user_type,
             "user_type": "",
             "created_at": "",
             "updated_at": ""
@@ -117,7 +123,7 @@ const Mailer = (e, mailType) => {
               timer: 1500
             })
 
-            //
+            
 
           })
           .catch(function (error) {
@@ -147,9 +153,7 @@ const Mailer = (e, mailType) => {
 
   return (
     <form className="contact-form" onSubmit={sendEmail}>
-      <label for="sw1">Es usuario ampip</label>
-      <Switch id="sw1"></Switch>
-      <Select placeholder="Patrocinador/desarrollador">
+      <Select placeholder="Patrocinador/desarrollador" onChange={(e)=>{ setCorporate_id(e) }}>
         {corporates.map((value, i) => {
           return (
             <Option key={i} value={value.id}>
@@ -158,7 +162,7 @@ const Mailer = (e, mailType) => {
           );
         })}
       </Select>
-      <Select placeholder="Rol de usuario ">
+      <Select placeholder="Rol de usuario " onChange={(e)=>{ setUser_type(e) }}>
         {permissions.map((value, i) => {
           return (
             <Option key={i} value={i}>
@@ -167,10 +171,10 @@ const Mailer = (e, mailType) => {
           );
         })}
       </Select>
-      <input type="text" name="name" placeholder="Nombre" />
-      <input type="text" name="last_name" placeholder="Apellido" />
-      <input type="text" name="email" placeholder="Correo" />
-      <input type="text" name="password" placeholder="Contraseña" />
+      <input type="text" name="name" placeholder="Nombre" onChange={(e)=>{  setName(e.target.value) }}/>
+      <input type="text" name="last_name" placeholder="Apellido" onChange={(e)=>{ setLastName(e.target.value) }}/>
+      <input type="text" name="email" placeholder="Correo" onChange={(e)=>{ setEmail(e.target.value) }}/>
+      <input type="text" name="password" placeholder="Contraseña" onChange={(e)=>{ setPassword(e.target.value) }}/>
       <input type="submit" value="Enviar" />
     </form>
   );
