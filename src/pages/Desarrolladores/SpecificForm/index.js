@@ -189,7 +189,7 @@ const SpecificForm = (props)=>{
             })}
         </Select>
       </Form.Item>
-      <Form.Item name={['user', 'municipality']} label="Municipio" rules={[{ required: true }]}>
+      <Form.Item name={['user', 'municipality']} label="Municipio/Alcaldía" rules={[{ required: true }]}>
         <Select
               placeholder="Selecione"
               allowClear
@@ -223,13 +223,13 @@ const SpecificForm = (props)=>{
       </div>
       <div style={{display:'block', width:'50%'}}>
         <Form.Item name={['user', 'inv_anu_on']} label="Inversión Anual Año en Curso" placeholder="(Pipeline año en curso)" >
-        <Input />
+        <Input type={"number"} />
       </Form.Item>
       <Form.Item name={['user', 'inv_anu_next']} label="Inversión Anual Programada" placeholder="(Pipeline año siguiente)">
-        <Input />
+        <Input type={"number"} />
       </Form.Item>
       <Form.Item name={['user', 'inv_anu_last']} label="Inversión Anual Año Anterior" placeholder="(Pipeline año anterior)">
-        <Input />
+        <Input type={"number"} />
       </Form.Item>
       <Form.Item name={['user', 'corporate_type']} label="Clasificación de Socio" rules={[{ required: true }]}>
       <Select
