@@ -2,10 +2,35 @@ import React, { useEffect, useState } from "react";
 import { Form, Input, Select, Button, Switch } from 'antd';
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import {
+  withGoogleMap,
+  withScriptjs,
+  GoogleMap,
+  Marker,
+} from "react-google-maps";
 import store from '../../../store/index'
 import ImageUpload from '../../../components/ImageUpload'
 
+
 const { Option } = Select;
+
+const BasicMap = withScriptjs(
+  withGoogleMap((props) => (
+    <GoogleMap
+      defaultZoom={4}
+      defaultCenter={{
+        lat: parseFloat(props.datas.lat),
+        lng: parseFloat(props.datas.lng),
+      }}
+
+      onClick={ev => {
+        props.clickeds(ev)
+      }}
+    >
+      <Marker position={{ lat: props.datas.lat, lng: props.datas.lng }} onClick={(e) => { console.log(e) }} />
+    </GoogleMap>
+  )),
+);
 
 const layout = {
   labelCol: { span: 8 },
@@ -24,6 +49,10 @@ const validateMessages = {
 };
 
 const SpecificForm = (props) => {
+  const [latlng, setLatlng] = useState({ lat: 19, lng: -99 }) // latlng.lat, latlng.lng
+  const events = (e) => {
+    setLatlng({ lat: e.latLng.lat(), lng: e.latLng.lng() })
+  }
   const [corporates, setCorporates] = useState([]);
   const [park , setPark] = useState([])
 
@@ -290,12 +319,9 @@ const SpecificForm = (props) => {
       <Form.Item name={['user', 'name']} label="Nombre en español" rules={[{ required: true }]}>
         <Input />
       </Form.Item>
-      <Form.Item name={['user', 'name_en']} label="Nombre en ingles" rules={[{ required: true }]}>
+      <Form.Item name={['user', 'name_en']} label="Nombre en inglés" rules={[{ required: true }]}>
         <Input />
       </Form.Item>
-
-      </div>
-      <div style={{display:'block', width:'50%'}}>
       <Form.Item name={['user', 'adress']} label="Calle y Número" rules={[{ required: true }]}>
         <Input />
       </Form.Item>
@@ -308,9 +334,170 @@ const SpecificForm = (props) => {
       <Form.Item name={['user', 'state']} label="Estado" rules={[{ required: true }]}>
         <Input/>
       </Form.Item>
-      <Form.Item name={['user', 'municipality']} label="Municipio" rules={[{ required: true }]}>
+      <Form.Item name={['user', 'municipality']} label="Municipio/Alcaldía" rules={[{ required: true }]}>
         <Input/>
       </Form.Item>
+      <Form.Item name={['user', 'region']} label="Región" rules={[{required: !isapark,},]}>
+            <Select
+              placeholder="Selecciona la unidad de medida"
+              allowClear
+              disabled={isapark}
+            >
+              <Option value="Norte">Norte</Option>
+              <Option value="Oeste">Oeste</Option>
+              <Option value="Poniente">Poniente</Option>
+              <Option value="Sur"></Option>
+            </Select>
+          </Form.Item>
+          <Form.Item name={['user', 'park_property']} label="Propietario/Administrador" rules={[{required: !isapark,},]} >
+            <Select
+              placeholder="Selecciona la unidad de medida"
+              allowClear
+              disabled={isapark}
+            >
+              <Option value="Propietario">Propietario</Option>
+              <Option value="Administrador">Administrador</Option>
+              </Select>
+          </Form.Item>
+          <Form.Item name={['user', 'market']} label="Mercado" rules={[{required: !isapark,},]} >
+            <Input disabled={isapark}/>
+          </Form.Item>
+          <Form.Item name={['user', 'cel_code']} label="Código de país" rules={[{required: !isapark,},]} >
+          <Select
+            placeholder="Select"
+            allowClear
+            style={{width:"100px"}}
+            disabled={isapark}
+          >
+            <Option value="52">52</Option>
+            <Option value="1">1</Option>
+          </Select>
+          </Form.Item>
+          <Form.Item name={['user', 'cel_lada']} label="Lada" rules={[{required: !isapark,},]} >
+            <Input style={{width:"100px"}} maxLength={3} disabled={isapark}/>
+          </Form.Item>
+          <Form.Item name={['user', 'cel']} label="Número Local" rules={[{required: !isapark,},]} >
+            <Input maxLength={8} disabled={isapark}/>
+          </Form.Item>
+
+      </div>
+      <div style={{display:'block', width:'50%'}}>
+      <Form.Item name={['user', 'industry']} label="Industria" rules={[{required: !isapark,},]}>
+            <Select
+              placeholder="Selecciona la unidad de medida"
+              allowClear
+              disabled={isapark}
+            >
+              <Option value="Ligera">Ligera</Option>
+              <Option value="Pesada">Pesada</Option>
+              <Option value="Mixta">Mixta</Option>
+            </Select>
+          </Form.Item>
+          <Form.Item name={['user', 'infrastructure']} label="Infraestructura Disponible" rules={[{required: !isapark,},]}>
+            <Select
+              placeholder="Select a option and change input text above"
+              allowClear
+              mode="multiple"
+              disabled={isapark}
+            >
+              <Option value="Al menos 0.5 litros agua por segundo por ha">Al menos 0.5 litros agua por segundo por ha</Option>
+              <Option value="Pavimento">Pavimento</Option>
+              <Option value="Banquetas">Banquetas</Option>
+              <Option value="Drenaje Sanitario">Drenaje Sanitario</Option>
+              <Option value="Drenaje Pluvial">Drenaje Pluvial</Option>
+              <Option value="Planta de tratamiento de Agua">Planta de tratamiento de Agua</Option>
+              <Option value="Gas Natural">Gas Natural</Option>
+              <Option value="Alumbrado público">Alumbrado público</Option>
+              <Option value="Instalación eléctrica">Instalación eléctrica</Option>
+              <Option value="Subestación eléctrica">Subestación eléctrica</Option>
+              <Option value="Telefonía">Telefonía</Option>
+              <Option value="Comunicación Satelital">Comunicación Satelital</Option>
+              <Option value="Instalación Digital">Instalación Digital</Option>
+              <Option value="Espuela de Ferrocarril">Espuela de Ferrocarril</Option>
+              <Option value="Estación de bomberos">Estación de bomberos</Option>
+              <Option value="Áreas verdes o recreativas">Áreas verdes o recreativas</Option>
+              <Option value="Guardería">Guardería</Option>
+              <Option value="Centro de Capacitación">Centro de Capacitación</Option>
+              <Option value="Seguridad">Seguridad</Option>
+              <Option value="Transporte interno de personal">Transporte interno de personal</Option>
+              <Option value="Transporte Urbano">Transporte Urbano</Option>
+              <Option value="Recolección de basura">Recolección de basura</Option>
+              <Option value="Aduana interna">Aduana interna</Option>
+              <Option value="Agente aduanal">Agente aduanal</Option>
+              <Option value="Servicios de consultoria">Servicios de consultoria</Option>
+              <Option value="Programa shelter">Programa shelter</Option>
+              <Option value="Servicio Built to suit">Servicio Built to suit</Option>
+              <Option value="Reglamento interno">Reglamento interno</Option>
+              <Option value="Oficinas administrativas">Oficinas administrativas</Option>
+              <Option value="Otros">Otros</Option>
+            </Select>
+          </Form.Item>
+          <Form.Item name={['user', 'inicio_de_operaciones']} label="Inicio de Operaciones" rules={[{required: !isapark,},]}>
+            <Input disabled={isapark}/>
+          </Form.Item>
+          <Form.Item name={['user', 'number_employe']} label="Número de empleados" rules={[{required: !isapark,},]}>
+            <Input disabled={isapark}/>
+          </Form.Item>
+          {/* <Form.Item name={['user', 'message']} label="Mensaje" rules={[{ required: true }]}>
+        <Input />
+      </Form.Item> */}
+          <Form.Item name={['user', 'practices_recognition']} label="Reconocimientos" rules={[{required: !isapark,},]}>
+            <Select
+              placeholder="Select a option and change input text above"
+              allowClear
+              mode="multiple"
+              disabled={isapark}
+            >
+              <Option value="Norma Mexiana de Parque Industrial">Norma Mexiana de Parque Industrial</Option>
+              <Option value="Parque Industrial Verde">Parque Industrial Verde</Option>
+              <Option value="Calidad Ambiental (PROFEPA)">Calidad Ambiental (PROFEPA)</Option>
+              <Option value="Parque Industrial Sustentable">Parque Industrial Sustentable</Option>
+              <Option value="Parque Industrial Limpio">Parque Industrial Limpio</Option>
+              <Option value="Parque Industrial Seguro">Parque Industrial Seguro</Option>
+              <Option value="OEA">OEA</Option>
+            </Select>
+          </Form.Item>
+          <Form.Item name={['user', 'superficie_total']} label="Superficie Total" rules={[{required: !isapark,},]}>
+            <Input disabled={isapark}/>
+          </Form.Item>
+          <Form.Item name={['user', 'superficie']} label="Superficie Ocupada" rules={[{required: !isapark,},]}>
+            <Input disabled={isapark}/>
+          </Form.Item>
+          <Form.Item name={['user', 'superficie_urbanizada']} label="Superficie Urbanizada" rules={[{required: !isapark,},]}>
+            <Input disabled={isapark}/>
+          </Form.Item>
+          <Form.Item name={['user', 'superficie_disponible']} label="Superficie Disponible" rules={[{required: !isapark,},]}>
+            <Input disabled={isapark}/>
+          </Form.Item>
+          <Form.Item name={['user', 'unity']} label="Unidad De Medida" rules={[{required: !isapark,},]}>
+            <Select
+              placeholder="Selecciona la unidad de medida"
+              allowClear
+              disabled={isapark}
+            >
+              <Option value="M2">m²</Option>
+              <Option value="Ha">Ha</Option>
+              <Option value="Ft2">ft²</Option>
+            </Select>
+          </Form.Item>
+          <Form.Item name={['user', 'lat']} label="Latitud" rules={[{required: !isapark,},]}>
+            <Input disabled={isapark}/>
+          </Form.Item>
+          <Form.Item name={['user', 'lng']} label="Longitud" rules={[{required: !isapark,},]}>
+            <Input disabled={isapark}/>
+          </Form.Item>
+          <Form.Item  value={latlng} style={{ display: 'flex', justifyContent: 'center', width: '100%', marginTop: '30px' }}>
+            <BasicMap
+              googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=AIzaSyCFdQ7O0MIewEqbyXhW0k9XemMqnYx0aDQ"
+              loadingElement={<div style={{ width: "inherit" }} />}
+              containerElement={<div style={{ height: "25em" }} />}
+              mapElement={<div style={{ height: "100%" }} />}
+              datas={{ lat: latlng.lat, lng: latlng.lng }}
+              onClick={() => { console.log("clicked") }}
+              clickeds={(e) => { events(e) }}
+              disabled={isapark}
+            />
+          </Form.Item>
       </div>
       </div>
       
