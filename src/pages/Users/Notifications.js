@@ -29,6 +29,7 @@ import ShowInformation from '../Users/ShowInformation'
 import ModalInformation from '../../components/ModalInformation'
 import ModaEdit from '../../components/ModalEdit'
 import EditForm from './EditForm'
+import Mailer from '../../components/Mailer'
 
 const data = JSON.parse(localStorage.getItem("data"));
 const permisos = JSON.parse(localStorage.getItem("permisos"));
@@ -136,7 +137,7 @@ export default function NotificationsPage(props) {
           }]} tableData={datatableData} />}
           </div>
         )}
-        {/* <SpecificForm functionFetch={()=>seviceGet()}/> */}
+        {/* <Mailer/> */}
         {activeTabId === 1 && (
           <div style={{display:'flex', justifyContent:'center'}}>
           {write && <SpecificForm functionFetch={()=>seviceGet()}/>}

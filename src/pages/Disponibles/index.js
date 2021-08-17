@@ -84,7 +84,7 @@ const Disponibles = () => {
               corporatesAdd2.push(corporates);
             });
           
-            setDatatableData([...corporatesAdd, ...corporatesAdd2]);
+            
           }
         }).catch(error => {
           console.log(error); // poner alerta cuando tengamos tiempo
