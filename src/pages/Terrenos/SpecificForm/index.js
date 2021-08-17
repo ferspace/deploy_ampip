@@ -421,6 +421,8 @@ const SpecificForm = (props)=>{
               <Option value="Oficinas administrativas">Oficinas administrativas</Option>
               <Option value="Otros">Otros</Option>
             </Select>
+
+            
           </Form.Item>
           <Form.Item name={['user', 'inicio_de_operaciones']} label="Inicio de Operaciones" rules={[{required: !isapark,},]}>
             <Input disabled={isapark}/>
