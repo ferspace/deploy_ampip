@@ -108,6 +108,7 @@ const SpecificForm = (props) => {
             "municipality": values.user.municipality,
             "state": values.user.state,
             "status": 0,
+            "tipo":1
           }
         });
         
@@ -175,6 +176,7 @@ const SpecificForm = (props) => {
         "municipality": values.user.municipality,
         "state": values.user.state,
         "status": 0,
+        "tipo":1
       }
     });
     
@@ -215,7 +217,9 @@ const SpecificForm = (props) => {
   const onFinish = (values) => {
     if(isapark){
       saveWhithProperty(values);
+      alert("------")
     }else{
+      alert("*******")
       saveWhitouthProperty(values);
     }
   };
@@ -335,7 +339,7 @@ const SpecificForm = (props) => {
         >
           {park.map((value, i) => {
             return (
-              <Option key={i} value={value.name}>
+              <Option key={i} value={value.property_id}>
                 {value.name}
               </Option>
             );

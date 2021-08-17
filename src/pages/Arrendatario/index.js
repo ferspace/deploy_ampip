@@ -129,36 +129,9 @@ const Arendatario = (props) => {
           onChange={(e, id) => setActiveTabId(id)}
           className={classes.iconsBar}
         >
-          <Tab label="Inquilinos" className={classes.menuspace} />
           <Tab label="Agregar" className={classes.menuspace} />
         </Tabs>
         {activeTabId === 0 && (
-          <div style={{ padding: 20 }}>
-            <Tables title={"Todos los Inquilinos"} columns={["id", "Name", "Alta", {
-              label: "Ver",
-              options: {
-                customBodyRender: (value, tableMeta, updateValue) => {
-                  return (
-                    <ModalInformation data={tableMeta.rowData[0]} children={<ShowInformation id={tableMeta.rowData[0]}/>}/>
-                  )
-                }
-              }
-            },
-              {
-                label: "Editar",
-                options: {
-                  customBodyRender: (value, tableMeta, updateValue) => {
-                    return (
-                      <ModaEdit data={tableMeta.rowData[0]} children={<EditForm functionFetch={()=>seviceGet()} id={tableMeta.rowData[0]} write={write} />} />
-                    )
-                  }
-                }
-              }]} tableData={datatableData} />
-          </div>
-
-        )}
-
-        {activeTabId === 1 && (
           <div style={{ display: 'flex', justifyContent: 'center' }}>
             {write && <SpecificForm functionFetch={()=>seviceGet()}/>}
           </div>

@@ -78,15 +78,10 @@ const UserModal=(props)=>{
         "phone_office": values.dataOf.phone_office,
         "cel": "",
         "corporate_id": 1,
-        "status": "",
+        "status": 1,
         "municipality": values.dataOf.municipality,
         "colony": values.dataOf.colony,
-        "postal_code_number": "",
-        "user_rols_id": 1,
-        "user_type": "",
-        "created_at": "",
-        "updated_at": "",
-        "phone_office_lada":values.dataOf.phone_office_lada,
+       "phone_office_lada":values.dataOf.phone_office_lada,
         "phone_office_code":values.dataOf.phone_office_code
       }
     });
@@ -103,12 +98,7 @@ const UserModal=(props)=>{
 
     axios(config)
       .then(function (response) {
-        Swal.fire({
-          icon: 'success',
-          title: '¡Usuario actualizado!',
-          showConfirmButton: false,
-          timer: 1500
-        })
+        alert("Datos actualizados");
       })
       .catch(function (error) {
         Swal.fire({
@@ -157,34 +147,34 @@ const UserModal=(props)=>{
               <Input />
             </Form.Item>
             <Form.Item name={['dataOf', 'last_name']} label="Apellido" rules={[{ required: true }]}>
-              <Input defaultValue="mysite" />
+              <Input defaultValue="" />
             </Form.Item>
             <Form.Item name={['dataOf', 'address']} label="Dirección" rules={[{ required: true }]}>
-              <Input defaultValue="mysite" />
+              <Input defaultValue="" />
             </Form.Item>
             <Form.Item name={['dataOf', 'colony']} label="Colonia" rules={[{ required: true }]}>
-              <Input defaultValue="mysite" />
+              <Input defaultValue="" />
             </Form.Item>
             <Form.Item name={['dataOf', 'state']} label="Estado" rules={[{ required: true }]}>
-              <Input defaultValue="mysite" />
+              <Input defaultValue="" />
             </Form.Item>
             <Form.Item name={['dataOf', 'municipality']} label="Municipio" rules={[{ required: true }]}>
-              <Input defaultValue="mysite" />
+              <Input defaultValue="" />
             </Form.Item>
             <Form.Item name={['dataOf', 'office_address']} label="Dirección de oficina" rules={[{ required: true }]}>
-              <Input defaultValue="mysite" />
+              <Input defaultValue="" />
             </Form.Item>
             <Form.Item name={['dataOf', 'charge']} label="Puesto" rules={[{ required: true }]}>
-              <Input defaultValue="mysite" />
+              <Input defaultValue="" />
             </Form.Item>
             <Form.Item name={['dataOf', 'phone_office_lada']} label="Lada" rules={[{ required: true }]}>
-              <Input style={{width:"100px"}} defaultValue="mysite" />
+              <Input style={{width:"100px"}} defaultValue="" />
             </Form.Item>
             <Form.Item name={['dataOf', 'phone_office_code']} label="Código de país" rules={[{ required: true }]}>
-              <Input style={{width:"100px"}} defaultValue="mysite" />
+              <Input style={{width:"100px"}} defaultValue="" />
             </Form.Item>
             <Form.Item name={['dataOf', 'phone_office']} label="Teléfono" rules={[{ required: true }]}>
-              <Input defaultValue="mysite" />
+              <Input defaultValue="" />
             </Form.Item>
             <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
               <Button style={{ backgroundColor: "#00afb7", borderColor: "#00afb7", color: "#ffffff" }} type="primary" htmlType="submit">

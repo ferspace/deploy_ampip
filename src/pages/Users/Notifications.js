@@ -68,7 +68,7 @@ export default function NotificationsPage(props) {
   const [datatableData, setDatatableData] = useState([]) //descomentar al integrar apis
 
   const seviceGet =()=>{
-    axios.get(`${store.URL_PRODUCTION}/user_informations`, {
+    axios.get(`${store.URL_PRODUCTION}/dashboard`, {
       headers: {
         'Authorization': data.authentication_token,
       }
@@ -79,7 +79,7 @@ export default function NotificationsPage(props) {
       } else {
         console.log(response.data)
         var UsersAdd = []
-        response.data.map((item) => {
+        response.data.message.allUser.map((item) => {
           var User = [];
           User.push(item.id);
           User.push(item.full_name)   

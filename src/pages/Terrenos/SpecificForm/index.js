@@ -57,7 +57,7 @@ const SpecificForm = (props)=>{
     var data = JSON.stringify({
       "propieties": {
         "corporate_id": values.user.type,
-        "tipo": 2,
+        "tipo":2,
         "nombre": values.user.name,
       }
     });
@@ -102,6 +102,7 @@ const SpecificForm = (props)=>{
             "municipality": values.user.municipality,
             "state": values.user.state,
             "status": 0,
+            "tipo": 2,
           }
         });
         
@@ -169,6 +170,7 @@ const SpecificForm = (props)=>{
         "municipality": values.user.municipality,
         "state": values.user.state,
         "status": 0,
+        "tipo":2
       }
     });
     
@@ -325,7 +327,7 @@ const SpecificForm = (props)=>{
         >
           {park.map((value, i) => {
             return (
-              <Option key={i} value={value.id}>
+              <Option key={i} value={value.property_id}>
                 {value.name}
               </Option>
             );
