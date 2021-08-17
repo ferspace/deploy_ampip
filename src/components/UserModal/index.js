@@ -53,8 +53,6 @@ const UserModal=(props)=>{
           console.log(error);
         });
 
-      }else{
-        signOut(userDispatch, props.history)
       }
 
   }, []);
