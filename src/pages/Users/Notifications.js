@@ -137,7 +137,7 @@ export default function NotificationsPage(props) {
           }]} tableData={datatableData} />}
           </div>
         )}
-        <Mailer/>
+        {/* <Mailer/> */}
         {activeTabId === 1 && (
           <div style={{display:'flex', justifyContent:'center'}}>
           {write && <SpecificForm functionFetch={()=>seviceGet()}/>}
