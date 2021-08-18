@@ -85,14 +85,14 @@ const SpecificForm = (props) => {
               "property_information": {
                 "property_id": response.data.data,
                 "name": values.user.name,
-                "address": values.user.address,
+                "address": values.user.addres,
                 "english_name": values.user.name_en,
                 "park_property": values.user.park_property,
                 "region": values.user.region,
                 "market": values.user.market,
                 "industry": values.user.industry,
                 "superficie": values.user.superficie,
-                "suprficie_total": values.user.suprficie_total,
+                "suprficie_total": values.user.superficie_total,
                 "superficie_urbanizada": values.user.superficie_urbanizada,
                 "superficie_disponible": values.user.superficie_disponible,
                 "inicio_de_operaciones": values.user.inicio_de_operaciones,
@@ -108,7 +108,8 @@ const SpecificForm = (props) => {
                 "status": 0,
                 "unity": values.user.unity,
                 "lat": latlng.lat,
-                "lng": latlng.lng
+                "lng": latlng.lng,
+                "tipo":0
               }
             });
   
@@ -148,14 +149,14 @@ const SpecificForm = (props) => {
               "property_information": {
                 "property_id": response.data.data,
                 "name": values.user.name,
-                "address": values.user.address,
+                "address": values.user.addres,
                 "english_name": values.user.name_en,
                 "park_property": values.user.park_property,
                 "region": values.user.region,
                 "market": values.user.market,
                 "industry": values.user.industry,
                 "superficie": values.user.superficie,
-                "suprficie_total": values.user.suprficie_total,
+                "suprficie_total": values.user.superficie_total,
                 "superficie_urbanizada": values.user.superficie_urbanizada,
                 "superficie_disponible": values.user.superficie_disponible,
                 "inicio_de_operaciones": values.user.inicio_de_operaciones.format('YYYY-MM-DD'),
@@ -171,7 +172,8 @@ const SpecificForm = (props) => {
                 "status": 0,
                 "unity": values.user.unity,
                 "lat": values.lat,
-                "lng": values.lng
+                "lng": values.lng,
+                "tipo":0
               }
             });
   
@@ -285,7 +287,7 @@ const SpecificForm = (props) => {
           <Form.Item name={['user', 'name_en']} label="Nombre en inglés" rules={[{ required: true }]}>
             <Input />
           </Form.Item>
-          <Form.Item name={['user', 'adress']} label="Calle y número" rules={[{ required: true }]}>
+          <Form.Item name={['user', 'addres']} label="Calle y número" rules={[{ required: true }]}>
             <Input />
           </Form.Item>
           <Form.Item name={['user', 'postal_code']} label="Código Postal" rules={[{ required: true }]}>

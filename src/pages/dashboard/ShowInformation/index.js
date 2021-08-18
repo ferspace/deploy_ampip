@@ -10,20 +10,21 @@ const data = JSON.parse(localStorage.getItem("data"));
 const ShowInformation = (props) =>{
   const [info, setInfo]= useState({})
   useEffect(()=>{
-    axios.get(`${store.URL_PRODUCTION}/property_informations/${props.id}`, {
+    axios.get(`${store.URL_PRODUCTION}/update/${props.id}`, {
       headers: {
         'Authorization': data.authentication_token,
       }
     }).then((response) => {
       //setDatatableData(response.data);
       console.log(response.data, "show data")
-      setInfo(response.data)
+      setInfo(response.data[0])
     }).catch(error => {
       console.log(error); // poner alerta cuando tengamos tiempo
     });
   },[])
 
   const save = ()=>{
+    console.log(info)
     var data = JSON.stringify({
       "property_information": {
         "status": 1
@@ -32,7 +33,7 @@ const ShowInformation = (props) =>{
     
     var config = {
       method: 'put',
-      url: `${store.URL_PRODUCTION}/property_informations/` + props.id,
+      url: `${store.URL_PRODUCTION}/update/` + info.id,
       headers: { 
         'Authorization': JSON.parse(localStorage.getItem('data')).authentication_token, 
         'Content-Type': 'application/json'
