@@ -32,6 +32,7 @@ export default function SimpleModal(props) {
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   const showModal = () => {
+    console.log('props', props);
     setIsModalVisible(true); 
   };
 

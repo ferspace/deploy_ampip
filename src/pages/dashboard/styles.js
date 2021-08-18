@@ -127,5 +127,8 @@ export default makeStyles(theme => ({
   secondary: {
     backgroundColor: theme.palette.secondary.main,
     color: '#fff',
-  }
+  },
+  MuiTypography: {
+    color: '#00afb7 !important',
+  },
 }));

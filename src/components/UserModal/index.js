@@ -4,6 +4,8 @@ import { Input, Form } from 'antd';
 import axios from 'axios';
 import Swal from "sweetalert2";
 import store from '../../store/index' //variables de entorno
+import { useUserDispatch, signOut } from "../../context/UserContext";
+
 const style = { background: '#0092ff', padding: '8px 0' };
 
 
@@ -27,6 +29,8 @@ const UserModal=(props)=>{
   const [open, setOpen] = useState(false);
   const [scroll, setScroll] = useState('paper');
   const [initialValue, setInitialValue] = useState(props.value);
+  var userDispatch = useUserDispatch();
+
   useEffect(() => {
     if(DataOption !== null){
       var axios = require('axios');

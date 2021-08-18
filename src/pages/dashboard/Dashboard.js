@@ -39,6 +39,7 @@ import store from '../../store/index'
 import Tables from '../Tables'
 import ModalInformation from "../../components/ModalInformation";
 import ShowInformation from "./ShowInformation";
+import { useUserDispatch, signOut } from "../../context/UserContext";
 
 const mainChartData = getMainChartData();
 const PieChartData = [
@@ -56,52 +57,55 @@ export default function Dashboard(props) {
   const [allusers, setAllusers] = useState({ all_user: [] })
   const [allChanges, setAllChanges] = useState([])
   const [allproperties, setAllproperties] = useState({ parks: [], nav: [], other: [] })
+  var userDispatch = useUserDispatch();
 
   useEffect(() => {
     if(JSON.parse(localStorage.getItem('data')) !== null)
-    {var config = {
-      method: 'get',
-      url: `${store.URL_PRODUCTION}/dashboard`,
-      headers: {
-        'Authorization': JSON.parse(localStorage.getItem('data')).authentication_token
+      {var config = {
+        method: 'get',
+        url: `${store.URL_PRODUCTION}/dashboard`,
+        headers: {
+          'Authorization': JSON.parse(localStorage.getItem('data')).authentication_token
 
-      }
-    };
-
-    axios(config)
-      .then(function (response) {
-        if (response.data.message.widgets[0]) {
-          console.log(response.data.message.widgets[0]);
-          setWidgets({ developers: response.data.message.widgets[0].developers, sponsors: response.data.message.widgets[0].sponsors });
         }
-        if (response.data.message.allUser) {
-          setAllusers({ all_user: response.data.message.allUser });
-        }
+      };
 
-        if (response.data.message.allChanges) {
-          console.log(response.data.message.allChanges);
-          //setAllChanges({ all_changes: response.data.message.allChanges });
-          var corporatesAdd = [];
-          response.data.message.allChanges.map((i) => {
-            var corporates = [];
-            corporates.push(i.id);
-            corporates.push(i.name)
-            corporatesAdd.push(corporates);
-          });
+      axios(config)
+        .then(function (response) {
+          if (response.data.message.widgets[0]) {
+            console.log(response.data.message.widgets[0]);
+            setWidgets({ developers: response.data.message.widgets[0].developers, sponsors: response.data.message.widgets[0].sponsors });
+          }
+          if (response.data.message.allUser) {
+            setAllusers({ all_user: response.data.message.allUser });
+          }
 
-          setAllChanges([...corporatesAdd]);
-          console.log(allChanges);
-        }
+          if (response.data.message.allChanges) {
+            console.log(response.data.message.allChanges);
+            //setAllChanges({ all_changes: response.data.message.allChanges });
+            var corporatesAdd = [];
+            response.data.message.allChanges.map((i) => {
+              var corporates = [];
+              corporates.push(i.id);
+              corporates.push(i.name)
+              corporatesAdd.push(corporates);
+            });
 
-        if (response.data.message.allProperties) {
-          setAllproperties({ parks: response.data.message.allProperties.parques, nav: response.data.message.allProperties.naves, other: response.data.message.allProperties.terrenos });
-        }
+            setAllChanges([...corporatesAdd]);
+            console.log(allChanges);
+          }
+
+          if (response.data.message.allProperties) {
+            setAllproperties({ parks: response.data.message.allProperties.parques, nav: response.data.message.allProperties.naves, other: response.data.message.allProperties.terrenos });
+          }
 
 
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    }else{
+      signOut(userDispatch, props.history)
     }
   }, []);
 
@@ -178,7 +182,7 @@ export default function Dashboard(props) {
           <Widget
             title="Todos los Usuarios"
             upperTitle
-            noBodyPadding
+            noBodyPadding 
             bodyClass={classes.tableWidget}
           >
             <Tables title={"Todos los Usuarios"} columns={["id", "full_name"]} tableData={allusers.all_user} />

@@ -38,29 +38,32 @@ const Desarrolladores = (props) => {
   const [write, setWrite] = useState(false)
   const [permisos, setPermisos] = useState([])
 
-  const permissionsMap = () =>{
-    permisos.map((item)=>{
-      if (item.permiso === "sponsor"){
-        setRead(item.read)
-        setWrite(item.write)
-        console.log(item)
-      } 
-    })
+  const permissionsMap = () => {
+    if (permisos) {
+      permisos.map((item) => {
+        if (item.permiso === "sponsor") {
+          setRead(item.read)
+          setWrite(item.write)
+          console.log(item)
+        }
+      })
+    }
+
 
   }
 
   const seviceGet = () => {
     axios.get(`${store.URL_PRODUCTION}/corporates?type=1`, {
-      headers: { 
+      headers: {
         'Authorization': data.authentication_token,
       }
     }).then((response) => {
       //setDatatableData(response.data);
-      if(response.data.error){
+      if (response.data.error) {
         alert("error")
-      } else{
+      } else {
         var corporatesAdd = [];
-        response.data.map((i)=>{
+        response.data.map((i) => {
           var corporates = [];
           corporates.push(i.id);
           corporates.push(i.name)
@@ -68,7 +71,7 @@ const Desarrolladores = (props) => {
           corporates.push(i.address)
           corporatesAdd.push(corporates);
         });
-      
+
         setDatatableData([...corporatesAdd]);
       }
     }).catch(error => {
@@ -87,14 +90,14 @@ const Desarrolladores = (props) => {
 
   useEffect(() => {    //aqui va la peticion al endpoint , se va aprocesar la informacion del tipo [[dato1,dato2]]
     seviceGet()
-  },[]);
+  }, []);
 
-  useEffect(() => { 
+  useEffect(() => {
     permissionsMap()
-  },[permisos]);
+  }, [permisos]);
 
-  useEffect(() => { 
-    axios.get(`${store.URL_PRODUCTION}/dashboard`,{
+  useEffect(() => {
+    axios.get(`${store.URL_PRODUCTION}/dashboard`, {
       headers: {
         'Authorization': data.authentication_token,
         'Content-Type': 'application/json'
@@ -103,7 +106,7 @@ const Desarrolladores = (props) => {
       setPermisos(response.data.message.permissions)
     }).catch(error => {
       console.log(error); // poner alerta cuando tengamos tiempo
-    }); 
+    });
   }, []);
 
   return (
@@ -124,44 +127,44 @@ const Desarrolladores = (props) => {
       )} />
       <Paper className={classes.iconsContainer}>
         <Tabs
-          TabIndicatorProps={{style: {background:'#00AFB7'}}}
+          TabIndicatorProps={{ style: { background: '#00AFB7' } }}
           textColor="#fffff"
           value={activeTabId}
           onChange={(e, id) => setActiveTabId(id)}
           className={classes.iconsBar}
         >
-          <Tab label="Patrocinadores" className={classes.menuspace}  />
+          <Tab label="Patrocinadores" className={classes.menuspace} />
           <Tab label="Agregar" className={classes.menuspace} />
         </Tabs>
         {activeTabId === 0 && (
           <div style={{ padding: 20 }}>
 
-          {read && <Tables title={"Todos los Patrocinadores"} columns={["id","Name", "Nombre_en", "Direccion", {
-            label: "Ver",
-            options: {
-              customBodyRender: (value, tableMeta, updateValue) => {
-                return (
-                  <ModalInformation data={tableMeta.rowData[0]} children={<ShowInformation id={tableMeta.rowData[0]}/>}/>
-                )
+            {read && <Tables title={"Todos los Patrocinadores"} columns={["id", "Name", "Nombre_en", "Direccion", {
+              label: "Ver",
+              options: {
+                customBodyRender: (value, tableMeta, updateValue) => {
+                  return (
+                    <ModalInformation data={tableMeta.rowData[0]} children={<ShowInformation id={tableMeta.rowData[0]} />} />
+                  )
+                }
               }
-            }
-          },
-          {
-            label: "Editar",
-            options: {
-              customBodyRender: (value, tableMeta, updateValue) => {
-                return (
-                  <ModaEdit data={tableMeta.rowData[0]} children={<EditForm id={tableMeta.rowData[0]} functionFetch={()=>seviceGet()}/>} write={write}/>
-                )
-              }
-            }
-          }]} tableData={datatableData} />}
+            },
+              {
+                label: "Editar",
+                options: {
+                  customBodyRender: (value, tableMeta, updateValue) => {
+                    return (
+                      <ModaEdit data={tableMeta.rowData[0]} children={<EditForm id={tableMeta.rowData[0]} functionFetch={() => seviceGet()} />} write={write} />
+                    )
+                  }
+                }
+              }]} tableData={datatableData} />}
           </div>
         )}
 
         {activeTabId === 1 && (
-          <div style={{display:'flex', justifyContent:'center'}}>
-            {write && <SpecificForm functionFetch={()=>seviceGet()}/>}
+          <div style={{ display: 'flex', justifyContent: 'center' }}>
+            {write && <SpecificForm functionFetch={() => seviceGet()} />}
           </div>
         )}
       </Paper>
