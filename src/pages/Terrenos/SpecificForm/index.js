@@ -533,19 +533,6 @@ const SpecificForm = (props)=>{
               <Option value="OEA">OEA</Option>
             </Select>
           </Form.Item>
-<<<<<<< HEAD
-          <Form.Item name={['user', 'superficie_total']} label="Superficie Total" rules={[{required: !isapark,},]}>
-            <Input type={"number"} min="0" disabled={isapark}/>
-          </Form.Item>
-          <Form.Item name={['user', 'superficie']} label="Superficie Ocupada" rules={[{required: !isapark,},]}>
-            <Input type={"number"} min="0" disabled={isapark}/>
-          </Form.Item>
-          <Form.Item name={['user', 'superficie_urbanizada']} label="Superficie Urbanizada" rules={[{required: !isapark,},]}>
-            <Input type={"number"} min="0" disabled={isapark}/>
-          </Form.Item>
-          <Form.Item name={['user', 'superficie_disponible']} label="Superficie Disponible" rules={[{required: !isapark,},]}>
-            <Input type={"number"} min="0" disabled={isapark}/>
-=======
           <Form.Item name={['user', 'superficie_total']} label="Superficie Total" rules={[{ required: isapark, },]}>
             <Input type={"number"} min="1" disabled={!isapark} />
           </Form.Item>
@@ -557,7 +544,6 @@ const SpecificForm = (props)=>{
           </Form.Item>
           <Form.Item name={['user', 'superficie_disponible']} label="Superficie Disponible" rules={[{ required: isapark, },]}>
             <Input type={"number"} min="1" disabled={!isapark} />
->>>>>>> 92f195826fd14dbb72ac916c1d758251031027ce
           </Form.Item>
           <Form.Item name={['user', 'unity']} label="Unidad De Medida" rules={[{ required: isapark, },]}>
             <Select
@@ -570,15 +556,6 @@ const SpecificForm = (props)=>{
               <Option value="Ft2">ft²</Option>
             </Select>
           </Form.Item>
-<<<<<<< HEAD
-          <Form.Item name={['user', 'lng']} label="Longitud" rules={[{required: !isapark,},]}>
-            <Input type={"number"} onChange={(e)=>setCoordenadas(e, "lng")} disabled={isapark}/>
-          </Form.Item>
-          <Form.Item name={['user', 'lat']} label="Latitud" rules={[{required: !isapark,},]}>
-            <Input type={"number"} onChange={(e)=>setCoordenadas(e, "lat")} disabled={isapark}/>
-          </Form.Item>
-          <Form.Item  value={latlng} style={{ display: 'flex', justifyContent: 'center', width: '100%', marginTop: '30px' }}>
-=======
           <Form.Item name={['user', 'lat']} label="Latitud" rules={[{ required: isapark, },]}>
             <Input type={"number"} onChange={(e) => setCoordenadas(e, "lat")} disabled={!isapark} />
           </Form.Item>
@@ -586,7 +563,6 @@ const SpecificForm = (props)=>{
             <Input type={"number"} onChange={(e) => setCoordenadas(e, "lng")} disabled={!isapark} />
           </Form.Item>
           <Form.Item value={latlng} style={{ display: 'flex', justifyContent: 'center', width: '100%', marginTop: '30px' }}>
->>>>>>> 92f195826fd14dbb72ac916c1d758251031027ce
             <BasicMap
               googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=AIzaSyCFdQ7O0MIewEqbyXhW0k9XemMqnYx0aDQ"
               loadingElement={<div style={{ width: "inherit" }} />}
