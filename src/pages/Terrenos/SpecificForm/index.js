@@ -46,7 +46,7 @@ const validateMessages = {
   },
 };
 
-const SpecificForm = (props)=>{
+const SpecificForm = (props) => {
   const [latlng, setLatlng] = useState({ lat: 19, lng: -99 }) // latlng.lat, latlng.lng
   const events = (e) => {
     setLatlng({ lat: e.latLng.lat(), lng: e.latLng.lng() })
@@ -81,20 +81,20 @@ const SpecificForm = (props)=>{
             "property_information": {
               "property_id": response.data.data,
               "name": values.user.name,
-              "superficie": "",
               "address": values.user.addres,
               "english_name": response.data.name_en,
-              "park_property": "",
-              "region": "",
-              "market": "",
-              "industry": "",
-              "suprficie_total": "",
-              "superficie_urbanizada": "",
-              "superficie_disponible": "",
-              "inicio_de_operaciones": "",
-              "number_employe": "",
-              "practices_recognition": "",
-              "infrastructure": "",
+              "park_property": values.user.park_property,
+              "region": values.user.region,
+              "market": values.user.market,
+              "industry": values.user.industry,
+              "suprficie_total":"",
+              "superficie": values.user.superficie,
+              "superficie_urbanizada": values.user.superficie_urbanizada,
+              "superficie_disponible": values.user.superficie_disponible,
+              "inicio_de_operaciones": values.user.inicio_de_operaciones,
+              "number_employe": values.user.number_employe,
+              "practices_recognition": values.user.practices_recognition,
+              "infrastructure": values.user.infrastructure,
               "navy_number": "",
               "message": "",
               "postal_code": values.user.postal_code,
@@ -161,16 +161,16 @@ const SpecificForm = (props)=>{
             "property_information": {
               "property_id": values.user.propertyId,
               "name": values.user.name,
-              "superficie": "",
               "address": values.user.addres,
               "english_name": values.user.name_en,
               "park_property": values.user.park_property,
               "region": res.data[0].region,
               "market": res.data[0].market,
               "industry": res.data[0].industry,
-              "suprficie_total": res.data[0].address,
-              "superficie_urbanizada": res.data[0].superficie_urbanizada,
-              "superficie_disponible": res.data[0].superficie_disponible,
+              "suprficie_total": "",
+              "superficie": values.user.superficie,
+              "superficie_urbanizada": values.user.superficie_urbanizada,
+              "superficie_disponible": values.user.superficie_disponible,
               "inicio_de_operaciones": res.data[0].inicio_de_operaciones,
               "number_employe": res.data[0].number_employe,
               "practices_recognition": "",
@@ -225,11 +225,12 @@ const SpecificForm = (props)=>{
       });
   }
 
-
   const onFinish = (values) => {
-    if(isapark){
+    if (isapark) {
+      alert("+")
       saveWhithProperty(values);
-    }else{
+    } else {
+      alert("-")
       saveWhitouthProperty(values);
     }
     props.functionFetch()
@@ -237,7 +238,7 @@ const SpecificForm = (props)=>{
   };
 
   const [corporates, setCorporates] = useState([]);
-  const [park , setPark] = useState([])
+  const [park, setPark] = useState([])
 
   useEffect(() => {
     if (corporates.length === 0) {
@@ -254,7 +255,7 @@ const SpecificForm = (props)=>{
   }, []);// obtiene el corporativo
 
   useEffect(() => {
-    if(park.length === 0){
+    if (park.length === 0) {
       axios.get(`${store.URL_PRODUCTION}/dashboard`, {
         headers: {
           'Authorization': DataOption.authentication_token,
@@ -271,20 +272,20 @@ const SpecificForm = (props)=>{
     setIsapark(!isapark);
   }
 
-  const setCoordenadas=(e, type)=>{
+  const setCoordenadas = (e, type) => {
     console.log(e, "coordenadas")
-    if(type === "lat"){
+    if (type === "lat") {
       setLatlng({ lat: e.target.value, lng: latlng.lng })
-    }else{
-      setLatlng({ lat: latlng.lat , lng: e.target.value})
+    } else {
+      setLatlng({ lat: latlng.lat, lng: e.target.value })
     }
   }
   console.log(latlng, "coordenadas")
 
-  const [getAddress, setGetAddress]= useState([])
+  const [getAddress, setGetAddress] = useState([])
 
-  const getAddessFunction = (e)=>{
-    if(e.target.value.length === 5){
+  const getAddessFunction = (e) => {
+    if (e.target.value.length === 5) {
       axios.get(`${store.ADDRESS}/zip_codes?zip_code=${e.target.value}`, {
         headers: {
           'Authorization': DataOption.authentication_token,
@@ -292,17 +293,16 @@ const SpecificForm = (props)=>{
         },
       }).then((response) => {
         setGetAddress(response.data.zip_codes)
-      }).catch((err)=>{
+      }).catch((err) => {
         console.log("no se encontro direccion")
       })
     }
   }
 
   return (
-    <Form {...layout} name="nest-messages" onFinish={onFinish} validateMessages={validateMessages} >
+    <Form {...layout} name="nest-messages" onFinish={onFinish} validateMessages={validateMessages}>
       <div style={{ display: 'flex', justifyContent: 'center', width: '1200px' }}>
         <div style={{ display: 'block', width: '50%' }}>
-
           <div style={{ display: 'flex', justifyContent: 'center', width: '100%', padding: '20px' }}>
             <ImageUpload />
           </div>
@@ -312,11 +312,11 @@ const SpecificForm = (props)=>{
             rules={[
               {
                 required: isapark,
-              },
+              }
             ]}
           >
             <Select
-              placeholder="Select a option and change input text above"
+              placeholder="Selecciona un corporativo"
               allowClear
               disabled={!isapark}
             >
@@ -329,18 +329,16 @@ const SpecificForm = (props)=>{
               })}
             </Select>
           </Form.Item>
-          <Form.Item name={"check"} label="Pertenece a un Parque" rules={[{ required: true }]}>
-            <Switch onChange={onChange} label="Pertenece a un parque" style={{ paddingTop: "1em" }} ></Switch>
+          <Form.Item label="Pertenece a un Parque" rules={[{ required: true }]}>
+            <Switch onChange={onChange} label="Pertenece a un parque" style={{ paddingTop: "1em" }}></Switch>
           </Form.Item>
-
-
 
           <Form.Item
             name={["user", "propertyId"]}
             label="Parque"
             rules={[
               {
-                required: isapark,
+                required: !isapark,
               },
             ]}
           >
@@ -365,7 +363,10 @@ const SpecificForm = (props)=>{
           <Form.Item name={['user', 'name_en']} label="Nombre en inglés" rules={[{ required: true }]}>
             <Input />
           </Form.Item>
-          <Form.Item name={['user', 'addres']} label="Calle y Número" rules={[{ required: true }]}>
+          <Form.Item name={['user', 'type']} value={2} label="type" hidden={true} >
+            <Input />
+          </Form.Item>
+          <Form.Item name={['user', 'adress']} label="Calle y Número" rules={[{ required: true }]}>
             <Input />
           </Form.Item>
           <Form.Item name={['user', 'postal_code']} label="Código Postal" rules={[{ required: true }]}>
@@ -399,7 +400,7 @@ const SpecificForm = (props)=>{
               })}
             </Select>
           </Form.Item>
-          <Form.Item name={['user', 'municipality']} label="Municipio" rules={[{ required: true }]}>
+          <Form.Item name={['user', 'municipality']} label="Municipio/Alcaldía" rules={[{ required: true }]}>
             <Select
               placeholder="Selecione"
               allowClear
@@ -425,11 +426,10 @@ const SpecificForm = (props)=>{
               <Option value="Sur"></Option>
             </Select>
           </Form.Item>
-          <Form.Item name={['user', 'park_property']} label="Propietario/Administrador" rules={[{ required: isapark, },]} >
+          <Form.Item name={['user', 'park_property']} label="Propietario/Administrador" rules={[{ required: true, },]} >
             <Select
               placeholder="Selecciona la unidad de medida"
               allowClear
-              disabled={isapark}
             >
               <Option value="Propietario">Propietario</Option>
               <Option value="Administrador">Administrador</Option>
@@ -507,6 +507,8 @@ const SpecificForm = (props)=>{
               <Option value="Oficinas administrativas">Oficinas administrativas</Option>
               <Option value="Otros">Otros</Option>
             </Select>
+
+
           </Form.Item>
           <Form.Item name={['user', 'inicio_de_operaciones']} label="Inicio de Operaciones" rules={[{ required: isapark, },]}>
             <DatePicker disabled={!isapark} />
@@ -533,33 +535,31 @@ const SpecificForm = (props)=>{
               <Option value="OEA">OEA</Option>
             </Select>
           </Form.Item>
-          <Form.Item name={['user', 'superficie_total']} label="Superficie Total" rules={[{ required: isapark, },]}>
-            <Input type={"number"} min="1" disabled={!isapark} />
+
+          <Form.Item name={['user', 'superficie']} label="Superficie Ocupada" rules={[{ required: !isapark }]}>
+            <Input type={"number"} min="1" />
           </Form.Item>
-          <Form.Item name={['user', 'superficie']} label="Superficie Ocupada" rules={[{ required: isapark, },]}>
-            <Input type={"number"} min="1" disabled={!isapark} />
+          <Form.Item name={['user', 'superficie_urbanizada']} label="Superficie Urbanizada" rules={[{ required: !isapark, },]}>
+            <Input type={"number"} min="1" />
           </Form.Item>
-          <Form.Item name={['user', 'superficie_urbanizada']} label="Superficie Urbanizada" rules={[{ required: isapark, },]}>
-            <Input type={"number"} min="1" disabled={!isapark} />
+          <Form.Item name={['user', 'superficie_disponible']} label="Superficie Disponible" rules={[{ required: !isapark, },]}>
+            <Input type={"number"} min="1" />
           </Form.Item>
-          <Form.Item name={['user', 'superficie_disponible']} label="Superficie Disponible" rules={[{ required: isapark, },]}>
-            <Input type={"number"} min="1" disabled={!isapark} />
-          </Form.Item>
-          <Form.Item name={['user', 'unity']} label="Unidad De Medida" rules={[{ required: isapark, },]}>
+          <Form.Item name={['user', 'unity']} label="Unidad De Medida" rules={[{ required: !isapark, },]}>
             <Select
               placeholder="Selecciona la unidad de medida"
               allowClear
-              disabled={!isapark}
+
             >
               <Option value="M2">m²</Option>
               <Option value="Ha">Ha</Option>
               <Option value="Ft2">ft²</Option>
             </Select>
           </Form.Item>
-          <Form.Item name={['user', 'lat']} label="Latitud" rules={[{ required: isapark, },]}>
+          <Form.Item name={['user', 'lat']} label="Latitud">
             <Input type={"number"} onChange={(e) => setCoordenadas(e, "lat")} disabled={!isapark} />
           </Form.Item>
-          <Form.Item name={['user', 'lng']} label="Longitud" rules={[{ required: isapark, },]}>
+          <Form.Item name={['user', 'lng']} label="Longitud">
             <Input type={"number"} onChange={(e) => setCoordenadas(e, "lng")} disabled={!isapark} />
           </Form.Item>
           <Form.Item value={latlng} style={{ display: 'flex', justifyContent: 'center', width: '100%', marginTop: '30px' }}>
