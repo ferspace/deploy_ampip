@@ -10,7 +10,7 @@ const ShowInformation = (props) => {
   const [info, setInfo] = useState({});
   const [corporate, setCorporate] = useState({});
   useEffect(() => {
-    axios.get(`${store.URL_PRODUCTION}/propieties/${props.id}`, {
+    axios.get(`${store.URL_PRODUCTION}/update/${props.id}`, {
       headers: {
         'Authorization': data.authentication_token,
       }
@@ -20,7 +20,7 @@ const ShowInformation = (props) => {
         headers: {
           'Authorization': data.authentication_token,
         }
-      }).then((response) => {
+      }).then((response) => { 
         setCorporate(response.data);
       }).catch(error => {
         console.log(error);

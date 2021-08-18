@@ -108,7 +108,8 @@ const SpecificForm = (props) => {
                 "status": 0,
                 "unity": values.user.unity,
                 "lat": latlng.lat,
-                "lng": latlng.lng
+                "lng": latlng.lng,
+                "tipo":0
               }
             });
   
@@ -171,7 +172,8 @@ const SpecificForm = (props) => {
                 "status": 0,
                 "unity": values.user.unity,
                 "lat": values.lat,
-                "lng": values.lng
+                "lng": values.lng,
+                "tipo":0
               }
             });
   
