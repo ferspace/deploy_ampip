@@ -85,7 +85,7 @@ const SpecificForm = (props) => {
               "property_information": {
                 "property_id": response.data.data,
                 "name": values.user.name,
-                "address": values.user.address,
+                "address": values.user.addres,
                 "english_name": values.user.name_en,
                 "park_property": values.user.park_property,
                 "region": values.user.region,
@@ -148,7 +148,7 @@ const SpecificForm = (props) => {
               "property_information": {
                 "property_id": response.data.data,
                 "name": values.user.name,
-                "address": values.user.address,
+                "address": values.user.addres,
                 "english_name": values.user.name_en,
                 "park_property": values.user.park_property,
                 "region": values.user.region,
@@ -285,7 +285,7 @@ const SpecificForm = (props) => {
           <Form.Item name={['user', 'name_en']} label="Nombre en inglés" rules={[{ required: true }]}>
             <Input />
           </Form.Item>
-          <Form.Item name={['user', 'adress']} label="Calle y número" rules={[{ required: true }]}>
+          <Form.Item name={['user', 'addres']} label="Calle y número" rules={[{ required: true }]}>
             <Input />
           </Form.Item>
           <Form.Item name={['user', 'postal_code']} label="Código Postal" rules={[{ required: true }]}>
