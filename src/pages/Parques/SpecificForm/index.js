@@ -451,16 +451,16 @@ const SpecificForm = (props) => {
             </Select>
           </Form.Item>
           <Form.Item name={['user', 'superficie_total']} label="Superficie Total" rules={[{ required: true }]}>
-            <Input type={"number"} min="1" />
+            <Input type={"number"} min="0" />
           </Form.Item>
           <Form.Item name={['user', 'superficie']} label="Superficie Ocupada" rules={[{ required: true }]}>
-            <Input type={"number"} min="1" />
+            <Input type={"number"} min="0" />
           </Form.Item>
           <Form.Item name={['user', 'superficie_urbanizada']} label="Superficie Urbanizada" rules={[{ required: true }]}>
-            <Input type={"number"} min="1" />
+            <Input type={"number"} min="0" />
           </Form.Item>
           <Form.Item name={['user', 'superficie_disponible']} label="Superficie Disponible" rules={[{ required: true }]}>
-            <Input type={"number"} min="1" />
+            <Input type={"number"} min="0" />
           </Form.Item>
           <Form.Item name={['user', 'unity']} label="Unidad De Medida" rules={[{ required: true }]}>
             <Select
@@ -472,11 +472,11 @@ const SpecificForm = (props) => {
               <Option value="Ft2">ft²</Option>
             </Select>
           </Form.Item>
-          <Form.Item name={['user', 'lat']} label="Latitud">
-            <Input type={"number"} onChange={(e)=>setCoordenadas(e, "lat")}/>
-          </Form.Item>
           <Form.Item name={['user', 'lng']} label="Longitud">
             <Input type={"number"} onChange={(e)=>setCoordenadas(e, "lng")}/>
+          </Form.Item>
+          <Form.Item name={['user', 'lat']} label="Latitud">
+            <Input type={"number"} onChange={(e)=>setCoordenadas(e, "lat")}/>
           </Form.Item>
           <Form.Item  value={latlng} style={{ display: 'flex', justifyContent: 'center', width: '100%', marginTop: '30px' }}>
             <BasicMap

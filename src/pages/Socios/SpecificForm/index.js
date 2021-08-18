@@ -186,7 +186,7 @@ const SpecificForm = (props) => {
               })}
             </Select>
           </Form.Item>
-          <Form.Item name={['user', 'municipality']} label="Municipio" rules={[{ required: true }]}>
+          <Form.Item name={['user', 'municipality']} label="Municipio/Alcaldía" rules={[{ required: true }]}>
             <Select
               placeholder="Selecione"
               allowClear
@@ -218,7 +218,7 @@ const SpecificForm = (props) => {
             <Input maxLength={8} />
           </Form.Item>
 
-          <Form.Item name={['user', 'social_media_tw']} label="Clasificación de Socio" rules={[{ required: true }]}>
+          <Form.Item name={['user', 'social_media_tw']} label="Clasificación de Patrocinador" rules={[{ required: true }]}>
             <Select
               placeholder="Select"
               allowClear
