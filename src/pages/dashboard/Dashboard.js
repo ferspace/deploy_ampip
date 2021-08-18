@@ -182,7 +182,7 @@ export default function Dashboard(props) {
           <Widget
             title="Todos los Usuarios"
             upperTitle
-            noBodyPadding 
+            noBodyPadding
             bodyClass={classes.tableWidget}
           >
             <Tables title={"Todos los Usuarios"} columns={["id", "full_name"]} tableData={allusers.all_user} />
