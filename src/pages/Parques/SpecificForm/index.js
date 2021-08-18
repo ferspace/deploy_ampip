@@ -92,7 +92,7 @@ const SpecificForm = (props) => {
                 "market": values.user.market,
                 "industry": values.user.industry,
                 "superficie": values.user.superficie,
-                "suprficie_total": values.user.suprficie_total,
+                "suprficie_total": values.user.superficie_total,
                 "superficie_urbanizada": values.user.superficie_urbanizada,
                 "superficie_disponible": values.user.superficie_disponible,
                 "inicio_de_operaciones": values.user.inicio_de_operaciones,
@@ -108,7 +108,8 @@ const SpecificForm = (props) => {
                 "status": 0,
                 "unity": values.user.unity,
                 "lat": latlng.lat,
-                "lng": latlng.lng
+                "lng": latlng.lng,
+                "tipo":0
               }
             });
   
@@ -155,7 +156,7 @@ const SpecificForm = (props) => {
                 "market": values.user.market,
                 "industry": values.user.industry,
                 "superficie": values.user.superficie,
-                "suprficie_total": values.user.suprficie_total,
+                "suprficie_total": values.user.superficie_total,
                 "superficie_urbanizada": values.user.superficie_urbanizada,
                 "superficie_disponible": values.user.superficie_disponible,
                 "inicio_de_operaciones": values.user.inicio_de_operaciones.format('YYYY-MM-DD'),
@@ -171,7 +172,8 @@ const SpecificForm = (props) => {
                 "status": 0,
                 "unity": values.user.unity,
                 "lat": values.lat,
-                "lng": values.lng
+                "lng": values.lng,
+                "tipo":0
               }
             });
   
