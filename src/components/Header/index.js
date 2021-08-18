@@ -149,7 +149,7 @@ export default function Header(props) {
           )}
         </IconButton>
         <Typography variant="h6" weight="medium" className={classes.logotype}>
-        <img src={imgampiplo} alt="logo" className={classes.ampipImage} /> 
+        <img src={imgampiplo} alt="logo" width="150px" height="auto" className={classes.ampipImage} /> 
         </Typography>
         <div className={classes.grow} />
   
@@ -191,7 +191,7 @@ export default function Header(props) {
           disableAutoFocusItem
         >
           <div className={classes.profileMenuUser}>
-            <Typography variant="h4" weight="medium">
+            <Typography style={{color:"#00afb7", fontSize:"16px", fontWeight:"bold"}} variant="h4" weight="medium">
               {emailUser}
             </Typography>
             
@@ -199,10 +199,9 @@ export default function Header(props) {
           <div className={classes.profileMenuUser}>
             <Typography
               className={classes.profileMenuLink}
-              color="primary"
               onClick={() => signOut(userDispatch, props.history)}
             >
-              Sign Out
+              Salir
             </Typography>
           </div>
         </Menu>

@@ -48,32 +48,34 @@ const Parques = (props) => {
   }
 
   const seviceGet = () => {
-    axios.get(`${store.URL_PRODUCTION}/dashboard`, {
+    if(data !== null){
+      axios.get(`${store.URL_PRODUCTION}/dashboard`, {
       headers: {
         'Authorization': data.authentication_token,
       }
-    }).then((response) => {
-      console.log(response.data.message.allProperties)
+      }).then((response) => {
+        console.log(response.data.message.allProperties)
 
-      if (response.data.message == "Sin datos para mostrar") {
-        console.log(response.data)
-        setDatatableData([["s", "s", "s"]]);
-      } else {
-        console.log()
-         var corporatesAdd = [];
-        response.data.message.allProperties.parques.map((i) => {
-          var corporates = [];
-          corporates.push(i.id);
-          corporates.push(i.name)
-          corporates.push(i.updated_at)
-          corporatesAdd.push(corporates);
-        });
+        if (response.data.message == "Sin datos para mostrar") {
+          console.log(response.data)
+          setDatatableData([["s", "s", "s"]]);
+        } else {
+          console.log()
+          var corporatesAdd = [];
+          response.data.message.allProperties.parques.map((i) => {
+            var corporates = [];
+            corporates.push(i.id);
+            corporates.push(i.name)
+            corporates.push(i.updated_at)
+            corporatesAdd.push(corporates);
+          });
 
-        setDatatableData([...corporatesAdd]);
-      }
-    }).catch(error => {
-      console.log(error); // poner alerta cuando tengamos tiempo
-    });
+          setDatatableData([...corporatesAdd]);
+        }
+      }).catch(error => {
+        console.log(error); // poner alerta cuando tengamos tiempo
+      });
+    }
   }
 
   const handleClose = () => {
@@ -95,7 +97,8 @@ const Parques = (props) => {
   }, [permisos]);
 
   useEffect(() => {
-    axios.get(`${store.URL_PRODUCTION}/dashboard`, {
+    
+      axios.get(`${store.URL_PRODUCTION}/dashboard`, {
       headers: {
         'Authorization': data.authentication_token,
         'Content-Type': 'application/json'

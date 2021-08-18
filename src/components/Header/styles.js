@@ -141,10 +141,16 @@ export default makeStyles(theme => ({
     }
   },
   profileMenuLink: {
-    fontSize: 16,
+    textAlign:"center",
+    color:"red;",
+    border:"1px solid red",
+    borderRadius:"2px",
+    fontSize: 14,
     textDecoration: "none",
     "&:hover": {
       cursor: "pointer",
+      color:"#333333",
+      border:"1px solid #333333",
     },
   },
   messageNotification: {

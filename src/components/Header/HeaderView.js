@@ -288,7 +288,7 @@ const Header = ({ classes, isSidebarOpened, toggleSidebar, ...props }) => (
             color="primary"
             onClick={props.signOut}
           >
-            Sign Out
+            Sign Ooout
           </Typography>
         </div>
       </Menu>
