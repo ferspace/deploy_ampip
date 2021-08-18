@@ -126,7 +126,7 @@ const Disponibles = () => {
           onChange={(e, id) => setActiveTabId(id)}
           className={classes.iconsBar}
         >
-          <Tab label="Espacios" className={classes.menuspace} />
+          <Tab style={{marginBottom:'20px'}} label="Espacios" className={classes.menuspace} />
         </Tabs>
         {activeTabId === 0 && (
           <div style={{padding:20}}>
