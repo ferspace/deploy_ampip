@@ -455,7 +455,7 @@ const SpecificForm = (props) => {
             </Select>
           </Form.Item>
           <Form.Item name={['user', 'cel_lada']} label="Lada" rules={[{ required: isapark, },]} >
-            <Input style={{ width: "100px" }} maxLength={3} disabled={!isapark} />
+            <Input type={"number"} style={{ width: "100px" }} maxLength={3} disabled={!isapark} />
           </Form.Item>
           <Form.Item name={['user', 'cel']} label="Número Local" rules={[{ required: isapark, },]} >
             <Input type={"number"} maxLength={8} disabled={!isapark} />
