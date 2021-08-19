@@ -4,7 +4,7 @@ const store = {
     //https://ampip-back-33cr9.ondigitalocean.app/api/v1/sign_in
     //https://ampip-back-33cr9.ondigitalocean.app/api/v1/sign_in
     //https://cepomex.herokuapp.com/api/v1/zip_codes?zip_code=529
-    URL_PRODUCTION: 'https://ampip-back-dyp5u.ondigitalocean.app/api/v1',
+    URL_PRODUCTION: 'https://ampip-back-dyp5u.ondigitalocean.app/',
     ADDRESS: 'https://cepomex.herokuapp.com/api/v1'
 
 }
