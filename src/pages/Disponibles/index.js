@@ -56,7 +56,7 @@ const Disponibles = () => {
         });
       
         // setDatatableData([...corporatesAdd]);
-        axios.get(`${store.URL_PRODUCTION}/propieties?type=2`, {
+        axios.get(`${store.URL_PRODUCTION}/propieties`, {
           headers: { 
             'Authorization': data.authentication_token,
           }
