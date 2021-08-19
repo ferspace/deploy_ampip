@@ -167,7 +167,7 @@ const SpecificForm = (props) => {
                 "infrastructure": values.user.infrastructure,
                 "navy_number": values.user.navy_number,
                 "message": values.user.message,
-                "postal_code": values.user.postal_code,
+                "postal_code_number": values.user.postal_code,
                 "colony": values.user.colony,
                 "municipality": values.user.municipality,
                 "state": values.user.state,
@@ -325,12 +325,13 @@ const SpecificForm = (props) => {
               <Select
                 placeholder="Selecione"
                 allowClear
+                name={['user', 'colony']}
               >
                 {getAddress.map((value, i) => {
                   return (
-                    <Option key={i} value={value.d_asenta}>
+                    <option key={i} value={value.d_asenta}>
                       {value.d_asenta}
-                    </Option>
+                    </option>
                   );
                 })}
             </Select>
@@ -603,15 +604,14 @@ const SpecificForm = (props) => {
               clickeds={(e) => { events(e) }}
             />
           </Form.Item>
-        
-        <Grid item xs={12} >
-          <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
+      
+          <Form.Item style={{ display: 'flex', justifyContent: 'center', width: '100%', backgroundColor:'red'}} >
 
             <Button style={{ backgroundColor: "#00afb7", borderColor: "#00afb7", color: "#ffffff" }} type="primary" htmlType="submit">
               Enviar
             </Button>
           </Form.Item>
-        </Grid>
+     
       </Grid>
    </>
     </Form>
@@ -619,4 +619,5 @@ const SpecificForm = (props) => {
   )
 
 }
+
 export default SpecificForm;

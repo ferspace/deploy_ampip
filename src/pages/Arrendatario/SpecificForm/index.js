@@ -11,6 +11,7 @@ const layout = {
   wrapperCol: { span: 16 },
 };
 const DataOption = JSON.parse(localStorage.getItem("data"));
+
 const validateMessages = {
   required: '${label} is required!',
   types: {
@@ -175,4 +176,5 @@ const SpecificForm = (props) => {
     </Form>
   )
 }
+
 export default SpecificForm;
