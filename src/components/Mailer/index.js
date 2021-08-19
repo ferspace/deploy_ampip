@@ -101,7 +101,7 @@ const Mailer = (e, mailType) => {
             "status": "",
             "municipality": "",
             "colony": "",
-            "postal_code_number": "",
+            "postal_code_number": "0000",
             "user_rols_id": user_type,
             "user_type": "",
             "created_at": "",
