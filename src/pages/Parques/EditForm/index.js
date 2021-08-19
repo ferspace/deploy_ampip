@@ -119,11 +119,11 @@ const EditForm = (props) => {
       <Form.Item name={['property_information', 'name']} label="Nombre" rules={[{ required: true }]}>
         <Input />
       </Form.Item>
-      <Form.Item name={['property_information', 'name_en']} label="Nombre en ingles" rules={[{ required: true }]}>
+      <Form.Item name={['property_information', 'english_name']} label="Nombre en ingles" rules={[{ required: true }]}>
         <Input />
       </Form.Item>
  
-      <Form.Item name={['property_information', 'adress']} label="Calle y número" rules={[{ required: true }]}>
+      <Form.Item name={['property_information', 'address']} label="Calle y número" rules={[{ required: true }]}>
         <Input />
       </Form.Item>
       <Form.Item name={['property_information', 'postal_code']} label="Código Postal" rules={[{ required: true }]}>
@@ -229,14 +229,11 @@ const EditForm = (props) => {
           <Option value="OEA">OEA</Option>
         </Select>
       </Form.Item>
-      <Form.Item name={['property_information', 'superficie']} label="Superficie" rules={[{ required: true }]}>
+      <Form.Item name={['property_information', 'superficie']} label="Superficie Ocupada" rules={[{ required: true }]}>
         <Input />
       </Form.Item>
 
       <Form.Item name={['property_information', 'superficie_total']} label="Superficie Total" rules={[{ required: true }]}>
-        <Input />
-      </Form.Item>
-      <Form.Item name={['property_information', 'superficie']} label="Superficie Ocupada" rules={[{ required: true }]}>
         <Input />
       </Form.Item>
       <Form.Item name={['property_information', 'superficie_urbanizada']} label="Superficie Urbanizada" rules={[{ required: true }]}>
