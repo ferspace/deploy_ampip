@@ -9,6 +9,20 @@ const Uploaded = () => {
 
     const onChange = (imageList, addUpdateIndex) => {
         // data for submit
+
+        const normFile = async (e) => {    //sube la imagen 
+            const files = e.target.files
+            const data = new FormData()
+            data.append('file', files[0])
+            data.append('upload_preset', 'darwin')
+            setLoading(true)
+            const res  = await fetch("https://api.cloudinary.com/v1_1/deq1fmfhm/image/upload", {
+              method: 'POST',
+              body:data
+            })
+            const file = await res.json()
+            setImage(file.secure_url)
+          };
         console.log(imageList, addUpdateIndex);
         setImages(imageList);
     };
