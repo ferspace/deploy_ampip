@@ -31,87 +31,17 @@ const EditForm = (props)=>{
 
   const onFinish = (values) => {
     console.log(values)
-    var data = JSON.stringify({
-      "corporate": {
-      "name": values.user.name,
-      "english_name": values.user.name_en,
-      "social_type": 1,
-      "address": values.user.address,
-      "postal_code": values.user.cp,
-      "colony": values.user.colony,
-      "state": values.user.state,
-      "municipality": values.user.municipality,
-      "cel": values.user.cel,
-      "anual_invetsment": "",
-      "previus_anual_inv": "",
-      "next_anual_inv": "",
-      "downt_date": null,
-      "corporate_type": "",
-      "status": true
-    }
-  });
-  
-  var config = {
-    method: 'put',
-    url: `${store.URL_PRODUCTION}/corporates/${props.id}`,
-    headers: { 
+    axios.put(`${store.URL_PRODUCTION}/corporate/${props.id}`,{data: values},
+    {headers: {
       'Authorization': DataOption.authentication_token,
       'Content-Type': 'application/json'
-    },
-    data : data
-  };
-  
-  axios(config)
-  .then(function (response) {
-    if (response.data.message != 0){
-      var data = JSON.stringify({
-          "corporate_information": {
-          "rfc": values.user.RFC,
-          "social_media_tw": values.user.social_media_tw,
-          "social_media_fb": values.user.social_media_fb,
-          "social_media_inst": values.user.social_media_inst,
-          "social_media_link": values.user.social_media_link,
-          "social_media_web": values.user.social_media_web,
-          "corporate_id": response.data.message
-        }
-      });
-      
-      var config = {
-        method: 'put',
-        url: `${store.URL_PRODUCTION}/corporate_informations/${props.id}`,
-        headers: { 
-          'Authorization': DataOption.authentication_token, 
-          'Content-Type': 'application/json'
-        },
-        data : data
-      };
-      
-      axios(config)
-      .then(function (response) {
-        Swal.fire({
-          icon: 'success',
-          title: '¡Se agrego correctamente!',
-          showConfirmButton: false,
-          timer: 1500
-        })
-        console.log(JSON.stringify(response.data));
-      })
-      .catch(function (error) {
-        Swal.fire({
-          icon: 'error',
-          title: '¡Error al agregar!',
-          showConfirmButton: false,
-          timer: 1500
-        })
-        console.log(error);
-      });
-    }
-  })
-  .catch(function (error) {
-    console.log(error);
-  });
-  props.functionFetch()
-
+    }}
+    
+    )
+    .then(res => {
+      console.log("Respuesta a petición");
+      console.log(res.data);
+    })
   };
 
   const findAddress = (e) =>{
@@ -145,42 +75,42 @@ const EditForm = (props)=>{
 
       <ImageUpload/>
 
-      <Form.Item name={['user', 'name']} label="Nombre en español" rules={[{ required: true }]}>
+      <Form.Item name={['corporate', 'name']} label="Nombre en español" rules={[{ required: true }]}>
         <Input />
       </Form.Item>
-      <Form.Item name={['user', 'name_en']} label="Nombre en ingles" rules={[{ required: true }]}>
+      <Form.Item name={['corporate', 'name_en']} label="Nombre en ingles" rules={[{ required: true }]}>
         <Input />
       </Form.Item>
-      <Form.Item name={['user', 'address']} label="Calle y número" rules={[{ required: true }]}>
+      <Form.Item name={['corporate', 'address']} label="Calle y número" rules={[{ required: true }]}>
         <Input />
       </Form.Item>
-      <Form.Item name={['user', 'cp']} label="Código Postal" rules={[{ required: true }]}>
+      <Form.Item name={['corporate', 'cp']} label="Código Postal" rules={[{ required: true }]}>
         <Input />
       </Form.Item>
-      <Form.Item name={['user', 'colony']} label="Colonia" rules={[{ required: true }]}>
+      <Form.Item name={['corporate', 'colony']} label="Colonia" rules={[{ required: true }]}>
         <Input />
       </Form.Item>
       </div>
       <div style={{display:'block', width:'50%'}}>
-      <Form.Item name={['user', 'state']} label="Estado" rules={[{ required: true }]}>
+      <Form.Item name={['corporate', 'state']} label="Estado" rules={[{ required: true }]}>
         <Input />
       </Form.Item>
-      <Form.Item name={['user', 'municipality']} label="Municipio" rules={[{ required: true }]}>
+      <Form.Item name={['corporate', 'municipality']} label="Municipio" rules={[{ required: true }]}>
         <Input />
       </Form.Item>     
-      <Form.Item name={['user', 'cel_code']} label="Lada" rules={[{ required: true }]}>
+      <Form.Item name={['corporate', 'cel_code']} label="Lada" rules={[{ required: true }]}>
         <Input />
       </Form.Item>
       
-      <Form.Item name={['user', 'cel_lada']} label="Código de país" rules={[{ required: true }]}>
+      <Form.Item name={['corporate', 'cel_lada']} label="Código de país" rules={[{ required: true }]}>
         <Input />
       </Form.Item>
 
-      <Form.Item name={['user', 'cel']} label="Número" rules={[{ required: true }]}>
+      <Form.Item name={['corporate', 'cel']} label="Número" rules={[{ required: true }]}>
         <Input />
       </Form.Item>
 
-      <Form.Item name={['user', 'social_media_tw']} label="Clasificación" rules={[{ required: true }]}>
+      <Form.Item name={['corporate', 'social_media_tw']} label="Clasificación" rules={[{ required: true }]}>
         <Input />
       </Form.Item>
       </div>

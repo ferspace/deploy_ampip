@@ -142,7 +142,7 @@ const UserModalCopy = (props) => {
     <>
 
       <Button style={{ backgroundColor: "#00afb7", borderColor: "#00afb7", color: "#ffffff"}} type="primary" onClick={showModal}>
-        Mi Perfil
+         Perfil
       </Button>
 
       <Modal title="Información del Usuario" visible={isModalVisible} onCancel={handleCancel} onOk={handleOk} centered style={{  overflow: 'scroll',height: 500}}>

@@ -40,7 +40,7 @@ const SpecificForm = (props) => {
         "english_name": values.user.name_en,
         "social_type": 1,
         "address": values.user.address,
-        "postal_code": values.user.cp,
+        "postal_code_number": values.user.cp,
         "colony": values.user.colony,
         "state": values.user.state,
         "municipality": values.user.municipality,
@@ -155,50 +155,55 @@ const SpecificForm = (props) => {
             <Input />
           </Form.Item>
 
-          <Form.Item name={['user', 'cp']} label="Código Postal" rules={[{ required: true }]}>
+          <Form.Item name={['user', 'postal_code_number']} label="Código Postal" rules={[{ required: true }]}>
             <Input style={{ width: "100px" }} onChange={(e) => getAddessFunction(e)} />
           </Form.Item>
-          <Form.Item name={['user', 'colony']} label="Colonia" rules={[{ required: true }]}>
-            <Select
+          <Form.Item label="Colonia" rules={[{ required: true }]}>
+            <select
               placeholder="Selecione"
               allowClear
+              name={['user', 'colony']}
             >
               {getAddress.map((value, i) => {
                 return (
-                  <Option key={i} value={value.d_asenta}>
+                  <option key={i} value={value.d_asenta}>
                     {value.d_asenta}
-                  </Option>
+                  </option>
                 );
               })}
-            </Select>
+            </select>
           </Form.Item>
-          <Form.Item name={['user', 'state']} label="Estado" rules={[{ required: true }]}>
-            <Select
+          <Form.Item label="Estado" rules={[{ required: true }]}>
+            <select
               placeholder="Selecione"
               allowClear
+              name={['user', 'state']}
+              disabled="true"
             >
               {getAddress.map((value, i) => {
                 return (
-                  <Option key={i} value={value.d_estado}>
+                  <option key={i} value={value.d_estado}>
                     {value.d_estado}
-                  </Option>
+                  </option>
                 );
               })}
-            </Select>
+            </select>
           </Form.Item>
-          <Form.Item name={['user', 'municipality']} label="Municipio" rules={[{ required: true }]}>
-            <Select
+          <Form.Item label="Municipio/Alcaldía" rules={[{ required: true }]}>
+            <select
               placeholder="Selecione"
               allowClear
+              name={['user', 'municipality']}
+              disabled="true"
             >
               {getAddress.map((value, i) => {
                 return (
-                  <Option key={i} value={value.d_mnpio}>
+                  <option key={i} value={value.d_mnpio}>
                     {value.d_mnpio}
-                  </Option>
+                  </option>
                 );
               })}
-            </Select>
+            </select>
           </Form.Item>
 
           <Form.Item name={['user', 'cel_code']} label="Código de país" rules={[{ required: true }]}>
@@ -215,10 +220,10 @@ const SpecificForm = (props) => {
             <Input style={{ width: "100px" }} maxLength={3} />
           </Form.Item>
           <Form.Item name={['user', 'cel']} label="Número Local" rules={[{ required: true }]}>
-            <Input maxLength={8} />
+            <Input type={"number"} maxLength={8} />
           </Form.Item>
 
-          <Form.Item name={['user', 'social_media_tw']} label="Clasificación de Socio" rules={[{ required: true }]}>
+          <Form.Item name={['user', 'social_media_tw']} label="Clasificación de Patrocinador" rules={[{ required: true }]}>
             <Select
               placeholder="Select"
               allowClear

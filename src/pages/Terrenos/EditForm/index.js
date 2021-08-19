@@ -29,166 +29,20 @@ const EditForm = (props)=>{
   const [corporates, setCorporates] = useState([]);
   const [park , setPark] = useState([])
   const [parkById , setParkById] = useState([])
-
-  const saveWhithProperty = (values)=>{
-    var data = JSON.stringify({
-      "propieties": {
-        "corporate_id": values.user.type,
-        "tipo": 2,
-        "nombre": values.user.name,
-      }
-    });
     
-    var config = {
-      method: 'put',
-      url: `${store.URL_PRODUCTION}/propieties/${props.id}`,
-      headers: { 
-        'Authorization': DataOption.authentication_token, 
-        'Content-Type': 'application/json'
-      },
-      data: data
-    };
-    
-    axios(config)
-    .then(function (response) {
-      //console.log(JSON.stringify(response.data));
-      if(response.data.message !== 0) {
-        console.log(response.data)
-        var data = JSON.stringify({
-          "property_information": {
-            "property_id": response.data.data,
-            "name": values.user.name,
-            "superficie": "",
-            "address": values.user.address,
-            "english_name":response.data.name_en,
-            "park_property": "",
-            "region": "",
-            "market": "",
-            "industry": "",
-            "suprficie_total": "",
-            "superficie_urbanizada": "",
-            "superficie_disponible": "",
-            "inicio_de_operaciones": "",
-            "number_employe": "",
-            "practices_recognition": "",
-            "infrastructure": "",
-            "navy_number": "",
-            "message": "",
-            "postal_code": values.user.postal_code,
-            "colony": values.user.colony,
-            "municipality": values.user.municipality,
-            "state": values.user.state,
-            "status": 1,
-          }
-        });
-        
-        var config = {
-          method: 'put',
-          url: `${store.URL_PRODUCTION}/property_informations/${props.id}`,
-          headers: { 
-            'Authorization': DataOption.authentication_token, 
-            'Content-Type': 'application/json'
-          },
-          data : data
-        };
-        
-        axios(config)
-        .then(function (response) {
-          Swal.fire({
-            icon: 'success',
-            title: '¡Se agrego correctamente!',
-            showConfirmButton: false,
-            timer: 1500
-          })
-          props.functionFetch()
-          console.log(JSON.stringify(response.data));
-        })
-        .catch(function (error) {
-          Swal.fire({
-            icon: 'error',
-            title: '¡Error al agregar!',
-            showConfirmButton: false,
-            timer: 1500
-          })
-          console.log(error);
-        });
-      } 
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
-  }
-
-  const saveWhitouthProperty = (values)=>{
-    var data = JSON.stringify({
-      "property_information": {
-        "property_id": values.user.propertyId,
-        "name": values.user.name,
-        "superficie": "",
-        "address": values.user.address,
-        "english_name":"",
-        "park_property": "",
-        "region": "",
-        "market": "",
-        "industry": "",
-        "suprficie_total": "",
-        "superficie_urbanizada": "",
-        "superficie_disponible": "",
-        "inicio_de_operaciones": "",
-        "number_employe": "",
-        "practices_recognition": "",
-        "infrastructure": "",
-        "navy_number": "",
-        "message": "",
-        "postal_code": values.user.postal_code,
-        "colony": values.user.colony,
-        "municipality": values.user.municipality,
-        "state": values.user.state,
-        "status": 1,
-      }
-    });
-    
-    var config = {
-      method: 'put',
-      url: `${store.URL_PRODUCTION}/property_informations/${props.id}`,
-      headers: { 
-        'Authorization': DataOption.authentication_token, 
-        'Content-Type': 'application/json'
-      },
-      data : data
-    };
-    
-    axios(config)
-    .then(function (response) {
-      Swal.fire({
-        icon: 'success',
-        title: '¡Se agrego correctamente!',
-        showConfirmButton: false,
-        timer: 1500
-      })
-      props.functionFetch()
-
-      console.log(JSON.stringify(response.data));
-    })
-    .catch(function (error) {
-      Swal.fire({
-        icon: 'error',
-        title: '¡Error al agregar!',
-        showConfirmButton: false,
-        timer: 1500
-      })
-      console.log(error);
-    });
-  }
-
   const onFinish = (values) => {
-    if(isapark){
-      saveWhithProperty(values);
-    }else{
-      saveWhitouthProperty(values);
-    }
-    props.functionFetch()
-
+    console.log(values)
+    axios.put(`${store.URL_PRODUCTION}/property_informations/${props.id}`,{data: values},
+    {headers: {
+      'Authorization': DataOption.authentication_token,
+      'Content-Type': 'application/json'
+    }}
+    
+    )
+    .then(res => {
+      console.log("Respuesta a petición");
+      console.log(res.data);
+    })
   };
 
   useEffect(() => {
@@ -243,7 +97,7 @@ const EditForm = (props)=>{
       <div style={{ display: 'flex', justifyContent: 'center', width:'1200px'}}>
       <div style={{display:'block', width:'50%'}}>
       <Form.Item
-        name={["user", "type"]}
+        name={["property_information", "type"]}
         label="Corporativos"
         rules={[
           {
@@ -269,7 +123,7 @@ const EditForm = (props)=>{
       <Switch defaultChecked onChange={onChange} label="Pertenece a un parque" style={{marginBottom:"1em"}}></Switch>
 
       <Form.Item
-        name={["user", "propertyId"]}
+        name={["property_information", "propertyId"]}
         label="Parque"
         rules={[
           {
@@ -292,30 +146,30 @@ const EditForm = (props)=>{
         </Select>
       </Form.Item>
 
-      <Form.Item name={['user', 'name']} label="Nombre" rules={[{ required: true }]}>
+      <Form.Item name={['property_information', 'name']} label="Nombre" rules={[{ required: true }]}>
         <Input />
       </Form.Item>
-      <Form.Item name={['user', 'name_en']} label="Nombre en ingles" rules={[{ required: true }]}>
+      <Form.Item name={['property_information', 'english_name']} label="Nombre en ingles" rules={[{ required: true }]}>
         <Input />
       </Form.Item>
-      <Form.Item name={['user', 'type']} value={2} label="type" hidden={true} >
+      <Form.Item name={['property_information', 'type']} value={2} label="type" hidden={true} >
         <Input />
       </Form.Item>
-      <Form.Item name={['user', 'adress']} label="Dirección" rules={[{ required: true }]}>
+      <Form.Item name={['property_information', 'address']} label="Dirección" rules={[{ required: true }]}>
         <Input />
       </Form.Item>
       </div>
       <div style={{display:'block', width:'50%'}}>
-      <Form.Item name={['user', 'postal_code']} label="Código Postal" rules={[{ required: true }]}>
+      <Form.Item name={['property_information', 'postal_code']} label="Código Postal" rules={[{ required: true }]}>
         <Input/>
       </Form.Item>
-      <Form.Item name={['user', 'colony']} label="Colonia" rules={[{ required: true }]}>
+      <Form.Item name={['property_information', 'colony']} label="Colonia" rules={[{ required: true }]}>
         <Input/>
       </Form.Item>
-      <Form.Item name={['user', 'state']} label="Estado" rules={[{ required: true }]}>
+      <Form.Item name={['property_information', 'state']} label="Estado" rules={[{ required: true }]}>
         <Input/>
       </Form.Item>
-      <Form.Item name={['user', 'municipality']} label="Municipio" rules={[{ required: true }]}>
+      <Form.Item name={['property_information', 'municipality']} label="Municipio" rules={[{ required: true }]}>
         <Input/>
       </Form.Item>
 
