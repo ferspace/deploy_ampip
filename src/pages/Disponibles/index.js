@@ -56,7 +56,7 @@ const Disponibles = () => {
         });
       
         // setDatatableData([...corporatesAdd]);
-        axios.get(`${store.URL_PRODUCTION}/propieties?type=2`, {
+        axios.get(`${store.URL_PRODUCTION}/property_informations`, {
           headers: { 
             'Authorization': data.authentication_token,
           }
@@ -65,16 +65,22 @@ const Disponibles = () => {
           if(response.data.error){
             console.log(response.data)
           } else{
-            var corporatesAdd2 = [];
-            response.data.map((i)=>{
+            var corporatesAdd = [];
+            response.data.map((i) => {
               var corporates = [];
-              corporates.push(i.id);
-              corporates.push(i.nombre)
-              corporates.push(i.updated_at)
-              corporatesAdd2.push(corporates);
+              if(i.status_disponibilities.length > 0){
+                i.status_disponibilities.map((j)=>{
+                  if(j){
+                    corporates.push(j.id);
+                    corporates.push(j.average_price)
+                    corporates.push(j.use)
+                  }
+                });
+                corporatesAdd.push(corporates);
+              }
             });
-          
-            
+            console.log("corporate, data" , corporatesAdd)
+             setDatatableData([...corporatesAdd]);
           }
         }).catch(error => {
           console.log(error); // poner alerta cuando tengamos tiempo

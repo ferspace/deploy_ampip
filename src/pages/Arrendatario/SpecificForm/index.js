@@ -11,6 +11,7 @@ const layout = {
   wrapperCol: { span: 16 },
 };
 const DataOption = JSON.parse(localStorage.getItem("data"));
+
 const validateMessages = {
   required: '${label} is required!',
   types: {
@@ -32,7 +33,11 @@ const SpecificForm = (props) => {
           'Content-Type': 'application/json'
         },
       }).then((response) => {
-        setCorporates(response.data.message.rescueParks)
+       var naves = response.data.message.allProperties.naves;
+       var terrenos = response.data.message.allProperties.terrenos;
+       var navy = response.data.message.allProperties.ter;
+       var ter = response.data.message.allProperties.ter;
+        setCorporates(...naves,terrenos, navy, ter);
         // setCorporates(response.data)
         //setPost(response.data);
       });
@@ -175,4 +180,5 @@ const SpecificForm = (props) => {
     </Form>
   )
 }
+
 export default SpecificForm;
