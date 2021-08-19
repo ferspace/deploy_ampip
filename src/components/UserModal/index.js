@@ -1,11 +1,12 @@
 import React,{useState, useEffect} from 'react';
 import {Button, Dialog, DialogActions, DialogContent, DialogTitle} from '@material-ui/core';
-import { Input, Form } from 'antd';
+import { Input, Form, Select } from 'antd';
 import axios from 'axios';
 import Swal from "sweetalert2";
 import store from '../../store/index' //variables de entorno
 import { useUserDispatch, signOut } from "../../context/UserContext";
 
+const { Option } = Select;
 const style = { background: '#0092ff', padding: '8px 0' };
 
 
@@ -136,6 +137,22 @@ const UserModal=(props)=>{
     }
   }, [open]);
 
+  const [getAddress, setGetAddress]= useState([])
+  const getAddessFunction = (e)=>{
+    if(e.target.value.length === 5){
+      axios.get(`${store.ADDRESS}/zip_codes?zip_code=${e.target.value}`, {
+        headers: {
+          'Authorization': DataOption.authentication_token,
+          'Content-Type': 'application/json'
+        },
+      }).then((response) => {
+        setGetAddress(response.data.zip_codes)
+      }).catch((err)=>{
+        console.log("no se encontro direccion")
+      })
+    }
+  }
+
   return (
     <div>
       <Button onClick={handleClickOpen('paper')} style={{color:'white'}}>Perfil</Button>
@@ -155,17 +172,59 @@ const UserModal=(props)=>{
             <Form.Item name={['dataOf', 'last_name']} label="Apellido" rules={[{ required: true }]}>
               <Input defaultValue="" />
             </Form.Item>
-            <Form.Item name={['dataOf', 'address']} label="Dirección" rules={[{ required: true }]}>
+            <Form.Item name={['dataOf', 'address']} label="Calle y Número" rules={[{ required: true }]}>
               <Input defaultValue="" />
             </Form.Item>
-            <Form.Item name={['dataOf', 'colony']} label="Colonia" rules={[{ required: true }]}>
-              <Input defaultValue="" />
+            <Form.Item name={['user', 'postal_code_number']} label="Código Postal" rules={[{ required: true }]}>
+            <Input style={{ width: "100px" }} onChange={(e)=>getAddessFunction(e)} />
+          </Form.Item>
+            <Form.Item label="Colonia" rules={[{ required: true }]}>
+              <select
+                  placeholder="Selecione"
+                  allowClear
+                  name={['dataOf', 'colony']}
+                >
+                  {getAddress.map((value, i) => {
+                    return (
+                      <option key={i} value={value.d_asenta}>
+                        {value.d_asenta}
+                      </option>
+                    );
+                  })}
+              </select>
             </Form.Item>
-            <Form.Item name={['dataOf', 'state']} label="Estado" rules={[{ required: true }]}>
-              <Input defaultValue="" />
+            <Form.Item label="Estado" rules={[{ required: true }]}>
+              <select
+                placeholder="Selecione"
+                allowClear
+                disabled="true"
+                name={['dataOf', 'state']}
+              >
+
+                {getAddress.map((value, i) => {
+                  return (
+                    <option key={i} value={value.d_estado}>
+                      {value.d_estado}
+                    </option>
+                  );
+                })}
+            </select>
             </Form.Item>
-            <Form.Item name={['dataOf', 'municipality']} label="Municipio" rules={[{ required: true }]}>
-              <Input defaultValue="" />
+            <Form.Item label="Municipio/Alcandía" rules={[{ required: true }]}>
+              <select
+                    placeholder="Selecione"
+                    allowClear
+                    disabled="true"
+                    name={['dataOf', 'municipality']}
+                  >
+                    {getAddress.map((value, i) => {
+                      return (
+                        <option key={i} value={value.d_mnpio}>
+                          {value.d_mnpio}
+                        </option>
+                      );
+                    })}
+              </select>
             </Form.Item>
             <Form.Item name={['dataOf', 'office_address']} label="Dirección de oficina" rules={[{ required: true }]}>
               <Input defaultValue="" />
@@ -174,13 +233,21 @@ const UserModal=(props)=>{
               <Input defaultValue="" />
             </Form.Item>
             <Form.Item name={['dataOf', 'phone_office_lada']} label="Lada" rules={[{ required: true }]}>
-              <Input style={{width:"100px"}} defaultValue="" />
+            <Input style={{width:"100px"}} maxLength={3}/>
             </Form.Item>
-            <Form.Item name={['dataOf', 'phone_office_code']} label="Código de país" rules={[{ required: true }]}>
-              <Input style={{width:"100px"}} defaultValue="" />
+            <Form.Item label="Código de país" rules={[{ required: true }]}>
+            <select
+            placeholder="Select"
+            allowClear
+            style={{width:"100px"}}
+            name={['dataOf', 'phone_office_code']}
+          >
+            <option value="52">52</option>
+            <option value="1">1</option>
+          </select>
             </Form.Item>
             <Form.Item name={['dataOf', 'phone_office']} label="Teléfono" rules={[{ required: true }]}>
-              <Input defaultValue="" />
+              <Input type={"number"} maxLength={8}/>
             </Form.Item>
             <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
               <Button style={{ backgroundColor: "#00afb7", borderColor: "#00afb7", color: "#ffffff" }} type="primary" htmlType="submit">
