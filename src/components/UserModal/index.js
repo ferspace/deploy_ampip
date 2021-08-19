@@ -48,7 +48,8 @@ const UserModal=(props)=>{
 
       axios(config)
         .then(function (response) {
-          setInitialValue(response.data);
+          console.log("USER",response.data);
+          setInitialValue(response.data[0]);
         })
         .catch(function (error) {
           console.log(error);
@@ -89,7 +90,9 @@ const UserModal=(props)=>{
         "municipality": values.dataOf.municipality,
         "colony": values.dataOf.colony,
        "phone_office_lada":values.dataOf.phone_office_lada,
-        "phone_office_code":values.dataOf.phone_office_code
+        "phone_office_code":values.dataOf.phone_office_code,
+        "postal_code_number":values.dataOf.postal_code_number,
+
       }
     });
 
@@ -175,7 +178,7 @@ const UserModal=(props)=>{
             <Form.Item name={['dataOf', 'address']} label="Calle y Número" rules={[{ required: true }]}>
               <Input defaultValue="" />
             </Form.Item>
-            <Form.Item name={['user', 'postal_code_number']} label="Código Postal" rules={[{ required: true }]}>
+            <Form.Item name={['dataOf', 'postal_code_number']} label="Código Postal" rules={[{ required: true }]}>
             <Input style={{ width: "100px" }} onChange={(e)=>getAddessFunction(e)} />
           </Form.Item>
             <Form.Item label="Colonia" rules={[{ required: true }]}>
