@@ -59,18 +59,22 @@ const Arendatario = (props) => {
         console.log(response.data)
         setDatatableData([["s", "s", "s"]]);
       } else {
-        var corporatesAdd = [];
-        response.data.map((i) => {
-          var corporates = [];
-          i.tenant_users.map((z)=>{
-            corporates.push(z.id);
-            corporates.push(z.name_bussines)
-            corporates.push(z.updated_at)
-          });
-          corporatesAdd.push(corporates);
-        });
-
-         setDatatableData([...corporatesAdd]);
+         var corporatesAdd = [];
+            response.data.map((i) => {
+              var corporates = [];
+              if(i.tenant_users.length > 0){
+                i.tenant_users.map((j)=>{
+                  if(j){
+                    corporates.push(j.id);
+                    corporates.push(j.name_bussines)
+                    corporates.push(j.updated_at)
+                  }
+                });
+                corporatesAdd.push(corporates);
+              }
+            });
+            console.log("corporate, data" , corporatesAdd)
+             setDatatableData([...corporatesAdd]);
       }
     }).catch(error => {
       console.log(error); // poner alerta cuando tengamos tiempo
