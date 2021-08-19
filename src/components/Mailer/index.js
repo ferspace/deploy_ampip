@@ -68,7 +68,7 @@ const Mailer = (e, mailType) => {
         "email": email,
         "password": password,
         "password_confirmation": password,
-        "user_type": user_type,
+        "user_type": user_type - 1,
       }
     });
 
@@ -174,7 +174,7 @@ const Mailer = (e, mailType) => {
       <Select placeholder="Rol de usuario " onChange={(e)=>{ setUser_type(e) }}>
         {permissions.map((value, i) => {
           return (
-            <Option key={i} value={i}>
+            <Option key={i} value={i.id}>
               {value.name}
             </Option>
           );
