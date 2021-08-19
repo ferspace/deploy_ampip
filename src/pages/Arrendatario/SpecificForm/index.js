@@ -126,7 +126,7 @@ const SpecificForm = (props) => {
               placeholder="Select a option and change input text above"
               allowClear
             >
-              {corporates != null && (
+              {corporates.length > 0 && (
                 corporates.map((value, i) => {
                   return (
                     <Option key={i} value={value.id}>
