@@ -316,7 +316,7 @@ const SpecificForm = (props) => {
             <Grid item xs={12} sm={6} md={6} lg={4}>
               Código Postal:
               <Form.Item name={['user', 'postal_code']} rules={[{ required: true }]}>
-            <Input style={{ width: "100px" }} onChange={(e)=>getAddessFunction(e)} />
+            <Input type={"number"} style={{ width: "100px" }} onChange={(e)=>getAddessFunction(e)} />
           </Form.Item>
           </Grid>
             <Grid item xs={12} sm={6} md={6} lg={4}>
@@ -344,35 +344,15 @@ const SpecificForm = (props) => {
             <Grid item xs={12} sm={12} md={6} lg={4}>
               Estado:
               <Form.Item name={['user', 'state']} rules={[{ required: true }]}>
-              <Select
-                placeholder="Selecione"
-                allowClear
-              >
-                {getAddress.map((value, i) => {
-                  return (
-                    <Option key={i} value={value.d_estado}>
-                      {value.d_estado}
-                    </Option>
-                  );
-                })}
-            </Select>
+              {getAddress.length>0&&(<Input name={['user', 'state']} disabled="true" value={getAddress[0].d_estado}></Input>)}
+              {getAddress.length==0&&(<Input disabled="true" defaultValue={'Sin datos'}></Input>)}
             </Form.Item>
             </Grid>
             <Grid item xs={12} sm={12} md={6} lg={4}>
               Municipio/Alcaldía:
               <Form.Item name={['user', 'municipality']} rules={[{ required: true }]}>
-                <Select
-                    placeholder="Selecione"
-                    allowClear
-                  >
-                    {getAddress.map((value, i) => {
-                      return (
-                        <Option key={i} value={value.d_mnpio}>
-                          {value.d_mnpio}
-                        </Option>
-                      );
-                    })}
-              </Select>
+              {getAddress.length>0&&(<Input name={['user', 'municipality']} disabled="true" value={getAddress[0].d_mnpio}></Input>)}
+              {getAddress.length==0&&(<Input disabled="true" defaultValue={'Sin datos'}></Input>)}
             </Form.Item>
             </Grid>
             <Grid item xs={12} sm={12} md={6} lg={4}>

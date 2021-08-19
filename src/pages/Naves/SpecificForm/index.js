@@ -374,54 +374,30 @@ const SpecificForm = (props) => {
             <Input />
           </Form.Item>
           <Form.Item name={['user', 'postal_code_number']} label="Código Postal" rules={[{ required: true }]}>
-            <Input style={{ width: "100px" }} onChange={(e) => getAddessFunction(e)} />
+            <Input type={"number"} style={{ width: "100px" }} onChange={(e) => getAddessFunction(e)} />
           </Form.Item>
           <Form.Item label="Colonia" rules={[{ required: true }]}>
-            <select
+            <Select
               placeholder="Selecione"
               allowClear
               name={['user', 'colony']}
             >
               {getAddress.map((value, i) => {
                 return (
-                  <option key={i} value={value.d_asenta}>
+                  <Option key={i} value={value.d_asenta}>
                     {value.d_asenta}
-                  </option>
+                  </Option>
                 );
               })}
-            </select>
+            </Select>
           </Form.Item>
           <Form.Item label="Estado" rules={[{ required: true }]}>
-            <select
-              placeholder="Selecione"
-              allowClear
-              name={['user', 'state']}
-              disabled="true"
-            >
-              {getAddress.map((value, i) => {
-                return (
-                  <option key={i} value={value.d_estado}>
-                    {value.d_estado}
-                  </option>
-                );
-              })}
-            </select>
+              {getAddress.length>0&&(<Input name={['user', 'state']} disabled="true" value={getAddress[0].d_estado}></Input>)}
+              {getAddress.length==0&&(<Input disabled="true" defaultValue={'Sin datos'}></Input>)}
           </Form.Item>
-          <Form.Item label="Municipio" rules={[{ required: true }]}>
-            <select
-              placeholder="Selecione"
-              allowClear
-              name={['user', 'municipality']}
-              disabled="true"
-            >
-              {getAddress.map((value, i) => {
-                return (
-                  <option key={i} value={value.d_mnpio}>
-                    {value.d_mnpio}
-                  </option>
-                );
-              })}
-            </select>
+          <Form.Item label="Municipio/Alcaldía" rules={[{ required: true }]}>
+              {getAddress.length>0&&(<Input name={['user', 'municipality']} disabled="true" value={getAddress[0].d_mnpio}></Input>)}
+              {getAddress.length==0&&(<Input disabled="true" defaultValue={'Sin datos'}></Input>)}
           </Form.Item>
           <Form.Item name={['user', 'region']} label="Región" rules={[{ required: isapark, },]}>
             <Select
