@@ -126,13 +126,15 @@ const SpecificForm = (props) => {
               placeholder="Select a option and change input text above"
               allowClear
             >
-              {corporates.map((value, i) => {
-                return (
-                  <Option key={i} value={value.id}>
-                    {value.name}
-                  </Option>
-                );
-              })}
+              {corporates.length > 0 && (
+                corporates.map((value, i) => {
+                  return (
+                    <Option key={i} value={value.id}>
+                      {value.name}
+                    </Option>
+                  );
+                })
+              )}
             </Select>
           </Form.Item>
           <Form.Item name={['user', 'name_busines']} label="Nombre de la empresa" rules={[{ required: true }]}>
