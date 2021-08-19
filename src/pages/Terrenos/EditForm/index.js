@@ -149,13 +149,13 @@ const EditForm = (props)=>{
       <Form.Item name={['property_information', 'name']} label="Nombre" rules={[{ required: true }]}>
         <Input />
       </Form.Item>
-      <Form.Item name={['property_information', 'name_en']} label="Nombre en ingles" rules={[{ required: true }]}>
+      <Form.Item name={['property_information', 'english_name']} label="Nombre en ingles" rules={[{ required: true }]}>
         <Input />
       </Form.Item>
       <Form.Item name={['property_information', 'type']} value={2} label="type" hidden={true} >
         <Input />
       </Form.Item>
-      <Form.Item name={['property_information', 'adress']} label="Dirección" rules={[{ required: true }]}>
+      <Form.Item name={['property_information', 'address']} label="Dirección" rules={[{ required: true }]}>
         <Input />
       </Form.Item>
       </div>
