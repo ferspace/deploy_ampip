@@ -218,7 +218,7 @@ const SpecificForm = (props)=>{
         <Input style={{width:"100px"}} maxLength={3} />
       </Form.Item>
       <Form.Item name={['user', 'cel']} label="Número Local" rules={[{ required: true }]}>
-        <Input maxLength={8}/>
+        <Input type={"number"} maxLength={8}/>
       </Form.Item>
       </div>
       <div style={{display:'block', width:'50%'}}>

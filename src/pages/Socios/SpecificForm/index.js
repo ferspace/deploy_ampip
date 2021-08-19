@@ -215,7 +215,7 @@ const SpecificForm = (props) => {
             <Input style={{ width: "100px" }} maxLength={3} />
           </Form.Item>
           <Form.Item name={['user', 'cel']} label="Número Local" rules={[{ required: true }]}>
-            <Input maxLength={8} />
+            <Input type={"number"} maxLength={8} />
           </Form.Item>
 
           <Form.Item name={['user', 'social_media_tw']} label="Clasificación de Patrocinador" rules={[{ required: true }]}>
