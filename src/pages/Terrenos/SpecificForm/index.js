@@ -453,7 +453,7 @@ const SpecificForm = (props) => {
             <Input style={{ width: "100px" }} maxLength={3} disabled={!isapark} />
           </Form.Item>
           <Form.Item name={['user', 'cel']} label="Número Local" rules={[{ required: isapark, },]} >
-            <Input maxLength={8} disabled={!isapark} />
+            <Input type={"number"} maxLength={8} disabled={!isapark} />
           </Form.Item>
 
         </div>
@@ -556,11 +556,11 @@ const SpecificForm = (props) => {
               <Option value="Ft2">ft²</Option>
             </Select>
           </Form.Item>
-          <Form.Item name={['user', 'lat']} label="Latitud">
-            <Input type={"number"} onChange={(e) => setCoordenadas(e, "lat")} disabled={!isapark} />
-          </Form.Item>
           <Form.Item name={['user', 'lng']} label="Longitud">
             <Input type={"number"} onChange={(e) => setCoordenadas(e, "lng")} disabled={!isapark} />
+          </Form.Item>
+          <Form.Item name={['user', 'lat']} label="Latitud">
+            <Input type={"number"} onChange={(e) => setCoordenadas(e, "lat")} disabled={!isapark} />
           </Form.Item>
           <Form.Item value={latlng} style={{ display: 'flex', justifyContent: 'center', width: '100%', marginTop: '30px' }}>
             <BasicMap
