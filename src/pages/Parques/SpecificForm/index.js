@@ -431,7 +431,7 @@ const SpecificForm = (props) => {
             <Grid item xs={12} sm={12} md={6} lg={4}>
             <p style={{color: "#666666", margin:"0" }}><span style={{color: "red"}}>*</span> Lada:</p>
               <Form.Item name={['user', 'cel_lada']} rules={[{ required: true }]}>
-              <Input style={{width:"100px"}} maxLength={3}/>
+              <Input type={"number"} style={{width:"100px"}} maxLength={3}/>
             </Form.Item>
             </Grid>
             <Grid item xs={12} sm={12} md={6} lg={4}>
