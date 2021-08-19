@@ -431,7 +431,7 @@ const SpecificForm = (props) => {
             <Grid item xs={12} sm={12} md={6} lg={4}>
               Lada:
               <Form.Item name={['user', 'cel_lada']} rules={[{ required: true }]}>
-              <Input style={{width:"100px"}} maxLength={3}/>
+              <Input type={"number"} style={{width:"100px"}} maxLength={3}/>
             </Form.Item>
             </Grid>
             <Grid item xs={12} sm={12} md={6} lg={4}>
