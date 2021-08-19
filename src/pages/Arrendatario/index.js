@@ -49,7 +49,7 @@ const Arendatario = (props) => {
   }
 
   const seviceGet=()=>{
-    axios.get(`${store.URL_PRODUCTION}/propieties?type=1`,{ // modificar por que debe traer  arrendatarios
+    axios.get(`${store.URL_PRODUCTION}/propieties`,{ // modificar por que debe traer  arrendatarios
       headers: {
         'Authorization': data.authentication_token,
       }
@@ -62,13 +62,15 @@ const Arendatario = (props) => {
         var corporatesAdd = [];
         response.data.map((i) => {
           var corporates = [];
-          corporates.push(i.id);
-          corporates.push(i.nombre)
-          corporates.push(i.updated_at)
+          i.tenant_users.map((z)=>{
+            corporates.push(z.id);
+            corporates.push(z.name_bussines)
+            corporates.push(z.updated_at)
+          });
           corporatesAdd.push(corporates);
         });
 
-        // setDatatableData([...corporatesAdd]);
+         setDatatableData([...corporatesAdd]);
       }
     }).catch(error => {
       console.log(error); // poner alerta cuando tengamos tiempo
@@ -129,9 +131,34 @@ const Arendatario = (props) => {
           onChange={(e, id) => setActiveTabId(id)}
           className={classes.iconsBar}
         >
+          <Tab label="Inquilinos" className={classes.menuspace} />
           <Tab label="Agregar" className={classes.menuspace} />
         </Tabs>
         {activeTabId === 0 && (
+          <div style={{ padding: 20 }}>
+           {read && <Tables title={"Todas las naves"} columns={["id", "Name", "Alta", {
+              label: "Ver",
+              options: {
+                customBodyRender: (value, tableMeta, updateValue) => {
+                  return (
+                <ModalInformation data={tableMeta.rowData[0]} children={<ShowInformation id={tableMeta.rowData[0]}/>}/>                  )
+                }
+              }
+            },
+              {
+                label: "Editar",
+                options: {
+                  customBodyRender: (value, tableMeta, updateValue) => {
+                    return (
+                      <ModaEdit data={tableMeta.rowData[0]} children={<EditForm id={tableMeta.rowData[0]} functionFetch={()=>seviceGet()}/>} write={write}/>
+                    )
+                  }
+                }
+              }]} tableData={datatableData} />}
+          </div>
+
+        )}
+        {activeTabId === 1 && (
           <div style={{ display: 'flex', justifyContent: 'center' }}>
             {write && <SpecificForm functionFetch={()=>seviceGet()}/>}
           </div>
