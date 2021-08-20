@@ -386,11 +386,18 @@ const SpecificForm = (props) => {
           <Form.Item name={['user', 'addres']} rules={[{ required: true }]}>
             <Input />
           </Form.Item>
-
-          <Form.Item name={['user', 'postal_code_number']} label="Código Postal" rules={[{ required: true }]}>
+          </Grid>
+          </Grid> 
+          <Grid item spacing={2} xs={12} container >
+          <Grid item xs={12} sm={6} md={6} lg={4} >
+          <p style={{color: "#666666", margin:"0" }}><span style={{color: "red"}}>*</span> Código Postal:</p>
+          <Form.Item name={['user', 'postal_code_number']}  rules={[{ required: true }]}>
             <Input type={"number"} style={{ width: "100px" }} onChange={(e) => getAddessFunction(e)} />
           </Form.Item>
-          <Form.Item label="Colonia" rules={[{ required: true }]}>
+          </Grid>
+          <Grid item xs={12} sm={6} md={6} lg={4} >
+          <p style={{color: "#666666", margin:"0" }}><span style={{color: "red"}}>*</span> Colonia:</p>
+          <Form.Item rules={[{ required: true }]}>
             <Select
 
               placeholder="Selecione"
@@ -406,11 +413,19 @@ const SpecificForm = (props) => {
               })}
             </Select>
           </Form.Item>
-          <Form.Item label="Estado" rules={[{ required: true }]}>
+          </Grid>
+          <Grid item xs={12} sm={6} md={6} lg={4} >
+          <p style={{color: "#666666", margin:"0" }}><span style={{color: "red"}}>*</span> Estado:</p>
+          <Form.Item rules={[{ required: true }]}>
               {getAddress.length>0&&(<Input name={['user', 'state']} disabled="true" value={getAddress[0].d_estado}></Input>)}
               {getAddress.length==0&&(<Input disabled="true" defaultValue={'Sin datos'}></Input>)}
           </Form.Item>
-          <Form.Item label="Municipio/Alcaldía" rules={[{ required: true }]}>
+          </Grid>
+          </Grid>
+          <Grid item spacing={2} xs={12} container > 
+          <Grid item xs={12} sm={6} md={6} lg={4} >
+          <p style={{color: "#666666", margin:"0" }}><span style={{color: "red"}}>*</span> Municipio/Alcaldía:</p>
+          <Form.Item rules={[{ required: true }]}>
               {getAddress.length>0&&(<Input name={['user', 'municipality']} disabled="true" value={getAddress[0].d_mnpio}></Input>)}
               {getAddress.length==0&&(<Input disabled="true" defaultValue={'Sin datos'}></Input>)}
           </Form.Item>
