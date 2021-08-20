@@ -38,7 +38,8 @@ const SpecificForm = (props) => {
         var terrenos = response.data.message.allProperties.terrenos;
         var navy = response.data.message.allProperties.nav;
         var ter = response.data.message.allProperties.ter;
-        var all = ter.concat(navy, terrenos, naves);
+        var parques = response.data.message.allProperties.parques;
+        var all = ter.concat(navy, terrenos, naves, parques);
         setCorporates(all)
 
         // setCorporates(response.data)

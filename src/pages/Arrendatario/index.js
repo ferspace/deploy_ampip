@@ -38,21 +38,21 @@ const Arendatario = (props) => {
   const [permisos, setPermisos] = useState([])
   const [dataToken, setDataToken] = useState(JSON.parse(localStorage.getItem("data")))
 
-  const permissionsMap = () =>{
-    permisos.map((item)=>{
-      if (item.permiso === "sponsor"){
+  const permissionsMap = () => {
+    permisos.map((item) => {
+      if (item.permiso === "sponsor") {
         setRead(item.read)
         setWrite(item.write)
         console.log(item)
-      } 
+      }
     })
 
   }
 
-  const seviceGet=()=>{
-    if(dataToken !== null){
+  const seviceGet = () => {
+    if (dataToken !== null) {
 
-      axios.get(`${store.URL_PRODUCTION}/propieties`,{ // modificar por que debe traer  arrendatarios
+      axios.get(`${store.URL_PRODUCTION}/propieties`, { // modificar por que debe traer  arrendatarios
         headers: {
           'Authorization': dataToken.authentication_token,
         }
@@ -63,26 +63,28 @@ const Arendatario = (props) => {
           setDatatableData([["s", "s", "s"]]);
         } else {
           var corporatesAdd = [];
-              response.data.map((i) => {
+          response.data.map((i) => {
+            if (i.tenant_users.length > 0) {
+              i.tenant_users.map((j) => {
                 var corporates = [];
-                if(i.tenant_users.length > 0){
-                  i.tenant_users.map((j)=>{
-                    if(j){
-                      corporates.push(j.id);
-                      corporates.push(j.name_bussines)
-                      corporates.push(j.updated_at)
-                    }
-                  });
-                  corporatesAdd.push(corporates);
+                if (j) {
+                  corporates.push(j.id);
+                  corporates.push(j.name_bussines)
+                  corporates.push(j.updated_at)
                 }
+                corporatesAdd.push(corporates);
               });
-              console.log("corporate, data" , corporatesAdd)
-              setDatatableData([...corporatesAdd]);
+              
+            }
+            
+          });
+          console.log("corporate, data", corporatesAdd)
+          setDatatableData([...corporatesAdd]);
         }
       }).catch(error => {
         console.log(error); // poner alerta cuando tengamos tiempo
       })
-  }
+    }
   }
 
   const handleClose = () => {
@@ -94,8 +96,8 @@ const Arendatario = (props) => {
   // local
   var [activeTabId, setActiveTabId] = useState(0);
 
-  const permissionRequest =()=>{
-    axios.get(`${store.URL_PRODUCTION}/dashboard`,{
+  const permissionRequest = () => {
+    axios.get(`${store.URL_PRODUCTION}/dashboard`, {
       headers: {
         'Authorization': dataToken.authentication_token,
         'Content-Type': 'application/json'
@@ -104,18 +106,18 @@ const Arendatario = (props) => {
       setPermisos(response.data.message.permissions)
     }).catch(error => {
       console.log(error); // poner alerta cuando tengamos tiempo
-    }); 
+    });
   }
   useEffect(() => {    //
     seviceGet()
     permissionRequest()
-  },[dataToken]);
+  }, [dataToken]);
 
-  useEffect(() => { 
+  useEffect(() => {
     permissionsMap()
-  },[permisos]);
+  }, [permisos]);
 
-  useEffect(() => { 
+  useEffect(() => {
     setDataToken(JSON.parse(localStorage.getItem("data")))
 
   }, []);
@@ -139,7 +141,7 @@ const Arendatario = (props) => {
       )} />
       <Paper className={classes.iconsContainer}>
         <Tabs
-          TabIndicatorProps={{style: {background:'#00AFB7'}}}
+          TabIndicatorProps={{ style: { background: '#00AFB7' } }}
           textColor="#ffffff"
           value={activeTabId}
           onChange={(e, id) => setActiveTabId(id)}
@@ -150,12 +152,12 @@ const Arendatario = (props) => {
         </Tabs>
         {activeTabId === 0 && (
           <div style={{ padding: 20 }}>
-           {read && <Tables title={"Todas las naves"} columns={["id", "Name", "Alta", {
+            {read && <Tables title={"Todos los Inquilinos"} columns={["id", "Name", "Alta", {
               label: "Ver",
               options: {
                 customBodyRender: (value, tableMeta, updateValue) => {
                   return (
-                <ModalInformation data={tableMeta.rowData[0]} children={<ShowInformation id={tableMeta.rowData[0]}/>}/>                  )
+                    <ModalInformation data={tableMeta.rowData[0]} children={<ShowInformation id={tableMeta.rowData[0]} />} />)
                 }
               }
             },
@@ -164,7 +166,7 @@ const Arendatario = (props) => {
                 options: {
                   customBodyRender: (value, tableMeta, updateValue) => {
                     return (
-                      <ModaEdit data={tableMeta.rowData[0]} children={<EditForm id={tableMeta.rowData[0]} functionFetch={()=>seviceGet()}/>} write={write}/>
+                      <ModaEdit data={tableMeta.rowData[0]} children={<EditForm id={tableMeta.rowData[0]} functionFetch={() => seviceGet()} />} write={write} />
                     )
                   }
                 }
@@ -174,7 +176,7 @@ const Arendatario = (props) => {
         )}
         {activeTabId === 1 && (
           <div style={{ display: 'flex', justifyContent: 'center' }}>
-            {write && <SpecificForm functionFetch={()=>seviceGet()}/>}
+            {write && <SpecificForm functionFetch={() => seviceGet()} />}
           </div>
         )}
       </Paper>

@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { Form, Input, InputNumber, Button } from 'antd';
+import { Form, Input, Select, Button } from 'antd';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import store from '../../../store/index'
 import ImageUpload from '../../../components/ImageUpload'
 
+const { Option } = Select;
 const DataOption = JSON.parse(localStorage.getItem("data"));
 const layout = {
   labelCol: { span: 8 },
@@ -96,6 +97,23 @@ const EditForm = (props)=>{
     }
   }, [info]);
 
+  const [getAddress, setGetAddress] = useState([])
+
+  const getAddessFunction = (e) => {
+    if (e.target.value.length === 5) {
+      axios.get(`${store.ADDRESS}/zip_codes?zip_code=${e.target.value}`, {
+        headers: {
+          'Authorization': DataOption.authentication_token,
+          'Content-Type': 'application/json'
+        },
+      }).then((response) => {
+        setGetAddress(response.data.zip_codes)
+      }).catch((err) => {
+        console.log("no se encontro direccion")
+      })
+    }
+  }
+
   return(
     <Form {...layout} name="nest-messages" onFinish={onFinish} validateMessages={validateMessages} fields={fields}>
       <div style={{ display: 'flex', justifyContent: 'center', width:'1000px'}}>
@@ -106,49 +124,100 @@ const EditForm = (props)=>{
       <Form.Item name={ 'name' } label="Nombre en español" rules={[{ required: true }]}>
         <Input />
       </Form.Item>
-      <Form.Item name={ 'corporate_type' } label="Nombre en ingles" rules={[{ required: true }]}>
+      <Form.Item name={ 'corporate_type' } label="Nombre en inglés" rules={[{ required: true }]}>
         <Input />
       </Form.Item>
       <Form.Item name={ 'address' } label="Calle y número" rules={[{ required: true }]}>
         <Input />
       </Form.Item>
       <Form.Item name={ 'postal_code' } label="Código Postal" rules={[{ required: true }]}>
-        <Input />
+      <Input type={"number"} style={{ width: "100px" }} onChange={(e) => getAddessFunction(e)} />
       </Form.Item>
       <Form.Item name={ 'colony' } label="Colonia" rules={[{ required: true }]}>
-        <Input />
+         <Select
+          placeholder="Selecione"
+          allowClear
+          name={['user', 'colony']}
+        >
+          {getAddress.map((value, i) => {
+            return (
+              <Option key={i} value={value.d_asenta}>
+                {value.d_asenta}
+              </Option>
+            );
+          })}
+        </Select>
       </Form.Item>
       </div>
       <div style={{display:'block', width:'50%'}}>
       <Form.Item name={ 'state' } label="Estado" rules={[{ required: true }]}>
-        <Input />
+        <Select
+          placeholder="Selecione"
+          allowClear
+        >
+          {getAddress.map((value, i) => {
+            return (
+              <Option key={i} value={value.d_estado}>
+                {value.d_estado}
+              </Option>
+            );
+          })}
+        </Select>
       </Form.Item>
       <Form.Item name={ 'municipality' } label="Municipio" rules={[{ required: true }]}>
-        <Input />
+        <Select
+            placeholder="Selecione"
+            allowClear
+          >
+            {getAddress.map((value, i) => {
+              return (
+                <Option key={i} value={value.d_mnpio}>
+                  {value.d_mnpio}
+                </Option>
+              );
+            })}
+          </Select>
       </Form.Item>     
-      <Form.Item name={ 'cel_code' } label="Lada" rules={[{ required: true }]}>
-        <Input />
-      </Form.Item>
-      
       <Form.Item name={ 'cel_lada' } label="Código de país" rules={[{ required: true }]}>
-        <Input />
+          <Select
+            placeholder="Select"
+            allowClear
+            style={{ width: "100px" }}
+          >
+            <Option value="52">52</Option>
+            <Option value="1">1</Option>
+          </Select>
+      </Form.Item>
+      <Form.Item name={ 'cel_code' } label="Lada" rules={[{ required: true }]}>
+        <Input type={"number"} style={{ width: "100px" }} maxLength={3}/>
+      </Form.Item>
+      <Form.Item name={ 'cel' } label="Número Local" rules={[{ required: true }]}>
+        <Input type={"number"} maxLength={8}/>
       </Form.Item>
 
-      <Form.Item name={ 'cel' } label="Número" rules={[{ required: true }]}>
-        <Input />
-      </Form.Item>
-
-      <Form.Item name={ 'social_media_tw' } label="Clasificación" rules={[{ required: true }]}>
-        <Input />
+      <Form.Item name={ 'social_media_tw' } label="Clasificación de Patrocinador" rules={[{ required: true }]}>
+        <Select
+          placeholder="Select"
+          allowClear
+        >
+          <Option value="Consultoría">Consultoría</Option>
+          <Option value="Construcción">Construcción</Option>
+          <Option value="Energía">Energía</Option>
+          <Option value="Financiero">Financiero</Option>
+          <Option value="Inmobiliario">Inmobiliario</Option>
+          <Option value="Telecomunicaciones">Telecomunicaciones</Option>
+          <Option value="Transporte">Transporte</Option>
+          <Option value="Otros">Otros</Option>
+        </Select>
       </Form.Item>
       </div>
       </div>
       <div style={{display:'flex', justifyContent:'center', width:'100%'}}>
-      <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
-        <Button style={{backgroundColor:"#00afb7",borderColor:"#00afb7", color:"#ffffff"}} type="primary" htmlType="submit">
-          Enviar
-        </Button>
-      </Form.Item>
+        <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
+          <Button style={{backgroundColor:"#00afb7",borderColor:"#00afb7", color:"#ffffff"}} type="primary" htmlType="submit">
+            Enviar
+          </Button>
+        </Form.Item>
       </div>
     </Form>
   )

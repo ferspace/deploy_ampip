@@ -183,9 +183,9 @@ const SpecificForm = (props) => {
               >
                 {getAddress.map((value, i) => {
                   return (
-                    <option key={i} value={value.d_asenta}>
+                    <Option key={i} value={value.d_asenta}>
                       {value.d_asenta}
-                    </option>
+                    </Option>
                   );
                 })}
               </Select>

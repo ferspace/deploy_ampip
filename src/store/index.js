@@ -1,7 +1,7 @@
 const store = {
     URL_LOCAL: 'https://ampip-back-44yib.ondigitalocean.app/api/v1',
     //URL_PRODUCTION: 'http://localhost:3001/api/v1',
-    URL_PRODUCTION: 'https://ampip-back-dyp5u.ondigitalocean.app/api/v1',
+    URL_PRODUCTION: 'https://ampip-back-obete.ondigitalocean.app/api/v1',
     ADDRESS: 'https://cepomex.herokuapp.com/api/v1'
 
 }
