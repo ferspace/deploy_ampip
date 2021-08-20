@@ -202,7 +202,7 @@ const Mailer = (e, mailType) => {
       </Form.Item>
       </Grid>
       <Grid item xs={12} sm={6} md={6} lg={4} >
-      <p style={{color: "#666666", margin:"0", padding:"5px 0" }}><span style={{color: "red"}}>*</span> Correo</p>
+      <p style={{color: "#666666", margin:"0", padding:"5px 0" }}><span style={{color: "red"}}>*</span> Correo electrònico</p>
       <Form.Item >
       <input style={{boxSizing:"border-box", margin:"0", fontVariant:"tabular-nums", listStyle:"none", position:"relative", display:"inline-block",width:"100%", minWidth:"0", padding:"4px 11px", color:"#d9d9d9", fontSize:"14px",lineHeight:"1.5", backgroundColor:"#fff", backgroundImage:"none", border:"solid 1px #d9d9d9", borderRadius:"2px", transition:"all 0.3s" }} type="text" name="email"  onChange={(e)=>{ setEmail(e.target.value) }}/>
       </Form.Item>
