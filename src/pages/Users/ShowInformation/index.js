@@ -8,19 +8,31 @@ const data = JSON.parse(localStorage.getItem("data"));
 
 const ShowInformation = (props) =>{
   const [info, setInfo]= useState({})
+  const [dataToken, setDataToken] = useState(JSON.parse(localStorage.getItem("data")))
+
+  useEffect(() => {    //aqui va la peticion al endpoint , se va aprocesar la informacion del tipo [[dato1,dato2]]
+    getData()
+  }, [dataToken]);
+
   useEffect(()=>{
-    axios.get(`${store.URL_PRODUCTION}/users/${props.id}`, {
-      headers: {
-        'Authorization': data.authentication_token,
-      }
-    }).then((response) => {
-      //setDatatableData(response.data);
-      console.log(response, "show data")
-      setInfo(response.data)
-    }).catch(error => {
-      console.log(error); // poner alerta cuando tengamos tiempo
-    });
+    setDataToken(JSON.parse(localStorage.getItem("data")))
   },[])
+
+  const getData =()=>{
+    if(dataToken !== null){
+      axios.get(`${store.URL_PRODUCTION}/users/${props.id}`, {
+        headers: {
+          'Authorization': dataToken.authentication_token,
+        }
+      }).then((response) => {
+        //setDatatableData(response.data);
+        console.log(response, "show data")
+        setInfo(response.data)
+      }).catch(error => {
+        console.log(error); // poner alerta cuando tengamos tiempo
+      });
+    }
+  }
 
   return(
 

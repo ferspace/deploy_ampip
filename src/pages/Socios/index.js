@@ -37,7 +37,7 @@ const Desarrolladores = (props) => {
   const [write, setWrite] = useState(false)
   const [permisos, setPermisos] = useState([])
   const [dataToken, setDataToken] = useState(JSON.parse(localStorage.getItem("data")))
-  
+
   const permissionsMap = () => {
     if (permisos) {
       permisos.map((item) => {
