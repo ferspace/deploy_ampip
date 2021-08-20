@@ -6,6 +6,7 @@ import Swal from "sweetalert2";
 import emailjs from 'emailjs-com';
 //import Mailer from "../../../components/Mailer"; // importamos el mailer
 import store from '../../../store/index'
+import {Grid} from '@material-ui/core';
 
 const { Option } = Select;
 
@@ -125,10 +126,13 @@ const SpecificForm = (props) => {
   const [corporates, setCorporates] = useState([]);
 
   return (
+    <div style={{ padding: 20 }}>
     <Form {...layout} name="nest-messages" onFinish={onFinish} validateMessages={validateMessages}  >
-      <div style={{ display: 'flex', justifyContent: 'center', width:'1200px'}}>
-      <div style={{display:'block', width:'50%'}}>
-      <Form.Item name={["user", "corporate"]} label="Socio/Patrocinador"
+    <Grid container spacing={30} xs={12}>
+      <Grid item spacing={2} xs={12} container > 
+      <Grid item xs={12} sm={6} md={6} lg={4} >
+      <p style={{color: "#666666", margin:"0" }}><span style={{color: "red"}}>*</span> Socio/Patrocinador:</p>
+      <Form.Item name={["user", "corporate"]} 
         rules={[{required: true,},]}>
         <Select placeholder="Select a option and change input text above" allowClear >
           {corporates.map((value, i) => {
@@ -140,7 +144,10 @@ const SpecificForm = (props) => {
           })}
         </Select>
       </Form.Item>
-      <Form.Item name={["user", "user_type"]} label="Permisos" rules={[{required: true}]}>
+      </Grid>
+      <Grid item xs={12} sm={6} md={6} lg={4} >
+      <p style={{color: "#666666", margin:"0" }}><span style={{color: "red"}}>*</span> Permisos:</p>
+      <Form.Item name={["user", "user_type"]} rules={[{required: true}]}>
         <Select
           placeholder="Select a option and change input text above"
           allowClear
@@ -154,29 +161,51 @@ const SpecificForm = (props) => {
           })}
         </Select>
       </Form.Item>
-      <Form.Item name={["user", "name"]} label="Nombre" rules={[{ required: true }]}>
+      </Grid>
+      <Grid item xs={12} sm={6} md={6} lg={4} >
+      <p style={{color: "#666666", margin:"0" }}><span style={{color: "red"}}>*</span> Nombre:</p>
+      <Form.Item name={["user", "name"]}  rules={[{ required: true }]}>
         <Input />
       </Form.Item>
-      <Form.Item name={['dataOf', 'charge']} label="Puesto" rules={[{ required: true }]}>
+      </Grid>
+      </Grid>
+
+      <Grid item spacing={2} xs={12} container > 
+      <Grid item xs={12} sm={6} md={6} lg={4} >
+      <p style={{color: "#666666", margin:"0" }}><span style={{color: "red"}}>*</span> Puesto:</p>
+      <Form.Item name={['dataOf', 'charge']} rules={[{ required: true }]}>
         <Input />
       </Form.Item>
-      
-      </div>
-      <div style={{display:'block', width:'50%'}}>
-      <Form.Item name={["user", "lastName"]} label="Apellido" rules={[{ required: true }]}>
+      </Grid>
+      <Grid item xs={12} sm={6} md={6} lg={4} >
+      <p style={{color: "#666666", margin:"0" }}><span style={{color: "red"}}>*</span> Apellido:</p>
+      <Form.Item name={["user", "lastName"]} rules={[{ required: true }]}>
         <Input />
       </Form.Item>
-      <Form.Item name={["user", "email"]} label="Correo" rules={[{ required: true }]}>
+      </Grid>
+      <Grid item xs={12} sm={6} md={6} lg={4} >
+      <p style={{color: "#666666", margin:"0" }}><span style={{color: "red"}}>*</span> Correo:</p>
+      <Form.Item name={["user", "email"]} rules={[{ required: true }]}>
         <Input />
       </Form.Item>
-      <Form.Item name={["user", "password"]} label="Contraseña" rules={[{ required: true }]}>
+      </Grid>
+      </Grid>
+
+      <Grid item spacing={2} xs={12} container >
+      <Grid item xs={12} sm={6} md={6} lg={4} >
+      <p style={{color: "#666666", margin:"0" }}><span style={{color: "red"}}>*</span> Contraseña:</p>
+      <Form.Item name={["user", "password"]} rules={[{ required: true }]}>
         <Input type="password" />
       </Form.Item>
-      <Form.Item name={["user", "password"]} label="Confirmar Contraseña" rules={[{ required: true }]}>
+      </Grid> 
+      <Grid item xs={12} sm={6} md={6} lg={4} >
+      <p style={{color: "#666666", margin:"0" }}><span style={{color: "red"}}>*</span> Confirmar Contraseña:</p>
+      <Form.Item name={["user", "password"]} rules={[{ required: true }]}>
         <Input type="password" />
       </Form.Item>
-      </div>
-      </div>
+      </Grid>
+      </Grid>
+  </Grid>     
       <div style={{display:'flex', justifyContent:'center', width:'100%'}}>
       <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
         <br />
@@ -186,6 +215,7 @@ const SpecificForm = (props) => {
       </Form.Item>
       </div>
     </Form>
+    </div>
   );
 };
 export default SpecificForm;
