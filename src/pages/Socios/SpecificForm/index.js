@@ -176,9 +176,9 @@ const SpecificForm = (props) => {
               >
                 {getAddress.map((value, i) => {
                   return (
-                    <option key={i} value={value.d_asenta}>
+                    <Option key={i} value={value.d_asenta}>
                       {value.d_asenta}
-                    </option>
+                    </Option>
                   );
                 })}
               </Select>
@@ -207,7 +207,7 @@ const SpecificForm = (props) => {
             
             <Form.Item name={['user', 'cel_lada']} label="Lada" rules={[{ required: true }]}>
             <Input type={"number"} style={{ width: "100px" }} maxLength={3} />
-          </Form.Item>
+            </Form.Item>
           
             <Form.Item name={['user', 'cel']} label="Número Local" rules={[{ required: true }]}>
               <Input type={"number"} maxLength={8} />

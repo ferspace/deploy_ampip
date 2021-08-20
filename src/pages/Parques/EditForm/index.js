@@ -164,12 +164,30 @@ const EditForm = (props) => {
     }
   }, [info]);
 
+  const [getAddress, setGetAddress]= useState([])
+
+  const getAddessFunction = (e)=>{
+    if(e.target.value.length === 5){
+      axios.get(`${store.ADDRESS}/zip_codes?zip_code=${e.target.value}`, {
+        headers: {
+          'Authorization': DataOption.authentication_token,
+          'Content-Type': 'application/json'
+        },
+      }).then((response) => {
+        setGetAddress(response.data.zip_codes)
+      }).catch((err)=>{
+        console.log("no se encontro direccion")
+      })
+    }
+  }
+
   return (
     <Form {...layout} name="nest-messages" onFinish={onFinish} validateMessages={validateMessages} style={{ height: "950px" }} fields={fields}>
       <div style={{ display: 'flex', justifyContent: 'center', width: '1200px' }}>
         <div style={{ display: 'block', width: '50%' }}>
           
-          <Form.Item name={"name"} label="Nombre" rules={[{ required: true }]}>
+        <ImageUpload />
+          <Form.Item name={"name"} label="Nombre en español" rules={[{ required: true }]}>
             <Input />
           </Form.Item>
           <Form.Item name={"english_name"} label="Nombre en ingles" rules={[{ required: true }]}>
@@ -180,16 +198,49 @@ const EditForm = (props) => {
             <Input />
           </Form.Item>
           <Form.Item name={"postal_code"} label="Código Postal" rules={[{ required: true }]}>
-            <Input />
+           <Input type={"number"} style={{ width: "100px" }} onChange={(e)=>getAddessFunction(e)} />
           </Form.Item>
           <Form.Item name={"colony"} label="Colonia" rules={[{ required: true }]}>
-            <Input />
+            <Select
+                  placeholder="Selecione"
+                  allowClear
+                >
+                  {getAddress.map((value, i) => {
+                    return (
+                      <option key={i} value={value.d_asenta}>
+                        {value.d_asenta}
+                      </option>
+                    );
+                  })}
+              </Select>
           </Form.Item>
           <Form.Item name={"state"} label="Estado" rules={[{ required: true }]}>
-            <Input />
+              <Select
+                  placeholder="Selecione"
+                  allowClear
+                >
+                  {getAddress.map((value, i) => {
+                    return (
+                      <option key={i} value={value.d_estado}>
+                        {value.d_estado}
+                      </option>
+                    );
+                  })}
+              </Select>
           </Form.Item>
-          <Form.Item name={"municipality"} label="Municipio" rules={[{ required: true }]}>
-            <Input />
+          <Form.Item name={"municipality"} label="Municipio/Alcaldía" rules={[{ required: true }]}>
+              <Select
+                  placeholder="Selecione"
+                  allowClear
+                >
+                  {getAddress.map((value, i) => {
+                    return (
+                      <option key={i} value={value.d_mnpio}>
+                        {value.d_mnpio}
+                      </option>
+                    );
+                  })}
+              </Select>
           </Form.Item>
           <Form.Item name={"region"} label="Región" rules={[{ required: true }]}>
             <Select
@@ -202,8 +253,14 @@ const EditForm = (props) => {
               <Option value="Sur"></Option>
             </Select>
           </Form.Item>
-          <Form.Item name={"park_property"} label="Propietario" rules={[{ required: true }]}>
-            <Input />
+          <Form.Item name={"park_property"} label="Propietario/Administrador" rules={[{ required: true }]}>
+             <Select
+                placeholder="Selecciona la unidad de medida"
+                allowClear
+              >
+                <Option value="Propietario">Propietario</Option>
+                <Option value="Administrador">Administrador</Option>
+              </Select>
           </Form.Item>
           <Form.Item name={"market"} label="Mercado" rules={[{ required: true }]}>
             <Input />
@@ -318,7 +375,7 @@ const EditForm = (props) => {
             />
           </Form.Item>
 
-          <ImageUpload />
+          
         </div>
       </div>
       <div style={{ display: 'flex', justifyContent: 'center', width: '100%' }}>

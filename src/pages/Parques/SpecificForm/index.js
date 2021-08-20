@@ -321,7 +321,7 @@ const SpecificForm = (props) => {
           </Grid>
             <Grid item xs={12} sm={6} md={6} lg={4}>
             Colonia:
-            <Form.Item name={['user', 'colony']} rules={[{ required: true }]}>
+            <Form.Item rules={[{ required: true }]}>
               <Select
                 placeholder="Selecione"
                 allowClear
