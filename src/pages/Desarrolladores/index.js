@@ -108,9 +108,9 @@ const Desarrolladores = (props) => {
         </Tabs>
         {activeTabId === 0 && (
           <div style={{ padding: 20 }}>
-            <Tables title={"Todos los Socios"} columns={["id", "Name", "Nombre_en", "Direccion",
+            <Tables title={"Todos los Socios"} columns={["id", "Nombre en español","Nombre en inglés","Dirección",
               {
-                label: "Ver",
+                label: "Ver información",
                 options: {
                   customBodyRender: (value, tableMeta, updateValue) => {
                     return (
@@ -120,7 +120,7 @@ const Desarrolladores = (props) => {
                 }
               },
               {
-                label: "Editar",
+                label: "Cambios",
                 options: {
                   customBodyRender: (value, tableMeta, updateValue) => {
                     return (
