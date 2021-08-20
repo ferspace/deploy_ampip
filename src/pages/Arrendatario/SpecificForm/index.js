@@ -60,7 +60,8 @@ const SpecificForm = (props) => {
             "ID_SCIAN": values.user.IDSCIAN,
             "ID_DENUE": values.user.IDDENUE,
             "antiquity": values.user.antiquity,
-            "superficie": values.user.siperficie
+            "superficie": values.user.siperficie,
+            "id_propiedad":  values.user.propertyId
         }
     });
 
@@ -75,10 +76,15 @@ const SpecificForm = (props) => {
 
     axios(config)
       .then(function (response) {
+        
+        Swal.fire({
+          icon: 'success',
+          title: '¡Inquilino Guardado!',
+          showConfirmButton: false,
+          timer: 1500
+        })
 
-        if (response.data.message != 0) {
-          alert("Hello")
-        }
+      
       })
       .catch(function (error) {
         console.log(error);
