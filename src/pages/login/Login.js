@@ -73,6 +73,7 @@ function Login(props) {
             props.history,
             setIsLoading,
             setError)
+            
         } else {
           alert("Usuario no autorizado")
         }
