@@ -81,7 +81,7 @@ const SpecificForm = (props) => {
             "property_information": {
               "property_id": response.data.data,
               "name": values.user.name,
-              "address": values.user.addres,
+              "address": values.user.adress,
               "english_name": response.data.name_en,
               "park_property": values.user.park_property,
               "region": values.user.region,
@@ -99,8 +99,8 @@ const SpecificForm = (props) => {
               "message": "",
               "postal_code": values.user.postal_code,
               "colony": values.user.colony,
-              "municipality": values.user.municipality,
-              "state": values.user.state,
+              "municipality": getAddress[0].d_mnpio,
+              "state": getAddress[0].d_estado,
               "status": 0,
               "tipo": 2
             }
@@ -161,7 +161,7 @@ const SpecificForm = (props) => {
             "property_information": {
               "property_id": values.user.propertyId,
               "name": values.user.name,
-              "address": values.user.addres,
+              "address": values.user.adress,
               "english_name": values.user.name_en,
               "park_property": values.user.park_property,
               "region": res.data[0].region,
@@ -177,10 +177,10 @@ const SpecificForm = (props) => {
               "infrastructure": "",
               "navy_number": "",
               "message": "",
-              "postal_code_number": values.user.postal_code,
+              "postal_code": values.user.postal_code,
               "colony": values.user.colony,
-              "municipality": values.user.municipality,
-              "state": values.user.state,
+              "municipality": getAddress[0].d_mnpio,
+              "state": getAddress[0].d_estado,
               "status": 0,
               "tipo": 2
             }
@@ -369,55 +369,31 @@ const SpecificForm = (props) => {
           <Form.Item name={['user', 'adress']} label="Calle y Número" rules={[{ required: true }]}>
             <Input />
           </Form.Item>
-          <Form.Item name={['user', 'postal_code_number']} label="Código Postal" rules={[{ required: true }]}>
-            <Input style={{ width: "100px" }} onChange={(e) => getAddessFunction(e)} />
+          <Form.Item name={['user', 'postal_code']} label="Código Postal" rules={[{ required: true }]}>
+            <Input type={"number"} style={{ width: "100px" }} onChange={(e) => getAddessFunction(e)} />
           </Form.Item>
-          <Form.Item label="Colonia" rules={[{ required: true }]}>
-            <select
+          <Form.Item label="Colonia" name={['user', 'colony']} rules={[{ required: true }]}>
+            <Select
               placeholder="Selecione"
               allowClear
-              name={['user', 'colony']}
+              
             >
               {getAddress.map((value, i) => {
                 return (
-                  <option key={i} value={value.d_asenta}>
+                  <Option key={i} value={value.d_asenta}>
                     {value.d_asenta}
-                  </option>
+                  </Option>
                 );
               })}
-            </select>
+            </Select>
           </Form.Item>
           <Form.Item label="Estado" rules={[{ required: true }]}>
-            <select
-              placeholder="Selecione"
-              allowClear
-              name={['user', 'state']}
-              disabled="true"
-            >
-              {getAddress.map((value, i) => {
-                return (
-                  <option key={i} value={value.d_estado}>
-                    {value.d_estado}
-                  </option>
-                );
-              })}
-            </select>
+              {getAddress.length>0&&(<Input name={['user', 'state']} disabled="true" value={getAddress[0].d_estado}></Input>)}
+              {getAddress.length==0&&(<Input disabled="true" defaultValue={'Sin datos'}></Input>)}
           </Form.Item>
           <Form.Item label="Municipio/Alcaldía" rules={[{ required: true }]}>
-            <select
-              placeholder="Selecione"
-              allowClear
-              name={['user', 'municipality']}
-              disabled="true"
-            >
-              {getAddress.map((value, i) => {
-                return (
-                  <option key={i} value={value.d_mnpio}>
-                    {value.d_mnpio}
-                  </option>
-                );
-              })}
-            </select>
+              {getAddress.length>0&&(<Input name={['user', 'municipality']} disabled="true" value={getAddress[0].d_mnpio}></Input>)}
+              {getAddress.length==0&&(<Input disabled="true" defaultValue={'Sin datos'}></Input>)}
           </Form.Item>
           <Form.Item name={['user', 'region']} label="Región" rules={[{ required: isapark, },]}>
             <Select

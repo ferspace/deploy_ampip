@@ -157,7 +157,7 @@ export default function NotificationsPage(props) {
         
         {activeTabId === 1 && (
           <div style={{display:'flex', justifyContent:'center'}}>
-          {write && <Mailer/> }
+          {write && <SpecificForm/> }
         </div>
         )}
       </Paper>

@@ -105,8 +105,8 @@ const SpecificForm = (props) => {
                 "message": values.user.message,
                 "postal_code": values.user.postal_code,
                 "colony": values.user.colony,
-                "municipality": values.user.municipality,
-                "state": values.user.state,
+                "municipality": getAddress[0].d_mnpio,
+                "state": getAddress[0].d_estado,
                 "status": 0,
                 "unity": values.user.unity,
                 "lat": latlng.lat,
@@ -167,9 +167,9 @@ const SpecificForm = (props) => {
                 "infrastructure": values.user.infrastructure,
                 "navy_number": values.user.navy_number,
                 "message": values.user.message,
-                "postal_code_number": values.user.postal_code,
+                "postal_code": values.user.postal_code,
                 "colony": values.user.colony,
-                "municipality": values.user.municipality,
+                "municipality": getAddress[0].d_mnpio,
                 "state": values.user.state,
                 "status": 0,
                 "unity": values.user.unity,
@@ -316,7 +316,7 @@ const SpecificForm = (props) => {
             <Grid item xs={12} sm={6} md={6} lg={4}>
               Código Postal:
               <Form.Item name={['user', 'postal_code']} rules={[{ required: true }]}>
-            <Input style={{ width: "100px" }} onChange={(e)=>getAddessFunction(e)} />
+            <Input type={"number"} style={{ width: "100px" }} onChange={(e)=>getAddessFunction(e)} />
           </Form.Item>
           </Grid>
             <Grid item xs={12} sm={6} md={6} lg={4}>
@@ -343,36 +343,16 @@ const SpecificForm = (props) => {
 
             <Grid item xs={12} sm={12} md={6} lg={4}>
               Estado:
-              <Form.Item name={['user', 'state']} rules={[{ required: true }]}>
-              <Select
-                placeholder="Selecione"
-                allowClear
-              >
-                {getAddress.map((value, i) => {
-                  return (
-                    <Option key={i} value={value.d_estado}>
-                      {value.d_estado}
-                    </Option>
-                  );
-                })}
-            </Select>
+              <Form.Item  rules={[{ required: true }]}>
+              {getAddress.length>0&&(<Input name={['user', 'state']} disabled="true" value={getAddress[0].d_estado}></Input>)}
+              {getAddress.length==0&&(<Input disabled="true" defaultValue={'Sin datos'}></Input>)}
             </Form.Item>
             </Grid>
             <Grid item xs={12} sm={12} md={6} lg={4}>
               Municipio/Alcaldía:
-              <Form.Item name={['user', 'municipality']} rules={[{ required: true }]}>
-                <Select
-                    placeholder="Selecione"
-                    allowClear
-                  >
-                    {getAddress.map((value, i) => {
-                      return (
-                        <Option key={i} value={value.d_mnpio}>
-                          {value.d_mnpio}
-                        </Option>
-                      );
-                    })}
-              </Select>
+              <Form.Item  rules={[{ required: true }]}>
+              {getAddress.length>0&&(<Input name={['user', 'municipality']} disabled="true" value={getAddress[0].d_mnpio}></Input>)}
+              {getAddress.length==0&&(<Input disabled="true" defaultValue={'Sin datos'}></Input>)}
             </Form.Item>
             </Grid>
             <Grid item xs={12} sm={12} md={6} lg={4}>

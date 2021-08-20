@@ -45,19 +45,24 @@ const EditForm = (props) => {
   const [fields, setFields] = useState([]);
 
   const onFinish = (values) => {
-    console.log(values)
-    axios.put(`${store.URL_PRODUCTION}/property_informations/${props.id}`, { data: values },
+    var data = {
+      "property_information": values
+    }
+    axios.put(`${store.URL_PRODUCTION}/property_informations/${props.id}`, data,
       {
         headers: {
           'Authorization': DataOption.authentication_token,
           'Content-Type': 'application/json'
         }
       }
-
     )
-      .then(res => {
-        console.log("Respuesta a petición");
-        console.log(res.data);
+      .then(() => {
+        Swal.fire({
+          icon: 'success',
+          title: '¡Registro actualizado correctamente!',
+          showConfirmButton: false,
+          timer: 1500
+        })
       })
   };
 
@@ -89,7 +94,6 @@ const EditForm = (props) => {
     }
   }, []) // obtiene el parque
 
-
   useEffect(() => {
     if (park.length === 0) {
       axios.get(`${store.URL_PRODUCTION}/propieties/${props.id}`, {
@@ -116,8 +120,6 @@ const EditForm = (props) => {
     });
   }, []);
 
-  console.log(parkById, "informacion a editar")
-
   const onChange = () => {
     setIsapark(!isapark);
   }
@@ -140,56 +142,6 @@ const EditForm = (props) => {
     <Form {...layout} name="nest-messages" onFinish={onFinish} validateMessages={validateMessages} fields={fields}>
       <div style={{ display: 'flex', justifyContent: 'center', width: '1200px' }}>
         <div style={{ display: 'block', width: '50%' }}>
-          <Form.Item
-            name={"type"}
-            label="Corporativos"
-            rules={[
-              {
-                required: isapark,
-              },
-            ]}
-          >
-            <Select
-              placeholder="Select a option and change input text above"
-              allowClear
-              disabled={!isapark}
-            >
-              {corporates.map((value, i) => {
-                return (
-                  <Option key={i} value={value.id}>
-                    {value.name}
-                  </Option>
-                );
-              })}
-            </Select>
-          </Form.Item>
-          <label>No Pertenece a un Parque</label>
-          <Switch defaultChecked onChange={onChange} label="Pertenece a un parque" style={{ marginBottom: "1em" }}></Switch>
-
-          <Form.Item
-            name={"propertyId"}
-            label="Parque"
-            rules={[
-              {
-                required: !isapark,
-              },
-            ]}
-          >
-            <Select
-              placeholder="Seleccione un  parque"
-              allowClear
-              disabled={isapark}
-            >
-              {park.map((value, i) => {
-                return (
-                  <Option key={i} value={value.id}>
-                    {value.name}
-                  </Option>
-                );
-              })}
-            </Select>
-          </Form.Item>
-
           <Form.Item name={"name"} label="Nombre" rules={[{ required: true }]}>
             <Input />
           </Form.Item>

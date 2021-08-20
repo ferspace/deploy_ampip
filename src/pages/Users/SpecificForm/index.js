@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Form, Input, Select, Button } from "antd";
 import axios from "axios";
 import Swal from "sweetalert2";
+import emailjs from 'emailjs-com';
 //import Mailer from "../../../components/Mailer"; // importamos el mailer
 import store from '../../../store/index'
 
@@ -54,92 +55,65 @@ const SpecificForm = (props) => {
       }
   }, []);
 
-  const onFinish = (values) => {
-    
 
-    var data = JSON.stringify({
+
+  const onFinish =(values)=>{
+
+    const dataUser = {
       "user": {
         "email": values.user.email,
         "password": values.user.password,
         "password_confirmation": values.user.password,
-        "user_type": values.user.user_type,
+        "user_type": values.user.user_type
       }
-    });
-
-    var config = {
-      method: 'post',
-      url: `${store.URL_PRODUCTION}/sign_up`,
+    }
+    axios.post(`${store.URL_PRODUCTION}/sign_up`, dataUser,
+    {
       headers: {
-        Authorization: DataOption.authentication_token,
-        "Content-Type": "application/json",
-      },
-      data: data
-    };
+      Authorization: DataOption.authentication_token,
+      "Content-Type": "application/json",
+    }}).then((response) =>{
+      console.log("se subio el usuario")
+      UserInfo(response.data, values)
+    }
+    ).catch((error)=>console.log(error.message,error.request ,error.response, "el error user"))
+  }
 
-    axios(config)
-      .then(function (response) {
-        var user_id = response.data.data.user.id
-        var data = JSON.stringify({
-          "information": {
-            "user_id": user_id,
-            "full_name": values.user.name,
-            "last_name": values.user.lastName,
-            "address": "",
-            "state": "",
-            "office_address": "",
-            "charge": "",
-            "date_of_birth": "",
-            "phone_office": "",
-            "cel": "",
-            "corporate_id": values.user.corporate,
-            "status": "",
-            "municipality": "",
-            "colony": "",
-            "postal_code_number": "",
-            "user_rols_id": values.user.user_type,
-            "user_type": "",
-            "created_at": "",
-            "updated_at": ""
-          }
-        });
-        
-        var config = {
-          method: 'post',
-          url: `${store.URL_PRODUCTION}/user_informations/`,
-          headers: { 
-            'Authorization': DataOption.authentication_token , 
-            'Content-Type': 'application/json'
-          },
-          data : data
-        };
-        
-        axios(config)
-        .then(function (response) {
-          Swal.fire({
-            icon: 'success',
-            title: '¡Se agrego correctamente!',
-            showConfirmButton: false,
-            timer: 1500
-          })
+  const UserInfo =(response, values)=>{
+    const dataInformation = {
+      "information": {
+        "user_id": response.data.user.id,
+        "full_name": values.user.name,
+        "last_name": values.user.lastName,
+        "corporate_id": values.user.corporate,
+        "user_rols_id": response.data.user.user_type
+      }
+    }
+    
+    axios.post(`${store.URL_PRODUCTION}/user_informations`,dataInformation, 
+    {
+      headers: {
+      Authorization: DataOption.authentication_token,
+      "Content-Type": "application/json",
+    }}).then((response) => {
+      console.log("se envio email")
+      sendMAiler(values)//console.log(response.data)
+    }).catch((error)=>console.log(error.message,error.request ,error.response, "el error user info"))
+  }
 
-          props.functionFetch()
-
-        })
-        .catch(function (error) {
-          Swal.fire({
-            icon: 'error',
-            title: '¡Error al agregar!',
-            showConfirmButton: false,
-            timer: 1500
-          })
-          console.log(error);
-        });
+  const sendMAiler = (e )=>{
+    emailjs.sendForm('service_x9q2e6a', 'template_uy5yp2l', e.target, 'user_zbtd9FWQ1S1q7XRSiPlyz')
+    .then((result) => {
+      Swal.fire({
+        icon: 'success',
+        title: '¡Se agrego correctamente, se notificara al usuario!',
+        showConfirmButton: false,
+        timer: 1500
       })
-      .catch(function (error) {
-        console.log(error);
-      });
-      props.functionFetch()
-  };
+    }, (error) => {
+      return console.log(error.text);
+    })
+  }
 
   const [permissions, setPermissions] = useState([ {id: 1, name: "Administrador AMPIP", created_at: "2021-08-16T00:21:50.519Z", updated_at: "2021-08-16T00:21:50.519Z"},
   {id: 2, name: "Usuario AMPIP", created_at: "2021-08-16T00:22:20.904Z", updated_at: "2021-08-16T00:22:20.904Z"},

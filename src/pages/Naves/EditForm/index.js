@@ -40,21 +40,39 @@ const EditForm = (props) => {
   const [fields, setFields] = useState([]);
 
   const onFinish = (values) => {
-    console.log(values)
-    axios.put(`${store.URL_PRODUCTION}/property_informations/${props.id}`, { data: values },
+    var data = {
+      "property_information": values
+    }
+    axios.put(`${store.URL_PRODUCTION}/property_informations/${props.id}`, data,
       {
         headers: {
           'Authorization': DataOption.authentication_token,
           'Content-Type': 'application/json'
         }
       }
-
     )
-      .then(res => {
-        console.log("Respuesta a petición");
-        console.log(res.data);
+      .then(() => {
+        Swal.fire({
+          icon: 'success',
+          title: '¡Registro actualizado correctamente!',
+          showConfirmButton: false,
+          timer: 1500
+        })
       })
   };
+
+  useEffect(() => {
+    axios.get(`${store.URL_PRODUCTION}/dashboard`, {
+      headers: {
+        'Authorization': DataOption.authentication_token,
+        'Content-Type': 'application/json'
+      },
+    }).then((response) => {
+      if (response.data.message.widgets[0].developers) {
+        setCorporates(response.data.message.widgets[0].developers)
+      }
+    });
+  }, []);
 
   useEffect(() => {
     axios.get(`${store.URL_PRODUCTION}/update/${props.id}`, {
@@ -90,38 +108,12 @@ const EditForm = (props) => {
     <Form {...layout} name="nest-messages" onFinish={onFinish} validateMessages={validateMessages} fields={fields}>
       <div style={{ display: 'flex', justifyContent: 'center', width: '1200px' }}>
         <div style={{ display: 'block', width: '50%' }}>
-          <Form.Item
-            name={"type"}
-            label="Corporativos"
-          >
-            <Select
-              placeholder="Select a option and change input text above"
-              allowClear
-            >
-              <Option key={1} value={1}>
-                {"ejemplo de editar"}
-              </Option>
-              {/* {corporates.map((value, i) => {
-            return (
-              <Option key={i} value={value.id}>
-                {value.name}
-              </Option>
-            );
-          })} */}
-            </Select>
-          </Form.Item>
-
-          <label>No Pertenece a un Parque</label>
-
-          <Switch defaultChecked onChange={onChange} label="Pertenece a un parque" style={{ marginBottom: "1em" }}></Switch>
-
           <Form.Item name={"name"} label="Nombre en español" rules={[{ required: true }]}>
             <Input />
           </Form.Item>
           <Form.Item name={"english_name"} label="Nombre en ingles" rules={[{ required: true }]}>
             <Input />
           </Form.Item>
-
         </div>
         <div style={{ display: 'block', width: '50%' }}>
           <Form.Item name={"address"} label="Calle y Número" rules={[{ required: true }]}>
