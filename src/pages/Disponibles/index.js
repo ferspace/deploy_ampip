@@ -34,61 +34,65 @@ const Disponibles = () => {
   const [datatableData, setDatatableData] = useState([]) //descomentar al integrar apis
   const [read, setRead] = useState(false);
   const [write, setWrite] = useState(false)
+  const [dataToken, setDataToken] = useState(JSON.parse(localStorage.getItem("data")))
 
 
   const seviceGet = () => {
-    axios.get(`${store.URL_PRODUCTION}/propieties?type=2`, {
-      headers: { 
-        'Authorization': data.authentication_token,
-      }
-    }).then((response) => {
-      //setDatatableData(response.data);
-      if(response.data.error){
-        console.log(response.data)
-      } else{
-        var corporatesAdd = [];
-        response.data.map((i)=>{
-          var corporates = [];
-          corporates.push(i.id);
-          corporates.push(i.nombre)
-          corporates.push(i.updated_at)
-          corporatesAdd.push(corporates);
-        });
-      
-        // setDatatableData([...corporatesAdd]);
-        axios.get(`${store.URL_PRODUCTION}/property_informations`, {
-          headers: { 
-            'Authorization': data.authentication_token,
-          }
-        }).then((response) => {
-          //setDatatableData(response.data);
-          if(response.data.error){
-            console.log(response.data)
-          } else{
-            var corporatesAdd = [];
-            response.data.map((i) => {
-              var corporates = [];
-              if(i.status_disponibilities.length > 0){
-                i.status_disponibilities.map((j)=>{
-                  if(j){
-                    corporates.push(j.id);
-                    corporates.push(j.average_price)
-                    corporates.push(j.use)
-                  }
-                });
-                corporatesAdd.push(corporates);
-              }
-            });
-            console.log("corporate, data" , corporatesAdd)
-             setDatatableData([...corporatesAdd]);
-          }
-        }).catch(error => {
-          console.log(error); // poner alerta cuando tengamos tiempo
-        });
-      }
-    }).catch(error => {
-      console.log(error); // poner alerta cuando tengamos tiempo
-    });
+    if(dataToken !== null){
+
+      axios.get(`${store.URL_PRODUCTION}/propieties?type=2`, {
+        headers: { 
+          'Authorization': dataToken.authentication_token,
+        }
+      }).then((response) => {
+        //setDatatableData(response.data);
+        if(response.data.error){
+          console.log(response.data)
+        } else{
+          var corporatesAdd = [];
+          response.data.map((i)=>{
+            var corporates = [];
+            corporates.push(i.id);
+            corporates.push(i.nombre)
+            corporates.push(i.updated_at)
+            corporatesAdd.push(corporates);
+          });
+        
+          // setDatatableData([...corporatesAdd]);
+          axios.get(`${store.URL_PRODUCTION}/property_informations`, {
+            headers: { 
+              'Authorization': dataToken.authentication_token,
+            }
+          }).then((response) => {
+            //setDatatableData(response.data);
+            if(response.data.error){
+              console.log(response.data)
+            } else{
+              var corporatesAdd = [];
+              response.data.map((i) => {
+                var corporates = [];
+                if(i.status_disponibilities.length > 0){
+                  i.status_disponibilities.map((j)=>{
+                    if(j){
+                      corporates.push(j.id);
+                      corporates.push(j.average_price)
+                      corporates.push(j.use)
+                    }
+                  });
+                  corporatesAdd.push(corporates);
+                }
+              });
+              console.log("corporate, data" , corporatesAdd)
+              setDatatableData([...corporatesAdd]);
+            }
+          }).catch(error => {
+            console.log(error); // poner alerta cuando tengamos tiempo
+          });
+        }
+      }).catch(error => {
+        console.log(error); // poner alerta cuando tengamos tiempo
+      })
+    }
   }
 
   const handleClose = () => {
@@ -104,8 +108,13 @@ const Disponibles = () => {
   useEffect(() => {    //aqui va la peticion al endpoint , se va aprocesar la informacion del tipo [[dato1,dato2]]
     seviceGet()
     
-  }, []);
+  }, [dataToken]);
 
+
+  useEffect(() => { 
+    setDataToken(JSON.parse(localStorage.getItem("data")))
+
+  }, []);
 
   return (
     <>
