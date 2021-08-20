@@ -125,6 +125,7 @@ export default function NotificationsPage(props) {
   useEffect(() => { 
     setDataToken(JSON.parse(localStorage.getItem("data")))
   }, []);
+  
   return (
     <>
       <PageTitle title="Usuarios" />
