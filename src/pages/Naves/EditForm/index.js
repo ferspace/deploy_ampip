@@ -108,19 +108,6 @@ const EditForm = (props) => {
     <Form {...layout} name="nest-messages" onFinish={onFinish} validateMessages={validateMessages} fields={fields}>
       <div style={{ display: 'flex', justifyContent: 'center', width: '1200px' }}>
         <div style={{ display: 'block', width: '50%' }}>
-          <Form.Item name={"type"} label="Corporativos">
-            <Select placeholder="Select a option and change input text above" allowClear disabled>
-              {corporates.map((value, i) => {
-                return (
-                  <Option key={i} value={value.id}>
-                    {value.name}
-                  </Option>
-                );
-              })}
-            </Select>
-          </Form.Item>
-          <label>No Pertenece a un Parque</label>
-          <Switch defaultChecked onChange={onChange} label="Pertenece a un parque" style={{ marginBottom: "1em" }}></Switch>
           <Form.Item name={"name"} label="Nombre en español" rules={[{ required: true }]}>
             <Input />
           </Form.Item>
