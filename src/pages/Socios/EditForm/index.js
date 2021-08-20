@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Form, Input, InputNumber, Button } from 'antd';
 import axios from 'axios';
 import Swal from 'sweetalert2';
@@ -23,15 +23,36 @@ const validateMessages = {
 };
 
 const EditForm = (props)=>{
-  const [address, setAddress] = useState({
-    municipio: '',
-    estado: '',
-    colonia: ''
-  })
+  const [info, setInfo]= useState({})
+  const [fields, setFields] = useState([]);
+
+  const arrayFields =[
+    {name:"address", value: ""},
+    {name:"anual_invetsment", value: ""},
+    {name:"cel", value: ""},
+    {name:"cel_code", value: ""},
+    {name:"cel_lada", value: ""},
+    {name:"colony", value: ""},
+    {name:"corporate_type", value: ""},
+    {name:"created_at", value: ""},
+    {name:"downt_date", value: ""},
+    {name:"english_name", value: ""},
+    {name:"municipality", value: ""},
+    {name:"name", value: ""},
+    {name:"next_anual_inv", value: ""},
+    {name:"postal_code", value: ""},
+    {name:"previus_anual_inv", value: ""},
+    {name:"social_type", value: ""},
+    {name:"state", value: ""},
+    {name:"status", value: ""}
+  ]
 
   const onFinish = (values) => {
     console.log(values)
-    axios.put(`${store.URL_PRODUCTION}/corporate/${props.id}`,{data: values},
+    var data = {
+      "corporate": values
+    }
+    axios.put(`${store.URL_PRODUCTION}/corporates/${props.id}`,data,
     {headers: {
       'Authorization': DataOption.authentication_token,
       'Content-Type': 'application/json'
@@ -42,75 +63,82 @@ const EditForm = (props)=>{
       console.log("Respuesta a petición");
       console.log(res.data);
     })
+    props.functionFetch()
+
   };
 
-  const findAddress = (e) =>{
-    
-    if (e.target.value.length === 5 ){
-      console.log(e.target.value)
-      setAddress({
-        municipio: 'municipio',
-        estado: 'estado',
-        colonia: 'colonia'
-      });
+  useEffect(()=>{
+    axios.get(`${store.URL_PRODUCTION}/corporates/${props.id}`, {
+      headers: {
+        'Authorization': DataOption .authentication_token,
+      }
+    }).then((response) => {
+      console.log(response, "show data")
+      setInfo(response.data)
+    }).catch(error => {
+      console.log(error); // poner alerta cuando tengamos tiempo
+    });
+  },[])
 
-      // descomentar al implementar api
+  console.log(info, "info socios")
 
-      /* axios.get(`https://localhost:3000/api/v1/zip_codes?zip_code=${e.target.value}`).then((response) => {
-        setAddress({
-          municipio: 'municipio',
-          estado: 'estado',
-          colonia: 'colonia'
-        });
-      }); */
+  const getFields = (responseData) => {
+    arrayFields.map((item) => {
+      if (responseData[item.name] != undefined)
+        return item.value = responseData[item.name];
+    });
+    setFields(arrayFields);
+  };
+
+  useEffect(() => {
+    if (info.length !== 0) {
+      getFields(info);
     }
-  }
-
-  console.log(address)
+  }, [info]);
 
   return(
-    <Form {...layout} name="nest-messages" onFinish={onFinish} validateMessages={validateMessages}>
+    <Form {...layout} name="nest-messages" onFinish={onFinish} validateMessages={validateMessages} fields={fields}>
       <div style={{ display: 'flex', justifyContent: 'center', width:'1000px'}}>
       <div style={{display:'block', width:'50%'}}>
 
       <ImageUpload/>
 
-      <Form.Item name={['corporate', 'name']} label="Nombre en español" rules={[{ required: true }]}>
+      <Form.Item name={ 'name' } label="Nombre en español" rules={[{ required: true }]}>
         <Input />
       </Form.Item>
-      <Form.Item name={['corporate', 'name_en']} label="Nombre en ingles" rules={[{ required: true }]}>
+      <Form.Item name={ 'corporate_type' } label="Nombre en ingles" rules={[{ required: true }]}>
         <Input />
       </Form.Item>
-      <Form.Item name={['corporate', 'address']} label="Calle y número" rules={[{ required: true }]}>
+      <Form.Item name={ 'address' } label="Calle y número" rules={[{ required: true }]}>
         <Input />
       </Form.Item>
-      <Form.Item name={['corporate', 'cp']} label="Código Postal" rules={[{ required: true }]}>
+      <Form.Item name={ 'postal_code' } label="Código Postal" rules={[{ required: true }]}>
         <Input />
       </Form.Item>
-      <Form.Item name={['corporate', 'colony']} label="Colonia" rules={[{ required: true }]}>
+      <Form.Item name={ 'colony' } label="Colonia" rules={[{ required: true }]}>
         <Input />
       </Form.Item>
       </div>
       <div style={{display:'block', width:'50%'}}>
-      <Form.Item name={['corporate', 'state']} label="Estado" rules={[{ required: true }]}>
+      <Form.Item name={ 'state' } label="Estado" rules={[{ required: true }]}>
         <Input />
       </Form.Item>
-      <Form.Item name={['corporate', 'municipality']} label="Municipio" rules={[{ required: true }]}>
+      <Form.Item name={ 'municipality' } label="Municipio" rules={[{ required: true }]}>
         <Input />
       </Form.Item>     
-      <Form.Item name={['corporate', 'cel_code']} label="Lada" rules={[{ required: true }]}>
+      <Form.Item name={ 'cel_code' } label="Lada" rules={[{ required: true }]}>
         <Input />
       </Form.Item>
       
-      <Form.Item name={['corporate', 'cel_lada']} label="Código de país" rules={[{ required: true }]}>
+      <Form.Item name={ 'cel_lada' } label="Código de país" rules={[{ required: true }]}>
         <Input />
       </Form.Item>
 
-      <Form.Item name={['corporate', 'cel']} label="Número" rules={[{ required: true }]}>
+      <Form.Item name={ 'cel' } label="Número" rules={[{ required: true }]}>
         <Input />
       </Form.Item>
 
-      <Form.Item name={['corporate', 'social_media_tw']} label="Clasificación" rules={[{ required: true }]}>
+      <Form.Item name={ 'social_media_tw' } label="Clasificación" rules={[{ required: true }]}>
         <Input />
       </Form.Item>
       </div>
