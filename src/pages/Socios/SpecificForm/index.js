@@ -226,10 +226,6 @@ const SpecificForm = (props) => {
             <Form.Item name={['user', 'cel_lada']} rules={[{ required: true }]}>
             <Input type={"number"} style={{ width: "100px" }} maxLength={3} />
             </Form.Item>
-<<<<<<< HEAD
-          
-            <Form.Item name={['user', 'cel']} label="Número Local" rules={[{ required: true }]}>
-=======
             </Grid>
             </Grid>
             
@@ -237,7 +233,6 @@ const SpecificForm = (props) => {
             <Grid item xs={12} sm={6} md={6} lg={4} >
             <p style={{color: "#666666", margin:"0" }}><span style={{color: "red"}}>*</span> Número Local</p>    
             <Form.Item name={['user', 'cel']} rules={[{ required: true }]}>
->>>>>>> d898e286ad7d7f4651272aa87e9f5864f200c136
               <Input type={"number"} maxLength={8} />
             </Form.Item>
             </Grid>
