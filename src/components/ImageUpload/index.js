@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import 'antd/dist/antd.css';
 import { Upload, Modal } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
 
@@ -43,10 +44,11 @@ class ImageUpload extends React.Component {
         <div style={{ marginTop: 8 }}>Upload</div>
       </div>
     );
+
     return (
       <>
         <Upload
-          action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+          //action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
           listType="picture-card"
           fileList={fileList}
           onPreview={this.handlePreview}
