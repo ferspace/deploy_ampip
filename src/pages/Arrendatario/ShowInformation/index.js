@@ -29,8 +29,29 @@ const ShowInformation = (props) =>{
       <Descriptions.Item label="Billing Mode">""</Descriptions.Item>
       <Descriptions.Item label="Automatic Renewal">""</Descriptions.Item>
       <Descriptions.Item label="Order time">""</Descriptions.Item> */}
+      <Descriptions.Item label="Nombre de la empresa" span={2}>
+        {info.name_bussines}
+      </Descriptions.Item>
+      <Descriptions.Item label="País" span={2}>
+        {info.country}
+      </Descriptions.Item>
+      <Descriptions.Item label="Producto estrella" span={2}>
+        {info.product_badge}
+      </Descriptions.Item>
+      <Descriptions.Item label="ID SCIAN" span={2}>
+        {info.ID_SCIAN}
+      </Descriptions.Item>
+      <Descriptions.Item label="ID DENUE" span={2}>
+        {info.ID_DENUE}
+      </Descriptions.Item>
+      <Descriptions.Item label="Antiguedad" span={2}>
+        {info.antiquity}
+      </Descriptions.Item>
+      <Descriptions.Item label="Superficie" span={2}>
+        {info.superficie}
+      </Descriptions.Item>
       <Descriptions.Item label="ultima actualizacion" span={2}>
-        {info.created_at}
+        {info.updated_at}
       </Descriptions.Item>
       {/* <Descriptions.Item label="Negotiated Amount">$80.00</Descriptions.Item>
       <Descriptions.Item label="Discount">$20.00</Descriptions.Item>

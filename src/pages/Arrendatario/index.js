@@ -152,7 +152,7 @@ const Arendatario = (props) => {
         </Tabs>
         {activeTabId === 0 && (
           <div style={{ padding: 20 }}>
-            {read && <Tables title={"Todas las naves"} columns={["id", "Name", "Alta", {
+            {read && <Tables title={"Todos los Inquilinos"} columns={["id", "Name", "Alta", {
               label: "Ver",
               options: {
                 customBodyRender: (value, tableMeta, updateValue) => {
