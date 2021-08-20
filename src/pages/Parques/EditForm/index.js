@@ -50,6 +50,7 @@ const validateMessages = {
 
 const EditForm = (props) => {
   const arrayFields = [
+    { name: "corpoate_id", value: "" },
     { name: "name", value: "" },
     { name: "english_name", value: "" },
     { name: "address", value: "" },
@@ -66,11 +67,11 @@ const EditForm = (props) => {
     { name: "number_employe", value: "" },
     { name: "practices_recognition", value: "" },
     { name: "superficie", value: "" },
-    { name: "superficie_total", value: "" },
+    { name: "suprficie_total", value: "" },
     { name: "superficie_urbanizada", value: "" },
     { name: "superficie_disponible", value: "" },
     { name: "unity", value: "" },
-    { name: "map", value: ""  }
+    { name: "map", value: "" }
   ];
 
   const [latlng, setLatlng] = useState({ lat: 19.00, lng: -99.644 })
@@ -88,7 +89,7 @@ const EditForm = (props) => {
     var data = {
       "property_information": values
     }
-    axios.put(`${store.URL_PRODUCTION}/property_informations/${props.id}`, { data: values },
+    axios.put(`${store.URL_PRODUCTION}/property_informations/${props.id}`, data,
       {
         headers: {
           'Authorization': DataOption.authentication_token,
@@ -96,11 +97,28 @@ const EditForm = (props) => {
         }
       }
     )
-      .then(res => {
-        console.log("Respuesta a petición");
-        console.log(res.data);
+      .then(() => {
+        Swal.fire({
+          icon: 'success',
+          title: '¡Registro actualizado correctamente!',
+          showConfirmButton: false,
+          timer: 1500
+        })
       })
   };
+
+  useEffect(() => {
+    axios.get(`${store.URL_PRODUCTION}/dashboard`, {
+      headers: {
+        'Authorization': DataOption.authentication_token,
+        'Content-Type': 'application/json'
+      },
+    }).then((response) => {
+      if (response.data.message.widgets[0].developers) {
+        setCorporates(response.data.message.widgets[0].developers)
+      }
+    });
+  }, []);
 
   useEffect(() => {
     axios.get(`${store.URL_PRODUCTION}/update/${props.id}`, {
@@ -109,6 +127,7 @@ const EditForm = (props) => {
       }
     }).then((response) => {
       setInfo(response.data);
+      getCorporates(response.data[0].property.corporate_id);
     }).catch(error => {
       console.log(error);
     });
@@ -128,18 +147,20 @@ const EditForm = (props) => {
 
   const getFields = (responseData) => {
     const newArrayFields = arrayFields.map((item) => {
-      if (responseData[0][item.name] != undefined) 
+      if (responseData[0][item.name] != undefined)
         return item.value = responseData[0][item.name];
     });
     setFields(arrayFields);
   };
 
   const getFieldsCorporates = (responseData) => {
+    arrayFields[0].value = responseData.id;
   };
 
   useEffect(() => {
     if (info.length !== 0) {
       getFields(info);
+      getFieldsCorporates(info);
     }
   }, [info]);
 
@@ -147,10 +168,11 @@ const EditForm = (props) => {
     <Form {...layout} name="nest-messages" onFinish={onFinish} validateMessages={validateMessages} style={{ height: "950px" }} fields={fields}>
       <div style={{ display: 'flex', justifyContent: 'center', width: '1200px' }}>
         <div style={{ display: 'block', width: '50%' }}>
-          <Form.Item name={"corpoate_id"} label="Corporativos" rules={[{ required: true }]}>
+          <Form.Item name={"corpoate_id"} label="Corporativos">
             <Select
               placeholder="Select a option and change input text above"
-              allowClear
+              allowClear 
+              disabled 
             >
               {corporates.map((value, i) => {
                 return (
@@ -214,7 +236,7 @@ const EditForm = (props) => {
             <Select
               placeholder="Select a option and change input text above"
               allowClear
-              mode="tags"
+              mode="multiple"
             >
               <Option value="Al menos 0.5 litros agua por segundo por ha">Al menos 0.5 litros agua por segundo por ha</Option>
               <Option value="Pavimento">Pavimento</Option>
@@ -263,7 +285,7 @@ const EditForm = (props) => {
             <Select
               placeholder="Select a option and change input text above"
               allowClear
-              mode="tags"
+              mode="multiple"
             >
               <Option value="Norma Mexiana de Parque Industrial">Norma Mexiana de Parque Industrial</Option>
               <Option value="Parque Industrial Verde">Parque Industrial Verde</Option>
@@ -278,7 +300,7 @@ const EditForm = (props) => {
             <Input />
           </Form.Item>
 
-          <Form.Item name={"superficie_total"} label="Superficie Total" rules={[{ required: true }]}>
+          <Form.Item name={"suprficie_total"} label="Superficie Total" rules={[{ required: true }]}>
             <Input />
           </Form.Item>
           <Form.Item name={"superficie_urbanizada"} label="Superficie Urbanizada" rules={[{ required: true }]}>
