@@ -5,6 +5,7 @@ import axios from 'axios';
 import Swal from "sweetalert2";
 import store from '../../store/index' //variables de entorno
 import { useUserDispatch, signOut } from "../../context/UserContext";
+import {Grid} from '@material-ui/core';
 
 const { Option } = Select;
 const style = { background: '#0092ff', padding: '8px 0' };
@@ -157,7 +158,7 @@ const UserModal=(props)=>{
   }
 
   return (
-    <div>
+    <div style={{padding:20}}>
       <Button onClick={handleClickOpen('paper')} style={{color:'white'}}>Perfil</Button>
       <Dialog
         open={open}
@@ -168,20 +169,41 @@ const UserModal=(props)=>{
       >
         <DialogTitle id="scroll-dialog-title">Perfil</DialogTitle>
         <DialogContent dividers={scroll === 'paper'}>
+        
           <Form {...layout} name="nest-messages" onFinish={onFinish} validateMessages={validateMessages} initialValues={{ dataOf: initialValue }}>
-            <Form.Item name={['dataOf', 'full_name']} label="Nombre" rules={[{ required: true }]}>
+          <Grid container spacing={30} xs={12}>
+          <Grid item spacing={2} xs={12} container >
+            <Grid item xs={12} sm={6} md={6} lg={6} >
+            <p style={{color: "#666666", margin:"0" }}><span style={{color: "red"}}>*</span> Nombre:</p>
+            <Form.Item name={['dataOf', 'full_name']} rules={[{ required: true }]}>
               <Input />
             </Form.Item>
-            <Form.Item name={['dataOf', 'last_name']} label="Apellido" rules={[{ required: true }]}>
+            </Grid>
+            <Grid item xs={12} sm={6} md={6} lg={6} >
+            <p style={{color: "#666666", margin:"0" }}><span style={{color: "red"}}>*</span> Apellido:</p>
+            <Form.Item name={['dataOf', 'last_name']} rules={[{ required: true }]}>
               <Input defaultValue="" />
             </Form.Item>
-            <Form.Item name={['dataOf', 'address']} label="Calle y Número" rules={[{ required: true }]}>
+            </Grid>
+          </Grid>
+          <Grid item spacing={2} xs={12} container >
+            <Grid item xs={12} sm={6} md={6} lg={6} >
+            <p style={{color: "#666666", margin:"0" }}><span style={{color: "red"}}>*</span> Calle y Número:</p> 
+            <Form.Item name={['dataOf', 'address']} rules={[{ required: true }]}>
               <Input defaultValue="" />
             </Form.Item>
-            <Form.Item name={['dataOf', 'postal_code_number']} label="Código Postal" rules={[{ required: true }]}>
+            </Grid>
+            <Grid item xs={12} sm={6} md={6} lg={6} >
+            <p style={{color: "#666666", margin:"0" }}><span style={{color: "red"}}>*</span> Código Postal:</p> 
+            <Form.Item name={['dataOf', 'postal_code_number']} rules={[{ required: true }]}>
             <Input type={"number"} style={{ width: "100px" }} onChange={(e)=>getAddessFunction(e)} />
-          </Form.Item>
-            <Form.Item label="Colonia" rules={[{ required: true }]}>
+            </Form.Item>
+            </Grid>
+          </Grid> 
+          <Grid item spacing={2} xs={12} container > 
+            <Grid item xs={12} sm={6} md={6} lg={6} >
+            <p style={{color: "#666666", margin:"0" }}><span style={{color: "red"}}>*</span> Colonia:</p>  
+            <Form.Item rules={[{ required: true }]}>
               <select
                   placeholder="Selecione"
                   allowClear
@@ -196,24 +218,48 @@ const UserModal=(props)=>{
                   })}
               </select>
             </Form.Item>
-            <Form.Item label="Estado" rules={[{ required: true }]}>
+            </Grid>
+            <Grid item xs={12} sm={6} md={6} lg={6} >
+            <p style={{color: "#666666", margin:"0" }}><span style={{color: "red"}}>*</span> Estado:</p>  
+            <Form.Item rules={[{ required: true }]}>
               {getAddress.length>0&&(<Input name={['user', 'state']} disabled="true" value={getAddress[0].d_estado}></Input>)}
               {getAddress.length==0&&(<Input disabled="true" defaultValue={'Sin datos'}></Input>)}
             </Form.Item>
-            <Form.Item label="Municipio/Alcandía" rules={[{ required: true }]}>
+            </Grid>
+          </Grid>
+          <Grid item spacing={2} xs={12} container >
+            <Grid item xs={12} sm={6} md={6} lg={6} >
+            <p style={{color: "#666666", margin:"0" }}><span style={{color: "red"}}>*</span> Municipio/Alcandía:</p>   
+            <Form.Item  rules={[{ required: true }]}>
               {getAddress.length>0&&(<Input name={['user', 'municipality']} disabled="true" value={getAddress[0].d_mnpio}></Input>)}
               {getAddress.length==0&&(<Input disabled="true" defaultValue={'Sin datos'}></Input>)}
             </Form.Item>
-            <Form.Item name={['dataOf', 'office_address']} label="Dirección de oficina" rules={[{ required: true }]}>
+            </Grid> 
+            <Grid item xs={12} sm={6} md={6} lg={6} >
+            <p style={{color: "#666666", margin:"0" }}><span style={{color: "red"}}>*</span> Dirección de oficina:</p>
+            <Form.Item name={['dataOf', 'office_address']}  rules={[{ required: true }]}>
               <Input defaultValue="" />
             </Form.Item>
-            <Form.Item name={['dataOf', 'charge']} label="Puesto" rules={[{ required: true }]}>
+            </Grid>
+          </Grid>
+          <Grid item spacing={2} xs={12} container > 
+            <Grid item xs={12} sm={6} md={6} lg={6} > 
+            <p style={{color: "#666666", margin:"0" }}><span style={{color: "red"}}>*</span> Puesto:</p>     
+            <Form.Item name={['dataOf', 'charge']}  rules={[{ required: true }]}>
               <Input defaultValue="" />
             </Form.Item>
-            <Form.Item name={['dataOf', 'phone_office_lada']} label="Lada" rules={[{ required: true }]}>
+            </Grid>
+            <Grid item xs={12} sm={6} md={6} lg={6} >
+            <p style={{color: "#666666", margin:"0" }}><span style={{color: "red"}}>*</span> Lada:</p>
+            <Form.Item name={['dataOf', 'phone_office_lada']} rules={[{ required: true }]}>
             <Input style={{width:"100px"}} maxLength={3}/>
             </Form.Item>
-            <Form.Item label="Código de país" rules={[{ required: true }]}>
+            </Grid>
+          </Grid>
+          <Grid item spacing={2} xs={12} container >
+            <Grid item xs={12} sm={6} md={6} lg={6} >
+            <p style={{color: "#666666", margin:"0" }}><span style={{color: "red"}}>*</span> Código de país:</p>    
+            <Form.Item rules={[{ required: true }]}>
             <select
             placeholder="Select"
             allowClear
@@ -224,18 +270,26 @@ const UserModal=(props)=>{
             <option value="1">1</option>
           </select>
             </Form.Item>
-            <Form.Item name={['dataOf', 'phone_office']} label="Teléfono" rules={[{ required: true }]}>
+            </Grid>
+            <Grid item xs={12} sm={6} md={6} lg={6} >
+            <p style={{color: "#666666", margin:"0" }}><span style={{color: "red"}}>*</span> Teléfono:</p>
+            <Form.Item name={['dataOf', 'phone_office']} rules={[{ required: true }]}>
               <Input type={"number"} maxLength={8}/>
             </Form.Item>
+            </Grid>
+          </Grid>  
+            </Grid> 
+            <div style={{ display: 'flex', justifyContent: 'center', width: '90%' }}> 
             <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
               <Button style={{ backgroundColor: "#00afb7", borderColor: "#00afb7", color: "#ffffff" }} type="primary" htmlType="submit">
                 Enviar
               </Button>
             </Form.Item>
+            </div>
           </Form>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose} color="primary">
+          <Button style={{color:"red"}} onClick={handleClose} >
             Cancelar
           </Button>
         </DialogActions>
