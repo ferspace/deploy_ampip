@@ -21,12 +21,13 @@ import axios from 'axios';
 import Tables from '../Tables'
 import EditForm from './EditForm'
 import ShowInformation from "./ShowInformation"
-
+import Disponibilities from "../../components/Disponibilities";
 // icons sets
 import "font-awesome/css/font-awesome.min.css";
 import ModalInformation from '../../components/ModalInformation'
 import ModaEdit from '../../components/ModalEdit'
 import store from '../../store/index'
+
 
 const Naves = (props) => {
   const [anchorEl, setAnchorEl] = React.useState(null)
@@ -36,20 +37,20 @@ const Naves = (props) => {
   const [permisos, setPermisos] = useState([])
   const [dataToken, setDataToken] = useState(JSON.parse(localStorage.getItem("data")))
 
-  const permissionsMap = () =>{
-    permisos.map((item)=>{
-      if (item.permiso === "ship"){
+  const permissionsMap = () => {
+    permisos.map((item) => {
+      if (item.permiso === "ship") {
         setRead(item.read)
         setWrite(item.write)
         console.log(item)
-      } 
+      }
     })
 
   }
 
   const seviceGet = () => {
-    if(dataToken !== null)
-      {axios.get(`${store.URL_PRODUCTION}/dashboard`,{
+    if (dataToken !== null) {
+      axios.get(`${store.URL_PRODUCTION}/dashboard`, {
         headers: {
           'Authorization': dataToken.authentication_token,
         }
@@ -68,7 +69,7 @@ const Naves = (props) => {
             corporatesAdd.push(corporates);
           });
           var corpoatesPlus = []
-          response.data.message.allProperties.nav.map((i)=>{
+          response.data.message.allProperties.nav.map((i) => {
             var corporates = [];
             corporates.push(i.id);
             corporates.push(i.name)
@@ -79,7 +80,7 @@ const Naves = (props) => {
         }
       }).catch(error => {
         console.log(error); // poner alerta cuando tengamos tiempo
-      });  
+      });
     }
   }
 
@@ -90,7 +91,7 @@ const Naves = (props) => {
   var classes = useStyles();
 
 
-  useEffect(() => { 
+  useEffect(() => {
     permissionsMap()
   }, [permisos]);
   // local
@@ -98,10 +99,10 @@ const Naves = (props) => {
   var [activeTabId, setActiveTabId] = useState(0);
   useEffect(() => {    //aqui va la peticion al endpoint , se va aprocesar la informacion del tipo [[dato1,dato2]]
     seviceGet()
-  },[dataToken]);
+  }, [dataToken]);
 
-  useEffect(() => { 
-    axios.get(`${store.URL_PRODUCTION}/dashboard`,{
+  useEffect(() => {
+    axios.get(`${store.URL_PRODUCTION}/dashboard`, {
       headers: {
         'Authorization': dataToken.authentication_token,
         'Content-Type': 'application/json'
@@ -110,7 +111,7 @@ const Naves = (props) => {
       setPermisos(response.data.message.permissions)
     }).catch(error => {
       console.log(error); // poner alerta cuando tengamos tiempo
-    }); 
+    });
     setDataToken(JSON.parse(localStorage.getItem("data")))
 
   }, []);
@@ -134,7 +135,7 @@ const Naves = (props) => {
       )} />
       <Paper className={classes.iconsContainer}>
         <Tabs
-          TabIndicatorProps={{style: {background:'#00AFB7'}}}
+          TabIndicatorProps={{ style: { background: '#00AFB7' } }}
           textColor="#ffffff"
           value={activeTabId}
           onChange={(e, id) => setActiveTabId(id)}
@@ -145,12 +146,12 @@ const Naves = (props) => {
         </Tabs>
         {activeTabId === 0 && (
           <div style={{ padding: 20 }}>
-           {read && <Tables title={"Todas las naves"} columns={["id", "Nombre","Nombre en inglés","Dirección", {
+            {read && <Tables title={"Todas las naves"} columns={["id", "Nombre", "Nombre en inglés", "Dirección", {
               label: "Ver información",
               options: {
                 customBodyRender: (value, tableMeta, updateValue) => {
                   return (
-                <ModalInformation data={tableMeta.rowData[0]} children={<ShowInformation id={tableMeta.rowData[0]}/>}/>                  )
+                    <ModalInformation data={tableMeta.rowData[0]} children={<ShowInformation id={tableMeta.rowData[0]} />} />)
                 }
               }
             },
@@ -159,7 +160,17 @@ const Naves = (props) => {
                 options: {
                   customBodyRender: (value, tableMeta, updateValue) => {
                     return (
-                      <ModaEdit data={tableMeta.rowData[0]} children={<EditForm id={tableMeta.rowData[0]} functionFetch={()=>seviceGet()}/>} write={write}/>
+                      <ModaEdit data={tableMeta.rowData[0]} children={<EditForm id={tableMeta.rowData[0]} functionFetch={() => seviceGet()} />} write={write} />
+                    )
+                  }
+                }
+              },
+              {
+                label: "Disponibilidad",
+                options: {
+                  customBodyRender: (value, tableMeta, updateValue) => {
+                    return (
+                      <ModaEdit data={tableMeta.rowData[0]} children={<Disponibilities id={tableMeta.rowData[0]} functionFetch={() => seviceGet()} />} write={write} />
                     )
                   }
                 }
@@ -170,7 +181,7 @@ const Naves = (props) => {
 
         {activeTabId === 1 && (
           <div style={{ display: 'flex', justifyContent: 'center' }}>
-            {write && <SpecificForm functionFetch={()=>seviceGet()}/>}
+            {write && <SpecificForm functionFetch={() => seviceGet()} />}
           </div>
         )}
       </Paper>
