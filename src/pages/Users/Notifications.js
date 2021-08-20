@@ -66,47 +66,42 @@ export default function NotificationsPage(props) {
   var [errorToastId, setErrorToastId] = useState(null);
 
   const [datatableData, setDatatableData] = useState([]) //descomentar al integrar apis
+  const [dataToken, setDataToken] = useState(JSON.parse(localStorage.getItem("data")))
 
   const seviceGet =()=>{
-    axios.get(`${store.URL_PRODUCTION}/dashboard`, {
-      headers: {
-        'Authorization': data.authentication_token,
-      }
-    }).then((response) => {
-      //setDatatableData(response.data);
-      if (response.data.error) {
-        alert("error")
-      } else {
-        console.log(response.data)
-        var UsersAdd = []
-        response.data.message.allUser.map((item) => {
-          var User = [];
-          User.push(item.id);
-          User.push(item.full_name)   
-          User.push(item.last_name)    
-          User.push(item.address)   
-          UsersAdd.push(User)  
-        })
-        console.log(UsersAdd)
-        setDatatableData([... UsersAdd])
-      }
-    }).catch(error => {
-      console.log(error); // poner alerta cuando tengamos tiempo
-    });
+    if(dataToken !== null)
+      {axios.get(`${store.URL_PRODUCTION}/dashboard`, {
+        headers: {
+          'Authorization': dataToken.authentication_token,
+        }
+      }).then((response) => {
+        //setDatatableData(response.data);
+        if (response.data.error) {
+          alert("error")
+        } else {
+          console.log(response.data)
+          var UsersAdd = []
+          response.data.message.allUser.map((item) => {
+            var User = [];
+            User.push(item.id);
+            User.push(item.full_name)   
+            User.push(item.last_name)    
+            User.push(item.address)   
+            UsersAdd.push(User)  
+          })
+          console.log(UsersAdd)
+          setDatatableData([... UsersAdd])
+        }
+      }).catch(error => {
+        console.log(error); // poner alerta cuando tengamos tiempo
+      })
+    }
   }
 
-  useEffect(() => {    //aqui va la peticion al endpoint , se va aprocesar la informacion del tipo [[dato1,dato2]]
-    seviceGet()
-  }, []);
-
-  useEffect(() => { 
-    permissionsMap()
-  },[permisos]);
-
-  useEffect(() => { 
+  const permissionRequest =()=>{
     axios.get(`${store.URL_PRODUCTION}/dashboard`,{
       headers: {
-        'Authorization': data.authentication_token,
+        'Authorization': dataToken.authentication_token,
         'Content-Type': 'application/json'
       }
     }).then((response) => {
@@ -114,6 +109,19 @@ export default function NotificationsPage(props) {
     }).catch(error => {
       console.log(error); // poner alerta cuando tengamos tiempo
     }); 
+  }
+
+  useEffect(() => {    //aqui va la peticion al endpoint , se va aprocesar la informacion del tipo [[dato1,dato2]]
+    seviceGet()
+    permissionRequest()
+  }, [dataToken]);
+
+  useEffect(() => { 
+    permissionsMap()
+  },[permisos]);
+
+  useEffect(() => { 
+    setDataToken(JSON.parse(localStorage.getItem("data")))
   }, []);
   return (
     <>

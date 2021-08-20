@@ -36,6 +36,7 @@ const Arendatario = (props) => {
   const [read, setRead] = useState(false);
   const [write, setWrite] = useState(false)
   const [permisos, setPermisos] = useState([])
+  const [dataToken, setDataToken] = useState(JSON.parse(localStorage.getItem("data")))
 
   const permissionsMap = () =>{
     permisos.map((item)=>{
@@ -49,36 +50,39 @@ const Arendatario = (props) => {
   }
 
   const seviceGet=()=>{
-    axios.get(`${store.URL_PRODUCTION}/propieties`,{ // modificar por que debe traer  arrendatarios
-      headers: {
-        'Authorization': data.authentication_token,
-      }
-    }).then((response) => {
-      //setDatatableData(response.data);
-      if (response.data.message == "Sin datos para mostrar") {
-        console.log(response.data)
-        setDatatableData([["s", "s", "s"]]);
-      } else {
-         var corporatesAdd = [];
-            response.data.map((i) => {
-              var corporates = [];
-              if(i.tenant_users.length > 0){
-                i.tenant_users.map((j)=>{
-                  if(j){
-                    corporates.push(j.id);
-                    corporates.push(j.name_bussines)
-                    corporates.push(j.updated_at)
-                  }
-                });
-                corporatesAdd.push(corporates);
-              }
-            });
-            console.log("corporate, data" , corporatesAdd)
-             setDatatableData([...corporatesAdd]);
-      }
-    }).catch(error => {
-      console.log(error); // poner alerta cuando tengamos tiempo
-    });
+    if(dataToken !== null){
+
+      axios.get(`${store.URL_PRODUCTION}/propieties`,{ // modificar por que debe traer  arrendatarios
+        headers: {
+          'Authorization': dataToken.authentication_token,
+        }
+      }).then((response) => {
+        //setDatatableData(response.data);
+        if (response.data.message == "Sin datos para mostrar") {
+          console.log(response.data)
+          setDatatableData([["s", "s", "s"]]);
+        } else {
+          var corporatesAdd = [];
+              response.data.map((i) => {
+                var corporates = [];
+                if(i.tenant_users.length > 0){
+                  i.tenant_users.map((j)=>{
+                    if(j){
+                      corporates.push(j.id);
+                      corporates.push(j.name_bussines)
+                      corporates.push(j.updated_at)
+                    }
+                  });
+                  corporatesAdd.push(corporates);
+                }
+              });
+              console.log("corporate, data" , corporatesAdd)
+              setDatatableData([...corporatesAdd]);
+        }
+      }).catch(error => {
+        console.log(error); // poner alerta cuando tengamos tiempo
+      })
+  }
   }
 
   const handleClose = () => {
@@ -89,18 +93,11 @@ const Arendatario = (props) => {
 
   // local
   var [activeTabId, setActiveTabId] = useState(0);
-  useEffect(() => {    //
-    seviceGet()
-  },[]);
 
-  useEffect(() => { 
-    permissionsMap()
-  },[permisos]);
-
-  useEffect(() => { 
+  const permissionRequest =()=>{
     axios.get(`${store.URL_PRODUCTION}/dashboard`,{
       headers: {
-        'Authorization': data.authentication_token,
+        'Authorization': dataToken.authentication_token,
         'Content-Type': 'application/json'
       }
     }).then((response) => {
@@ -108,6 +105,19 @@ const Arendatario = (props) => {
     }).catch(error => {
       console.log(error); // poner alerta cuando tengamos tiempo
     }); 
+  }
+  useEffect(() => {    //
+    seviceGet()
+    permissionRequest()
+  },[dataToken]);
+
+  useEffect(() => { 
+    permissionsMap()
+  },[permisos]);
+
+  useEffect(() => { 
+    setDataToken(JSON.parse(localStorage.getItem("data")))
+
   }, []);
 
   return (

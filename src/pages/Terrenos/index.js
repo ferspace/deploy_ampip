@@ -37,6 +37,7 @@ const Terrenos = (props) => {
   const [read, setRead] = useState(false);
   const [write, setWrite] = useState(false)
   const [permisos, setPermisos] = useState([])
+  const [dataToken, setDataToken] = useState(JSON.parse(localStorage.getItem("data")))
 
   const permissionsMap = () =>{
     permisos.map((item)=>{
@@ -63,53 +64,47 @@ const Terrenos = (props) => {
   var [activeTabId, setActiveTabId] = useState(0);
 
   const seviceGet=()=>{
-    axios.get(`${store.URL_PRODUCTION}/dashboard`, {
+    if(dataToken !== null){
+      axios.get(`${store.URL_PRODUCTION}/dashboard`, {
       headers: {
-        'Authorization': data.authentication_token,
+        'Authorization': dataToken.authentication_token,
       }
-    }).then((response) => {
-      //setDatatableData(response.data);
-      if (response.data.message == "Sin datos para mostrar") {
-        console.log(response.data)
-        setDatatableData([["s", "s", "s"]]);
-      } else {
-        var corporatesAdd = [];
-        response.data.message.allProperties.terrenos.map((i) => {
-          var corporates = [];
-          corporates.push(i.id);
-          corporates.push(i.name)
-          corporates.push(i.updated_at)
-          corporatesAdd.push(corporates);
-        });
+      }).then((response) => {
+        //setDatatableData(response.data);
+        if (response.data.message == "Sin datos para mostrar") {
+          console.log(response.data)
+          setDatatableData([["s", "s", "s"]]);
+        } else {
+          var corporatesAdd = [];
+          response.data.message.allProperties.terrenos.map((i) => {
+            var corporates = [];
+            corporates.push(i.id);
+            corporates.push(i.name)
+            corporates.push(i.updated_at)
+            corporatesAdd.push(corporates);
+          });
 
-        var corpoatesPlus = []
-        response.data.message.allProperties.ter.map((i)=>{
-          var corporates = [];
-          corporates.push(i.id);
-          corporates.push(i.name)
-          corporates.push(i.updated_at)
-          corpoatesPlus.push(corporates);
-        });
+          var corpoatesPlus = []
+          response.data.message.allProperties.ter.map((i)=>{
+            var corporates = [];
+            corporates.push(i.id);
+            corporates.push(i.name)
+            corporates.push(i.updated_at)
+            corpoatesPlus.push(corporates);
+          });
 
-        setDatatableData([...corporatesAdd , ...corpoatesPlus]);
-      }
-    }).catch(error => {
-      console.log(error); // poner alerta cuando tengamos tiempo
-    });
+          setDatatableData([...corporatesAdd , ...corpoatesPlus]);
+        }
+      }).catch(error => {
+        console.log(error); // poner alerta cuando tengamos tiempo
+      })
+    }
   }
 
-  useEffect(() => {    //aqui va la peticion al endpoint , se va aprocesar la informacion del tipo [[dato1,dato2]]
-    seviceGet()
-  },[]);
-
-  useEffect(() => { 
-    permissionsMap()
-  },[permisos]);
-
-  useEffect(() => { 
+  const permissionRequest =()=>{
     axios.get(`${store.URL_PRODUCTION}/dashboard`,{
       headers: {
-        'Authorization': data.authentication_token,
+        'Authorization': dataToken.authentication_token,
         'Content-Type': 'application/json'
       }
     }).then((response) => {
@@ -117,6 +112,21 @@ const Terrenos = (props) => {
     }).catch(error => {
       console.log(error); // poner alerta cuando tengamos tiempo
     }); 
+  }
+
+  useEffect(() => {    //aqui va la peticion al endpoint , se va aprocesar la informacion del tipo [[dato1,dato2]]
+    seviceGet()
+    permissionRequest()
+  },[dataToken]);
+
+
+  useEffect(() => { 
+    permissionsMap()
+  },[permisos]);
+
+  useEffect(() => { 
+    setDataToken(JSON.parse(localStorage.getItem("data")))
+
   }, []);
 
   return (

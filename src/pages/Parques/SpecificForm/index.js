@@ -263,18 +263,20 @@ const SpecificForm = (props) => {
 
   return (
     <div style={{ padding: 20 }}>
-
+      
     <Form {...layout} name="nest-messages" onFinish={onFinish} validateMessages={validateMessages} style={{ height: "1350px" }} >
       <>
+      <div style={{display:'flex', justifyContent:'center', width:'100%', marginBottom:'10px'}}>
         <ImageUpload />
-        <Grid container spacing={3}>
-          <Grid item spacing={2} xs={12} container>
+        </div>  
+        <Grid container spacing={30} xs={12}>
+          <Grid item spacing={2} xs={12} container >
   
             <Grid item xs={12} sm={6} md={6} lg={4} >
              
                 <>
-                    Socio AMPIP:
-                    <Form.Item name={["user", "corpoate_id"]} rules={[{ required: true }]}>
+                    <p style={{color: "#666666", margin:"0" }}><span style={{color: "red"}}>*</span> Socio AMPIP:</p>
+                    <Form.Item  name={["user", "corpoate_id"]} rules={[{ required: true }]}>
                       <Select
                         placeholder="Select a option and change input text above"
                         allowClear
@@ -292,13 +294,13 @@ const SpecificForm = (props) => {
              
           </Grid>
             <Grid item xs={12} sm={6} md={6} lg={4}>
-              Nombre en español:
+            <p style={{color: "#666666", margin:"0" }}><span style={{color: "red"}}>*</span> Nombre en español:</p>
               <Form.Item name={['user', 'name']} rules={[{ required: true }]}>
             <Input />
           </Form.Item>
           </Grid>
             <Grid item xs={12} sm={6} md={6} lg={4}>
-            Nombre en inglés:
+            <p style={{color: "#666666", margin:"0" }}><span style={{color: "red"}}>*</span> Nombre en inglés:</p>
             <Form.Item name={['user', 'name_en']} rules={[{ required: true }]}>
             <Input />
           </Form.Item>
@@ -308,20 +310,25 @@ const SpecificForm = (props) => {
           <Grid item spacing={2} xs={12} container>
 
             <Grid item xs={12} sm={6} md={6} lg={4}>
-              Calle y número:
+            <p style={{color: "#666666", margin:"0" }}><span style={{color: "red"}}>*</span> Calle y número:</p>
               <Form.Item name={['user', 'addres']} rules={[{ required: true }]}>
             <Input />
           </Form.Item>
           </Grid>
             <Grid item xs={12} sm={6} md={6} lg={4}>
-              Código Postal:
+            <p style={{color: "#666666", margin:"0" }}><span style={{color: "red"}}>*</span> Código Postal:</p>
               <Form.Item name={['user', 'postal_code']} rules={[{ required: true }]}>
             <Input type={"number"} style={{ width: "100px" }} onChange={(e)=>getAddessFunction(e)} />
           </Form.Item>
           </Grid>
             <Grid item xs={12} sm={6} md={6} lg={4}>
+<<<<<<< HEAD
             Colonia:
             <Form.Item rules={[{ required: true }]}>
+=======
+            <p style={{color: "#666666", margin:"0" }}><span style={{color: "red"}}>*</span> Colonia:</p>
+            <Form.Item name={['user', 'colony']} rules={[{ required: true }]}>
+>>>>>>> d898e286ad7d7f4651272aa87e9f5864f200c136
               <Select
                 placeholder="Selecione"
                 allowClear
@@ -356,7 +363,7 @@ const SpecificForm = (props) => {
             </Form.Item>
             </Grid>
             <Grid item xs={12} sm={12} md={6} lg={4}>
-            Región:
+            <p style={{color: "#666666", margin:"0" }}><span style={{color: "red"}}>*</span> Región:</p>
             <Form.Item name={['user', 'region']} rules={[{ required: true }]}>
             <Select
               placeholder="Selecciona la unidad de medida"
@@ -374,7 +381,7 @@ const SpecificForm = (props) => {
           <Grid item spacing={2} xs={12} container>
 
             <Grid item xs={12} sm={12} md={6} lg={4}>
-              Propietario/Administrador
+            <p style={{color: "#666666", margin:"0" }}><span style={{color: "red"}}>*</span> Propietario/Administrador</p>
               <Form.Item name={['user', 'park_property']} rules={[{ required: true }]}>
               <Select
                 placeholder="Selecciona la unidad de medida"
@@ -386,13 +393,13 @@ const SpecificForm = (props) => {
             </Form.Item>
             </Grid>
             <Grid item xs={12} sm={12} md={6} lg={4}>
-              Mercado
+            <p style={{color: "#666666", margin:"0" }}><span style={{color: "red"}}>*</span> Mercado</p>
               <Form.Item name={['user', 'market']} rules={[{ required: true }]}>
               <Input />
             </Form.Item>
             </Grid>
             <Grid item xs={12} sm={12} md={6} lg={4}>
-            Código de país:
+            <p style={{color: "#666666", margin:"0" }}><span style={{color: "red"}}>*</span> Código de país:</p>
             <Form.Item name={['user', 'cel_code']} rules={[{ required: true }]}>
           <Select
             placeholder="Select"
@@ -409,19 +416,19 @@ const SpecificForm = (props) => {
           <Grid item spacing={2} xs={12} container>
 
             <Grid item xs={12} sm={12} md={6} lg={4}>
-              Lada:
+            <p style={{color: "#666666", margin:"0" }}><span style={{color: "red"}}>*</span> Lada:</p>
               <Form.Item name={['user', 'cel_lada']} rules={[{ required: true }]}>
               <Input type={"number"} style={{width:"100px"}} maxLength={3}/>
             </Form.Item>
             </Grid>
             <Grid item xs={12} sm={12} md={6} lg={4}>
-              Número Local:
+            <p style={{color: "#666666", margin:"0" }}><span style={{color: "red"}}>*</span> Número Local:</p>
               <Form.Item name={['user', 'cel']} rules={[{ required: true }]}>
               <Input type={"number"} maxLength={8}/>
             </Form.Item>
             </Grid>
             <Grid item xs={12} sm={12} md={6} lg={4}>
-            Industria:
+            <p style={{color: "#666666", margin:"0" }}><span style={{color: "red"}}>*</span> Industria:</p>
             <Form.Item name={['user', 'industry']} rules={[{ required: true }]}>
             <Select
               placeholder="Selecciona la unidad de medida"
@@ -438,7 +445,7 @@ const SpecificForm = (props) => {
           <Grid item spacing={2} xs={12} container>
 
             <Grid item xs={12} sm={12} md={6} lg={4}>
-            Infraestructura Disponible:
+            <p style={{color: "#666666", margin:"0" }}><span style={{color: "red"}}>*</span> Infraestructura Disponible:</p>
             <Form.Item name={['user', 'infrastructure']} rules={[{ required: true }]}>
             <Select
               placeholder="Select a option and change input text above"
@@ -479,13 +486,13 @@ const SpecificForm = (props) => {
           </Form.Item>
           </Grid>
             <Grid item xs={12} sm={12} md={6} lg={4}>
-            Inicio de Operaciones:
+            <p style={{color: "#666666", margin:"0" }}><span style={{color: "red"}}>*</span> Inicio de Operaciones:</p>
             <Form.Item name={['user', 'inicio_de_operaciones']} rules={[{ required: true }]}>
             <DatePicker />
           </Form.Item>
           </Grid>
             <Grid item xs={12} sm={12} md={6} lg={4}>
-            Número de empleados:
+            <p style={{color: "#666666", margin:"0" }}><span style={{color: "red"}}>*</span> Número de empleados:</p>
             <Form.Item name={['user', 'number_employe']} rules={[{ required: true }]}>
             <Input type={"number"} min="1"/>
           </Form.Item>
@@ -495,7 +502,7 @@ const SpecificForm = (props) => {
           <Grid item spacing={2} xs={12} container>
 
             <Grid item xs={12} sm={12} md={6} lg={4}>
-            Reconocimientos:
+            <p style={{color: "#666666", margin:"0" }}><span style={{color: "red"}}>*</span> Reconocimientos:</p>
             <Form.Item name={['user', 'practices_recognition']} rules={[{ required: true }]}>
             <Select
               placeholder="Select a option and change input text above"
@@ -513,13 +520,13 @@ const SpecificForm = (props) => {
           </Form.Item>
           </Grid>
             <Grid item xs={12} sm={12} md={6} lg={4}>
-            Superficie Total:
+            <p style={{color: "#666666", margin:"0" }}><span style={{color: "red"}}>*</span> Superficie Total:</p>
             <Form.Item name={['user', 'superficie_total']} rules={[{ required: true }]}>
             <Input type={"number"} min="0" />
           </Form.Item>
           </Grid>
             <Grid item xs={12} sm={12} md={6} lg={4}>
-            Superficie Ocupada:
+            <p style={{color: "#666666", margin:"0" }}><span style={{color: "red"}}>*</span> Superficie Ocupada:</p>
             <Form.Item name={['user', 'superficie']} rules={[{ required: true }]}>
             <Input type={"number"} min="0" />
           </Form.Item>
@@ -529,21 +536,21 @@ const SpecificForm = (props) => {
           <Grid item spacing={2} xs={12} container>
 
             <Grid item xs={12} sm={12} md={6} lg={4}>
-            Superficie Urbanizada:
+            <p style={{color: "#666666", margin:"0" }}><span style={{color: "red"}}>*</span> Superficie Urbanizada:</p>
             <Form.Item name={['user', 'superficie_urbanizada']} rules={[{ required: true }]}>
             <Input type={"number"} min="0" />
           </Form.Item>
           </Grid>
 
             <Grid item xs={12} sm={12} md={6} lg={4}>
-            Superficie Disponible:
+            <p style={{color: "#666666", margin:"0" }}><span style={{color: "red"}}>*</span> Superficie Disponible:</p>
             <Form.Item name={['user', 'superficie_disponible']} rules={[{ required: true }]}>
             <Input type={"number"} min="0" />
           </Form.Item>
           </Grid>
 
             <Grid item xs={12} sm={12} md={6} lg={4}>
-            Unidad De Medida:
+            <p style={{color: "#666666", margin:"0" }}><span style={{color: "red"}}>*</span> Unidad De Medida:</p>
             <Form.Item name={['user', 'unity']} rules={[{ required: true }]}>
             <Select
               placeholder="Selecciona la unidad de medida"
@@ -560,19 +567,20 @@ const SpecificForm = (props) => {
           <Grid item spacing={2} xs={12} container>
 
             <Grid item xs={12} sm={6}>
-
-            <Form.Item name={['user', 'lng']} label="Longitud">
+            <p style={{color: "#666666", margin:"0" }}><span style={{color: "red"}}>*</span> Longitud:</p>       
+            <Form.Item name={['user', 'lng']} >
             <Input type={"number"} onChange={(e)=>setCoordenadas(e, "lng")}/>
           </Form.Item>
           </Grid>
 
             <Grid item xs={12} sm={6}>
-            <Form.Item name={['user', 'lat']} label="Latitud">
+            <p style={{color: "#666666", margin:"0" }}><span style={{color: "red"}}>*</span> Latitud:</p>
+            <Form.Item name={['user', 'lat']}>
             <Input type={"number"} onChange={(e)=>setCoordenadas(e, "lat")}/>
           </Form.Item>
           </Grid>
           </Grid>
-
+          <div style={{display:'flex', justifyContent:'center', width:'100%'}}>          
           <Form.Item  value={latlng} style={{ display: 'flex', justifyContent: 'center', width: '100%', marginTop: '30px' }}>
             <BasicMap
               googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=AIzaSyCFdQ7O0MIewEqbyXhW0k9XemMqnYx0aDQ"
@@ -584,14 +592,14 @@ const SpecificForm = (props) => {
               clickeds={(e) => { events(e) }}
             />
           </Form.Item>
-      
-          <Form.Item style={{ display: 'flex', justifyContent: 'center', width: '100%', backgroundColor:'red'}} >
-
+          </div>
+          <div style={{display:'flex', justifyContent:'center', width:'100%'}}>
+          <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }} >
             <Button style={{ backgroundColor: "#00afb7", borderColor: "#00afb7", color: "#ffffff" }} type="primary" htmlType="submit">
               Enviar
             </Button>
           </Form.Item>
-     
+          </div>           
       </Grid>
    </>
     </Form>
