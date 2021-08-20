@@ -1,61 +1,72 @@
-import React, { useState } from "react";
-import ImageUploading from 'react-images-uploading';
+import React from 'react';
+import 'antd/dist/antd.css';
+import { Upload, Modal } from 'antd';
+import { PlusOutlined } from '@ant-design/icons';
 
-
-const Uploaded = () => {
-
-    const [images, setImages] = React.useState([]);
-    const maxNumber = 69;
-
-    const onChange = (imageList, addUpdateIndex) => {
-        // data for submit
-        console.log(imageList, addUpdateIndex);
-        setImages(imageList);
-    };
-
-
-    return (
-        <ImageUploading
-            multiple
-            value={images}
-            onChange={onChange}
-            maxNumber={maxNumber}
-            dataURLKey="data_url"
-        >
-            {({
-                imageList,
-                onImageUpload,
-                onImageRemoveAll,
-                onImageUpdate,
-                onImageRemove,
-                isDragging,
-                dragProps,
-            }) => (
-                // write your building UI
-                <div style={{margin:'15px 5px', textAlign:'center'}} className="upload__image-wrapper">
-                    <button
-                        style={{backgroundColor:'#333333', border:'solid 1px #333333', color:'#ffffff', padding:'5px 10px', margin:'5px 0', cursor:'pointer'}}
-                        //style={isDragging ? { color: 'red' } : undefined}
-                        onClick={onImageUpload}
-                        {...dragProps}
-                    >
-                        Selecciona imagen
-                    </button>
-                    &nbsp;
-                    <button style={{backgroundColor:'#ff4d4f', border:'solid 1px #ff4d4f', color:'#ffffff', padding:'5px 10px', cursor:'pointer'}}  onClick={onImageRemoveAll}>Quitar todas las imagenes</button>
-                    {imageList.map((image, index) => (
-                        <div key={index} className="image-item" style={{margin:'20px 5px', backgroundColor:'#f8f8f8', textAlign:'center', padding:'5px 5px'}}>
-                            <img src={image['data_url']} alt="" width="100" style={{padding:'5px 5px'}} />
-                            <div className="image-item__btn-wrapper">
-                                <button style={{backgroundColor:'#333333', border:'0', color:'#ffffff', margin:'10px 5px', padding:'5px 10px', cursor:'pointer'}} >Seleccionar</button>
-                                <button style={{backgroundColor:'#ff4d4f', border:'0', color:'#ffffff', margin:'10px 5px', padding:'5px 10px', cursor:'pointer'}} onClick={() => onImageRemove(index)}>Eliminar</button>
-                            </div>
-                        </div>
-                    ))}
-                </div>
-            )}
-        </ImageUploading>
-    )
+function getBase64(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = error => reject(error);
+  });
 }
 
-export default Uploaded
+class ImageUpload extends React.Component {
+  state = {
+    previewVisible: false,
+    previewImage: '',
+    previewTitle: '',
+    fileList: [],
+  };
+
+  handleCancel = () => this.setState({ previewVisible: false });
+
+  handlePreview = async file => {
+    if (!file.url && !file.preview) {
+      file.preview = await getBase64(file.originFileObj);
+    }
+
+    this.setState({
+      previewImage: file.url || file.preview,
+      previewVisible: true,
+      previewTitle: file.name || file.url.substring(file.url.lastIndexOf('/') + 1),
+    });
+  };
+
+  handleChange = ({ fileList }) => this.setState({ fileList });
+
+  render() {
+    const { previewVisible, previewImage, fileList, previewTitle } = this.state;
+    const uploadButton = (
+      <div>
+        <PlusOutlined />
+        <div style={{ marginTop: 8 }}>Upload</div>
+      </div>
+    );
+
+    return (
+      <>
+        <Upload
+          //action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+          listType="picture-card"
+          fileList={fileList}
+          onPreview={this.handlePreview}
+          onChange={this.handleChange}
+        >
+          {fileList.length >= 8 ? null : uploadButton}
+        </Upload>
+        <Modal
+          visible={previewVisible}
+          title={previewTitle}
+          footer={null}
+          onCancel={this.handleCancel}
+        >
+          <img alt="example" style={{ width: '100%' }} src={previewImage} />
+        </Modal>
+      </>
+    );
+  }
+}
+
+export default ImageUpload
