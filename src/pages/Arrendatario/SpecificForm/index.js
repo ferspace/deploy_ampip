@@ -35,11 +35,10 @@ const SpecificForm = (props) => {
       }).then((response) => {
         var naves = response.data.message.allProperties.naves;
         var terrenos = response.data.message.allProperties.terrenos;
-        var navy = response.data.message.allProperties.ter;
+        var navy = response.data.message.allProperties.nav;
         var ter = response.data.message.allProperties.ter;
-        var arrayProperty = [];
-        arrayProperty.push(naves, terrenos, navy, ter);
-        setCorporates(arrayProperty)
+        var all = ter.concat(navy, terrenos, naves);
+        setCorporates(all)
 
         // setCorporates(response.data)
         //setPost(response.data);
@@ -52,21 +51,21 @@ const SpecificForm = (props) => {
   const onFinish = (values) => {
 
     var data = JSON.stringify({
-      "tenant_user": {
-        "property": values.user.propertyId,
-        "name_bussines": values.user.name_busines,
-        "country": values.user.country,
-        "product_badge": values.user.product_badge,
-        "ID_SCIAN": values.user.ID_SCIAN,
-        "ID_DENUE": values.user.ID_DENUE,
-        "antiquity": values.user.antiquity,
-        "superficie": values.user.superficie,
-      }
+        "tenant_user": {
+            "property_id": values.user.propertyId,
+            "name_bussines": values.user.name_busines,
+            "country": values.user.country,
+            "product_badge": values.user.product_badge,
+            "ID_SCIAN": values.user.IDSCIAN,
+            "ID_DENUE": values.user.IDDENUE,
+            "antiquity": values.user.antiquity,
+            "superficie": values.user.siperficie
+        }
     });
 
     var config = {
       method: 'post',
-      url: 'https://ampip-back-44yib.ondigitalocean.app/api/v1/tenant_users',
+      url: `${store.URL_PRODUCTION}/tenant_users`,
       headers: {
         'Content-Type': 'application/json'
       },
@@ -77,32 +76,7 @@ const SpecificForm = (props) => {
       .then(function (response) {
 
         if (response.data.message != 0) {
-          var data = JSON.stringify({
-            "tenant_histories": {
-              "property_id": values.user.propertyId,
-              "tenant_user_id": response.data.message
-            }
-          });
-
-          var config = {
-            method: 'post',
-            url: 'https://ampip-back-44yib.ondigitalocean.app/api/v1/tenant_histories',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            data: data
-          };
-
-          axios(config)
-            .then(function (response) {
-              Swal.fire({ text: response.data.message })
-              props.functionFetch()
-
-            })
-            .catch(function (error) {
-              console.log(error);
-            });
-
+          alert("Hello")
         }
       })
       .catch(function (error) {
