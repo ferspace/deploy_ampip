@@ -28,10 +28,11 @@ import ModalInformation from '../../components/ModalInformation'
 import ModaEdit from '../../components/ModalEdit'
 import EditForm from './EditForm'
 import store from '../../store/index'
-const dataOpt = JSON.parse(localStorage.getItem("data"));
+
 const Desarrolladores = (props) => {
   const [anchorEl, setAnchorEl] = React.useState(null)
   const [datatableData, setDatatableData] = useState([]) //descomentar al integrar apis
+  const [dataToken, setDataToken] = useState(JSON.parse(localStorage.getItem("data")))
 
   const handleClick = (e) => {
     setAnchorEl(e.currentTarget)
@@ -47,35 +48,39 @@ const Desarrolladores = (props) => {
   var [activeTabId, setActiveTabId] = useState(0);
 
   useEffect(() => {    //aqui va la peticion al endpoint , se va aprocesar la informacion del tipo [[dato1,dato2]]
+    if(dataToken !== null){
+      var x = new URLSearchParams();
+      axios.get(`${store.URL_PRODUCTION}/corporates?type=0`,{
+        headers: {
+          'Authorization': dataToken.authentication_token,
+        }
+      }).then((response) => {
+        //setDatatableData(response.data);
+        if (response.data.error) {
+          console.log(response.data.error);
+        } else {
+          var corporatesAdd = [];
+          response.data.map((i) => {
+            var corporates = [];
+            corporates.push(i.id);
+            corporates.push(i.name)
+            corporates.push(i.english_name)
+            corporates.push(i.address)
+            corporatesAdd.push(corporates);
+          });
 
-    var x = new URLSearchParams();
-    axios.get(`${store.URL_PRODUCTION}/corporates?type=0`,{
-      headers: {
-        'Authorization': dataOpt.authentication_token,
-      }
-    }).then((response) => {
-      //setDatatableData(response.data);
-      if (response.data.error) {
-        console.log(response.data.error);
-      } else {
-        var corporatesAdd = [];
-        response.data.map((i) => {
-          var corporates = [];
-          corporates.push(i.id);
-          corporates.push(i.name)
-          corporates.push(i.english_name)
-          corporates.push(i.address)
-          corporatesAdd.push(corporates);
-        });
+          setDatatableData([...corporatesAdd]);
+        }
+      }).catch(error => {
+        console.log(error); // poner alerta cuando tengamos tiempo
+      });
+    }
+    
+  }, [dataToken]);
 
-        setDatatableData([...corporatesAdd]);
-      }
-    }).catch(error => {
-      console.log(error); // poner alerta cuando tengamos tiempo
-    });
-  }, []);
-
-
+  useEffect(()=>{
+    setDataToken(JSON.parse(localStorage.getItem("data")))
+  },[])
   return (
     <>
       <PageTitle style={{color:"red"}} title="Socios AMPIP" button={(
