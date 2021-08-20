@@ -27,8 +27,6 @@ import "font-awesome/css/font-awesome.min.css";
 import ModalInformation from '../../components/ModalInformation'
 import ModaEdit from '../../components/ModalEdit'
 import store from '../../store/index'
-const data = JSON.parse(localStorage.getItem("data"));
-
 
 const Naves = (props) => {
   const [anchorEl, setAnchorEl] = React.useState(null)
@@ -36,6 +34,7 @@ const Naves = (props) => {
   const [read, setRead] = useState(false);
   const [write, setWrite] = useState(false)
   const [permisos, setPermisos] = useState([])
+  const [dataToken, setDataToken] = useState(JSON.parse(localStorage.getItem("data")))
 
   const permissionsMap = () =>{
     permisos.map((item)=>{
@@ -49,37 +48,39 @@ const Naves = (props) => {
   }
 
   const seviceGet = () => {
-    axios.get(`${store.URL_PRODUCTION}/dashboard`,{
-      headers: {
-        'Authorization': data.authentication_token,
-      }
-    }).then((response) => {
-      //setDatatableData(response.data);
-      if (response.data.message == "Sin datos para mostrar") {
-        console.log(response.data)
-        setDatatableData([["s", "s", "s"]]);
-      } else {
-        var corporatesAdd = [];
-        response.data.message.allProperties.naves.map((i) => {
-          var corporates = [];
-          corporates.push(i.id);
-          corporates.push(i.name)
-          corporates.push(i.updated_at)
-          corporatesAdd.push(corporates);
-        });
-        var corpoatesPlus = []
-        response.data.message.allProperties.nav.map((i)=>{
-          var corporates = [];
-          corporates.push(i.id);
-          corporates.push(i.name)
-          corporates.push(i.updated_at)
-          corpoatesPlus.push(corporates);
-        });
-        setDatatableData([...corporatesAdd, ...corpoatesPlus]);
-      }
-    }).catch(error => {
-      console.log(error); // poner alerta cuando tengamos tiempo
-    });  
+    if(dataToken !== null)
+      {axios.get(`${store.URL_PRODUCTION}/dashboard`,{
+        headers: {
+          'Authorization': dataToken.authentication_token,
+        }
+      }).then((response) => {
+        //setDatatableData(response.data);
+        if (response.data.message == "Sin datos para mostrar") {
+          console.log(response.data)
+          setDatatableData([["s", "s", "s"]]);
+        } else {
+          var corporatesAdd = [];
+          response.data.message.allProperties.naves.map((i) => {
+            var corporates = [];
+            corporates.push(i.id);
+            corporates.push(i.name)
+            corporates.push(i.updated_at)
+            corporatesAdd.push(corporates);
+          });
+          var corpoatesPlus = []
+          response.data.message.allProperties.nav.map((i)=>{
+            var corporates = [];
+            corporates.push(i.id);
+            corporates.push(i.name)
+            corporates.push(i.updated_at)
+            corpoatesPlus.push(corporates);
+          });
+          setDatatableData([...corporatesAdd, ...corpoatesPlus]);
+        }
+      }).catch(error => {
+        console.log(error); // poner alerta cuando tengamos tiempo
+      });  
+    }
   }
 
   const handleClose = () => {
@@ -93,15 +94,16 @@ const Naves = (props) => {
     permissionsMap()
   }, [permisos]);
   // local
+
   var [activeTabId, setActiveTabId] = useState(0);
   useEffect(() => {    //aqui va la peticion al endpoint , se va aprocesar la informacion del tipo [[dato1,dato2]]
     seviceGet()
-  },[]);
+  },[dataToken]);
 
   useEffect(() => { 
     axios.get(`${store.URL_PRODUCTION}/dashboard`,{
       headers: {
-        'Authorization': data.authentication_token,
+        'Authorization': dataToken.authentication_token,
         'Content-Type': 'application/json'
       }
     }).then((response) => {
@@ -109,6 +111,8 @@ const Naves = (props) => {
     }).catch(error => {
       console.log(error); // poner alerta cuando tengamos tiempo
     }); 
+    setDataToken(JSON.parse(localStorage.getItem("data")))
+
   }, []);
 
   return (
