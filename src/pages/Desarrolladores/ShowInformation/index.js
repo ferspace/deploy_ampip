@@ -14,7 +14,6 @@ const ShowInformation = (props) =>{
         'Authorization': data.authentication_token,
       }
     }).then((response) => {
-      //setDatatableData(response.data);
       console.log(response, "show data")
       setInfo(response.data)
     }).catch(error => {
@@ -24,18 +23,27 @@ const ShowInformation = (props) =>{
 
   return(
 
-    <Descriptions title={info.nombre} layout="vertical" bordered>
-   {/*    <Descriptions.Item label="Product">""</Descriptions.Item>
-      <Descriptions.Item label="Billing Mode">""</Descriptions.Item>
-      <Descriptions.Item label="Automatic Renewal">""</Descriptions.Item>
-      <Descriptions.Item label="Order time">""</Descriptions.Item> */}
-      <Descriptions.Item label="ultima actualizacion" span={2}>
-        {info.created_at}
+    <Descriptions title={info.name} layout="vertical" bordered>
+    <Descriptions.Item label="Nombre en inglés">{info.english_name} </Descriptions.Item>
+      <Descriptions.Item label="Calle y número">{info.address} </Descriptions.Item>
+      <Descriptions.Item label="Código Postal">{info.postal_code_number} </Descriptions.Item>
+      <Descriptions.Item label="Colonia">{info.colony} </Descriptions.Item>
+      <Descriptions.Item label="Estado" span={2}>
+        {info.state}
       </Descriptions.Item>
-      {/* <Descriptions.Item label="Negotiated Amount">$80.00</Descriptions.Item>
-      <Descriptions.Item label="Discount">$20.00</Descriptions.Item>
-      <Descriptions.Item label="Official Receipts">$60.00</Descriptions.Item> */}
-      
+      <Descriptions.Item label="Municipio/Alcaldía">{info.municipality}</Descriptions.Item>
+      <Descriptions.Item label="Código de país">{info.cel_code}</Descriptions.Item>
+      <Descriptions.Item label="Lada">{info.cel_lada}</Descriptions.Item>
+      <Descriptions.Item label="Número Local">{info.cel}</Descriptions.Item>
+      <Descriptions.Item label="Inversión Anual Año en Curso">{info.anual_invetsment}</Descriptions.Item>
+      <Descriptions.Item label="Inversión Anual Programada">{info.next_anual_inv}</Descriptions.Item>
+      <Descriptions.Item label="Inversión Anual Año Anterior">{info.previus_anual_inv}</Descriptions.Item>
+      <Descriptions.Item label="Clasificación de Socio">{info.corporate_type}</Descriptions.Item>
+      <Descriptions.Item label="Twitter">{info.social_media_tw}</Descriptions.Item>
+      <Descriptions.Item label="Facebook">{info.social_media_fb}</Descriptions.Item>
+      <Descriptions.Item label="Instagram">{info.social_media_inst}</Descriptions.Item>
+      <Descriptions.Item label="LinkedIn">{info.social_media_link}</Descriptions.Item>
+      <Descriptions.Item label="Sitio Web">{info.social_media_web}</Descriptions.Item>
     </Descriptions>
   )
 }
