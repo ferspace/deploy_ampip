@@ -159,8 +159,7 @@ const Mailer = (e, mailType) => {
   return (
     <div style={{ padding: 20 }}> 
     <form {...layout} name="nest-messages" onSubmit={sendEmail}>
-    <Grid container spacing={30} xs={12}>
-    <Grid item spacing={2} xs={12} container >
+    <Grid container spacing={3} xs={12}>
       <Grid item xs={12} sm={6} md={6} lg={4} >
       <p style={{color: "#666666", margin:"0", padding:"5px 0" }}><span style={{color: "red"}}>*</span> Patrocinador/desarrollador:</p>
       <Form.Item >
@@ -195,9 +194,7 @@ const Mailer = (e, mailType) => {
       <input style={{boxSizing:"border-box", margin:"0", fontVariant:"tabular-nums", listStyle:"none", position:"relative", display:"inline-block",width:"100%", minWidth:"0", padding:"4px 11px", color:"#d9d9d9", fontSize:"14px",lineHeight:"1.5", backgroundColor:"#fff", backgroundImage:"none", border:"solid 1px #d9d9d9", borderRadius:"2px", transition:"all 0.3s" }} type="text" name="user_name" onChange={(e)=>{  setName(e.target.value) }}/>
       </Form.Item>
       </Grid>
-      </Grid>
 
-      <Grid item spacing={2} xs={12} container >
       <Grid item xs={12} sm={6} md={6} lg={4} >
       <p style={{color: "#666666", margin:"0", padding:"5px 0" }}><span style={{color: "red"}}>*</span> Apellido</p>
       <Form.Item >
@@ -216,7 +213,7 @@ const Mailer = (e, mailType) => {
       <input style={{boxSizing:"border-box", margin:"0", fontVariant:"tabular-nums", listStyle:"none", position:"relative", display:"inline-block",width:"100%", minWidth:"0", padding:"4px 11px", color:"#d9d9d9", fontSize:"14px",lineHeight:"1.5", backgroundColor:"#fff", backgroundImage:"none", border:"solid 1px #d9d9d9", borderRadius:"2px", transition:"all 0.3s" }} type="text" name="password_temporal" onChange={(e)=>{ setPassword(e.target.value) }}/>
       </Form.Item>
       </Grid>
-      </Grid>
+    
       </Grid> 
       <div style={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
       <input style={{ backgroundColor: "#00afb7", borderColor: "#00afb7", color: "#ffffff", border:"none", cursor:"pointer", padding:"5px 10px",  borderRadius:"2px" }}  type="submit" value="Enviar" />
