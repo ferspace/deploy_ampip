@@ -19,7 +19,7 @@ import PageTitle from "../../components/PageTitle/PageTitle";
 import SpecificForm from './SpecificForm'
 import axios from 'axios';
 import Tables from '../Tables'
-import ShowInformation from '../Socios/ShowInformation'
+import ShowInformation from './ShowInformation'
 
 
 // icons sets
