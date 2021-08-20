@@ -20,8 +20,7 @@ const Mailer = (e, mailType) => {
   { id: 2, name: "Usuario AMPIP", created_at: "2021-08-16T00:22:20.904Z", updated_at: "2021-08-16T00:22:20.904Z" },
   { id: 3, name: "Administrador Socio", created_at: "2021-08-16T00:22:50.693Z", updated_at: "2021-08-16T00:22:50.693Z" },
   { id: 4, name: "Usuario Socio", created_at: "2021-08-16T00:23:00.855Z", updated_at: "2021-08-16T00:23:00.855Z" },
-  { id: 5, name: "Administrador Propiedades", created_at: "2021-08-16T00:23:10.436Z", updated_at: "2021-08-16T00:23:10.436Z" },
-  { id: 6, name: "Patrocinador", created_at: "2021-08-16T00:23:22.168Z", updated_at: "2021-08-16T00:23:22.168Z" }
+  { id: 5, name: "Administrador Propiedades", created_at: "2021-08-16T00:23:10.436Z", updated_at: "2021-08-16T00:23:10.436Z" }
   ]);
  
   const [email, setEmail] = useState("");
@@ -69,7 +68,7 @@ const Mailer = (e, mailType) => {
         "email": email,
         "password": password,
         "password_confirmation": password,
-        "user_type": user_type - 1,
+        "user_type": parseInt(user_type) + 1,
       }
     });
 
@@ -103,7 +102,7 @@ const Mailer = (e, mailType) => {
             "municipality": "",
             "colony": "",
             "postal_code_number": "0000",
-            "user_rols_id": user_type,
+            "user_rols_id": parseInt(user_type) + 1,
             "user_type": "",
             "created_at": "",
             "updated_at": ""
