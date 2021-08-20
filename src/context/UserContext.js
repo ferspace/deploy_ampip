@@ -61,7 +61,9 @@ function loginUser(dispatch, login, password, history, setIsLoading, setError) {
       dispatch({ type: 'LOGIN_SUCCESS' })
 
       history.push('/app/dashboard')
+      window.location.reload()
     }, 2000);
+   
   } else {
     dispatch({ type: "LOGIN_FAILURE" });
     setError(true);

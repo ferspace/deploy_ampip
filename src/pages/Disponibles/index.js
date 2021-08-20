@@ -36,7 +36,6 @@ const Disponibles = () => {
   const [write, setWrite] = useState(false)
   const [dataToken, setDataToken] = useState(JSON.parse(localStorage.getItem("data")))
 
-
   const seviceGet = () => {
     if(dataToken !== null){
 

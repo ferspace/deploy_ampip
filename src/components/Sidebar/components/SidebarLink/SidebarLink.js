@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Collapse,
   Divider,
@@ -29,7 +29,6 @@ export default function SidebarLink({
   type,
 }) {
   var classes = useStyles();
-
   // local
   var [isOpen, setIsOpen] = useState(false);
   var isLinkActive =

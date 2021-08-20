@@ -50,6 +50,8 @@ export default function NotificationsPage(props) {
   const [read, setRead] = useState(false);
   const [write, setWrite] = useState(false)
   const [permisos, setPermisos] = useState([])
+  const [count, setCount] =useState(0)
+ 
 
   const permissionsMap = () =>{
     permisos.map((item)=>{

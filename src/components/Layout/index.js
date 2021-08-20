@@ -28,6 +28,7 @@ import Parques from "../../pages/Parques";
 import Arendatario from "../../pages/Arrendatario";
 // context
 import { useLayoutState } from "../../context/LayoutContext";
+const dataOpt = JSON.parse(localStorage.getItem("data"));
 
 function Layout(props) {
   var classes = useStyles();
@@ -49,6 +50,8 @@ function Layout(props) {
             <Switch>
               <Route path="/app/dashboard" component={Dashboard} />
               <Route path="/app/usuarios" component={Notifications} />
+              <Route path="/app/ui/Propiedades" component={Dashboard} />
+
               <Route
                 exact
                 path="/app/ui"
@@ -59,7 +62,7 @@ function Layout(props) {
               <Route path="/app/ui/naves" component={Naves} />
               <Route path="/app/ui/terrenos" component={Terrenos} />
               <Route path="/app/ui/socios" component={Socios} />
-              <Route path="/app/ui/desarrolladores" component={Desarrolladores} />
+              <Route path="/app/ui/desarrolladores" component={()=>(<Desarrolladores dataOpt={dataOpt}/>)} />
               <Route path="/app/ui/arrendatarios" component={Arendatario} />
             </Switch>
             <Box
