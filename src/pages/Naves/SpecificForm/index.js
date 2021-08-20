@@ -10,7 +10,7 @@ import {
 } from "react-google-maps";
 import store from '../../../store/index'
 import ImageUpload from '../../../components/ImageUpload'
-
+import {Grid} from '@material-ui/core';
 
 const { Option } = Select;
 
@@ -304,16 +304,17 @@ const SpecificForm = (props) => {
 
 
   return (
+  <div style={{ padding: 20 }}> 
     <Form {...layout} name="nest-messages" onFinish={onFinish} validateMessages={validateMessages} >
-      <div style={{ display: 'flex', justifyContent: 'center', width: '1200px' }}>
-        <div style={{ display: 'block', width: '50%' }}>
-
-          <div style={{ display: 'flex', justifyContent: 'center', width: '100%', padding: '20px' }}>
-            <ImageUpload />
-          </div>
+      <div style={{display:'flex', justifyContent:'center', width:'100%', marginBottom:'10px'}}>
+        <ImageUpload />
+      </div> 
+      <Grid container spacing={30} xs={12}>
+      <Grid item spacing={2} xs={12} container >
+          <Grid item xs={12} sm={6} md={6} lg={4} >
+          <p style={{color: "#666666", margin:"0" }}><span style={{color: "red"}}>*</span> Corporativos:</p>
           <Form.Item
             name={["user", "type"]}
-            label="Corporativos"
             rules={[
               {
                 required: isapark,
@@ -334,15 +335,17 @@ const SpecificForm = (props) => {
               })}
             </Select>
           </Form.Item>
-          <Form.Item name={"check"} label="Pertenece a un Parque" >
+          </Grid>
+          <Grid item xs={12} sm={6} md={6} lg={4} >
+          <p style={{color: "#666666", margin:"0" }}><span style={{color: "red"}}>*</span> Pertenece a un Parque:</p>
+          <Form.Item name={"check"}>
             <Switch onChange={onChange} label="Pertenece a un parque" style={{ paddingTop: "1em" }} ></Switch>
           </Form.Item>
-
-
-
+          </Grid>    
+          <Grid item xs={12} sm={6} md={6} lg={4} > 
+          <p style={{color: "#666666", margin:"0" }}><span style={{color: "red"}}>*</span> Parque:</p>   
           <Form.Item
             name={["user", "propertyId"]}
-            label="Parque"
             rules={[
               {
                 required: !isapark,
@@ -363,20 +366,39 @@ const SpecificForm = (props) => {
               })}
             </Select>
           </Form.Item>
+          </Grid>
+          </Grid>    
+          <Grid item spacing={2} xs={12} container > 
+          <Grid item xs={12} sm={6} md={6} lg={4} >
+          <p style={{color: "#666666", margin:"0" }}><span style={{color: "red"}}>*</span> Nombre en español:</p>  
+          <Form.Item name={['user', 'name']} rules={[{ required: true }]}>
+            <Input />
+          </Form.Item>
+          </Grid>
+          <Grid item xs={12} sm={6} md={6} lg={4} >
+          <p style={{color: "#666666", margin:"0" }}><span style={{color: "red"}}>*</span> Nombre en inglés:</p>    
+          <Form.Item name={['user', 'name_en']} rules={[{ required: true }]}>
+            <Input />
+          </Form.Item>
+          </Grid>
+          <Grid item xs={12} sm={6} md={6} lg={4} >
+          <p style={{color: "#666666", margin:"0" }}><span style={{color: "red"}}>*</span> Calle y Número:</p>    
+          <Form.Item name={['user', 'addres']} rules={[{ required: true }]}>
+            <Input />
+          </Form.Item>
+          </Grid>
+          </Grid>    
 
-          <Form.Item name={['user', 'name']} label="Nombre en español" rules={[{ required: true }]}>
-            <Input />
-          </Form.Item>
-          <Form.Item name={['user', 'name_en']} label="Nombre en inglés" rules={[{ required: true }]}>
-            <Input />
-          </Form.Item>
-          <Form.Item name={['user', 'addres']} label="Calle y Número" rules={[{ required: true }]}>
-            <Input />
-          </Form.Item>
-          <Form.Item name={['user', 'postal_code_number']} label="Código Postal" rules={[{ required: true }]}>
+          <Grid item spacing={2} xs={12} container >
+          <Grid item xs={12} sm={6} md={6} lg={4} > 
+          <p style={{color: "#666666", margin:"0" }}><span style={{color: "red"}}>*</span> Código Postal:</p>   
+          <Form.Item name={['user', 'postal_code_number']}  rules={[{ required: true }]}>
             <Input style={{ width: "100px" }} onChange={(e) => getAddessFunction(e)} />
           </Form.Item>
-          <Form.Item label="Colonia" rules={[{ required: true }]}>
+          </Grid>
+          <Grid item xs={12} sm={6} md={6} lg={4} >
+          <p style={{color: "#666666", margin:"0" }}><span style={{color: "red"}}>*</span> Colonia:</p>
+          <Form.Item rules={[{ required: true }]}>
             <select
               placeholder="Selecione"
               allowClear
@@ -391,7 +413,10 @@ const SpecificForm = (props) => {
               })}
             </select>
           </Form.Item>
-          <Form.Item label="Estado" rules={[{ required: true }]}>
+          </Grid>
+          <Grid item xs={12} sm={6} md={6} lg={4} >
+          <p style={{color: "#666666", margin:"0" }}><span style={{color: "red"}}>*</span> Estado:</p>
+          <Form.Item rules={[{ required: true }]}>
             <select
               placeholder="Selecione"
               allowClear
@@ -407,7 +432,12 @@ const SpecificForm = (props) => {
               })}
             </select>
           </Form.Item>
-          <Form.Item label="Municipio" rules={[{ required: true }]}>
+          </Grid>
+          </Grid>    
+          <Grid item spacing={2} xs={12} container > 
+          <Grid item xs={12} sm={6} md={6} lg={4} >
+          <p style={{color: "#666666", margin:"0" }}><span style={{color: "red"}}>*</span> Municipio:</p>   
+          <Form.Item rules={[{ required: true }]}>
             <select
               placeholder="Selecione"
               allowClear
@@ -423,7 +453,10 @@ const SpecificForm = (props) => {
               })}
             </select>
           </Form.Item>
-          <Form.Item name={['user', 'region']} label="Región" rules={[{ required: isapark, },]}>
+          </Grid>
+          <Grid item xs={12} sm={6} md={6} lg={4} >
+          <p style={{color: "#666666", margin:"0" }}><span style={{color: "red"}}>*</span> Región:</p>    
+          <Form.Item name={['user', 'region']} rules={[{ required: isapark, },]}>
             <Select
               placeholder="Selecciona la unidad de medida"
               allowClear
@@ -435,7 +468,10 @@ const SpecificForm = (props) => {
               <Option value="Sur"></Option>
             </Select>
           </Form.Item>
-          <Form.Item name={['user', 'park_property']} label="Propietario/Administrador" rules={[{ required: true, },]} >
+          </Grid>
+          <Grid item xs={12} sm={6} md={6} lg={4} >
+          <p style={{color: "#666666", margin:"0" }}><span style={{color: "red"}}>*</span> Propietario/Administrador:</p>    
+          <Form.Item name={['user', 'park_property']} rules={[{ required: true, },]} >
             <Select
               placeholder="Selecciona la unidad de medida"
               allowClear
@@ -444,10 +480,19 @@ const SpecificForm = (props) => {
               <Option value="Administrador">Administrador</Option>
             </Select>
           </Form.Item>
-          <Form.Item name={['user', 'market']} label="Mercado" rules={[{ required: isapark, },]} >
+          </Grid>
+          </Grid>    
+
+          <Grid item spacing={2} xs={12} container > 
+          <Grid item xs={12} sm={6} md={6} lg={4} > 
+          <p style={{color: "#666666", margin:"0" }}><span style={{color: "red"}}>*</span> Mercado:</p>  
+          <Form.Item name={['user', 'market']} rules={[{ required: isapark, },]} >
             <Input disabled={!isapark} />
           </Form.Item>
-          <Form.Item name={['user', 'cel_code']} label="Código de país" rules={[{ required: isapark, },]} >
+          </Grid>
+          <Grid item xs={12} sm={6} md={6} lg={4} >
+          <p style={{color: "#666666", margin:"0" }}><span style={{color: "red"}}>*</span> Código de país:</p>    
+          <Form.Item name={['user', 'cel_code']} rules={[{ required: isapark, },]} >
             <Select
               placeholder="Select"
               allowClear
@@ -458,16 +503,24 @@ const SpecificForm = (props) => {
               <Option value="1">1</Option>
             </Select>
           </Form.Item>
-          <Form.Item name={['user', 'cel_lada']} label="Lada" rules={[{ required: isapark, },]} >
+          </Grid>
+          <Grid item xs={12} sm={6} md={6} lg={4} > 
+          <p style={{color: "#666666", margin:"0" }}><span style={{color: "red"}}>*</span> Lada:</p>   
+          <Form.Item name={['user', 'cel_lada']} rules={[{ required: isapark, },]} >
             <Input type={"number"} style={{ width: "100px" }} maxLength={3} disabled={!isapark} />
           </Form.Item>
-          <Form.Item name={['user', 'cel']} label="Número Local" rules={[{ required: isapark, },]} >
+          </Grid>
+          </Grid>    
+          <Grid item spacing={2} xs={12} container > 
+          <Grid item xs={12} sm={6} md={6} lg={4} > 
+          <p style={{color: "#666666", margin:"0" }}><span style={{color: "red"}}>*</span> Número Local:</p>   
+          <Form.Item name={['user', 'cel']} rules={[{ required: isapark, },]} >
             <Input type={"number"} maxLength={8} disabled={!isapark} />
           </Form.Item>
-
-        </div>
-        <div style={{ display: 'block', width: '50%' }}>
-          <Form.Item name={['user', 'industry']} label="Industria" rules={[{ required: isapark, },]}>
+          </Grid>
+          <Grid item xs={12} sm={6} md={6} lg={4} >
+          <p style={{color: "#666666", margin:"0" }}><span style={{color: "red"}}>*</span> Industria:</p>    
+          <Form.Item name={['user', 'industry']} rules={[{ required: isapark, },]}>
             <Select
               placeholder="Selecciona la unidad de medida"
               allowClear
@@ -478,7 +531,10 @@ const SpecificForm = (props) => {
               <Option value="Mixta">Mixta</Option>
             </Select>
           </Form.Item>
-          <Form.Item name={['user', 'infrastructure']} label="Infraestructura Disponible" rules={[{ required: isapark, },]}>
+          </Grid>
+          <Grid item xs={12} sm={6} md={6} lg={4} >
+          <p style={{color: "#666666", margin:"0" }}><span style={{color: "red"}}>*</span> Infraestructura Disponible:</p>    
+          <Form.Item name={['user', 'infrastructure']} rules={[{ required: isapark, },]}>
             <Select
               placeholder="Select a option and change input text above"
               allowClear
@@ -517,16 +573,27 @@ const SpecificForm = (props) => {
               <Option value="Otros">Otros</Option>
             </Select>
           </Form.Item>
-          <Form.Item name={['user', 'inicio_de_operaciones']} label="Inicio de Operaciones" rules={[{ required: isapark, },]}>
+          </Grid>
+          </Grid>    
+          <Grid item spacing={2} xs={12} container > 
+          <Grid item xs={12} sm={6} md={6} lg={4} >
+          <p style={{color: "#666666", margin:"0" }}><span style={{color: "red"}}>*</span> Inicio de Operaciones:</p>  
+          <Form.Item name={['user', 'inicio_de_operaciones']} rules={[{ required: isapark, },]}>
             <DatePicker disabled={!isapark} />
           </Form.Item>
-          <Form.Item name={['user', 'number_employe']} label="Número de empleados" rules={[{ required: isapark, },]}>
+          </Grid>
+          <Grid item xs={12} sm={6} md={6} lg={4} >
+          <p style={{color: "#666666", margin:"0" }}><span style={{color: "red"}}>*</span> Número de empleados:</p>    
+          <Form.Item name={['user', 'number_employe']} rules={[{ required: isapark, },]}>
             <Input type={"number"} min="1" maxLength={8} disabled={!isapark} />
           </Form.Item>
+          </Grid>
           {/* <Form.Item name={['user', 'message']} label="Mensaje" rules={[{ required: true }]}>
         <Input />
       </Form.Item> */}
-          <Form.Item name={['user', 'practices_recognition']} label="Reconocimientos" rules={[{ required: isapark, },]}>
+          <Grid item xs={12} sm={6} md={6} lg={4} >
+          <p style={{color: "#666666", margin:"0" }}><span style={{color: "red"}}>*</span> Reconocimientos:</p>
+          <Form.Item name={['user', 'practices_recognition']} rules={[{ required: isapark, },]}>
             <Select
               placeholder="Select a option and change input text above"
               allowClear
@@ -542,17 +609,33 @@ const SpecificForm = (props) => {
               <Option value="OEA">OEA</Option>
             </Select>
           </Form.Item>
-          
-          <Form.Item name={['user', 'superficie']} label="Superficie Ocupada" rules={[{ required: true, },]}>
+          </Grid>
+          </Grid>
+
+          <Grid item spacing={2} xs={12} container >
+          <Grid item xs={12} sm={6} md={6} lg={4} >
+          <p style={{color: "#666666", margin:"0" }}><span style={{color: "red"}}>*</span> Superficie Ocupada:</p> 
+          <Form.Item name={['user', 'superficie']} rules={[{ required: true, },]}>
             <Input type={"number"} min="1"  />
           </Form.Item>
-          <Form.Item name={['user', 'superficie_urbanizada']} label="Superficie Urbanizada" rules={[{ required: true, },]}>
+          </Grid>
+          <Grid item xs={12} sm={6} md={6} lg={4} >
+          <p style={{color: "#666666", margin:"0" }}><span style={{color: "red"}}>*</span> Superficie Urbanizada:</p>
+          <Form.Item name={['user', 'superficie_urbanizada']}  rules={[{ required: true, },]}>
             <Input type={"number"} min="1"  />
           </Form.Item>
-          <Form.Item name={['user', 'superficie_disponible']} label="Superficie Disponible" rules={[{ required: true, },]}>
+          </Grid>
+          <Grid item xs={12} sm={6} md={6} lg={4} >
+          <p style={{color: "#666666", margin:"0" }}><span style={{color: "red"}}>*</span> Superficie Disponible:</p>
+          <Form.Item name={['user', 'superficie_disponible']}  rules={[{ required: true, },]}>
             <Input type={"number"} min="1"  />
           </Form.Item>
-          <Form.Item name={['user', 'unity']} label="Unidad De Medida" rules={[{ required: true, },]}>
+          </Grid>
+          </Grid>
+          <Grid item spacing={2} xs={12} container >
+          <Grid item xs={12} sm={6} md={6} lg={4} >
+          <p style={{color: "#666666", margin:"0" }}><span style={{color: "red"}}>*</span> Unidad De Medida:</p>
+          <Form.Item name={['user', 'unity']} rules={[{ required: true, },]}>
             <Select
               placeholder="Selecciona la unidad de medida"
               allowClear
@@ -563,12 +646,22 @@ const SpecificForm = (props) => {
               <Option value="Ft2">ft²</Option>
             </Select>
           </Form.Item>
-          <Form.Item name={['user', 'lng']} label="Longitud" rules={[{ required: isapark, },]}>
+          </Grid>
+          <Grid item xs={12} sm={6} md={6} lg={4} >
+          <p style={{color: "#666666", margin:"0" }}><span style={{color: "red"}}>*</span> Longitud:</p>
+          <Form.Item name={['user', 'lng']}  rules={[{ required: isapark, },]}>
             <Input type={"number"} onChange={(e) => setCoordenadas(e, "lng")} disabled={!isapark} />
           </Form.Item>
-          <Form.Item name={['user', 'lat']} label="Latitud" rules={[{ required: isapark, },]}>
+          </Grid>
+          <Grid item xs={12} sm={6} md={6} lg={4} >
+          <p style={{color: "#666666", margin:"0" }}><span style={{color: "red"}}>*</span> Latitud:</p>
+          <Form.Item name={['user', 'lat']} rules={[{ required: isapark, },]}>
             <Input type={"number"} onChange={(e) => setCoordenadas(e, "lat")} disabled={!isapark} />
           </Form.Item>
+          </Grid>
+          </Grid>
+    </Grid>
+          <div style={{display:'flex', justifyContent:'center', width:'100%'}}> 
           <Form.Item value={latlng} style={{ display: 'flex', justifyContent: 'center', width: '100%', marginTop: '30px' }}>
             <BasicMap
               googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=AIzaSyCFdQ7O0MIewEqbyXhW0k9XemMqnYx0aDQ"
@@ -581,9 +674,8 @@ const SpecificForm = (props) => {
               disabled={!isapark}
             />
           </Form.Item>
-        </div>
-      </div>
-
+          </div>
+       
       <div style={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
         <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
           <Button style={{ backgroundColor: "#00afb7", borderColor: "#00afb7", color: "#ffffff" }} type="primary" htmlType="submit">
@@ -592,6 +684,7 @@ const SpecificForm = (props) => {
         </Form.Item>
       </div>
     </Form>
+  </div>   
   )
 }
 export default SpecificForm;

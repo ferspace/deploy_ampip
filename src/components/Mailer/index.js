@@ -4,6 +4,7 @@ import { Switch, Select,Form, Input, Button } from 'antd';
 import axios from "axios";
 import Swal from "sweetalert2";
 import store from '../../store/index'
+import {Grid} from '@material-ui/core';
 
 const layout = {
   labelCol: { span: 8 },
@@ -157,10 +158,14 @@ const Mailer = (e, mailType) => {
   }
 
   return (
+    <div style={{ padding: 20 }}> 
     <form {...layout} name="nest-messages" onSubmit={sendEmail}>
-      <div style={{width:'100%', marginBottom:'50px', marginTop:'50px'}}>
+    <Grid container spacing={30} xs={12}>
+    <Grid item spacing={2} xs={12} container >
+      <Grid item xs={12} sm={6} md={6} lg={4} >
+      <p style={{color: "#666666", margin:"0", padding:"5px 0" }}><span style={{color: "red"}}>*</span> Patrocinador/desarrollador:</p>
       <Form.Item >
-      <Select placeholder="Patrocinador/desarrollador" onChange={(e)=>{ setCorporate_id(e) }}>
+      <Select placeholder="" onChange={(e)=>{ setCorporate_id(e) }}>
         {corporates.map((value, i) => {
           return (
             <Option key={i} value={value.id}>
@@ -170,8 +175,11 @@ const Mailer = (e, mailType) => {
         })}
       </Select>
       </Form.Item>
+      </Grid>  
+      <Grid item xs={12} sm={6} md={6} lg={4} >
+      <p style={{color: "#666666", margin:"0", padding:"5px 0" }}><span style={{color: "red"}}>*</span> Rol de usuario:</p>
       <Form.Item >
-      <Select placeholder="Rol de usuario " onChange={(e)=>{ setUser_type(e) }}>
+      <Select placeholder="" onChange={(e)=>{ setUser_type(e) }}>
         {permissions.map((value, i) => {
           return (
             <Option key={i} value={i.id}>
@@ -181,22 +189,41 @@ const Mailer = (e, mailType) => {
         })}
       </Select>
       </Form.Item>
+      </Grid>  
+      <Grid item xs={12} sm={6} md={6} lg={4} >
+      <p style={{color: "#666666", margin:"0", padding:"5px 0" }}><span style={{color: "red"}}>*</span> Nombre:</p>
       <Form.Item >
-      <input style={{boxSizing:"border-box", margin:"0", fontVariant:"tabular-nums", listStyle:"none", position:"relative", display:"inline-block",width:"100%", minWidth:"0", padding:"4px 11px", color:"#d9d9d9", fontSize:"14px",lineHeight:"1.5", backgroundColor:"#fff", backgroundImage:"none", border:"solid 1px #d9d9d9", borderRadius:"2px", transition:"all 0.3s" }} type="text" name="user_name" placeholder="Nombre" onChange={(e)=>{  setName(e.target.value) }}/>
+      <input style={{boxSizing:"border-box", margin:"0", fontVariant:"tabular-nums", listStyle:"none", position:"relative", display:"inline-block",width:"100%", minWidth:"0", padding:"4px 11px", color:"#d9d9d9", fontSize:"14px",lineHeight:"1.5", backgroundColor:"#fff", backgroundImage:"none", border:"solid 1px #d9d9d9", borderRadius:"2px", transition:"all 0.3s" }} type="text" name="user_name" onChange={(e)=>{  setName(e.target.value) }}/>
       </Form.Item>
+      </Grid>
+      </Grid>
+
+      <Grid item spacing={2} xs={12} container >
+      <Grid item xs={12} sm={6} md={6} lg={4} >
+      <p style={{color: "#666666", margin:"0", padding:"5px 0" }}><span style={{color: "red"}}>*</span> Apellido</p>
       <Form.Item >
-      <input style={{boxSizing:"border-box", margin:"0", fontVariant:"tabular-nums", listStyle:"none", position:"relative", display:"inline-block",width:"100%", minWidth:"0", padding:"4px 11px", color:"#d9d9d9", fontSize:"14px",lineHeight:"1.5", backgroundColor:"#fff", backgroundImage:"none", border:"solid 1px #d9d9d9", borderRadius:"2px", transition:"all 0.3s" }} type="text" name="last_name" placeholder="Apellido" onChange={(e)=>{ setLastName(e.target.value) }}/>
+      <input style={{boxSizing:"border-box", margin:"0", fontVariant:"tabular-nums", listStyle:"none", position:"relative", display:"inline-block",width:"100%", minWidth:"0", padding:"4px 11px", color:"#d9d9d9", fontSize:"14px",lineHeight:"1.5", backgroundColor:"#fff", backgroundImage:"none", border:"solid 1px #d9d9d9", borderRadius:"2px", transition:"all 0.3s" }} type="text" name="last_name"  onChange={(e)=>{ setLastName(e.target.value) }}/>
       </Form.Item>
+      </Grid>
+      <Grid item xs={12} sm={6} md={6} lg={4} >
+      <p style={{color: "#666666", margin:"0", padding:"5px 0" }}><span style={{color: "red"}}>*</span> Correo</p>
       <Form.Item >
-      <input style={{boxSizing:"border-box", margin:"0", fontVariant:"tabular-nums", listStyle:"none", position:"relative", display:"inline-block",width:"100%", minWidth:"0", padding:"4px 11px", color:"#d9d9d9", fontSize:"14px",lineHeight:"1.5", backgroundColor:"#fff", backgroundImage:"none", border:"solid 1px #d9d9d9", borderRadius:"2px", transition:"all 0.3s" }} type="text" name="email" placeholder="Correo" onChange={(e)=>{ setEmail(e.target.value) }}/>
+      <input style={{boxSizing:"border-box", margin:"0", fontVariant:"tabular-nums", listStyle:"none", position:"relative", display:"inline-block",width:"100%", minWidth:"0", padding:"4px 11px", color:"#d9d9d9", fontSize:"14px",lineHeight:"1.5", backgroundColor:"#fff", backgroundImage:"none", border:"solid 1px #d9d9d9", borderRadius:"2px", transition:"all 0.3s" }} type="text" name="email"  onChange={(e)=>{ setEmail(e.target.value) }}/>
       </Form.Item>
+      </Grid>
+      <Grid item xs={12} sm={6} md={6} lg={4} >
       <Form.Item >
-      <input style={{boxSizing:"border-box", margin:"0", fontVariant:"tabular-nums", listStyle:"none", position:"relative", display:"inline-block",width:"100%", minWidth:"0", padding:"4px 11px", color:"#d9d9d9", fontSize:"14px",lineHeight:"1.5", backgroundColor:"#fff", backgroundImage:"none", border:"solid 1px #d9d9d9", borderRadius:"2px", transition:"all 0.3s" }} type="text" name="password_temporal" placeholder="Contraseña" onChange={(e)=>{ setPassword(e.target.value) }}/>
+      <p style={{color: "#666666", margin:"0", padding:"5px 0" }}><span style={{color: "red"}}>*</span> Contraseña</p>
+      <input style={{boxSizing:"border-box", margin:"0", fontVariant:"tabular-nums", listStyle:"none", position:"relative", display:"inline-block",width:"100%", minWidth:"0", padding:"4px 11px", color:"#d9d9d9", fontSize:"14px",lineHeight:"1.5", backgroundColor:"#fff", backgroundImage:"none", border:"solid 1px #d9d9d9", borderRadius:"2px", transition:"all 0.3s" }} type="text" name="password_temporal" onChange={(e)=>{ setPassword(e.target.value) }}/>
       </Form.Item>
+      </Grid>
+      </Grid>
+      </Grid> 
+      <div style={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
       <input style={{ backgroundColor: "#00afb7", borderColor: "#00afb7", color: "#ffffff", border:"none", cursor:"pointer", padding:"5px 10px",  borderRadius:"2px" }}  type="submit" value="Enviar" />
       </div>
     </form>
-    
+    </div>
   );
 }
 export default Mailer

@@ -263,11 +263,13 @@ const SpecificForm = (props) => {
 
   return (
     <div style={{ padding: 20 }}>
-
+      
     <Form {...layout} name="nest-messages" onFinish={onFinish} validateMessages={validateMessages} style={{ height: "1350px" }} >
       <>
+      <div style={{display:'flex', justifyContent:'center', width:'100%', marginBottom:'10px'}}>
         <ImageUpload />
-        <Grid container spacing={30}>
+        </div>  
+        <Grid container spacing={30} xs={12}>
           <Grid item spacing={2} xs={12} container >
   
             <Grid item xs={12} sm={6} md={6} lg={4} >
@@ -580,19 +582,20 @@ const SpecificForm = (props) => {
           <Grid item spacing={2} xs={12} container>
 
             <Grid item xs={12} sm={6}>
-
-            <Form.Item name={['user', 'lng']} label="Longitud">
+            <p style={{color: "#666666", margin:"0" }}><span style={{color: "red"}}>*</span> Longitud:</p>       
+            <Form.Item name={['user', 'lng']} >
             <Input type={"number"} onChange={(e)=>setCoordenadas(e, "lng")}/>
           </Form.Item>
           </Grid>
 
             <Grid item xs={12} sm={6}>
-            <Form.Item name={['user', 'lat']} label="Latitud">
+            <p style={{color: "#666666", margin:"0" }}><span style={{color: "red"}}>*</span> Latitud:</p>
+            <Form.Item name={['user', 'lat']}>
             <Input type={"number"} onChange={(e)=>setCoordenadas(e, "lat")}/>
           </Form.Item>
           </Grid>
           </Grid>
-
+          <div style={{display:'flex', justifyContent:'center', width:'100%'}}>          
           <Form.Item  value={latlng} style={{ display: 'flex', justifyContent: 'center', width: '100%', marginTop: '30px' }}>
             <BasicMap
               googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=AIzaSyCFdQ7O0MIewEqbyXhW0k9XemMqnYx0aDQ"
@@ -604,14 +607,14 @@ const SpecificForm = (props) => {
               clickeds={(e) => { events(e) }}
             />
           </Form.Item>
-      
-          <Form.Item style={{ display: 'flex', justifyContent: 'center', width: '100%', backgroundColor:'red'}} >
-
+          </div>
+          <div style={{display:'flex', justifyContent:'center', width:'100%'}}>
+          <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }} >
             <Button style={{ backgroundColor: "#00afb7", borderColor: "#00afb7", color: "#ffffff" }} type="primary" htmlType="submit">
               Enviar
             </Button>
           </Form.Item>
-     
+          </div>           
       </Grid>
    </>
     </Form>
