@@ -8,6 +8,7 @@ const data = JSON.parse(localStorage.getItem("data"));
 
 const ShowInformation = (props) =>{
   const [info, setInfo]= useState({})
+
   useEffect(()=>{
     axios.get(`${store.URL_PRODUCTION}/corporates/${props.id}`, {
       headers: {
