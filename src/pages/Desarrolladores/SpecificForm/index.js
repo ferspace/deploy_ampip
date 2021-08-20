@@ -144,193 +144,99 @@ const SpecificForm = (props)=>{
       <div style={{display:'flex', justifyContent:'center', width:'100%', marginBottom:'10px'}}>
         <ImageUpload/>
       </div>
-    <Grid container spacing={30} xs={12}>
-      <Grid item spacing={2} xs={12} container>
-          <Grid item xs={12} sm={6} md={6} lg={4}>
-          <p style={{color: "#666666", margin:"0" }}><span style={{color: "red"}}>*</span> Nombre en español:</p>
-          <Form.Item name={['user', 'name']} rules={[{ required: true }]}>
-            <Input />
-          </Form.Item>
-          </Grid>
-          <Grid item xs={12} sm={6} md={6} lg={4}>
-          <p style={{color: "#666666", margin:"0" }}><span style={{color: "red"}}>*</span> Nombre en inglés:</p>
-          <Form.Item name={['user', 'name_en']} rules={[{ required: true }]}>
-            <Input />
-          </Form.Item>
-          </Grid>
-          {/* <Form.Item name={['user', 'RFC']} label="RFC" rules={[{ required: true }]}>
-            <Input />
-          </Form.Item> */}
-          <Grid item xs={12} sm={6} md={6} lg={4}>
-          <p style={{color: "#666666", margin:"0" }}><span style={{color: "red"}}>*</span> Calle y número:</p>
-          <Form.Item name={['user', 'address']} rules={[{ required: true }]}> 
-            <Input />
-          </Form.Item>
-          </Grid>
-      </Grid> 
-      <Grid item spacing={2} xs={12} container>
-            <Grid item xs={12} sm={6} md={6} lg={4}>
-            <p style={{color: "#666666", margin:"0" }}><span style={{color: "red"}}>*</span> Código Postal:</p>
-            <Form.Item name={['user', 'postal_code_number']} rules={[{ required: true }]}>
-             <Input style={{width:"100px"}} onChange={(e)=>getAddessFunction(e)}/>
-            </Form.Item>
-            </Grid>
-            <Grid item xs={12} sm={6} md={6} lg={4}>
-            <p style={{color: "#666666", margin:"0" }}><span style={{color: "red"}}>*</span> Colonia:</p>
-            <Form.Item name={['user', 'colony']} rules={[{ required: true }]}>
-             <select
+      
+      <Form.Item name={['user', 'name']} label="Nombre en español" rules={[{ required: true }]}>
+        <Input />
+      </Form.Item>
+      <Form.Item name={['user', 'name_en']} label="Nombre en inglés" rules={[{ required: true }]}>
+        <Input />
+      </Form.Item>
+      {/* <Form.Item name={['user', 'RFC']} label="RFC" rules={[{ required: true }]}>
+        <Input />
+      </Form.Item> */}
+      <Form.Item name={['user', 'address']} label="Calle y número" rules={[{ required: true }]}> 
+        <Input />
+      </Form.Item>
+      <Form.Item name={['user', 'postal_code_number']} label="Código Postal" rules={[{ required: true }]}>
+        <Input type={"number"} style={{width:"100px"}} onChange={(e)=>getAddessFunction(e)}/>
+      </Form.Item>
+      <Form.Item label="Colonia" rules={[{ required: true }]}>
+        <Select
             placeholder="Selecione"
             allowClear
             name={['user', 'colony']}
               >
             {getAddress.map((value, i) => {
               return (
-                <option key={i} value={value.d_asenta}>
+                <Option key={i} value={value.d_asenta}>
                   {value.d_asenta}
-                </option>
+                </Option>
               );
             })}
-              </select>
-            </Form.Item>
-            </Grid>
-            <Grid item xs={12} sm={6} md={6} lg={4}>
-            <p style={{color: "#666666", margin:"0" }}><span style={{color: "red"}}>*</span> Estado:</p>
-            <Form.Item rules={[{ required: true }]}>
-              <select
-            placeholder="Selecione"
+        </Select>
+      </Form.Item>
+      <Form.Item label="Estado" rules={[{ required: true }]}>
+        {getAddress.length>0&&(<Input name={['user', 'state']} disabled="true" value={getAddress[0].d_estado}></Input>)}
+        {getAddress.length==0&&(<Input disabled="true" defaultValue={'Sin datos'}></Input>)}
+      </Form.Item>
+      <Form.Item label="Municipio/Alcaldía" rules={[{ required: true }]}>
+        {getAddress.length>0&&(<Input name={['user', 'municipality']} disabled="true" value={getAddress[0].d_mnpio}></Input>)}
+        {getAddress.length==0&&(<Input disabled="true" defaultValue={'Sin datos'}></Input>)}
+      </Form.Item>
+ 
+      <Form.Item name={['user', 'cel_code']} label="Código de país" rules={[{ required: true }]}>
+          <Select
+            placeholder="Select"
             allowClear
-            name={['user', 'state']}
-            disabled="true"
-              >
-            {getAddress.map((value, i) => {
-              return (
-                <option key={i} value={value.d_estado}>
-                  {value.d_estado}
-                </option>
-              );
-            })}
-              </select>
-            </Form.Item>
-            </Grid>
-      </Grid>      
-      <Grid item spacing={2} xs={12} container> 
-            <Grid item xs={12} sm={6} md={6} lg={4}>
-            <p style={{color: "#666666", margin:"0" }}><span style={{color: "red"}}>*</span> Municipio/Alcaldía:</p>
-            <Form.Item  rules={[{ required: true }]}>
-             <select
-                    placeholder="Selecione"
-                    allowClear
-                    name={['user', 'municipality']}
-                    disabled="true"
-                  >
-                    {getAddress.map((value, i) => {
-                     return (
-                       <option key={i} value={value.d_mnpio}>
-                         {value.d_mnpio}
-                       </option>
-                     );
-                    })}
-              </select>
-            </Form.Item>
-            </Grid>
-            <Grid item xs={12} sm={6} md={6} lg={4}>
-            <p style={{color: "#666666", margin:"0" }}><span style={{color: "red"}}>*</span> Código de país:</p>       
-            <Form.Item name={['user', 'cel_code']} rules={[{ required: true }]}>
-                <Select
-                  placeholder="Select"
-                 allowClear
-                 style={{width:"100px"}}
-                >
-                 <Option value="52">52</Option>
-                 <Option value="1">1</Option>
-                </Select>
-            </Form.Item>
-            </Grid>
-            <Grid item xs={12} sm={6} md={6} lg={4}>
-            <p style={{color: "#666666", margin:"0" }}><span style={{color: "red"}}>*</span> Lada:</p>
-            <Form.Item name={['user', 'cel_lada']} rules={[{ required: true }]}>
-              <Input type={"number"} style={{width:"100px"}} maxLength={3} />
-            </Form.Item>
-            </Grid>
-      </Grid>          
-      <Grid item spacing={2} xs={12} container> 
-            <Grid item xs={12} sm={6} md={6} lg={4}> 
-            <p style={{color: "#666666", margin:"0" }}><span style={{color: "red"}}>*</span> Número Local:</p>     
-            <Form.Item name={['user', 'cel']} rules={[{ required: true }]}>
-              <Input type={"number"} maxLength={8}/>
-            </Form.Item>
-            </Grid>
-            <Grid item xs={12} sm={6} md={6} lg={4}>
-            <p style={{color: "#666666", margin:"0" }}><span style={{color: "red"}}>*</span> Inversión Anual Año en Curso:</p>
-            <Form.Item name={['user', 'inv_anu_on']} placeholder="(Pipeline año en curso)" >
-              <Input type={"number"} />
-            </Form.Item>
-            </Grid>
-            <Grid item xs={12} sm={6} md={6} lg={4}>
-            <p style={{color: "#666666", margin:"0" }}><span style={{color: "red"}}>*</span> Inversión Anual Programada:</p>
-            <Form.Item name={['user', 'inv_anu_next']}  placeholder="(Pipeline año siguiente)">
-              <Input type={"number"} />
-            </Form.Item>
-            </Grid>
-      </Grid>         
-      <Grid item spacing={2} xs={12} container>
-            <Grid item xs={12} sm={6} md={6} lg={4}>
-            <p style={{color: "#666666", margin:"0" }}><span style={{color: "red"}}>*</span> Inversión Anual Año Anterior:</p>         
-            <Form.Item name={['user', 'inv_anu_last']} placeholder="(Pipeline año anterior)">
-              <Input type={"number"} />
-            </Form.Item>
-            </Grid>
-            <Grid item xs={12} sm={6} md={6} lg={4}>
-            <p style={{color: "#666666", margin:"0" }}><span style={{color: "red"}}>*</span> Clasificación de Socio:</p>
-            <Form.Item name={['user', 'corporate_type']} rules={[{ required: true }]}>
-            <Select
-                 placeholder="Select a option and change input text above"
-                 allowClear
-                >
-                  <Option value="Desarrollador Privado">Desarrollador Privado</Option>
-                  <Option value="Gobierno Estatal">Gobierno Estatal</Option>
-                  <Option value="Fondo de inversión">Fondo de inversión</Option>
-                  <Option value="FIBRA">FIBRA</Option>
-                  <Option value="No socio AMPIP">No socio AMPIP</Option>
-                </Select>
-            </Form.Item>
-            </Grid>
-            <Grid item xs={12} sm={6} md={6} lg={4}>
-            <p style={{color: "#666666", margin:"0" }}><span style={{color: "red"}}>*</span> Twitter:</p>        
-            <Form.Item name={['user', 'social_media_tw']} >
-              <Input />
-            </Form.Item>
-            </Grid>
-      </Grid>        
-      <Grid item spacing={2} xs={12} container>
-            <Grid item xs={12} sm={6} md={6} lg={4}> 
-            <p style={{color: "#666666", margin:"0" }}><span style={{color: "red"}}>*</span> Facebook:</p>       
-            <Form.Item name={['user', 'social_media_fb']} >
-              <Input />
-            </Form.Item>
-            </Grid>
-            <Grid item xs={12} sm={6} md={6} lg={4}>
-            <p style={{color: "#666666", margin:"0" }}><span style={{color: "red"}}>*</span> Instagram:</p>
-            <Form.Item name={['user', 'social_media_inst']}  >
-              <Input />
-            </Form.Item>
-            </Grid>
-            <Grid item xs={12} sm={6} md={6} lg={4}>
-            <p style={{color: "#666666", margin:"0" }}><span style={{color: "red"}}>*</span> LinkedIn:</p>
-            <Form.Item name={['user', 'social_media_link']}  >
-              <Input />
-            </Form.Item>
-            </Grid>
-      </Grid>        
-      <Grid item spacing={2} xs={12} container>
-            <Grid item xs={12} sm={6} md={6} lg={4}>
-            <p style={{color: "#666666", margin:"0" }}><span style={{color: "red"}}>*</span> Sitio Web:</p>      
-            <Form.Item name={['user', 'social_media_web']}  >
-              <Input />
-            </Form.Item>
-            </Grid>
-      </Grid> 
-      </Grid>         
+            style={{width:"100px"}}
+          >
+            <Option value="52">52</Option>
+            <Option value="1">1</Option>
+          </Select>
+      </Form.Item>
+      <Form.Item name={['user', 'cel_lada']} label="Lada" rules={[{ required: true }]}>
+        <Input type={"number"} style={{width:"100px"}} maxLength={3} />
+      </Form.Item>
+      <Form.Item name={['user', 'cel']} label="Número Local" rules={[{ required: true }]}>
+        <Input type={"number"} maxLength={8}/>
+      </Form.Item>
+        <Form.Item name={['user', 'inv_anu_on']} label="Inversión Anual Año en Curso" placeholder="(Pipeline año en curso)" >
+        <Input type={"number"} />
+      </Form.Item>
+      <Form.Item name={['user', 'inv_anu_next']} label="Inversión Anual Programada" placeholder="(Pipeline año siguiente)">
+        <Input type={"number"} />
+      </Form.Item>
+      <Form.Item name={['user', 'inv_anu_last']} label="Inversión Anual Año Anterior" placeholder="(Pipeline año anterior)">
+        <Input type={"number"} />
+      </Form.Item>
+      <Form.Item name={['user', 'corporate_type']} label="Clasificación de Socio" rules={[{ required: true }]}>
+      <Select
+            placeholder="Select a option and change input text above"
+            allowClear
+          >
+            <Option value="Desarrollador Privado">Desarrollador Privado</Option>
+            <Option value="Gobierno Estatal">Gobierno Estatal</Option>
+            <Option value="Fondo de inversión">Fondo de inversión</Option>
+            <Option value="FIBRA">FIBRA</Option>
+            <Option value="No socio AMPIP">No socio AMPIP</Option>
+          </Select>
+      </Form.Item>
+      
+      <Form.Item name={['user', 'social_media_tw']} label="Twitter">
+        <Input />
+      </Form.Item>
+      <Form.Item name={['user', 'social_media_fb']} label="Facebook" >
+        <Input />
+      </Form.Item>
+      <Form.Item name={['user', 'social_media_inst']} label="Instagram" >
+        <Input />
+      </Form.Item>
+      <Form.Item name={['user', 'social_media_link']} label="LinkedIn" >
+        <Input />
+      </Form.Item>
+      <Form.Item name={['user', 'social_media_web']} label="Sitio Web" >
+        <Input />
+      </Form.Item>
       <div style={{display:'flex', justifyContent:'center', width:'100%'}}>
       <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
         <Button style={{ backgroundColor: "#00afb7", borderColor: "#00afb7", color: "#ffffff" }} type="primary" htmlType="submit">

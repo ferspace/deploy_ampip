@@ -45,19 +45,24 @@ const EditForm = (props) => {
   const [fields, setFields] = useState([]);
 
   const onFinish = (values) => {
-    console.log(values)
-    axios.put(`${store.URL_PRODUCTION}/property_informations/${props.id}`, { data: values },
+    var data = {
+      "property_information": values
+    }
+    axios.put(`${store.URL_PRODUCTION}/property_informations/${props.id}`, data,
       {
         headers: {
           'Authorization': DataOption.authentication_token,
           'Content-Type': 'application/json'
         }
       }
-
     )
-      .then(res => {
-        console.log("Respuesta a petición");
-        console.log(res.data);
+      .then(() => {
+        Swal.fire({
+          icon: 'success',
+          title: '¡Registro actualizado correctamente!',
+          showConfirmButton: false,
+          timer: 1500
+        })
       })
   };
 
@@ -89,7 +94,6 @@ const EditForm = (props) => {
     }
   }, []) // obtiene el parque
 
-
   useEffect(() => {
     if (park.length === 0) {
       axios.get(`${store.URL_PRODUCTION}/propieties/${props.id}`, {
@@ -115,8 +119,6 @@ const EditForm = (props) => {
       console.log(error);
     });
   }, []);
-
-  console.log(parkById, "informacion a editar")
 
   const onChange = () => {
     setIsapark(!isapark);

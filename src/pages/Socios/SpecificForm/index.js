@@ -138,42 +138,36 @@ const SpecificForm = (props) => {
   }
 
   return (
-    <div style={{padding:20}}>
+  <div style={{padding:20}}>
     <Form {...layout} name="nest-messages" onFinish={onFinish} validateMessages={validateMessages}>
-      <>
+     
       <div style={{display:'flex', justifyContent:'center', width:'100%', marginBottom:'10px'}}>
         <ImageUpload />
       </div>
           <Grid container spacing={30} xs={12}>
 
-            <Grid item container xs={12}>
-                <Grid item xs={12} sm={6} md={6} lg={4} spacing={2}>
+            
+                
                 <p style={{color: "#666666", margin:"0" }}><span style={{color: "red"}}>*</span> Nombre en español:</p>
                   <Form.Item name={['user', 'name']}  rules={[{ required: true }]}>
                     <Input />
                   </Form.Item>
-                </Grid>
-                <Grid item xs={12} sm={6} md={6} lg={4}>
+                
                 <p style={{color: "#666666", margin:"0" }}><span style={{color: "red"}}>*</span> Nombre en ingles:</p>
                   <Form.Item name={['user', 'name_en']} rules={[{ required: true }]} style={{width:'100%'}}>
                   <Input />
                 </Form.Item>
-                </Grid>
-                <Grid item xs={12} sm={6} md={6} lg={4}>
+               
                 <p style={{color: "#666666", margin:"0" }}><span style={{color: "red"}}>*</span> Calle y número:</p> 
                   <Form.Item name={['user', 'address']} rules={[{ required: true }]} style={{width:'100%'}}>
-              <Input />
+                <Input />
+              </Form.Item>
+           
+            <Form.Item name={['user', 'postal_code_number']} label="Código Postal" rules={[{ required: true }]}>
+              <Input type={"number"} style={{ width: "100px" }} onChange={(e) => getAddessFunction(e)} />
             </Form.Item>
-                </Grid>
-            </Grid>
-          <Grid item container xs={12}>
-            <Grid item xs={12} sm={6} md={6} lg={4} spacing={2}>
-            <p style={{color: "#666666", margin:"0" }}><span style={{color: "red"}}>*</span> Código Postal</p> 
-            <Form.Item name={['user', 'postal_code_number']}  rules={[{ required: true }]}>
-              <Input style={{ width: "100px" }} onChange={(e) => getAddessFunction(e)} />
-            </Form.Item>
-            </Grid>
-            <Grid item xs={12} sm={6} md={6} lg={4} spacing={2}>
+            
+           
             <p style={{color: "#666666", margin:"0" }}><span style={{color: "red"}}>*</span> Colonia</p>
             <Form.Item rules={[{ required: true }]}>
               <Select
@@ -190,46 +184,17 @@ const SpecificForm = (props) => {
                 })}
               </Select>
             </Form.Item>
-            </Grid>
-            <Grid item xs={12} sm={6} md={6} lg={4} spacing={2}>
-            <p style={{color: "#666666", margin:"0" }}><span style={{color: "red"}}>*</span> Estado</p>
-            <Form.Item rules={[{ required: true }]}>
-            <Select
-              placeholder="Selecione"
-              allowClear
-              name={['user', 'state']}
-            >
-              {getAddress.map((value, i) => {
-                return (
-                  <option key={i} value={value.d_estado}>
-                    {value.d_estado}
-                  </option>
-                );
-              })}
-            </Select>
-          </Form.Item>
-          </Grid>
-        </Grid>
-        <Grid item container xs={12}> 
-            <Grid item xs={12} sm={6} md={6} lg={4} spacing={2}> 
-            <p style={{color: "#666666", margin:"0" }}><span style={{color: "red"}}>*</span> Municipio/Alcaldía</p>
-            <Form.Item  rules={[{ required: true }]}>
-              <Select
-                placeholder="Selecione"
-                allowClear
-                name={['user', 'municipality']}
-              >
-                {getAddress.map((value, i) => {
-                  return (
-                    <option key={i} value={value.d_mnpio}>
-                      {value.d_mnpio}
-                    </option>
-                  );
-                })}
-              </Select>
+            
+            <Form.Item label="Estado" rules={[{ required: true }]}>
+              {getAddress.length>0&&(<Input name={['user', 'state']} disabled="true" value={getAddress[0].d_estado}></Input>)}
+              {getAddress.length==0&&(<Input disabled="true" defaultValue={'Sin datos'}></Input>)}
+             </Form.Item>
+          
+            <Form.Item label="Municipio/Alcaldía" rules={[{ required: true }]}>
+              {getAddress.length>0&&(<Input name={['user', 'municipality']} disabled="true" value={getAddress[0].d_mnpio}></Input>)}
+              {getAddress.length==0&&(<Input disabled="true" defaultValue={'Sin datos'}></Input>)}
             </Form.Item>
-            </Grid>
-            <Grid item xs={12} sm={6} md={6} lg={4} spacing={2}>
+            
             <p style={{color: "#666666", margin:"0" }}><span style={{color: "red"}}>*</span> Código de país</p>     
             <Form.Item name={['user', 'cel_code']} rules={[{ required: true }]}>
               <Select
@@ -241,22 +206,18 @@ const SpecificForm = (props) => {
                 <Option value="1">1</Option>
               </Select>
             </Form.Item>
-            </Grid>
-            <Grid item xs={12} sm={6} md={6} lg={4} spacing={2}>
+            
             <p style={{color: "#666666", margin:"0" }}><span style={{color: "red"}}>*</span> Lada</p> 
             <Form.Item name={['user', 'cel_lada']} rules={[{ required: true }]}>
             <Input type={"number"} style={{ width: "100px" }} maxLength={3} />
             </Form.Item>
-            </Grid>
-        </Grid>
-        <Grid item spacing={2} xs={12} container>
-            <Grid item xs={12} sm={6}> 
+           
+            
             <p style={{color: "#666666", margin:"0" }}><span style={{color: "red"}}>*</span> Número Local</p>    
             <Form.Item name={['user', 'cel']} rules={[{ required: true }]}>
               <Input type={"number"} maxLength={8} />
             </Form.Item>
-            </Grid>  
-            <Grid item xs={12} sm={6}> 
+           
             <p style={{color: "#666666", margin:"0" }}><span style={{color: "red"}}>*</span> Clasificación de Patrocinador</p> 
             <Form.Item name={['user', 'social_media_tw']} rules={[{ required: true }]}>
             <Select
@@ -273,8 +234,6 @@ const SpecificForm = (props) => {
               <Option value="Otros">Otros</Option>
             </Select>
             </Form.Item>
-            </Grid> 
-          </Grid>
         </Grid>
       <div style={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
         <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
@@ -283,7 +242,6 @@ const SpecificForm = (props) => {
           </Button>
         </Form.Item>
       </div>
-      </>
     </Form>
     </div>
   )
