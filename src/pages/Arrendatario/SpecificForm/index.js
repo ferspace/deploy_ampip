@@ -33,16 +33,19 @@ const SpecificForm = (props) => {
           'Content-Type': 'application/json'
         },
       }).then((response) => {
-       var naves = response.data.message.allProperties.naves;
-       var terrenos = response.data.message.allProperties.terrenos;
-       var navy = response.data.message.allProperties.ter;
-       var ter = response.data.message.allProperties.ter;
-        setCorporates(...naves,terrenos, navy, ter);
+        var naves = response.data.message.allProperties.naves;
+        var terrenos = response.data.message.allProperties.terrenos;
+        var navy = response.data.message.allProperties.ter;
+        var ter = response.data.message.allProperties.ter;
+        var arrayProperty = [];
+        arrayProperty.push(naves, terrenos, navy, ter);
+        setCorporates(arrayProperty)
+
         // setCorporates(response.data)
         //setPost(response.data);
       });
     }
-  }, []);
+  });
 
   const [corporates, setCorporates] = useState([]);
 
@@ -72,7 +75,7 @@ const SpecificForm = (props) => {
 
     axios(config)
       .then(function (response) {
-        
+
         if (response.data.message != 0) {
           var data = JSON.stringify({
             "tenant_histories": {
@@ -80,26 +83,26 @@ const SpecificForm = (props) => {
               "tenant_user_id": response.data.message
             }
           });
-          
+
           var config = {
             method: 'post',
             url: 'https://ampip-back-44yib.ondigitalocean.app/api/v1/tenant_histories',
-            headers: { 
+            headers: {
               'Content-Type': 'application/json'
             },
-            data : data
+            data: data
           };
-          
-          axios(config)
-          .then(function (response) {
-            Swal.fire({text: response.data.message})
-            props.functionFetch()
 
-          })
-          .catch(function (error) {
-            console.log(error);
-          });
-          
+          axios(config)
+            .then(function (response) {
+              Swal.fire({ text: response.data.message })
+              props.functionFetch()
+
+            })
+            .catch(function (error) {
+              console.log(error);
+            });
+
         }
       })
       .catch(function (error) {

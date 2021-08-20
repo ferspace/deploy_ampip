@@ -88,7 +88,7 @@ const SpecificForm = (props) => {
               "property_id": response.data.data,
               "name": values.user.name,
               "address": values.user.addres,
-              "english_name": response.data.name_en,
+              "english_name": response.data.english_name,
               "park_property": values.user.park_property,
               "region": values.user.region,
               "market": values.user.market,
@@ -105,9 +105,11 @@ const SpecificForm = (props) => {
               "message": "",
               "postal_code": values.user.postal_code,
               "colony": values.user.colony,
-              "municipality": values.user.municipality,
-              "state": values.user.state,
+              "municipality": getAddress[0].d_mnpio,
+              "state": getAddress[0].d_estado,
               "status": 0,
+              "lat": latlng.lat,
+              "lng": latlng.lng,
               "tipo": 1
             }
           });
@@ -168,7 +170,7 @@ const SpecificForm = (props) => {
               "property_id": values.user.propertyId,
               "name": values.user.name,
               "address": values.user.addres,
-              "english_name": values.user.name_en,
+              "english_name": values.user.english_name,
               "park_property": values.user.park_property,
               "region": res.data[0].region,
               "market": res.data[0].market,
@@ -185,9 +187,11 @@ const SpecificForm = (props) => {
               "message": "",
               "postal_code": values.user.postal_code,
               "colony": values.user.colony,
-              "municipality": values.user.municipality,
-              "state": values.user.state,
+              "municipality": getAddress[0].d_mnpio,
+              "state": getAddress[0].d_estado,
               "status": 0,
+              "lat": latlng.lat,
+              "lng": latlng.lng,
               "tipo": 1
             }
           });
@@ -367,20 +371,20 @@ const SpecificForm = (props) => {
           <Form.Item name={['user', 'name']} label="Nombre en español" rules={[{ required: true }]}>
             <Input />
           </Form.Item>
-          <Form.Item name={['user', 'name_en']} label="Nombre en inglés" rules={[{ required: true }]}>
+          <Form.Item name={['user', 'english_name']} label="Nombre en inglés" rules={[{ required: true }]}>
             <Input />
           </Form.Item>
           <Form.Item name={['user', 'addres']} label="Calle y Número" rules={[{ required: true }]}>
             <Input />
           </Form.Item>
-          <Form.Item name={['user', 'postal_code_number']} label="Código Postal" rules={[{ required: true }]}>
+          <Form.Item name={['user', 'postal_code']} label="Código Postal" rules={[{ required: true }]}>
             <Input type={"number"} style={{ width: "100px" }} onChange={(e) => getAddessFunction(e)} />
           </Form.Item>
-          <Form.Item label="Colonia" rules={[{ required: true }]}>
+          <Form.Item name={['user', 'colony']} label="Colonia" rules={[{ required: true }]}>
             <Select
               placeholder="Selecione"
               allowClear
-              name={['user', 'colony']}
+              
             >
               {getAddress.map((value, i) => {
                 return (
