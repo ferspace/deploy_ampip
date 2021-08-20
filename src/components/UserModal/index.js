@@ -200,7 +200,7 @@ const UserModal=(props)=>{
               {getAddress.length>0&&(<Input name={['user', 'state']} disabled="true" value={getAddress[0].d_estado}></Input>)}
               {getAddress.length==0&&(<Input disabled="true" defaultValue={'Sin datos'}></Input>)}
             </Form.Item>
-            <Form.Item label="Municipio/Alcandía" rules={[{ required: true }]}>
+            <Form.Item label="Municipio/Alcaldía" rules={[{ required: true }]}>
               {getAddress.length>0&&(<Input name={['user', 'municipality']} disabled="true" value={getAddress[0].d_mnpio}></Input>)}
               {getAddress.length==0&&(<Input disabled="true" defaultValue={'Sin datos'}></Input>)}
             </Form.Item>
