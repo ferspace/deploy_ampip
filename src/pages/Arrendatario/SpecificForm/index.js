@@ -33,37 +33,39 @@ const SpecificForm = (props) => {
           'Content-Type': 'application/json'
         },
       }).then((response) => {
-       var naves = response.data.message.allProperties.naves;
-       var terrenos = response.data.message.allProperties.terrenos;
-       var navy = response.data.message.allProperties.ter;
-       var ter = response.data.message.allProperties.ter;
-        setCorporates(...naves,terrenos, navy, ter);
+        var naves = response.data.message.allProperties.naves;
+        var terrenos = response.data.message.allProperties.terrenos;
+        var navy = response.data.message.allProperties.nav;
+        var ter = response.data.message.allProperties.ter;
+        var all = ter.concat(navy, terrenos, naves);
+        setCorporates(all)
+
         // setCorporates(response.data)
         //setPost(response.data);
       });
     }
-  }, []);
+  });
 
   const [corporates, setCorporates] = useState([]);
 
   const onFinish = (values) => {
 
     var data = JSON.stringify({
-      "tenant_user": {
-        "property": values.user.propertyId,
-        "name_bussines": values.user.name_busines,
-        "country": values.user.country,
-        "product_badge": values.user.product_badge,
-        "ID_SCIAN": values.user.ID_SCIAN,
-        "ID_DENUE": values.user.ID_DENUE,
-        "antiquity": values.user.antiquity,
-        "superficie": values.user.superficie,
-      }
+        "tenant_user": {
+            "property_id": values.user.propertyId,
+            "name_bussines": values.user.name_busines,
+            "country": values.user.country,
+            "product_badge": values.user.product_badge,
+            "ID_SCIAN": values.user.IDSCIAN,
+            "ID_DENUE": values.user.IDDENUE,
+            "antiquity": values.user.antiquity,
+            "superficie": values.user.siperficie
+        }
     });
 
     var config = {
       method: 'post',
-      url: 'https://ampip-back-44yib.ondigitalocean.app/api/v1/tenant_users',
+      url: `${store.URL_PRODUCTION}/tenant_users`,
       headers: {
         'Content-Type': 'application/json'
       },
@@ -72,34 +74,9 @@ const SpecificForm = (props) => {
 
     axios(config)
       .then(function (response) {
-        
-        if (response.data.message != 0) {
-          var data = JSON.stringify({
-            "tenant_histories": {
-              "property_id": values.user.propertyId,
-              "tenant_user_id": response.data.message
-            }
-          });
-          
-          var config = {
-            method: 'post',
-            url: 'https://ampip-back-44yib.ondigitalocean.app/api/v1/tenant_histories',
-            headers: { 
-              'Content-Type': 'application/json'
-            },
-            data : data
-          };
-          
-          axios(config)
-          .then(function (response) {
-            Swal.fire({text: response.data.message})
-            props.functionFetch()
 
-          })
-          .catch(function (error) {
-            console.log(error);
-          });
-          
+        if (response.data.message != 0) {
+          alert("Hello")
         }
       })
       .catch(function (error) {
