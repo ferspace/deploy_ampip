@@ -181,7 +181,7 @@ export default function Dashboard(props) {
         {/* Patrocinadores y  Desarrolladores */}
         <Grid item md={6} xs={12}>
           <Widget
-            title="Todos los Usuarios"
+            title="Todos los Usuarihjos"
             upperTitle
             noBodyPadding
             bodyClass={classes.tableWidget}

@@ -172,7 +172,7 @@ const SpecificForm = (props) => {
 
       <Grid item spacing={2} xs={12} container > 
       <Grid item xs={12} sm={6} md={6} lg={4} >
-      <p style={{color: "#666666", margin:"0" }}><span style={{color: "red"}}>*</span> Puesto:</p>
+      <p style={{color: "#666666", margin:"0" }}><span style={{color: "red"}}>*</span> Puestmo:</p>
       <Form.Item name={['dataOf', 'charge']} rules={[{ required: true }]}>
         <Input />
       </Form.Item>
