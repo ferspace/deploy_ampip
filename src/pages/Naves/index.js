@@ -145,8 +145,8 @@ const Naves = (props) => {
         </Tabs>
         {activeTabId === 0 && (
           <div style={{ padding: 20 }}>
-           {read && <Tables title={"Todas las naves"} columns={["id", "Name", "Alta", {
-              label: "Ver",
+           {read && <Tables title={"Todas las naves"} columns={["id", "Nombre","Nombre en inglés","Dirección", {
+              label: "Ver información",
               options: {
                 customBodyRender: (value, tableMeta, updateValue) => {
                   return (
@@ -155,7 +155,7 @@ const Naves = (props) => {
               }
             },
               {
-                label: "Editar",
+                label: "Cambios",
                 options: {
                   customBodyRender: (value, tableMeta, updateValue) => {
                     return (

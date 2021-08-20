@@ -158,8 +158,8 @@ const Terrenos = (props) => {
         </Tabs>
         {activeTabId === 0 && (
           <div style={{ padding: 20 }}>
-            {read && <Tables title={"Todos los Terrenos"}columns={["id", "Name", "Alta", {
-              label: "Ver",
+            {read && <Tables title={"Todos los Terrenos"}columns={["id", "Nombre","Nombre en inglés","Dirección",, {
+              label: "Ver información",
               options: {
                 customBodyRender: (value, tableMeta, updateValue) => {
                   return (
@@ -169,7 +169,7 @@ const Terrenos = (props) => {
               }
             },
               {
-                label: "Editar",
+                label: "Cabios",
                 options: {
                   customBodyRender: (value, tableMeta, updateValue) => {
                     return (

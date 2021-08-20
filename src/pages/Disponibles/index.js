@@ -145,9 +145,9 @@ const Disponibles = () => {
         {activeTabId === 0 && (
           <div style={{padding:20}}>
           <>
-            <Maps /> 
-            <Tables title={"Todos los Espacios"} columns={["id","Name", "Nombre_en", "Direccion",{
-              label: "Ver",
+            <Maps />
+            <Tables title={"Todos los Espacios"} columns={["id","Nombre en español","Nombre en inglés","Dirección",{
+              label: "Ver información",
               options: {
                 customBodyRender: (value, tableMeta, updateValue) => {
                   return (
